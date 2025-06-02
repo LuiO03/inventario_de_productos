@@ -1,0 +1,20 @@
+# Activar el motor de reescritura de URLs de Apache
+
+RewriteEngine On
+
+# Estas condiciones evitan que se reescriba la URL si:
+# - El archivo físico existe (!-f)
+# - El directorio físico existe (!-d)
+# - El enlace simbólico existe (!-l)
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
+
+# Si no existe archivo, carpeta o enlace simbólico:
+# Redirige todas las URLs a index.php y le pasa la URL como parámetro 'url'
+# Ejemplo: /productos/ver/5 → index.php?url=productos/ver/5
+# [L] = Última regla si se cumple
+# [QSA] = Agrega los parámetros de la query string original (ej: ?pagina=2)
+
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
