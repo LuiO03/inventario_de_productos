@@ -1,5 +1,5 @@
 <?php 
-    require_once 'libs/View.php';
+    require_once 'core/View.php';
     class Controller{
         protected $view;
 

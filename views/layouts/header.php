@@ -1,5 +1,4 @@
-<?php 
-    require_once 'config/config.php';
+<?php
     require_once 'helpers/fecha.php';
 ?>
 
@@ -12,10 +11,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Barra Lateral con Bootstrap</title>
 
+
+    <meta name="description" content="<?= APP_DESCRIPTION ?>">
+    <meta name="author" content="<?= APP_AUTHOR ?>">
+    
+    <!--=============== FAVICON ===============-->
+    <link rel="shortcut icon" href="<?= APP_LOGO ?>" type="image/x-icon">
+    <!--=============== FONTAWESOME ===============-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!--=============== REMIXICONS ===============-->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
 
+    <!--=============== CSS ===============-->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/css/base.css">
 </head>
 
@@ -24,13 +32,19 @@
         <aside id="sidebar">
             <div class="logo-content">
                 <button class="toggle-btn" type="button">
-                    <i class="ri-menu-line"></i>
+                    <img src="<?= BASE_URL ?>public/images/logos/logo.png" alt="">
                 </button>
                 <div class="sidebar-logo">
-                    <a href="#">CodzSword</a>
+                    <a href="#">Geckomerce</a>
                 </div>
             </div>
             <ul class="sidebar-nav">
+                <li class="sidebar-item">
+                    <a href="<?= BASE_URL ?>" class="sidebar-link" title="Productos">
+                        <i class="ri-box-3-line"></i>
+                        <span>Productos</span>
+                    </a>
+                </li>
                 <li class="sidebar-item">
                     <a href="ayudacontroller" class="sidebar-link" title="Perfil">
                         <i class="ri-user-line"></i>
@@ -38,68 +52,40 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" title="Tareas">
-                        <i class="ri-task-line"></i>
-                        <span>Tareas</span>
+                    <a href="#" class="sidebar-link" title="Categorías">
+                        <i class="ri-price-tag-3-line"></i>
+                        <span>Categorías</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth" title="Autenticación">
-                        <i class="ri-shield-user-line"></i>
-                        <span>Autenticación</span>
+                    <a href="#" class="sidebar-link" title="Clientes">
+                        <i class="ri-user-3-line"></i>
+                        <span>Clientes</span>
                     </a>
-                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-subitem">
-                            <i class="ri-login-box-line"></i>
-                            <span href="#" class="sidebarsub-link">Iniciar sesión</span>
-                        </li>
-                        <li class="sidebar-subitem">
-                            <i class="ri-user-add-line"></i>
-                            <span href="#" class="sidebarsub-link">Registrarse</span>
-                        </li>
-                    </ul>
                 </li>
+
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" title="Notificaciones">
-                        <i class="ri-notification-3-line"></i>
-                        <span>Notificaciones</span>
+                    <a href="#" class="sidebar-link" title="Ventas">
+                        <i class="ri-shopping-cart-line"></i>
+                        <span>Ventas</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" title="Configuración">
-                        <i class="ri-settings-3-line"></i>
-                        <span>Configuración</span>
+                    <a href="#" class="sidebar-link" title="Compras">
+                        <i class="ri-shopping-bag-line"></i>
+                        <span>Compras</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" title="Dashboard">
-                        <i class="ri-dashboard-line"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" title="Usuarios">
-                        <i class="ri-group-line"></i>
-                        <span>Usuarios</span>
+                    <a href="#" class="sidebar-link" title="Proveedores">
+                        <i class="ri-truck-line"></i>
+                        <span>Proveedores</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link" title="Reportes">
                         <i class="ri-bar-chart-line"></i>
                         <span>Reportes</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" title="Mensajes">
-                        <i class="ri-mail-line"></i>
-                        <span>Mensajes</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link" title="Ayuda">
-                        <i class="ri-question-line"></i>
-                        <span>Ayuda</span>
                     </a>
                 </li>
 

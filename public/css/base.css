@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
 
 a {
@@ -19,26 +20,24 @@ body {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    height: 100dvh;
 }
 
-main{
-    padding: 20px 10px;
-}
+
 
 .wrapper {
     display: flex;
-    height: 100vh;
+    height: 100%;
 }
 
 .header {
-    height: 100dvh;
     width: 100%;
     transition: all 0.35s ease-in-out;
 }
 
 .nav_admin{
     width: 100%;
-    background-color: #1E1E1E;
+    background-color: black;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -47,6 +46,14 @@ main{
     height: 60px;
     border-bottom: 1px solid black;
     color: white;
+}
+
+main{
+    padding: 20px 10px;
+    background-color: #212121;
+    color: whitesmoke;
+    height: calc(100dvh - 60px);
+    overflow-y: auto;
 }
 
 #sidebar {
@@ -74,8 +81,11 @@ main{
 .logo-content{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     gap: 10px;
+    padding: 0px 23px;
+    background-color: black;
+    height: 73px;
 }
 
 .toggle-btn {
@@ -85,13 +95,17 @@ main{
     padding: 1rem 0rem;
 }
 
-.toggle-btn i {
-    font-size: 1.5rem;
-    color: #FFF;
+.toggle-btn img {
+    width: 25px;
 }
 
 .sidebar-logo {
     margin: auto 0;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    text-transform: uppercase;
+    font-size: 25px;
 }
 
 .sidebar-logo a {
@@ -114,11 +128,11 @@ main{
 }
 
 .sidebar-nav {
-    padding: 0px 0px;
+    padding: 20px 0px;
     height: 100%;
     margin: 0px 0px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    /*overflow-y: auto;
+    overflow-x: hidden;*/
 }
 
 .sidebar-nav::-webkit-scrollbar{

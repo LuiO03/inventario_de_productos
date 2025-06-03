@@ -3,12 +3,12 @@ class MainController extends Controller {
 
     public function __construct() {
         parent::__construct(); // Llama al constructor de la clase padre
-        $this->view->traerVista('main/index');
+        $this->view->render('main/index');
     }
 
     // Método que carga la vista principal
     public function index() {
-        $this->view->traerVista('main/index');
+        $this->view->render('main/index');
     }
 
     // Método de ejemplo que imprime un saludo

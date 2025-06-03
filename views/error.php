@@ -49,7 +49,7 @@
         <p class="text-muted">
             Lo sentimos, la página que estás buscando no existe o ha sido movida. Por favor, verifica la URL ingresada o regresa a la página principal.
         </p>
-        <a href="maincontroller" class="btn btn-primary mt-3"><i class="bi bi-arrow-left-circle"></i> Volver al inicio</a>
+        <a href="../maincontroller" class="btn btn-primary mt-3"><i class="bi bi-arrow-left-circle"></i> Volver al inicio</a>
     </main>
 
     <footer class="bg-black py-3 mt-auto">
