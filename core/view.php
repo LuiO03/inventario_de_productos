@@ -2,11 +2,14 @@
 
     class View{
 
-        public $mensaje;
+
+        public $title;
         function __construct(){
         }
-        function render($nombre){
-            require 'views/'.$nombre.'.php';// hace require para trae el enlace de la vista especificada
+
+        function render($nombre, $mensaje = []) {
+            extract($mensaje); // Convierte ['mensaje' => ...] en $mensaje
+            require 'views/' . $nombre . '.php';
         }
     }
 ?>

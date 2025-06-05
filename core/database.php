@@ -3,6 +3,11 @@
     
     class Database {
 
+        // Patrón Singleton para asegurar una única instancia de la conexión
+        private static $instance = null;
+        private $pdo;
+
+        // base de datos parametros
         private $host;
         private $db;
         private $user;
@@ -25,12 +30,24 @@
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                     PDO::ATTR_EMULATE_PREPARES   => false,
                 ];
-                $pdo = new PDO($connection, $this->user, $this->password, $options);
-                return $pdo;
+                $this->pdo = new PDO($connection, $this->user, $this->password, $options);
             } catch (PDOException $e) {
                 echo "Error de conexión: " . $e->getMessage();
                 return null;
             }
+        }
+
+        // Método para obtener la instancia de la conexión
+        // Utilizando el patrón Singleton para evitar múltiples conexiones
+        public static function getInstance() {
+            if (self::$instance === null) {
+                self::$instance = new Database();
+            }
+            return self::$instance;
+        }
+        // Método para obtener la conexión PDO
+        public function getConnection() {
+            return $this->pdo;
         }
     }
 ?>

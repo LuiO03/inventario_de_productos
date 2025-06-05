@@ -23,6 +23,7 @@
     define('APP_AUTHOR', 'LuiOsorio');
     define('APP_COPYRIGHT', '© LuiOsorio 2025 - Todos los Derechos Reservados - Huancayo');
     define('APP_DESCRIPTION', 'Aplicación para gestionar un inventario de productos de manera eficiente y sencilla.');
+    define('APP_KEYWORDS', 'inventario, productos, gestión, administración, PHP, MySQL'); // Palabras clave para SEO
     define('APP_LICENSE', 'MIT'); // Licencia de uso
     define('APP_LOGO', BASE_URL.'public/images/logos/logo.png'); // Ruta del logo (relativa a la raíz del proyecto)
 
@@ -37,7 +38,7 @@
     // CONEXIÓN A BASE DE DATOS
     // ==============================
     define('DB_HOST', 'localhost');
-    define('DB_NAME', 'productos_mvc');      // ⚠️ Reemplaza por el nombre real de tu BD
+    define('DB_NAME', 'inv_productos');      // ⚠️ Reemplaza por el nombre real de tu BD
     define('DB_USER', 'root');
     define('DB_PASS', '');
     define('DB_CHARSET', 'utf8mb4');

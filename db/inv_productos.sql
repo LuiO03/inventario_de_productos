@@ -1,0 +1,12 @@
+
+DROP DATABASE IF EXISTS inv_productos;
+CREATE DATABASE inv_productos;
+
+USE inv_productos;
+
+CREATE TABLE productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
