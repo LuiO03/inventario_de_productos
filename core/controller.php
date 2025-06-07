@@ -12,7 +12,7 @@
         }
 
         public function loadModel($model) {
-            $archivoModelo = 'model/' . $model . 'Model.php';
+            $archivoModelo = 'models/' . $model . 'Model.php';
 
             if (file_exists($archivoModelo)) {
                 require_once $archivoModelo;
@@ -23,8 +23,6 @@
                 } else {
                     echo "<p>La clase $nombreModelo no existe en el archivo.</p>";
                 }
-            } else {
-                echo "<p>El archivo de modelo $archivoModelo no existe.</p>";
             }
         }
     }

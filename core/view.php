@@ -4,6 +4,7 @@
 
 
         public $title;
+        public $products;
         function __construct(){
         }
 

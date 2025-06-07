@@ -4,10 +4,11 @@
 
     class Model{
 
-        protected $db;
+        protected $PDO;
         function __construct(){
-            //$this->db = new Database();
-            $this->db = Database::getInstance()->getConnection();// Obtener la conexión a la base de datos
+            //$this->db = Database::getInstance()->getConnection();// Obtener la conexión a la base de datos
+            $conn = new Database();
+            $this->PDO = $conn->connect();
         }
     }
 ?>

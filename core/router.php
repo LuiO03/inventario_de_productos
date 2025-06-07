@@ -5,6 +5,7 @@
         function __construct() {
             // Obtener la URL de la petición o establecer 'main' por defecto
             $url = isset($_GET['url']) ? $_GET['url'] : 'main';
+            
             $url = rtrim($url, '/'); // Eliminar la barra al final si existe
             $url = explode('/', $url); // Separar los elementos de la URL
 
@@ -15,6 +16,7 @@
             if (file_exists($archivoController)) {
                 require_once $archivoController; // Incluir el archivo del controlador
                 $controller = new $controllerName(); // Crear instancia del controlador
+                $controller->loadModel($url[0]); // Cargar el modelo asociado al controlador
 
                 // Obtener el método a ejecutar (por defecto: 'index')
                 $method = isset($url[1]) ? $url[1] : 'index';

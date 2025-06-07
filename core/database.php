@@ -31,13 +31,15 @@
                     PDO::ATTR_EMULATE_PREPARES   => false,
                 ];
                 $this->pdo = new PDO($connection, $this->user, $this->password, $options);
+                return $this->pdo;
+                
             } catch (PDOException $e) {
                 echo "Error de conexión: " . $e->getMessage();
                 return null;
             }
         }
 
-        // Método para obtener la instancia de la conexión
+        /* Método para obtener la instancia de la conexión
         // Utilizando el patrón Singleton para evitar múltiples conexiones
         public static function getInstance() {
             if (self::$instance === null) {
@@ -49,5 +51,6 @@
         public function getConnection() {
             return $this->pdo;
         }
+            */
     }
 ?>

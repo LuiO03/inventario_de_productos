@@ -5,9 +5,9 @@
     // Aquí se cargan las configuraciones, controladores, modelos y vistas necesarias
     // session_start();
     session_start(); // Muy importante
+    require_once 'config/config.php';
     require_once 'helpers/flash.php';
     require_once 'helpers/fecha.php';
-    require_once 'config/config.php';
     require_once 'core/controller.php';
     require_once 'core/model.php';
     require_once 'core/view.php';
