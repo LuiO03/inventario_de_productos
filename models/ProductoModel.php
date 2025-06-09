@@ -46,6 +46,18 @@
                 echo "Error al obtener el producto: " . $e->getMessage();
             }
         }
+
+        public function findByNombre($nombre) {
+            try {
+                $query = $this->PDO->prepare("SELECT * FROM productos WHERE nombre = :nombre");
+                $query->bindParam(':nombre', $nombre, PDO::PARAM_STR);
+                $query->execute();
+                return $query->fetch(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                // Manejo de errores
+                echo "Error al buscar el producto: " . $e->getMessage();
+            }
+        }
         
     }
 ?>

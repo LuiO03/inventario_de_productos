@@ -6,6 +6,7 @@
     // session_start();
     session_start(); // Muy importante
     require_once 'config/config.php';
+    require_once 'helpers/helper.php';
     require_once 'helpers/flash.php';
     require_once 'helpers/fecha.php';
     require_once 'core/controller.php';

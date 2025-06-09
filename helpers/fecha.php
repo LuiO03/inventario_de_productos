@@ -28,5 +28,6 @@
             "sábado"
         );
 
-    return "Hoy es " . $dia[date("w")] . ", " . date("d") . " de " . $mes[date('n')] . " de " . date('Y');
-}
+        return "Hoy es " . $dia[date("w")] . ", " . date("d") . " de " . $mes[date('n')] . " de " . date('Y');
+    }
+?>

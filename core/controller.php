@@ -20,9 +20,9 @@
 
                 if (class_exists($nombreModelo)) {
                     $this->model = new $nombreModelo();
-                } else {
-                    echo "<p>La clase $nombreModelo no existe en el archivo.</p>";
+                    return $this->model;
                 }
+                return null;
             }
         }
     }

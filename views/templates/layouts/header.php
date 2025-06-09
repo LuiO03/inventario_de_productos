@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?= $this->title ??  APP_NAME .'- Panel de Administración' ?>
+        <?= $title ??  APP_NAME .'- Panel de Administración' ?>
     </title>
     <meta name="keywords" content="<?= APP_KEYWORDS ?>">
     <meta name="description" content="<?= APP_DESCRIPTION ?>">

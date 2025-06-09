@@ -16,7 +16,7 @@
             if (file_exists($archivoController)) {
                 require_once $archivoController; // Incluir el archivo del controlador
                 $controller = new $controllerName(); // Crear instancia del controlador
-                $controller->loadModel($url[0]); // Cargar el modelo asociado al controlador
+                //$controller->loadModel($url[0]); // Cargar el modelo asociado al controlador
 
                 // Obtener el método a ejecutar (por defecto: 'index')
                 $method = isset($url[1]) ? $url[1] : 'index';

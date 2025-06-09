@@ -7,8 +7,7 @@
         }
 
         public function index() {
-            $mensaje = Flash::get('mensaje'); // Recupera el mensaje flash
-            $this->view->render('main/index', ['mensaje' => $mensaje]);// Renderiza la vista principal
+            $this->view->render('main/index', ['mensaje' => $this->view->mensaje]);// Renderiza la vista principal
         }
         // Método de ejemplo que imprime un saludo
 

@@ -1,4 +1,5 @@
-<?php require('views/layouts/header.php'); ?>
+
+<?php headerAdmin(); ?>
 
 <h1>Barra Lateral con Bootstrap 5</h1>
 <?php if (!empty($mensaje)): ?>
@@ -33,4 +34,6 @@
 
 <?php endif; ?>
 
-<?php require('views/layouts/footer.php'); ?>
+<?php 
+    footerAdmin(); 
+?>
