@@ -17,4 +17,9 @@ INSERT INTO productos (nombre, precio, stock) VALUES
 ('Producto B', 20.00, 50),
 ('Producto C', 30.00, 75),
 ('Producto D', 40.00, 25),
-('Producto E', 50.00, 10);
+('Producto E', 50.00, 10),
+('Producto F', 50.00, 10),
+('Producto G', 50.00, 10),
+('Producto h', 50.00, 10),
+('Producto I', 50.00, 10);
+

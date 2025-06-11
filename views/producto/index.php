@@ -10,45 +10,48 @@
         <i class="ri-add-line fs-5"></i> Agregar Producto
     </a>
     <a href="<?= BASE_URL ?>" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
-        <i class="ri-arrow-left-line fs-5"></i> Volver
+        <i class="ri-home-line fs-5"></i> Inicio
     </a>
 </div>
 
 <table class="table table-sm table-striped table-bordered mt-4 table-dark">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Precio</th>
-            <th>Stock</th>
-            <th>Opciones</th>
+            <th class="text-center">ID</th>
+            <th class="text-center">Nombre</th>
+            <th class="text-center">Precio</th>
+            <th class="text-center">Stock</th>
+            <th class="text-center">Opciones</th>
         </tr>
     </thead>
     <tbody>
         <?php if (!empty($productos)): ?>
             <?php foreach ($productos as $producto): ?>
                 <tr>
-                    <td><?= htmlspecialchars($producto['id']) ?></td>
-                    <td><?= htmlspecialchars($producto['nombre']) ?></td>
-                    <td><?= htmlspecialchars($producto['precio']) ?></td>
-                    <td><?= htmlspecialchars($producto['stock']) ?></td>
+                    <td class="text-center"><?= htmlspecialchars($producto->getId() ) ?></td>
+                    <td><?= htmlspecialchars($producto->getNombre()) ?></td>
+                    <td class="text-center"><?= htmlspecialchars($producto->getPrecio()) ?></td>
+                    <td class="text-center"><?= htmlspecialchars($producto->getStock()) ?></td>
                     <td>
                         <div class="d-flex justify-content-center gap-2">
-                            <a href="<?= BASE_URL ?>producto/edit/<?= $producto['id'] ?>" class="btn btn-sm btn-warning">
+                            <a href="<?= BASE_URL ?>producto/edit/<?= $producto->getId() ?>" class="btn btn-sm btn-warning">
                                 <i class="ri-edit-line"></i> Editar
                             </a>
-                            <form method="POST" action="<?= BASE_URL ?>producto/delete/<?= $producto['id'] ?>" onsubmit="return confirm('¿Estás seguro de eliminar este producto?');">
-                                <button type="submit" class="btn btn-sm btn-danger">
-                                    <i class="ri-delete-bin-line"></i> Eliminar
-                                </button>
-                            </form>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $producto->getId() ?>">
+                                <i class="ri-delete-bin-line"></i> Eliminar
+                            </button>
                         </div>
                     </td>
                 </tr>
             <?php endforeach; ?>
         <?php else: ?>
             <tr>
-                <td colspan="4" class="text-center">No hay productos registrados.</td>
+                <td colspan="5" class="text-center py-5">
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <i class="ri-inbox-line fs-1 mb-2"></i>
+                        <span class="fs-5">No hay productos registrados.</span>
+                    </div>
+                </td>
             </tr>
         <?php endif; ?>
     </tbody>
@@ -80,4 +83,8 @@
 
 <?php endif; ?>
 
-<?php footerAdmin(); ?>
+<?php
+    modalFlash();
+    modalComponentes();
+    footerAdmin(); 
+?>

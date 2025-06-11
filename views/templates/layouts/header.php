@@ -32,12 +32,12 @@
                     <img src="<?= BASE_URL ?>public/images/logos/logo.png" alt="">
                 </button>
                 <div class="sidebar-logo">
-                    <a href="<?= BASE_URL ?>/">Geckomerce</a>
+                    <a href="<?= BASE_URL ?>">Geckomerce</a>
                 </div>
             </div>
             <ul class="sidebar-nav">
                 <li class="sidebar-item">
-                    <a href="<?= BASE_URL ?>/producto" class="sidebar-link" title="Productos">
+                    <a href="<?= BASE_URL ?>producto" class="sidebar-link" title="Productos">
                         <i class="ri-box-3-line"></i>
                         <span>Productos</span>
                     </a>

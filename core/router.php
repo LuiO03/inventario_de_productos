@@ -1,39 +1,41 @@
 <?php
-    require_once 'controllers/ErrorController.php'; // Cargar el controlador de error por defecto
-    class Router {
+require_once 'controllers/ErrorController.php';
 
-        function __construct() {
-            // Obtener la URL de la petición o establecer 'main' por defecto
-            $url = isset($_GET['url']) ? $_GET['url'] : 'main';
-            
-            $url = rtrim($url, '/'); // Eliminar la barra al final si existe
-            $url = explode('/', $url); // Separar los elementos de la URL
+class Router {
 
-            // Construir el nombre del controlador. Ejemplo: 'main' → 'MainController'
-            $controllerName = ucfirst($url[0]) . 'Controller';
-            $archivoController = 'controllers/' . $controllerName . '.php'; // Ruta al archivo del controlador
+    public function __construct() {
+        // Obtener la URL de la petición o establecer 'main' por defecto
+        $url = isset($_GET['url']) ? $_GET['url'] : 'main';
+        $url = rtrim($url, '/'); // Eliminar la barra al final si existe
+        $urlParts = explode('/', $url); // Separar por '/'
 
-            if (file_exists($archivoController)) {
-                require_once $archivoController; // Incluir el archivo del controlador
-                $controller = new $controllerName(); // Crear instancia del controlador
-                //$controller->loadModel($url[0]); // Cargar el modelo asociado al controlador
+        // Obtener nombre del controlador
+        $controllerName = ucfirst($urlParts[0]) . 'Controller';
+        $archivoController = 'controllers/' . $controllerName . '.php';
 
-                // Obtener el método a ejecutar (por defecto: 'index')
-                $method = isset($url[1]) ? $url[1] : 'index';
+        // Verificar si existe el archivo del controlador
+        if (file_exists($archivoController)) {
+            require_once $archivoController;
+            $controller = new $controllerName();
 
-                // Verificar si el método existe dentro del controlador
-                if (method_exists($controller, $method)) {
-                    $controller->{$method}(); // Llamar al método del controlador
-                } else {
-                    // Si el método no existe, puedes mostrar un error personalizado
-                    $error = new ErrorController(); // Instanciar controlador de errores
-                }
+            // Obtener método, si no se proporciona usar 'index'
+            $method = isset($urlParts[1]) ? $urlParts[1] : 'index';
 
+            // Obtener parámetros si existen
+            $params = array_slice($urlParts, 2);
+
+            // Verificar si el método existe en el controlador
+            if (method_exists($controller, $method)) {
+                // Llamar al método con o sin parámetros
+                call_user_func_array([$controller, $method], $params);
             } else {
-                // Si el archivo del controlador no existe, se carga el controlador de error
-                $error = new ErrorController(); // Instanciar controlador de errores
+                // Si no existe el método, mostrar error
+                $error = new ErrorController();
             }
-        }
 
+        } else {
+            // Si no existe el controlador, mostrar error
+            $error = new ErrorController();
+        }
     }
-?>
+}

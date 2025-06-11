@@ -52,7 +52,11 @@
                 exit;
             }
 
-            $id = $this->model->create($nombre, $precio, $stock);
+            // ✅ Crear el objeto Producto
+            $producto = new Producto(1,$nombre, $precio, $stock);
+
+            // ✅ Pasar el objeto al modelo
+            $id = $this->model->create($producto);
             if ($id) {
                 flash::set('mensaje', [
                     'type' => 'success',
@@ -69,6 +73,26 @@
             exit;
         }
 
-        
+        public function delete($id){
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_numeric($id)) {
+                $this->model->delete((int)$id);
+                
+                flash::set('mensaje', [
+                    'type' => 'success',
+                    'header' => 'Éxito',
+                    'message' => 'Producto eliminado correctamente.'
+                ]);
+            } else {
+                flash::set('mensaje', [
+                    'type' => 'danger',
+                    'header' => 'Error',
+                    'message' => 'Acceso no permitido o ID inválido.'
+                ]);
+            }
+
+            header('Location: ' . BASE_URL . 'producto/index');
+            exit;
+        }
+
     }
 ?>

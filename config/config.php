@@ -11,8 +11,8 @@
     $baseFolder = '/inventario_de_productos/';
 
     // Define la URL base para recursos como CSS, JS, imágenes
-    //define('BASE_URL', 'http://localhost/inventario_de_productos/');
-    define('BASE_URL', ($isLocalhost ? 'http://localhost' : 'https://' . $_SERVER['SERVER_NAME']) . $baseFolder);
+    define('BASE_URL', 'http://localhost/inventario_de_productos/');
+    //define('BASE_URL', ($isLocalhost ? 'http://localhost' : 'https://' . $_SERVER['SERVER_NAME']) . $baseFolder);
 
     // ==============================
     // CONFIGURACIÓN GENERAL
