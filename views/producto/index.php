@@ -28,16 +28,25 @@
         <?php if (!empty($productos)): ?>
             <?php foreach ($productos as $producto): ?>
                 <tr>
-                    <td class="text-center"><?= htmlspecialchars($producto->getId() ) ?></td>
+                    <td class="text-center"><?= htmlspecialchars($producto->getId()) ?></td>
                     <td><?= htmlspecialchars($producto->getNombre()) ?></td>
-                    <td class="text-center"><?= htmlspecialchars($producto->getPrecio()) ?></td>
+                    <td class="text-center">S/. <?= htmlspecialchars($producto->getPrecio()) ?></td>
                     <td class="text-center"><?= htmlspecialchars($producto->getStock()) ?></td>
                     <td>
                         <div class="d-flex justify-content-center gap-2">
-                            <a href="<?= BASE_URL ?>producto/edit/<?= $producto->getId() ?>" class="btn btn-sm btn-warning">
+
+                            <button 
+                                class="btn btn-sm btn-info btn-ver-producto" 
+                                data-id="<?= $producto->getId() ?>" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#viewModal"
+                            >
+                                <i class="ri-eye-line"></i> Ver
+                            </button>
+                            <a href="<?= BASE_URL ?>producto/edit/<?= $producto->getId() ?>" title="Editar Usuario" class="btn btn-sm btn-warning">
                                 <i class="ri-edit-line"></i> Editar
                             </a>
-                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $producto->getId() ?>">
+                            <button type="button" title="Eliminar Usuario" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $producto->getId() ?>">
                                 <i class="ri-delete-bin-line"></i> Eliminar
                             </button>
                         </div>
@@ -57,34 +66,80 @@
     </tbody>
 </table>
 
-<?php if (!empty($mensaje)): ?>
-    <!-- Modal de Bootstrap -->
-    <div class="modal fade" id="flashModal" tabindex="-1" aria-labelledby="flashModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-<?= htmlspecialchars($mensaje['type']) ?>">
-                    <h6 class="modal-title" id="flashModalLabel">Mensaje</h6>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+<!-- Modal ver registro -->
+<div class="modal fade modal-slide-animate" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header bg-danger border-0">
+                <h6 class="modal-title" id="viewModalLabel">Detalles del Producto </span></h6>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered table-dark mb-0">
+                        <tbody>
+                            <tr>
+                                <th class="w-50">ID:</th>
+                                <td class="text-center"><span id="modal-id"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Nombre:</th>
+                                <td class="text-center"><span id="modal-nombre"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Precio:</th>
+                                <td class="text-center">S/. <span id="modal-precio"></span></td>
+                            </tr>
+                            <tr>
+                                <th>Stock:</th>
+                                <td class="text-center"><span id="modal-stock"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="modal-body bg-dark text-white">
-                    <?= htmlspecialchars($mensaje['message']) ?>
-                </div>
+            </div>
+
+            <div class="modal-footer border-0 justify-content-center">
+                <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal"><i class="ri-close-line"></i> Cerrar</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Script para abrir la modal automáticamente -->
-    <script>
-        window.addEventListener('DOMContentLoaded', (event) => {
-            var flashModal = new bootstrap.Modal(document.getElementById('flashModal'));
-            flashModal.show();
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const buttons = document.querySelectorAll('.btn-ver-producto');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const id = button.getAttribute('data-id');
+
+            fetch(`<?= BASE_URL ?>producto/show/${id}`, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('modal-id').textContent = data.id;
+                document.getElementById('modal-nombre').textContent = data.nombre;
+                document.getElementById('modal-precio').textContent = data.precio;
+                document.getElementById('modal-stock').textContent = data.stock;
+            })
+            .catch(err => {
+                console.error("Error al cargar producto:", err);
+            });
         });
-    </script>
+    });
+});
+</script>
 
-<?php endif; ?>
+
 
 <?php
-    modalFlash();
-    modalComponentes();
-    footerAdmin(); 
+modalConfirmacion();
+require_once "views/templates/components/modal_flash.php";
+modalFlash();
+footerAdmin();
 ?>

@@ -7,9 +7,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $title ??  APP_NAME .'- Panel de Administración' ?>
-    </title>
+    <title><?= pageTitle() ?></title>
+
     <meta name="keywords" content="<?= APP_KEYWORDS ?>">
     <meta name="description" content="<?= APP_DESCRIPTION ?>">
     <meta name="author" content="<?= APP_AUTHOR ?>">
@@ -26,6 +25,7 @@
 
 <body>
     <div class="wrapper">
+        
         <aside id="sidebar">
             <div class="logo-content">
                 <button class="toggle-btn" type="button">
@@ -96,9 +96,9 @@
         </aside>
         <header class="header">
             <nav class="nav_admin">
-                <div class="boton-superiores">
+                <div class="botones_header">
                     <a class="ver_sitio" href="../../index.php" class="sidebar-link" target="_blank">
-                        <i class="fa-solid fa-eye"></i>
+                        <i class="ri-shut-down-fill"></i>
                         <span>Cerrar sesión</span>
                     </a>
                 </div>

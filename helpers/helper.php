@@ -20,12 +20,17 @@
         require_once "views/templates/layouts/footer.php";
     }
 
-    function modalComponentes() {
+    function modalConfirmacion() {
         require_once "views/templates/components/modal_confirmacion.php";
     }
 
     function modalFlash() {
         require_once "views/templates/components/modal_flash.php";
+    }
+
+    $GLOBALS['pageTitle'] = APP_NAME;
+    function pageTitle($default = null) {
+        return $GLOBALS['pageTitle'] ?? ($default ?? APP_NAME);
     }
 
     // Limpieza básica de texto para prevenir XSS y algunas inyecciones
