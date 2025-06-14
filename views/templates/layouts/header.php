@@ -21,12 +21,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/css/base.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/css/sidebar.css">
 </head>
 
 <body>
     <div class="wrapper">
         
-        <aside id="sidebar">
+        <aside id="sidebar" class="shadow-sm">
             <div class="logo-content">
                 <button class="toggle-btn" type="button">
                     <img src="<?= BASE_URL ?>public/images/logos/logo.png" alt="">
@@ -88,16 +89,16 @@
 
             </ul>
             <div class="sidebar-footer">
-                <a href="#" class="sidebar-link">
-                    <i class="ri-logout-box-r-line"></i>
+                <button id="toggleDarkMode" class="sidebar-tema text-xs">
+                    <i class="ri-contrast-2-line"></i>
                     <span class="text-capitalize">modo oscuro</span>
-                </a>
+                </button>
             </div>
         </aside>
         <header class="header">
             <nav class="nav_admin">
                 <div class="botones_header">
-                    <a class="ver_sitio" href="../../index.php" class="sidebar-link" target="_blank">
+                    <a class="ver_sitio" href="../../index.php" target="_blank">
                         <i class="ri-shut-down-fill"></i>
                         <span>Cerrar sesión</span>
                     </a>

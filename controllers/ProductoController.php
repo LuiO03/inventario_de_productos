@@ -45,6 +45,7 @@
         }
 
         public function store() {
+            protegerContraCSRF(); // <--- Protección CSRF aquí
             if (!$this->validarDatosProducto($nombre, $precio, $stock)) {
                 $this->redirigirConMensaje(
                     'producto/create', 
@@ -130,6 +131,7 @@
                 header('Location: ' . BASE_URL . 'producto/index');
                 exit;
             }
+            protegerContraCSRF(); // <--- Protección CSRF aquí
 
             if (!$this->validarDatosProducto($nombre, $precio, $stock)) {
                 flash::set('mensaje', [
@@ -179,6 +181,7 @@
 
         public function delete($id){
             if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_numeric($id)) {
+                protegerContraCSRF(); // <--- Protección CSRF aquí
                 $this->model->delete((int)$id);
                 
                 flash::set('mensaje', [

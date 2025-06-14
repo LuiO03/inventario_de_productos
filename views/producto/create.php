@@ -1,13 +1,15 @@
 <?php headerAdmin(); ?>
 
-<div class="container py-4">
+<div class="contenedor">
     <h1 class="text-center mb-3">
         <i class="ri-add-line"></i> Agregar Producto
     </h1>
-    <p class="text-center text-white mb-4">
+    <p class="text-start text-white mb-4">
         Aquí puedes agregar un nuevo producto al inventario. Completa los campos requeridos y haz clic en <strong>"Agregar Producto"</strong>.
     </p>
     <form action="<?= BASE_URL ?>producto/store" method="post" class="row justify-content-center" autocomplete="off">
+        <input type="hidden" name="csrf_token" value="<?= generarTokenCSRF(); ?>">
+
         <div class="mb-3 col-md-6">
             <label for="nombre" class="form-label">Nombre del Producto</label>
             <input type="text" class="form-control" id="nombre" name="nombre" required autofocus>

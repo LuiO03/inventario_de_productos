@@ -18,6 +18,9 @@
       
       <div class="modal-footer border-0 justify-content-center">
         <form id="deleteForm" method="POST" action="" class="d-flex gap-2">
+          
+          <input type="hidden" name="csrf_token" value="<?= generarTokenCSRF(); ?>">
+
           <button type="button" class="btn btn-sm btn-light d-flex align-items-center gap-1" data-bs-dismiss="modal">
             <i class="ri-close-line"></i> Cancelar
           </button>

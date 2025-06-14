@@ -9,6 +9,7 @@
     require_once 'helpers/helper.php';
     require_once 'helpers/flash.php';
     require_once 'helpers/fecha.php';
+    require_once 'core/csrf.php';
     require_once 'core/controller.php';
     require_once 'core/model.php';
     require_once 'core/view.php';

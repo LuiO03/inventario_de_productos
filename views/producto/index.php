@@ -1,9 +1,28 @@
 <?php headerAdmin(); ?>
 
+<!-- Breadcrumb modo oscuro con Remix Icon -->
+<nav aria-label="breadcrumb" class="mb-3 text-xs miga-container rounded">
+  <ol class="breadcrumb px-3 py-2 ">
+    <li class="breadcrumb-item">
+      <a href="<?= BASE_URL ?>dashboard" class="text-decoration-none d-flex align-items-center gap-1">
+        <i class="ri-home-4-line"></i> Inicio
+      </a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="<?= BASE_URL ?>producto" class="text-decoration-none d-flex align-items-center gap-1">
+        <i class="ri-t-shirt-line"></i> Productos
+      </a>
+    </li>
+    <li class="breadcrumb-item active text-secondary d-flex align-items-center gap-1" aria-current="page">
+      <i class="ri-list-check-2"></i> Lista
+    </li>
+  </ol>
+</nav>
+
+
+
 <h1 class="text-center">Lista de Productos</h1>
 <p class="text-center">Esta es la página de productos.</p>
-
-
 
 <div class="d-flex justify-content-center align-items-center flex-wrap gap-3 mb-4">
     <a href="<?= BASE_URL ?>producto/create" class="btn btn-sm btn-success d-flex align-items-center gap-2">
@@ -14,57 +33,59 @@
     </a>
 </div>
 
-<table class="table table-sm table-striped table-bordered mt-4 table-dark">
-    <thead>
-        <tr>
-            <th class="text-center">ID</th>
-            <th class="text-center">Nombre</th>
-            <th class="text-center">Precio</th>
-            <th class="text-center">Stock</th>
-            <th class="text-center">Opciones</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php if (!empty($productos)): ?>
-            <?php foreach ($productos as $producto): ?>
+<div class="contenedor">
+    <table class="table table-sm table-striped table-bordered table-light">
+        <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Nombre</th>
+                <th class="text-center">Precio</th>
+                <th class="text-center">Stock</th>
+                <th class="text-center">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php if (!empty($productos)): ?>
+                <?php foreach ($productos as $producto): ?>
+                    <tr>
+                        <td class="text-center"><?= htmlspecialchars($producto->getId()) ?></td>
+                        <td><?= htmlspecialchars($producto->getNombre()) ?></td>
+                        <td class="text-center">S/. <?= htmlspecialchars($producto->getPrecio()) ?></td>
+                        <td class="text-center"><?= htmlspecialchars($producto->getStock()) ?></td>
+                        <td>
+                            <div class="d-flex justify-content-center gap-2">
+    
+                                <button 
+                                    class="btn btn-sm btn-info btn-ver-producto" 
+                                    data-id="<?= $producto->getId() ?>" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#viewModal"
+                                >
+                                    <i class="ri-eye-line"></i> Ver
+                                </button>
+                                <a href="<?= BASE_URL ?>producto/edit/<?= $producto->getId() ?>" title="Editar Usuario" class="btn btn-sm btn-warning">
+                                    <i class="ri-edit-line"></i> Editar
+                                </a>
+                                <button type="button" title="Eliminar Usuario" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $producto->getId() ?>">
+                                    <i class="ri-delete-bin-line"></i> Eliminar
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
                 <tr>
-                    <td class="text-center"><?= htmlspecialchars($producto->getId()) ?></td>
-                    <td><?= htmlspecialchars($producto->getNombre()) ?></td>
-                    <td class="text-center">S/. <?= htmlspecialchars($producto->getPrecio()) ?></td>
-                    <td class="text-center"><?= htmlspecialchars($producto->getStock()) ?></td>
-                    <td>
-                        <div class="d-flex justify-content-center gap-2">
-
-                            <button 
-                                class="btn btn-sm btn-info btn-ver-producto" 
-                                data-id="<?= $producto->getId() ?>" 
-                                data-bs-toggle="modal" 
-                                data-bs-target="#viewModal"
-                            >
-                                <i class="ri-eye-line"></i> Ver
-                            </button>
-                            <a href="<?= BASE_URL ?>producto/edit/<?= $producto->getId() ?>" title="Editar Usuario" class="btn btn-sm btn-warning">
-                                <i class="ri-edit-line"></i> Editar
-                            </a>
-                            <button type="button" title="Eliminar Usuario" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $producto->getId() ?>">
-                                <i class="ri-delete-bin-line"></i> Eliminar
-                            </button>
+                    <td colspan="5" class="text-center py-5">
+                        <div class="d-flex flex-column align-items-center justify-content-center">
+                            <i class="ri-inbox-line fs-1 mb-2"></i>
+                            <span class="fs-5">No hay productos registrados.</span>
                         </div>
                     </td>
                 </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <tr>
-                <td colspan="5" class="text-center py-5">
-                    <div class="d-flex flex-column align-items-center justify-content-center">
-                        <i class="ri-inbox-line fs-1 mb-2"></i>
-                        <span class="fs-5">No hay productos registrados.</span>
-                    </div>
-                </td>
-            </tr>
-        <?php endif; ?>
-    </tbody>
-</table>
+            <?php endif; ?>
+        </tbody>
+    </table>
+</div>
 
 <!-- Modal ver registro -->
 <div class="modal fade modal-slide-animate" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
@@ -72,7 +93,7 @@
         <div class="modal-content bg-dark text-white">
             <div class="modal-header bg-danger border-0">
                 <h6 class="modal-title" id="viewModalLabel">Detalles del Producto </span></h6>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                <button type="button" class="btn-close btn-close-white bg-white rounded-circle p-2" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
                 <div class="table-responsive">

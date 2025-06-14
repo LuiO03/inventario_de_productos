@@ -1,6 +1,6 @@
 <?php headerAdmin(); ?>
 
-<div class="container py-4">
+<div class="contenedor">
     <h1 class="text-center mb-3">
         <i class="ri-edit-line"></i> Editar Producto
     </h1>
@@ -10,6 +10,7 @@
 
     <form action="<?= BASE_URL ?>producto/update/<?=$producto->getId()?>" method="post" class="row justify-content-center" autocomplete="off">
         <input type="hidden" name="id" value="<?= htmlspecialchars($producto->getId()) ?>">
+        <input type="hidden" name="csrf_token" value="<?= generarTokenCSRF(); ?>">
 
         <div class="mb-3 col-md-6">
             <label for="nombre" class="form-label">Nombre del Producto</label>
