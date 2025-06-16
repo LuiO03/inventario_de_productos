@@ -21,7 +21,11 @@ INSERT INTO productos (nombre, precio, stock) VALUES
 ('Producto F', 50.00, 10),
 ('Producto G', 50.00, 10),
 ('Producto h', 50.00, 10),
-('Producto I', 50.00, 10);
+('Producto I', 50.00, 10),
+('Producto J', 50.00, 10),
+('Producto K', 50.00, 10),
+('Producto L', 50.00, 10);
+
 
 CREATE TABLE categorias (
     id INT AUTO_INCREMENT PRIMARY KEY,

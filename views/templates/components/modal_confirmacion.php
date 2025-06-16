@@ -1,10 +1,10 @@
 <!-- Modal de Confirmación de Eliminación -->
 <div class="modal fade modal-slide-animate" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-dark text-white">
+    <div class="modal-content">
       
       <div class="modal-header bg-danger border-0">
-        <h6 class="modal-title" id="deleteModalLabel">Confirmar Eliminación</h6>
+        <h6 class="modal-title fw-bold" id="deleteModalLabel">Confirmar Eliminación</h6>
         <button type="button" class="btn-close btn-close-white bg-white rounded-circle p-2" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
       

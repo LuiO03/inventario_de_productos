@@ -1,0 +1,197 @@
+/*
+table .btn {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+}
+
+table .btn-info {
+  background-color: rgb(0, 132, 219);
+  border-color: #17a2b8;
+  color: #fff;
+}
+
+table .btn-warning {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: #212529;
+}
+
+table .btn-danger {
+  background-color: rgb(211, 0, 53);
+  border-color: #dc3545;
+  color: #fff;
+}*/
+
+/* ======= DataTables Global ======= */
+/* Estilo para el contenedor general */
+
+/* ======= DataTables Global ======= */
+/* Estilo para el contenedor general */
+/* Forzar que el contenedor que contiene dt-search use todo el espacio restante */
+
+.dt-layout-end {
+  display: flex !important;
+  justify-content: flex-end !important;
+  flex: 1 1 auto !important;
+  max-width: 100% !important;
+  padding-left: 0 !important;
+  margin: 0px 5px 0px 5px !important;
+}
+
+@media (max-width: 991px) {
+  .dt-layout-end {
+    justify-content: center !important;
+    margin: 10px 5px 0px 5px !important;
+  }
+}
+.dt-container {
+  font-size: var(--font-size-sm);
+}
+
+/* Estilo al contenedor del buscador */
+.dt-search {
+  width: 100% !important;
+  position: relative;
+}
+/* Input del buscador */
+.dt-search input[type="search"] {
+  width: 100% !important;
+  border-radius: 0.5rem;
+  padding: 0.4rem 1.5rem 0.4rem 2.5rem;
+  border: 1px solid var(--color-header);
+  background-color: var(--color-bg);
+  color: var(--color-texto);
+  transition: var(--transition-general);
+}
+
+.dt-search input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: none;
+}
+
+.dt-search .clear-search {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-family: "remixicon";
+  font-size: 1.2rem;
+  color: var(--color-texto);
+  cursor: pointer;
+  display: none; /* oculto por defecto */
+}
+
+/* Input al enfocar */
+.dt-search input[type="search"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px rgba(0, 132, 219, 0.3);
+  border-color: rgb(0, 132, 219);
+}
+
+/* Ocultar el label si quieres solo el icono */
+.dt-search label {
+  display: none;
+}
+
+/* Icono dentro del input */
+.dt-search::before {
+  content: "\f0cf"; /* Lupa: ri-search-line */
+  font-family: "remixicon";
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-texto);
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+
+/* Estilo del select de cantidad */
+
+.dt-length label select.form-select {
+  width: 100px !important;
+  border: none;
+}
+
+.dt-length select {
+  border-radius: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  height: 38px;
+  background-color: var(--color-bg);
+  color: var(--color-texto);
+  transition: var(--transition-general);
+}
+
+/* Estilo de la información de la tabla */
+.dt-info {
+  font-size: 0.85rem;
+  color: var(--color-texto);
+}
+
+/* Estilo de los botones de paginación */
+.dt-paging .page-item .page-link {
+  border-radius: 0.4rem;
+  margin: 0 2px;
+  background-color: var(--color-bg);
+  color: var(--color-muted);
+  border: none;
+  transition: var(--transition-general);
+}
+
+.dt-paging .page-item.active .page-link {
+  background-color: var(--color-bg);
+  color: var(--color-texto);
+  font-weight: bold;
+}
+
+#tablaProductos tbody tr {
+  animation: fadeInUp 0.3s ease-in-out;
+}
+
+/* Animación de aparición suave */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+table.dataTable thead .sorting::after,
+table.dataTable thead .sorting_asc::after,
+table.dataTable thead .sorting_desc::after {
+  display: none !important;
+}
+
+table.dataTable thead th.sorting::after {
+  content: "\ea4c"; /* ri-arrow-up-down-line */
+  font-family: 'remixicon';
+  margin-left: 6px;
+  color: var(--color-muted);
+}
+
+table.dataTable thead th.sorting_asc::after {
+  content: "\ea78"; /* ri-arrow-up-line */
+  font-family: 'remixicon';
+  margin-left: 6px;
+  color: var(--color-primario);
+}
+
+table.dataTable thead th.sorting_desc::after {
+  content: "\ea77"; /* ri-arrow-down-line */
+  font-family: 'remixicon';
+  margin-left: 6px;
+  color: var(--color-primario);
+}
+
+
+
+form div .form-control {
+  background-color: var(--color-input-bg);
+}

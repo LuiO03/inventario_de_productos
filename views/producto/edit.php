@@ -1,12 +1,32 @@
 <?php headerAdmin(); ?>
 
+<nav aria-label="breadcrumb" class="breadcrumb-container text-xs">
+    <ol class="breadcrumb">
+        <li>
+            <a href="<?= BASE_URL ?>">
+                <i class="ri-home-4-line"></i> Inicio
+            </a>
+            <i class="ri-arrow-right-s-line separator"></i>
+        </li>
+        <li>
+            <a href="<?= BASE_URL ?>producto">
+                <i class="ri-t-shirt-line"></i> Productos
+            </a>
+            <i class="ri-arrow-right-s-line separator"></i>
+        </li>
+        <li class="active">
+            <i class="ri-edit-box-fill"></i> Editar
+        </li>
+    </ol>
+</nav>
+
+<h1 class="text-center mb-3">
+    Editar Producto
+</h1>
+<p class="text-center mb-4">
+    Aquí puedes editar la información del producto seleccionado. Completa los campos y haz clic en <strong>"Actualizar Producto"</strong>.
+</p>
 <div class="contenedor">
-    <h1 class="text-center mb-3">
-        <i class="ri-edit-line"></i> Editar Producto
-    </h1>
-    <p class="text-center text-muted mb-4">
-        Aquí puedes editar la información del producto seleccionado. Completa los campos y haz clic en <strong>"Actualizar Producto"</strong>.
-    </p>
 
     <form action="<?= BASE_URL ?>producto/update/<?=$producto->getId()?>" method="post" class="row justify-content-center" autocomplete="off">
         <input type="hidden" name="id" value="<?= htmlspecialchars($producto->getId()) ?>">

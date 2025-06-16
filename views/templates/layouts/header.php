@@ -17,17 +17,39 @@
     <link rel="shortcut icon" href="<?= APP_LOGO ?>" type="image/x-icon">
     <!--=============== REMIXICONS ===============-->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    
+
+    
     <!--=============== BOOTSTRAP ===============-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--=============== Datatables CSS ===============-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css">
+
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/css/base.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/css/sidebar.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/css/tabla-productos.css">
+    
+      <script>
+        (function() {
+        try {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+            const theme = savedTheme || (prefersLight ? 'light' : 'dark');
+
+            if (theme === 'light') {
+            document.documentElement.classList.add('light-mode');
+            }
+        } catch (e) {
+            console.error('Error al aplicar el tema desde el inicio', e);
+        }
+        })();
+    </script>
 </head>
 
 <body>
     <div class="wrapper">
-        
-        <aside id="sidebar" class="shadow-sm">
+        <aside id="sidebar">
             <div class="logo-content">
                 <button class="toggle-btn" type="button">
                     <img src="<?= BASE_URL ?>public/images/logos/logo.png" alt="">
@@ -89,23 +111,14 @@
 
             </ul>
             <div class="sidebar-footer">
-                <button id="toggleDarkMode" class="sidebar-tema text-xs">
+                <button id="toggleModeTheme" class="sidebar-tema text-xs">
                     <i class="ri-contrast-2-line"></i>
                     <span class="text-capitalize">modo oscuro</span>
                 </button>
             </div>
         </aside>
-        <header class="header">
+        <div class="content">
             <nav class="nav_admin">
-                <div class="botones_header">
-                    <a class="ver_sitio" href="../../index.php" target="_blank">
-                        <i class="ri-shut-down-fill"></i>
-                        <span>Cerrar sesión</span>
-                    </a>
-                </div>
-                <span class="nav_fecha">
-                    <?= fechaC(); ?>
-                </span>
                 <div class="nav_usuario">
                     <img src="<?= BASE_URL ?>public/images/pikachu.jpg" alt="foto de perfil">
                     <div class="usuario_datos">
@@ -117,5 +130,15 @@
                         </span>
                     </div>
                 </div>
+                <span class="nav_fecha">
+                    <?= fechaC(); ?>
+                </span>
+                
+                <div class="botones_header">
+                    <a class="cerrar-sesión" href="../../index.php" target="_blank">
+                        <i class="ri-shut-down-fill"></i>
+                        <span>Cerrar sesión</span>
+                    </a>
+                </div>
             </nav>
-            <main class="">
+            <main class="main-content">

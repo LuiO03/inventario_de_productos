@@ -23,10 +23,10 @@
     <!-- Modal de Bootstrap -->
     <div class="modal fade modal-slide-animate" id="flashModal" tabindex="-1" aria-labelledby="flashModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark text-white">
+            <div class="modal-content">
                 
                 <div class="modal-header border-0 bg-<?= $tipo ?>">
-                    <h6 class="modal-title" id="flashModalLabel"><?= htmlspecialchars($mensaje['header']) ?></h6>
+                    <h6 class="modal-title fw-bold" id="flashModalLabel"><?= htmlspecialchars($mensaje['header']) ?></h6>
                     <button type="button" class="btn-close btn-close-white bg-white rounded-circle p-2" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 

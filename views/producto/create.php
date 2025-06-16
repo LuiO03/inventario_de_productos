@@ -1,12 +1,32 @@
 <?php headerAdmin(); ?>
 
+<nav aria-label="breadcrumb" class="breadcrumb-container text-xs">
+    <ol class="breadcrumb">
+        <li>
+            <a href="<?= BASE_URL ?>">
+                <i class="ri-home-4-line"></i> Inicio
+            </a>
+            <i class="ri-arrow-right-s-line separator"></i>
+        </li>
+        <li>
+            <a href="<?= BASE_URL ?>producto">
+                <i class="ri-t-shirt-line"></i> Productos
+            </a>
+            <i class="ri-arrow-right-s-line separator"></i>
+        </li>
+        <li class="active">
+            <i class="ri-add-box-fill"></i> Agregar
+        </li>
+    </ol>
+</nav>
+
+<h1 class="text-center mb-3">
+    Agregar Producto
+</h1>
+<p class="text-center mb-4">
+    Aquí puedes agregar un nuevo producto al inventario. Completa los campos requeridos y haz clic en <strong>"Agregar Producto"</strong>.
+</p>
 <div class="contenedor">
-    <h1 class="text-center mb-3">
-        <i class="ri-add-line"></i> Agregar Producto
-    </h1>
-    <p class="text-start text-white mb-4">
-        Aquí puedes agregar un nuevo producto al inventario. Completa los campos requeridos y haz clic en <strong>"Agregar Producto"</strong>.
-    </p>
     <form action="<?= BASE_URL ?>producto/store" method="post" class="row justify-content-center" autocomplete="off">
         <input type="hidden" name="csrf_token" value="<?= generarTokenCSRF(); ?>">
 

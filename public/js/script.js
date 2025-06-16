@@ -4,34 +4,36 @@ hamBurger.addEventListener("click", function () {
   document.querySelector("#sidebar").classList.toggle("expand");
 });
 
-
-
-const toggleDarkModeBtn = document.getElementById('toggleDarkMode');
+const toggleModeThemeBtn = document.getElementById('toggleModeTheme');
 
 function applyTheme(theme) {
-  const body = document.body;
-  const isDark = theme === 'dark';
+  const isLight = theme === 'light';
+  document.documentElement.classList.toggle('light-mode', isLight);
 
-  body.classList.toggle('dark-mode', isDark);
+  // Guardar tema en localStorage
+  localStorage.setItem('theme', theme);
 
-  // Cambiar clases en las tablas
-  const tables = document.querySelectorAll('table');
-  tables.forEach(table => {
-    table.classList.remove(isDark ? 'table-light' : 'table-dark');
-    table.classList.add(isDark ? 'table-dark' : 'table-light');
-  });
-
-  // Guardar en localStorage
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  // Cambiar ícono y texto del botón
+  const icon = toggleModeThemeBtn.querySelector('i');
+  const span = toggleModeThemeBtn.querySelector('span');
+  if (isLight) {
+    icon.className = 'ri-moon-line';
+    span.textContent = 'modo oscuro';
+  } else {
+    icon.className = 'ri-sun-line';
+    span.textContent = 'modo claro';
+  }
 }
 
-toggleDarkModeBtn.addEventListener('click', () => {
-  const isDark = !document.body.classList.contains('dark-mode');
-  applyTheme(isDark ? 'dark' : 'light');
+toggleModeThemeBtn.addEventListener('click', () => {
+  const isCurrentlyLight = document.documentElement.classList.contains('light-mode');
+  applyTheme(isCurrentlyLight ? 'dark' : 'light');
 });
 
 // Aplicar tema al cargar la página
 window.addEventListener('DOMContentLoaded', () => {
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  applyTheme(savedTheme);
+  const savedTheme = localStorage.getItem('theme');
+  const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  const themeToApply = savedTheme || (prefersLight ? 'light' : 'dark');
+  applyTheme(themeToApply);
 });
