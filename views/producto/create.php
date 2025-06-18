@@ -32,7 +32,7 @@
 
         <div class="mb-3 col-md-6">
             <label for="nombre" class="form-label">Nombre del Producto</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required autofocus>
+            <input type="text" class="form-control" id="nombre" name="nombre" required autofocus placeholder="Ingrese el nombre del producto">
         </div>
 
         <div class="mb-3 col-md-6">

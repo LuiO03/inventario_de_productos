@@ -10,10 +10,10 @@
       
       <div class="modal-body text-center">
         <i class="ri-close-circle-line text-danger mb-3" style="font-size: 6rem;"></i>
-        <p class="mb-0">
+        <h3 class="fw-bold">
           ¿Estás seguro de que deseas eliminar este producto?<br>
-        </p>
-        <small>Esta acción no se puede deshacer.</small>
+        </h3>
+        <p>Esta acción no se puede deshacer.</p>
       </div>
       
       <div class="modal-footer border-0 justify-content-center">

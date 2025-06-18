@@ -1,33 +1,154 @@
-/*
+/* ==== BOTONES DE TABLA (editar, eliminar, etc.) ==== */
+
 table .btn {
-  padding: 0.3rem 0.6rem;
+  width: min-content;
+  min-width: 40px;
+  min-height: 35px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  color: whitesmoke;
+  font-size: var(--font-size-xs);
+  margin: 2px 0px;
+}
+
+/* TEXTO del botón */
+table .btn .boton-text {
+  flex: 1;
+  white-space: nowrap;
+  padding: 1px 45px 1px 5px;
+  transition: color 200ms ease;
+}
+
+/* ÍCONO */
+table .btn .boton-icon {
+  height: 100%;
+  width: 40px;
+  display: flex;
+  font-size: 15px;
+  align-items: center;
+  justify-content: center;
+  transition: width 200ms ease, font-size 200ms ease;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: whitesmoke;
+}
+
+/* HOVER EFFECTS */
+table .btn:hover .boton-text {
+  color: transparent;
+}
+
+table .btn:hover .boton-icon {
+  width: 100%;
+  border-left: none;
+  right: 0;
+  justify-content: center;
+  font-size: 20px;
+}
+
+/* Active */
+table .btn:active .boton-icon i {
+  transform: scale(0.85);
+}
+
+/* === COLORES PERSONALIZADOS SEGÚN CLASE === */
+
+/* DANGER */
+table .btn-danger {
+  background-color: var(--color-error);
+}
+
+table .btn-danger:hover .boton-icon, table .btn-danger:hover{
+  background: #A9002A;
+}
+
+/* INFO */
+table .btn-info {
+  background-color: var(--color-info);
+}
+
+table .btn-info:hover .boton-icon, table .btn-info:hover{
+  background-color: #1D61D0;
+}
+
+/* WARNING */
+table .btn-warning {
+  background-color: var(--color-warning);
+  color: black;
+}
+table .btn-warning:hover .boton-icon, table .btn-warning:hover{
+  background-color: #CC7A00;
+}
+
+/* SUCCESS */
+table .btn-success {
+  background-color: var(--color-success);
+}
+table .btn-success:hover .boton-icon, table .btn-success:hover{
+  background-color: #007D71;
+}
+
+/* 
+table .btn {
+      padding: 0.375rem 0.75rem;
   font-size: 0.85rem;
+  border-width: 2px;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  box-shadow: none;
+  line-height: 1.5;
+  border-radius: 3px;
 }
 
 table .btn-info {
+  color: rgb(0, 132, 219);
+  border-color: rgb(0, 132, 219);
+}
+
+table .btn-info:hover {
   background-color: rgb(0, 132, 219);
-  border-color: #17a2b8;
   color: #fff;
 }
 
 table .btn-warning {
-  background-color: #ffc107;
+  color: #ffc107;
   border-color: #ffc107;
+}
+
+table .btn-warning:hover {
+  background-color: #ffc107 ;
   color: #212529;
 }
 
 table .btn-danger {
+  color: rgb(211, 0, 53);
+  border-color: rgb(211, 0, 53);
+}
+
+table .btn-danger:hover {
   background-color: rgb(211, 0, 53);
-  border-color: #dc3545;
   color: #fff;
 }*/
 
-/* ======= DataTables Global ======= */
-/* Estilo para el contenedor general */
+/* ==== DATATABLES: CONTENEDORES Y ESTRUCTURA GENERAL ==== */
 
-/* ======= DataTables Global ======= */
-/* Estilo para el contenedor general */
-/* Forzar que el contenedor que contiene dt-search use todo el espacio restante */
+.dt-container {
+  font-size: var(--font-size-sm);
+}
+
+.dt-container > div:nth-child(3){
+  padding-top: 10px;
+}
+
+.dt-container > div:nth-child(1) {
+  padding: 0px ;
+}
 
 .dt-layout-end {
   display: flex !important;
@@ -39,35 +160,59 @@ table .btn-danger {
 }
 
 @media (max-width: 991px) {
-  .dt-layout-end {
+  .dt-layout-start{
+    width: 100% !important;
+  }
+  .dt-layout-end, .dt-layout-start {
     justify-content: center !important;
     margin: 10px 5px 0px 5px !important;
   }
 }
-.dt-container {
-  font-size: var(--font-size-sm);
-}
 
-/* Estilo al contenedor del buscador */
+/* ==== DATATABLES: BUSCADOR ==== */
+
 .dt-search {
   width: 100% !important;
   position: relative;
 }
-/* Input del buscador */
+
 .dt-search input[type="search"] {
   width: 100% !important;
-  border-radius: 0.5rem;
+  border-radius: var(--border-radio-card);
   padding: 0.4rem 1.5rem 0.4rem 2.5rem;
-  border: 1px solid var(--color-header);
+  border: 2px solid var(--color-border);
   background-color: var(--color-bg);
   color: var(--color-texto);
   transition: var(--transition-general);
+}
+
+.dt-search input[type="search"]::placeholder{
+  color: var(--color-muted);
+  transition: var(--transition-general);
+}
+
+.dt-search input[type="search"]:focus {
+  outline: none;
+  border: 2px solid var(--color-primary);
+  box-shadow: none;
 }
 
 .dt-search input[type="search"]::-webkit-search-cancel-button {
   -webkit-appearance: none;
   appearance: none;
   display: none;
+}
+
+.dt-search::before {
+  content: "\f0cf"; /* ri-search-line */
+  font-family: "remixicon";
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-texto);
+  font-size: 1.2rem;
+  pointer-events: none;
 }
 
 .dt-search .clear-search {
@@ -81,43 +226,22 @@ table .btn-danger {
   font-size: 1.2rem;
   color: var(--color-texto);
   cursor: pointer;
-  display: none; /* oculto por defecto */
+  display: none;
 }
 
-/* Input al enfocar */
-.dt-search input[type="search"]:focus {
-  outline: none;
-  box-shadow: 0 0 0 1px rgba(0, 132, 219, 0.3);
-  border-color: rgb(0, 132, 219);
-}
-
-/* Ocultar el label si quieres solo el icono */
 .dt-search label {
   display: none;
 }
 
-/* Icono dentro del input */
-.dt-search::before {
-  content: "\f0cf"; /* Lupa: ri-search-line */
-  font-family: "remixicon";
-  position: absolute;
-  left: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--color-texto);
-  font-size: 1.2rem;
-  pointer-events: none;
-}
-
-/* Estilo del select de cantidad */
+/* ==== SELECT DE CANTIDAD DE FILAS ==== */
 
 .dt-length label select.form-select {
   width: 100px !important;
-  border: none;
 }
 
 .dt-length select {
-  border-radius: 0.4rem;
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radio-card);
   padding: 0.4rem 0.8rem;
   height: 38px;
   background-color: var(--color-bg);
@@ -125,33 +249,59 @@ table .btn-danger {
   transition: var(--transition-general);
 }
 
-/* Estilo de la información de la tabla */
+.dt-length select:focus {
+  outline: none;
+  border: 2px solid var(--color-primary);
+  box-shadow: none;
+}
+
+/* ==== INFO DE FILAS MOSTRADAS ==== */
+
 .dt-info {
-  font-size: 0.85rem;
   color: var(--color-texto);
 }
 
-/* Estilo de los botones de paginación */
+/* ==== PAGINACIÓN ==== */
+
 .dt-paging .page-item .page-link {
-  border-radius: 0.4rem;
+  border-radius: var(--border-radio-card);
   margin: 0 2px;
   background-color: var(--color-bg);
   color: var(--color-muted);
-  border: none;
   transition: var(--transition-general);
+  border: 2px solid var(--color-border);
+  font-size: var(--font-size-sm);
 }
 
 .dt-paging .page-item.active .page-link {
-  background-color: var(--color-bg);
-  color: var(--color-texto);
+  background-color: var(--color-primary);
+  color: white;
   font-weight: bold;
 }
+
+.dt-paging .page-item .page-link:hover {
+  background-color: var(--color-hover);
+}
+
+.dt-paging .page-item .page-link:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+  border: 2px solid var(--color-primary);
+}
+
+@media (max-width: 576px) {
+  .dt-paging .page-item .text-label {
+    display: none;
+  }
+}
+
+/* ==== ANIMACIÓN DE FILAS ==== */
 
 #tablaProductos tbody tr {
   animation: fadeInUp 0.3s ease-in-out;
 }
 
-/* Animación de aparición suave */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -163,35 +313,35 @@ table .btn-danger {
   }
 }
 
-table.dataTable thead .sorting::after,
-table.dataTable thead .sorting_asc::after,
-table.dataTable thead .sorting_desc::after {
+/* ==== ICONOS DE ORDENAMIENTO (REMIXICON) ==== */
+
+.dt-column-order {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px; /* separa el icono del texto */
+  vertical-align: middle;
+}
+
+.dt-column-order i {
+  font-size: 1rem; /* o ajústalo a tu preferencia */
+  line-height: 1;
+  color: var(--color-muted); /* o el color que prefieras */
+}
+
+th .dt-column-order::before,
+th .dt-column-order::after {
+  display: none !important;
+  content: none !important;
+}
+
+th.dt-orderable-asc::after,
+th.dt-orderable-desc::after,
+th.dt-ordering-asc::after,
+th.dt-ordering-desc::after {
+  content: none !important;
   display: none !important;
 }
 
-table.dataTable thead th.sorting::after {
-  content: "\ea4c"; /* ri-arrow-up-down-line */
-  font-family: 'remixicon';
-  margin-left: 6px;
-  color: var(--color-muted);
-}
-
-table.dataTable thead th.sorting_asc::after {
-  content: "\ea78"; /* ri-arrow-up-line */
-  font-family: 'remixicon';
-  margin-left: 6px;
-  color: var(--color-primario);
-}
-
-table.dataTable thead th.sorting_desc::after {
-  content: "\ea77"; /* ri-arrow-down-line */
-  font-family: 'remixicon';
-  margin-left: 6px;
-  color: var(--color-primario);
-}
 
 
-
-form div .form-control {
-  background-color: var(--color-input-bg);
-}

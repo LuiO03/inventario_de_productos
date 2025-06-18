@@ -9,7 +9,7 @@
   --font-family-base: "Poppins", sans-serif;
 
   --color-text: #e9e9e9;
-  --color-primary: #66b2ff;
+  --color-primary: #d11e4b;
   --color-secondary: #999999;
   --color-accent: #23c17e;
 
@@ -21,13 +21,19 @@
   --color-modal-bg: #222222;
   --color-dropdown-bg: #2a2a2a;
 
+  /* Tablas */
+  --color-table:#1e1e1e;
+  --color-stripet-table:#dee2e6;
+  --color-table-border: #0a0a0a;
+  --color-table-head-border:#000000;
+  
   --color-border: #3a3a3a;
-  --color-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  --color-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
 
-  --color-success: #23c17e;
-  --color-error: #ff6b6b;
-  --color-warning: #ffd166;
-  --color-info: #5bc0de;
+  --color-success: #00BFA5;   /* o #00796B */
+  --color-error:   #CD1A57;   /* o #B00020 */
+  --color-warning: #FFA000;   /* o #C67000 */
+  --color-info:    #2979FF;   /* o #0057B8 */
 
   --color-input-bg: #2a2a2a;
   --color-input-border: #444;
@@ -42,8 +48,13 @@
 
   --scrollbar-thumb: #444;
   --scrollbar-track: #2a2a2a;
+
+  /* variable unicas */
+  --color-focus: #66b2ff;
   --transition-general: background-color 0.3s ease-out, color 0.3s ease-out, border-color 0.3s ease-out;
   --border-radio-card: 3px;
+  --color-primario-s:rgb(252, 13, 65);
+  --color-primario-rgb:252, 13, 65;
 }
 
 /* ==========================================
@@ -58,29 +69,35 @@
   --color-accent: #198754;
 
   /* Fondos */
-  --color-sidebar: #EEEEEE;
+  --color-sidebar: #F2F2F2;
   --color-header: #F9F9F9;
   --color-footer: #f8f9fa;
   --color-card-bg: #f8f9fa;
   --color-modal-bg: #ffffff;
   --color-dropdown-bg: #ffffff;
 
+  /* Tablas */
+  --color-table:#dee2e6;
+  --color-stripet-table:#dee2e6;
+  --color-table-border: #dee2e6;
+  --color-table-head-border:#a5a9ad;
+  
   /* Bordes y sombras */
-  --color-border: #dee2e6;
+  --color-border: #a5a9ad;
   --color-shadow: rgba(0, 0, 0, 0.05);
 
   /* Estados */
-  --color-success: #198754;
-  --color-error: #dc3545;
-  --color-warning: #ffc107;
-  --color-info: #0dcaf0;
+  --color-success: #009688;
+  --color-error: #D30035;
+  --color-warning: #FF9800;
+  --color-info: #0084db;
 
   /* Inputs y elementos interactivos */
   --color-input-bg: #ffffff;
   --color-input-border: #ced4da;
   --color-input-text: #212529;
   --color-placeholder: #6c757d;
-  --color-hover: rgba(255, 255, 255, 0.5);
+  --color-hover: #E5E5E5;
   --color-active: #e2e6ea;
 
   /* Texto especial */
@@ -103,8 +120,10 @@
   --font-size-h2: 1.625rem; /* Títulos secundarios */
   --font-size-h3: 1.375rem; /* Subtítulos / paneles */
   --font-size-p: 1.05rem;  /* Texto general */
-  --font-size-sm: 0.95rem;  /* Texto secundario (inputs, etc.) */
+  --font-size-sm: 0.93rem;  /* Texto secundario (inputs, etc.) */
   --font-size-xs: 0.85rem;  /* Ayuda, tooltips */
+  --fw-regular: 400;
+  --fw-bold: 700;
 }
 
 /* Tablets (768px – 991px) */
@@ -135,6 +154,8 @@
 .text-sm { font-size: var(--font-size-sm); }
 .text-md { font-size: var(--font-size-p); }
 .text-lg { font-size: var(--font-size-h2); }
+.fw-regular { font-weight: var(--fw-regular); }
+.fw-bold { font-weight: var(--fw-bold); }
 
 /* ==========================================
    TIPOGRAFÍA ELEMENTOS
@@ -154,6 +175,7 @@ h3 {
 p {
   font-size: var(--font-size-p);
 }
+
 small {
   font-size: var(--font-size-sm);
 }
@@ -187,7 +209,7 @@ li {
 }
 
 ::selection {
-  background-color: var(--color-secondary);
+  background-color: var(--color-primary);
   color: var(--color-text);
 }
 
@@ -198,12 +220,14 @@ li {
 /* ======= Tabla personalizada ======= */
 table {
   background-color: var(--color-header) !important;
-  border: 1px solid var(--color-header)!important;
   border-radius: 0.5rem;
-  overflow: hidden;
   color: var(--color-texto) !important;
   transition: var(--transition-general);
-  margin: 10px 0px;
+  margin: 20px 0px;
+}
+
+table td{
+  text-align: center !important;
 }
 
 table td,
@@ -212,17 +236,28 @@ table th {
   vertical-align: middle !important;
   color: var(--color-texto) !important;
   padding-inline: 10px !important;
+  transition: var(--transition-general);
+  border: 1px solid var(--color-border);
+}
+
+table th:hover{
+  background-color: var(--color-primary) !important;
+  color: whitesmoke !important;
 }
 
 table thead {
   background-color: var(--color-sidebar) !important;
   text-transform: uppercase;
   transition: var(--transition-general);
+  border-top: 1px solid var(--color-table-head-border);
+  border-bottom: 1px solid var(--color-table-head-border);
+  height: 40px;
 }
 
 table tbody tr:nth-child(even) {
   background-color: var(--color-sidebar) !important;
   transition: var(--transition-general);
+  border-top: 1px solid var(--color-table-border);
 }
 
 table tbody tr:hover {
@@ -230,7 +265,67 @@ table tbody tr:hover {
   transition: background-color 0.3s ease;
 }
 
+@media (max-width: 768px) {
 
+  table .btn .boton-text{
+    display: none;
+  }
+  .tabla-responsive thead {
+    display: none;
+  }
+
+  .tabla-responsive, 
+  .tabla-responsive tbody, 
+  .tabla-responsive tr, 
+  .tabla-responsive td {
+    display: block;
+    width: 100%;
+  }
+ 
+  .tabla-responsive tr:hover {
+    background-color: var(--color-bg) !important;
+  }
+
+  .tabla-responsive tr {
+    margin-bottom: 1rem;
+    background-color: var(--color-sidebar);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radio-card);
+    padding: 0.5rem;
+    transition: var(--transition-general);
+  }
+
+  .tabla-responsive td {
+    position: relative;
+    text-align: end !important;
+    border: none;
+    border-bottom: 1px solid var(--color-border);
+    transition: var(--transition-general);
+  }
+
+  .tabla-responsive td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: -10px;
+    width: 50%;
+    padding-left: 1rem;
+    font-weight: 700;
+    text-align: left;
+    color: var(--color-text);
+  }
+
+  .tabla-responsive td:last-child {
+    border-bottom: none;
+  }
+}
+
+/* ==========================================
+   INPUTS EN FORMULARIOS (EXTRA)
+   ========================================== */
+
+form div .form-control {
+  background-color: var(--color-input-bg);
+}
 
 /* ==========================================
    ANIMACIONES
@@ -260,3 +355,18 @@ table tbody tr:hover {
     opacity: 1;
   }
 }
+
+.targeta{
+  border-radius: var(--border-radio-card);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  background-color: transparent;
+  text-transform: uppercase;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.targeta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+

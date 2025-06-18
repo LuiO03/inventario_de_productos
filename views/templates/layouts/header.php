@@ -17,13 +17,12 @@
     <link rel="shortcut icon" href="<?= APP_LOGO ?>" type="image/x-icon">
     <!--=============== REMIXICONS ===============-->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
-    
-
-    
     <!--=============== BOOTSTRAP ===============-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!--=============== Datatables CSS ===============-->
+    <!-- DataTables Bootstrap 5 CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css">
+    <!-- DataTables Responsive Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
 
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/css/base.css">
@@ -118,7 +117,7 @@
             </div>
         </aside>
         <div class="content">
-            <nav class="nav_admin">
+            <nav class="nav-header">
                 <div class="nav_usuario">
                     <img src="<?= BASE_URL ?>public/images/pikachu.jpg" alt="foto de perfil">
                     <div class="usuario_datos">
@@ -130,7 +129,7 @@
                         </span>
                     </div>
                 </div>
-                <span class="nav_fecha">
+                <span class="nav-fecha text-md">
                     <?= fechaC(); ?>
                 </span>
                 

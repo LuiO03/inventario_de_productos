@@ -10,7 +10,7 @@
   transition: margin-left 0.3s ease;
 }
 
-.nav_admin {
+.nav-header {
   background-color: var(--color-header);
   display: flex;
   justify-content: space-between;
@@ -20,7 +20,8 @@
   color: var(--color-text);
   transition: var(--transition-general);
   z-index: 10;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
   position: sticky;
 }
 
@@ -33,6 +34,18 @@
   height: 100dvh;
   overflow-y: auto;
   transition: var(--transition-general);
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding: 20px 10px;
+  }
+}
+
+@media (max-width: 458px) {
+  .main-content {
+    padding: 20px 0px;
+  }
 }
 
 main::-webkit-scrollbar {
@@ -135,7 +148,6 @@ main::-webkit-scrollbar-thumb:hover {
 
 #sidebar:not(.expand) a.sidebar-link:hover span {
   display: flex;
-  
 }
 
 #sidebar:not(.expand).sidebar-nav {
@@ -189,7 +201,8 @@ a.sidebar-link {
 #sidebar:not(.expand) .sidebar-item .sidebar-link:hover {
   background-color: var(--color-dropdown-bg);
   width: 250px;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
   display: flex;
 }
 
@@ -306,7 +319,8 @@ a.sidebar-link {
   border-radius: var(--border-radio-card);
   margin: 20px 0px;
   transition: var(--transition-general);
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
 .modal-content {
@@ -317,61 +331,73 @@ a.sidebar-link {
   color: white;
 }
 
+form div .form-control {
+  background-color: var(--color-input-bg);
+}
+
 /*====== MIGA DE NAVEGACIÓN ======*/
 
 .breadcrumb-container {
-      background-color: var(--color-header);
-      padding: 0.75rem 1rem;
-      width: 100%;
-      border-radius: var(--border-radio-card);
-      margin: 20px 0px;
-      transition: var(--transition-general);
-      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-    }
+  background-color: var(--color-header);
+  padding: 0.75rem 1rem;
+  width: 100%;
+  border-radius: var(--border-radio-card);
+  margin: 20px 0px;
+  transition: var(--transition-general);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
+    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
 
-    .breadcrumb {
-      list-style: none;
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      margin: 0;
-      padding: 0;
-    }
+.breadcrumb {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
 
-    .breadcrumb li {
-      display: flex;
-      align-items: center;
-    }
+.breadcrumb li {
+  display: flex;
+  align-items: center;
+}
 
-    .breadcrumb li:not(:last-child) .separator {
-      margin: 0 0.5rem;
-      color: #aaa;
-      font-size: 1rem;
-    }
+.breadcrumb li:not(:last-child) .separator {
+  margin: 0 0.5rem;
+  color: #aaa;
+  font-size: 1rem;
+}
 
-    .breadcrumb a {
-      color: var(--color-text);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      transition: color 0.2s;
-    }
+.breadcrumb a {
+  color: var(--color-text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: color 0.2s;
+}
 
-    .breadcrumb a:hover {
-      color: var(--color-muted);
-    }
+.breadcrumb a:hover {
+  color: var(--color-primary);
+  font-weight: var(fw-bold);
+}
 
-    .breadcrumb .active {
-      color: var(--color-muted);
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
+.breadcrumb .active {
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
 
 /*========== switch modo oscuro/claro ===========*/
 
 form div .form-control {
   background-color: var(--color-input-bg) !important;
   color: var(--color-text);
+}
+
+@media (max-width: 768px) {
+  .nav-fecha {
+    display: none;
+  }
 }

@@ -33,7 +33,7 @@
 </div>
 
 <div class="contenedor">
-    <table id="tablaProductos" class="col-12 table-striped table-sm d-none">
+    <table id="tablaProductos" class="table-sm d-none w-100 tabla-responsive">
         <thead>
             <tr>
                 <th class="text-center">ID</th>
@@ -43,29 +43,32 @@
                 <th class="text-center">Opciones</th>
             </tr>
         </thead>
+
         <tbody>
             <?php if (!empty($productos)): ?>
                 <?php foreach ($productos as $producto): ?>
                     <tr>
-                        <td class="text-center"><?= htmlspecialchars($producto->getId()) ?></td>
-                        <td><?= htmlspecialchars($producto->getNombre()) ?></td>
-                        <td class="text-center">S/. <?= htmlspecialchars($producto->getPrecio()) ?></td>
-                        <td class="text-center"><?= htmlspecialchars($producto->getStock()) ?></td>
-                        <td>
-                            <div class="d-flex justify-content-center gap-2">
-
-                                <button
+                        <td class="" data-label="ID:"><?= htmlspecialchars($producto->getId()) ?></td>
+                        <td data-label="Nombre:"><?= htmlspecialchars($producto->getNombre()) ?></td>
+                        <td class="" data-label="Precio:">S/. <?= htmlspecialchars($producto->getPrecio()) ?></td>
+                        <td class="" data-label="Stock:"><?= htmlspecialchars($producto->getStock()) ?></td>
+                        <td >
+                            <div class="d-flex justify-content-center gap-2 flex-wrap">
+                                <button title="Ver Producto"
                                     class="btn btn-sm btn-info btn-ver-producto"
                                     data-id="<?= $producto->getId() ?>"
                                     data-bs-toggle="modal"
                                     data-bs-target="#viewModal">
-                                    <i class="ri-eye-line"></i> Ver
+                                    <span class="boton-text">Ver</span>
+                                    <span class="boton-icon"><i class="ri-eye-fill"></i></span>
                                 </button>
-                                <a href="<?= BASE_URL ?>producto/edit/<?= $producto->getId() ?>" title="Editar Usuario" class="btn btn-sm btn-warning">
-                                    <i class="ri-edit-line"></i> Editar
+                                <a href="<?= BASE_URL ?>producto/edit/<?= $producto->getId() ?>" title="Editar Producto" class="btn btn-sm btn-warning">
+                                    <span class="boton-icon"><i class="ri-pencil-fill"></i></span>
+                                    <span class="boton-text">Editar</span>
                                 </a>
-                                <button type="button" title="Eliminar Usuario" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $producto->getId() ?>">
-                                    <i class="ri-delete-bin-line"></i> Eliminar
+                                <button type="button" title="Eliminar Producto" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $producto->getId() ?>">
+                                    <span class="boton-text">Eliminar</span>
+                                    <span class="boton-icon"><i class="ri-delete-bin-fill"></i></span>
                                 </button>
                             </div>
                         </td>
@@ -73,6 +76,7 @@
                 <?php endforeach; ?>
             <?php endif; ?>
         </tbody>
+
     </table>
 </div>
 
@@ -88,7 +92,7 @@
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
-                    <table class="table table-sm table-bordered mb-0 no-">
+                    <table class="table table-sm table-bordered mb-0 text-md">
                         <thead>
                             <tr>
                                 <th class="text-center">Atributos</th>
