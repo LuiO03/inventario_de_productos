@@ -20,12 +20,15 @@
     </ol>
 </nav>
 
-<h1 class="text-center mb-3">
-    Agregar Producto
-</h1>
-<p class="text-center mb-4">
-    Aquí puedes agregar un nuevo producto al inventario. Completa los campos requeridos y haz clic en <strong>"Agregar Producto"</strong>.
-</p>
+<div class="contenedor-header">
+    <h1 class="text-center mb-3">
+        Agregar Producto
+    </h1>
+    <p class="text-center mb-4">
+        Aquí puedes agregar un nuevo producto al inventario. Completa los campos requeridos y haz clic en <strong>"Agregar Producto"</strong>.
+    </p>
+</div>
+
 <div class="contenedor">
     <form action="<?= BASE_URL ?>producto/store" method="post" class="row justify-content-center" autocomplete="off">
         <input type="hidden" name="csrf_token" value="<?= generarTokenCSRF(); ?>">
@@ -56,9 +59,7 @@
     </form>
 </div>
 
-
-
 <?php 
-    require_once "views/templates/components/modal_flash.php";
+    modalFlash($mensaje);
     footerAdmin(); 
 ?>

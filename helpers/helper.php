@@ -20,13 +20,17 @@
         require_once "views/templates/layouts/footer.php";
     }
 
+    
+    function modalFlash($mensaje) {
+        if (!empty($mensaje)) {
+            include "views/templates/components/modal_flash.php";
+        }
+    }
+
     function modalConfirmacion() {
         require_once "views/templates/components/modal_confirmacion.php";
     }
 
-    function modalFlash() {
-        require_once "views/templates/components/modal_flash.php";
-    }
 
     $GLOBALS['pageTitle'] = APP_NAME;
     function pageTitle($default = null) {

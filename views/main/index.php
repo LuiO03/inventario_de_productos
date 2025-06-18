@@ -184,8 +184,7 @@
 </div>
 
 <?php
-modalConfirmacion();
-require_once "views/templates/components/modal_flash.php";
-modalFlash();
-footerAdmin();
+    modalConfirmacion();
+    modalFlash($mensaje);
+    footerAdmin();
 ?>

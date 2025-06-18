@@ -20,8 +20,7 @@
   color: var(--color-text);
   transition: var(--transition-general);
   z-index: 10;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--sombra-material);
   position: sticky;
 }
 
@@ -201,8 +200,7 @@ a.sidebar-link {
 #sidebar:not(.expand) .sidebar-item .sidebar-link:hover {
   background-color: var(--color-dropdown-bg);
   width: 250px;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--sombra-material);
   display: flex;
 }
 
@@ -304,7 +302,7 @@ a.sidebar-link {
   display: flex;
   gap: 10px;
   padding: 5px 10px;
-  border-radius: 5px;
+  border-radius: var(--border-radio-card);
   transition: var(--transition-general);
 }
 
@@ -319,8 +317,7 @@ a.sidebar-link {
   border-radius: var(--border-radio-card);
   margin: 20px 0px;
   transition: var(--transition-general);
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--sombra-material);
 }
 
 .modal-content {
@@ -335,17 +332,86 @@ form div .form-control {
   background-color: var(--color-input-bg);
 }
 
+/*====== CONTENEDOR-HEADER ======*/
+
+.contenedor-header{
+  padding: 20px;
+  margin: 20px 0px;
+}
+
+/* Botones generales */
+.btn-export {
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  border-radius: var(--border-radio-card);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  text-decoration: none;
+}
+
+/* Copiar */
+.btn-copy {
+  background-color: #5c6bc0;
+}
+.btn-copy:hover {
+  background-color: #3f51b5;
+}
+
+/* Excel */
+.btn-excel {
+  background-color: #43a047;
+}
+.btn-excel:hover {
+  background-color: #388e3c;
+}
+
+/* PDF */
+.btn-pdf {
+  background-color: #e53935;
+}
+.btn-pdf:hover {
+  background-color: #c62828;
+}
+
+/* Imprimir */
+.btn-print {
+  background-color: #00897b;
+}
+.btn-print:hover {
+  background-color: #00695c;
+}
+
+/* Botones superiores */
+.btn-create {
+  background-color: #43a047;
+}
+.btn-create:hover {
+  background-color: #388e3c;
+}
+
+.btn-home {
+  background-color: #1e88e5;
+}
+.btn-home:hover {
+  background-color: #1565c0;
+}
+
 /*====== MIGA DE NAVEGACIÓN ======*/
 
 .breadcrumb-container {
   background-color: var(--color-header);
   padding: 0.75rem 1rem;
   width: 100%;
+  font-size: var(--font-size-sm);
   border-radius: var(--border-radio-card);
   margin: 20px 0px;
   transition: var(--transition-general);
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--sombra-material);
 }
 
 .breadcrumb {

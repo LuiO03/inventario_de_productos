@@ -20,14 +20,15 @@
     </ol>
 </nav>
 
-<h1 class="text-center mb-3">
-    Editar Producto
-</h1>
-<p class="text-center mb-4">
-    Aquí puedes editar la información del producto seleccionado. Completa los campos y haz clic en <strong>"Actualizar Producto"</strong>.
-</p>
+<div class="contenedor-header">
+    <h1 class="text-center mb-3">
+        Editar Producto
+    </h1>
+    <p class="text-center mb-4">
+        Aquí puedes editar la información del producto seleccionado. Completa los campos y haz clic en <strong>"Actualizar Producto"</strong>.
+    </p>
+</div>
 <div class="contenedor">
-
     <form action="<?= BASE_URL ?>producto/update/<?=$producto->getId()?>" method="post" class="row justify-content-center" autocomplete="off">
         <input type="hidden" name="id" value="<?= htmlspecialchars($producto->getId()) ?>">
         <input type="hidden" name="csrf_token" value="<?= generarTokenCSRF(); ?>">
@@ -62,6 +63,6 @@
 </div>
 
 <?php
-    require_once "views/templates/components/modal_flash.php";
+    modalFlash($mensaje);
     footerAdmin(); 
 ?>

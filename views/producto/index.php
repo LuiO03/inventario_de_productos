@@ -1,6 +1,6 @@
 <?php headerAdmin(); ?>
 
-<nav aria-label="breadcrumb" class="breadcrumb-container text-xs">
+<nav aria-label="breadcrumb" class="breadcrumb-container">
     <ol class="breadcrumb">
         <li>
             <a href="<?= BASE_URL ?>">
@@ -20,17 +20,35 @@
     </ol>
 </nav>
 
-<h1 class="text-center">Lista de Productos</h1>
-<p class="text-center">Esta es la página de productos.</p>
+<div class="contenedor-header">
+    <h1 class="text-center">Lista de Productos</h1>
+    <p class="text-center">Esta es la página de productos.</p>
 
-<div class="d-flex justify-content-center align-items-center flex-wrap gap-3">
-    <a href="<?= BASE_URL ?>producto/create" class="btn btn-sm btn-success d-flex align-items-center gap-2">
-        <i class="ri-add-line fs-5"></i> Agregar Producto
-    </a>
-    <a href="<?= BASE_URL ?>" class="btn btn-sm btn-primary d-flex align-items-center gap-2">
-        <i class="ri-home-line fs-5"></i> Inicio
-    </a>
+    <div class="d-flex justify-content-center align-items-center flex-wrap gap-2 mb-2">
+        <a href="<?= BASE_URL ?>producto/create" class="btn-export text-light btn-create">
+            <i class="ri-add-line fs-5"></i> Agregar Producto
+        </a>
+        <a href="<?= BASE_URL ?>" class="btn-export text-light btn-home">
+            <i class="ri-home-line fs-5"></i> Inicio
+        </a>
+    </div>
+
+    <div class="d-flex justify-content-center align-items-center flex-wrap gap-2">
+        <button class="btn-export btn-copy text-light">
+            <i class="ri-file-copy-line"></i> Copiar
+        </button>
+        <button class="btn-export btn-excel text-light">
+            <i class="ri-file-excel-2-line"></i> Excel
+        </button>
+        <button class="btn-export btn-pdf text-light">
+            <i class="ri-file-pdf-2-line"></i> PDF
+        </button>
+        <button class="btn-export btn-print text-light">
+            <i class="ri-printer-line"></i> Imprimir
+        </button>
+    </div>
 </div>
+
 
 <div class="contenedor">
     <table id="tablaProductos" class="table-sm d-none w-100 tabla-responsive">
@@ -80,8 +98,6 @@
     </table>
 </div>
 
-
-
 <!-- Modal ver registro -->
 <div class="modal fade modal-slide-animate" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -92,7 +108,7 @@
             </div>
             <div class="modal-body">
                 <div class="table-responsive">
-                    <table class="table table-sm table-bordered mb-0 text-md">
+                    <table class="table-sm w-100 ">
                         <thead>
                             <tr>
                                 <th class="text-center">Atributos</th>
@@ -129,8 +145,8 @@
 </div>
 
 <?php
-modalConfirmacion();
-require_once "views/templates/components/modal_flash.php";
-modalFlash();
-footerAdmin();
+    modalFlash($mensaje);
+    modalConfirmacion();
+    footerAdmin();
 ?>
+

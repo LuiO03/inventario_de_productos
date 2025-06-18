@@ -28,10 +28,10 @@ table .btn .boton-icon {
   height: 100%;
   width: 40px;
   display: flex;
-  font-size: 15px;
+  font-size: 17px;
   align-items: center;
   justify-content: center;
-  transition: width 200ms ease, font-size 200ms ease;
+  transition: width 200ms ease, font-size 0.1s ease;
   background-color: rgba(0, 0, 0, 0.2);
   position: absolute;
   right: 0;
@@ -169,6 +169,26 @@ table .btn-danger:hover {
   }
 }
 
+/* ==== DATATABLES: ESTILOS DE FUNCIONES FOCUS, HOVER, SELECTED ==== */
+
+.dt-length select,
+.dt-search input[type="search"]
+{
+  border: 2px solid var(--color-boton-datatable);
+  border-radius: var(--border-radio-card);
+  background-color: var(--color-sidebar);
+  color: var(--color-texto);
+  transition: var(--transition-general);
+}
+
+.dt-search input[type="search"]:focus,
+.dt-length select:focus,
+.dt-paging .page-item .page-link:focus{
+  border-color: var(--color-primary);
+  box-shadow: var(--sombra-material);
+  outline: none;
+}
+
 /* ==== DATATABLES: BUSCADOR ==== */
 
 .dt-search {
@@ -177,24 +197,15 @@ table .btn-danger:hover {
 }
 
 .dt-search input[type="search"] {
+  height: 38px !important;
   width: 100% !important;
-  border-radius: var(--border-radio-card);
-  padding: 0.4rem 1.5rem 0.4rem 2.5rem;
-  border: 2px solid var(--color-border);
-  background-color: var(--color-bg);
-  color: var(--color-texto);
-  transition: var(--transition-general);
+  padding: 0.4rem 1.5rem 0.4rem 2.8rem;
+  
 }
 
 .dt-search input[type="search"]::placeholder{
   color: var(--color-muted);
   transition: var(--transition-general);
-}
-
-.dt-search input[type="search"]:focus {
-  outline: none;
-  border: 2px solid var(--color-primary);
-  box-shadow: none;
 }
 
 .dt-search input[type="search"]::-webkit-search-cancel-button {
@@ -207,12 +218,24 @@ table .btn-danger:hover {
   content: "\f0cf"; /* ri-search-line */
   font-family: "remixicon";
   position: absolute;
-  left: 20px;
-  top: 50%;
+  left: 9px;
+  top: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.3rem;
+  height: 35px;
   transform: translateY(-50%);
-  color: var(--color-texto);
+  color: white;
   font-size: 1.2rem;
   pointer-events: none;
+  background-color: var(--color-boton-datatable);
+  transition: var(--transition-general);
+}
+
+.dt-search:focus-within::before {
+  background-color: var(--color-primary);
+  font-size: 1.4rem;
 }
 
 .dt-search .clear-search {
@@ -223,8 +246,6 @@ table .btn-danger:hover {
   background: none;
   border: none;
   font-family: "remixicon";
-  font-size: 1.2rem;
-  color: var(--color-texto);
   cursor: pointer;
   display: none;
 }
@@ -235,25 +256,57 @@ table .btn-danger:hover {
 
 /* ==== SELECT DE CANTIDAD DE FILAS ==== */
 
-.dt-length label select.form-select {
-  width: 100px !important;
+.dt-length select {
+  margin-left: 7px;
+  height: 38px;
+  cursor: pointer;
 }
 
-.dt-length select {
-  border: 2px solid var(--color-border);
-  border-radius: var(--border-radio-card);
-  padding: 0.4rem 0.8rem;
-  height: 38px;
-  background-color: var(--color-bg);
-  color: var(--color-texto);
+/* Contenedor padre para posicionamiento relativo */
+.dt-length label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Estilo del select */
+.dt-length label select.form-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100px !important;
+  height: 38px !important;
+}
+
+/* Flechita personalizada con RemixIcon */
+.dt-length label::after {
+  content: "\ea4e"; /* flecha hacia abajo (ri-arrow-down-s-line) */
+  font-family: 'remixicon';
+  position: absolute;
+  right: 71px;
+  display: flex;
+  align-items: center;
+  height: 34px;
+  justify-content: center;
+  width: 2.2rem;
+  background-color: var(--color-boton-datatable);
+  pointer-events: none;
+  color: white;
+  font-size: 1.3rem;
   transition: var(--transition-general);
 }
 
-.dt-length select:focus {
-  outline: none;
-  border: 2px solid var(--color-primary);
-  box-shadow: none;
+@media (max-width: 468px) {
+  .dt-length label::after {
+    right: 69px;
+  }
 }
+
+.dt-length label:has(select:focus)::after {
+  background-color: var(--color-primary);
+  font-size: 1.5rem;
+}
+
 
 /* ==== INFO DE FILAS MOSTRADAS ==== */
 
@@ -263,31 +316,32 @@ table .btn-danger:hover {
 
 /* ==== PAGINACIÓN ==== */
 
-.dt-paging .page-item .page-link {
+.dt-paging .page-item .page-link{
+  margin: 2px;
+  border: 1px solid var(--color-boton-datatable);
   border-radius: var(--border-radio-card);
-  margin: 0 2px;
-  background-color: var(--color-bg);
-  color: var(--color-muted);
+  background-color: var(--color-sidebar);
+  color: var(--color-texto);
   transition: var(--transition-general);
-  border: 2px solid var(--color-border);
-  font-size: var(--font-size-sm);
+}
+
+.dt-paging li.page-item.disabled button.page-link{
+  background-color: var(--color-header);
+  color: #888;
+  box-shadow: none;
+  cursor: not-allowed;
+  pointer-events: none;
+  border-color: var(--color-border);
+}
+
+.dt-paging li.page-item.disabled button.page-link i{
+  color: var(--color-border) !important;
 }
 
 .dt-paging .page-item.active .page-link {
   background-color: var(--color-primary);
   color: white;
   font-weight: bold;
-}
-
-.dt-paging .page-item .page-link:hover {
-  background-color: var(--color-hover);
-}
-
-.dt-paging .page-item .page-link:focus {
-  outline: none;
-  border: none;
-  box-shadow: none;
-  border: 2px solid var(--color-primary);
 }
 
 @media (max-width: 576px) {
@@ -299,7 +353,7 @@ table .btn-danger:hover {
 /* ==== ANIMACIÓN DE FILAS ==== */
 
 #tablaProductos tbody tr {
-  animation: fadeInUp 0.3s ease-in-out;
+  animation: slideInLeft 0.3s ease-in-out;
 }
 
 @keyframes fadeInUp {
@@ -310,6 +364,28 @@ table .btn-danger:hover {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
