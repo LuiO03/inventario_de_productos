@@ -1,0 +1,259 @@
+/* ==========================================
+  TABLAS
+   ========================================== */
+
+/* ======= Tabla personalizada ======= */
+table {
+  background-color: var(--color-header) !important;
+  border-radius: var(--border-radio-card) !important;
+  color: var(--color-texto) !important;
+  transition: var(--transition-general);
+  margin: 0px;
+  font-size: var(--font-size-p);
+}
+
+table td {
+  text-align: center !important;
+}
+
+table td,
+table th {
+  background-color: transparent !important;
+  vertical-align: middle !important;
+  color: var(--color-texto) !important;
+  padding-inline: 10px !important;
+  border: 1px solid var(--color-border);
+  transition: var(--transition-general);
+}
+
+table th:hover {
+  background-color: var(--color-primario) !important;
+  color: whitesmoke !important;
+}
+
+table thead {
+  background-color: var(--color-sidebar) !important;
+  text-transform: uppercase;
+  transition: var(--transition-general);
+  border-top: 1px solid var(--color-table-head-border);
+  border-bottom: 1px solid var(--color-table-head-border);
+  height: 40px;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: var(--color-sidebar) !important;
+  transition: var(--transition-general);
+}
+
+table tbody tr:hover {
+  background-color: var(--color-hover) !important;
+  transition: background-color 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .tabla-responsive thead {
+    display: none;
+  }
+
+  .tabla-responsive,
+  .tabla-responsive tbody,
+  .tabla-responsive tr,
+  .tabla-responsive td {
+    display: block;
+    width: 100%;
+  }
+
+  .tabla-responsive tr:hover {
+    background-color: var(--color-bg) !important;
+  }
+
+  .tabla-responsive tr {
+    margin-bottom: 1rem;
+    background-color: var(--color-sidebar);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radio-card);
+    padding: 0.5rem;
+    transition: var(--transition-general);
+  }
+
+  .tabla-responsive td {
+    position: relative;
+    text-align: end !important;
+    border: none;
+    border-bottom: 1px solid var(--color-border);
+    transition: var(--transition-general);
+  }
+
+  .tabla-responsive td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: -10px;
+    width: 50%;
+    padding-left: 1rem;
+    font-weight: 700;
+    text-align: left;
+    color: var(--color-text);
+  }
+
+  .tabla-responsive td:last-child {
+    border-bottom: none;
+  }
+}
+
+/* ==== BOTONES DE TABLA (editar, eliminar, etc.) ==== */
+/*
+table thead tr th:last-child,table tbody tr td:last-child   {
+  max-width: 350px !important;
+}*/
+
+table td .table-botones {
+  max-width: 100%;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+table .btn {
+  flex: 1 1 80px;
+  max-width: 100%;
+  /*width: min-content;*/
+  min-width: 40px;
+  min-height: 35px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  color: whitesmoke;
+  font-size: var(--font-size-xs);
+  margin: 2px 0px;
+}
+
+/* TEXTO del botón */
+table .btn .boton-text, .breadcrumb-container .btn .boton-text{
+  flex: 1;
+  white-space: nowrap;
+  padding: 1px 45px 1px 5px;
+  transition: color 200ms ease;
+}
+
+/* ÍCONO */
+table .btn .boton-icon, .breadcrumb-container .btn .boton-icon {
+  height: 100%;
+  width: 40px;
+  display: flex;
+  font-size: 17px;
+  align-items: center;
+  justify-content: center;
+  transition: width 200ms ease, font-size 0.1s ease;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: whitesmoke;
+}
+
+/* HOVER EFFECTS */
+table .btn:hover .boton-text, .breadcrumb-container .btn:hover .boton-text {
+  color: transparent;
+}
+
+table .btn:hover .boton-icon, .breadcrumb-container .btn:hover .boton-icon {
+  width: 100%;
+  border-left: none;
+  right: 0;
+  justify-content: center;
+  font-size: 20px;
+}
+
+/* Active */
+table .btn:active .boton-icon i, .breadcrumb-container .btn:active .boton-icon i {
+  transform: scale(0.85);
+}
+
+/* === COLORES PERSONALIZADOS SEGÚN CLASE === */
+
+/* DANGER */
+table .btn-danger {
+  background-color: var(--color-error);
+}
+
+table .btn-danger:hover .boton-icon,
+table .btn-danger:hover {
+  background: #a9002a;
+}
+
+/* INFO */
+table .btn-info {
+  background-color: var(--color-info);
+}
+
+table .btn-info:hover .boton-icon,
+table .btn-info:hover {
+  background-color: #1d61d0;
+}
+
+/* WARNING */
+table .btn-warning {
+  background-color: var(--color-warning);
+  color: black;
+}
+table .btn-warning:hover .boton-icon,
+table .btn-warning:hover {
+  background-color: #cc7a00;
+}
+
+/* SUCCESS */
+table .btn-success {
+  background-color: var(--color-success);
+}
+table .btn-success:hover .boton-icon,
+table .btn-success:hover {
+  background-color: #007d71;
+}
+
+
+
+/* 
+table .btn {
+      padding: 0.375rem 0.75rem;
+  font-size: 0.85rem;
+  border-width: 2px;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  box-shadow: none;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+table .btn-info {
+  color: rgb(0, 132, 219);
+  border-color: rgb(0, 132, 219);
+}
+
+table .btn-info:hover {
+  background-color: rgb(0, 132, 219);
+  color: #fff;
+}
+
+table .btn-warning {
+  color: #ffc107;
+  border-color: #ffc107;
+}
+
+table .btn-warning:hover {
+  background-color: #ffc107 ;
+  color: #212529;
+}
+
+table .btn-danger {
+  color: rgb(211, 0, 53);
+  border-color: rgb(211, 0, 53);
+}
+
+table .btn-danger:hover {
+  background-color: rgb(211, 0, 53);
+  color: #fff;
+}*/

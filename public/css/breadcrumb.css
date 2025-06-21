@@ -1,0 +1,83 @@
+
+/*====== MIGA DE NAVEGACIÓN ======*/
+
+.breadcrumb-container {
+  background-color: var(--color-header);
+  padding: 10px 20px;
+  height: 55px;
+  width: 100%;
+  font-size: var(--font-size-p);
+  border-radius: var(--border-radio-card);
+  margin: 20px 0px;
+  transition: var(--transition-general);
+  box-shadow: var(--sombra-material);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.breadcrumb {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+.breadcrumb li {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb li:not(:last-child) .separator {
+  margin: 0 0.5rem;
+  color: #aaa;
+  font-size: 1rem;
+}
+
+.breadcrumb a {
+  color: var(--color-text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: color 0.2s;
+}
+
+.breadcrumb a:hover {
+  color: var(--color-primary);
+  font-weight: var(fw-bold);
+}
+
+.breadcrumb .active {
+  color: var(--color-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.breadcrumb-container .btn{
+  max-width: 100%;
+  width: min-content;
+  min-width: 40px;
+  min-height: 35px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  color: whitesmoke;
+  font-size: var(--font-size-xs);
+  margin: 0px;
+}
+
+/* PRIMARY */
+.breadcrumb-container .btn-primary {
+  background-color: var(--color-primary);
+  padding: 8px 20px 0px 20px;
+}
+
+
+

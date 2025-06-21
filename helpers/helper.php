@@ -23,7 +23,7 @@
     
     function modalFlash($mensaje) {
         if (!empty($mensaje)) {
-            include "views/templates/components/modal_flash.php";
+            include "views/templates/components/modal_mensaje.php";
         }
     }
 
@@ -31,6 +31,29 @@
         require_once "views/templates/components/modal_confirmacion.php";
     }
 
+    function getBreadcrumbData(): array {
+        $controlador = strtolower(Router::$controller ?? 'main');
+        $metodo = Router::$method ?? 'index';
+
+        $titulo = ucfirst($controlador);
+        $icono = match($controlador) {
+            'producto' => 'ri-t-shirt-fill',
+            'cliente'  => 'ri-user-line',
+            'usuario'  => 'ri-shield-user-line',
+            'servicio' => 'ri-store-line',
+            default    => 'ri-folder-line'
+        };
+
+        return [
+            'controlador' => $controlador,
+            'metodo'      => $metodo,
+            'titulo'      => $titulo,
+            'icono'       => $icono
+        ];
+    }
+    function partialBreadcrumb() {
+        require_once "views/templates/components/breadcrumb.php";
+    }
 
     $GLOBALS['pageTitle'] = APP_NAME;
     function pageTitle($default = null) {

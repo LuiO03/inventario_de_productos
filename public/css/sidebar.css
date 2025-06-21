@@ -15,7 +15,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 30px;
+  padding: 0px 10px;
   height: 60px;
   color: var(--color-text);
   transition: var(--transition-general);
@@ -27,22 +27,21 @@
 .main-content {
   flex: 1;
   max-width: 1024;
-  padding: 20px 30px;
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  padding: 10px 30px;
   height: 100dvh;
   overflow-y: auto;
-  transition: var(--transition-general);
 }
 
 @media (max-width: 768px) {
-  .main-content {
+  .main-content,
+  .nav-header {
     padding: 20px 10px;
   }
 }
 
 @media (max-width: 458px) {
-  .main-content {
+  .main-content,
+  .nav-header {
     padding: 20px 0px;
   }
 }
@@ -70,7 +69,7 @@ main::-webkit-scrollbar-thumb:hover {
   flex-direction: column;
   justify-content: space-between;
   overflow: visible;
-  transition: all 0.3s ease-out;
+  transition: var(--transition-general);
 }
 
 #sidebar.expand {
@@ -276,6 +275,7 @@ a.sidebar-link {
   align-items: center;
   gap: 10px;
   color: var(--color-text);
+  transition: var(--transition-general);
 }
 
 .nav_usuario img {
@@ -307,7 +307,7 @@ a.sidebar-link {
 }
 
 .cerrar-sesión:hover {
-  background-color: #bb0000;
+  background-color: var(--color-primary);
   color: white;
 }
 
@@ -334,125 +334,101 @@ form div .form-control {
 
 /*====== CONTENEDOR-HEADER ======*/
 
-.contenedor-header{
+.contenedor-header {
   padding: 20px;
   margin: 20px 0px;
 }
 
-/* Botones generales */
+.button-borders {
+  position: relative;
+  display: inline-block;
+}
+
+.button-borders:before {
+  content: "";
+  position: absolute;
+  width: calc(100% + 0.6em);
+  height: 50%;
+  left: -0.3em;
+  top: -0.3em;
+  border: 1px solid var(--color-bw);
+  border-bottom: 0px;
+  border-radius: var(--border-radio-card);
+  /* opacity: 0.3; */
+}
+
+.button-borders:after {
+  content: "";
+  position: absolute;
+  width: calc(100% + 0.6em);
+  height: 50%;
+  left: -0.3em;
+  bottom: -0.3em;
+  border: 1px solid var(--color-bw);
+  border-top: 0px;
+  border-radius: var(--border-radio-card);
+  /* opacity: 0.3; */
+  z-index: 0;
+}
+
 .btn-export {
-  border: none;
-  padding: 0.5rem 1rem;
-  font-weight: 500;
-  border-radius: var(--border-radio-card);
+  position: relative;
   display: inline-flex;
+  gap: 10px;
   align-items: center;
-  gap: 0.5rem;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  font-size: var(--font-size-sm);
   text-decoration: none;
-}
-
-/* Copiar */
-.btn-copy {
-  background-color: #5c6bc0;
-}
-.btn-copy:hover {
-  background-color: #3f51b5;
-}
-
-/* Excel */
-.btn-excel {
-  background-color: #43a047;
-}
-.btn-excel:hover {
-  background-color: #388e3c;
-}
-
-/* PDF */
-.btn-pdf {
-  background-color: #e53935;
-}
-.btn-pdf:hover {
-  background-color: #c62828;
-}
-
-/* Imprimir */
-.btn-print {
-  background-color: #00897b;
-}
-.btn-print:hover {
-  background-color: #00695c;
-}
-
-/* Botones superiores */
-.btn-create {
-  background-color: #43a047;
-}
-.btn-create:hover {
-  background-color: #388e3c;
-}
-
-.btn-home {
-  background-color: #1e88e5;
-}
-.btn-home:hover {
-  background-color: #1565c0;
-}
-
-/*====== MIGA DE NAVEGACIÓN ======*/
-
-.breadcrumb-container {
-  background-color: var(--color-header);
-  padding: 0.75rem 1rem;
-  width: 100%;
-  font-size: var(--font-size-sm);
+  z-index: 1;
+  color: white;
+  font-size: var(--font-size-p);
+  border: none;
   border-radius: var(--border-radio-card);
-  margin: 20px 0px;
-  transition: var(--transition-general);
-  box-shadow: var(--sombra-material);
+  overflow: hidden;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
 }
 
-.breadcrumb {
-  list-style: none;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
+.btn-export:hover {
+  color: var(--color-bw-inverted);
 }
 
-.breadcrumb li {
-  display: flex;
-  align-items: center;
+/* Fondo animado diagonal */
+.btn-export::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -210%;
+  width: 200%;
+  height: 100%;
+  background-color: var(--color-bw); /* Efecto sutil */
+  transform: skewX(-20deg);
+  z-index: -1;
+  transition: left 0.6s ease-in-out;
 }
 
-.breadcrumb li:not(:last-child) .separator {
-  margin: 0 0.5rem;
-  color: #aaa;
-  font-size: 1rem;
+/* Animación al pasar el mouse */
+.btn-export:hover::after {
+  left: -40%;
 }
 
-.breadcrumb a {
-  color: var(--color-text);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  transition: color 0.2s;
+/* Copiar - Azul petróleo oscuro */
+.btn-copy {
+  background: #181818;
 }
 
-.breadcrumb a:hover {
-  color: var(--color-primary);
-  font-weight: var(fw-bold);
+/* Excel - Verde bosque profundo */
+.btn-excel {
+  background: #1d613e;
 }
 
-.breadcrumb .active {
-  color: var(--color-muted);
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
+/* PDF - Rojo vino oscuro */
+.btn-pdf {
+  background: #b51308;
+}
+
+/* Imprimir - Azul noche */
+.btn-print {
+  background: #430199;
 }
 
 /*========== switch modo oscuro/claro ===========*/

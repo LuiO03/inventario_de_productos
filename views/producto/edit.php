@@ -1,24 +1,7 @@
-<?php headerAdmin(); ?>
-
-<nav aria-label="breadcrumb" class="breadcrumb-container text-xs">
-    <ol class="breadcrumb">
-        <li>
-            <a href="<?= BASE_URL ?>">
-                <i class="ri-home-4-line"></i> Inicio
-            </a>
-            <i class="ri-arrow-right-s-line separator"></i>
-        </li>
-        <li>
-            <a href="<?= BASE_URL ?>producto">
-                <i class="ri-t-shirt-line"></i> Productos
-            </a>
-            <i class="ri-arrow-right-s-line separator"></i>
-        </li>
-        <li class="active">
-            <i class="ri-edit-box-fill"></i> Editar
-        </li>
-    </ol>
-</nav>
+<?php 
+    headerAdmin();
+    partialBreadcrumb();
+?>
 
 <div class="contenedor-header">
     <h1 class="text-center mb-3">

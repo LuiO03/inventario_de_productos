@@ -9,12 +9,14 @@
   --font-family-base: "Poppins", sans-serif;
 
   --color-text: #e9e9e9;
-  --color-primary: #d11e4b;
-  --color-secondary: #51009D;
+  --color-bw: #ffffff;
+  --color-bw-inverted: #000000;
+  --color-primario: #d11e4b;
+  --color-secondary: #51009d;
   --color-accent: #23c17e;
 
   --color-bg: #111111;
-  --color-sidebar:  #181818;
+  --color-sidebar: #181818;
   --color-header: #1e1e1e;
   --color-footer: #1e1e1e;
   --color-card-bg: #1f1f1f;
@@ -23,17 +25,18 @@
 
   /* Tablas */
   --color-table: #1e1e1e;
-  --color-stripet-table:#dee2e6;
+  --color-stripet-table: #dee2e6;
   --color-table-border: #0a0a0a;
-  --color-table-head-border:#000000;
-  
-  --color-border: #3a3a3a;
+  --color-table-head-border: #000000;
+
+  --color-border: #202020;
   --color-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
 
-  --color-success: #00BFA5;
-  --color-error:   #CD1A57;
-  --color-warning: #FFA000;
-  --color-info:    #2979FF;
+  --color-primary: #19247f;
+  --color-success: #5b860b;
+  --color-error: #cd1a57;
+  --color-warning: #ffa000;
+  --color-info: #2979ff;
 
   --color-input-bg: #2a2a2a;
   --color-input-border: #444;
@@ -54,17 +57,15 @@
   --color-focus: #66b2ff;
   --transition-general: 
     background-color 0.3s ease-in-out, 
-    color 0.3s ease, 
-    border-color 0.3s ease, 
-    font-size 0.2s ease, 
-    box-shadow 0.3s ease;
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s ease-in-out,
+    font-size 0.2s ease, box-shadow 0.3s ease;
   --border-radio-card: 3px;
-  --color-primario-s:rgb(252, 13, 65);
-  --color-primario-rgb:252, 13, 65;
-  --sombra-material: 
-    0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12),
-    0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  --color-primario-s: rgb(252, 13, 65);
+  --color-primario-rgb: 252, 13, 65;
+  --sombra-material: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
 /* ==========================================
@@ -72,34 +73,37 @@
    ========================================== */
 .light-mode {
   /* Colores base */
-  --color-bg: #EEEEEE;
-  --color-text: #342E37;
-  --color-primary: #005be4;
-  --color-secondary: #51009D;
+  --color-bg: #eeeeee;
+  --color-text: #342e37;
+  --color-bw: #000000;
+  --color-bw-inverted: #ffffff;
+  --color-primario: #005be4;
+  --color-secundario: #51009d;
   --color-accent: #198754;
 
   /* Fondos */
-  --color-sidebar: #F2F2F2;
-  --color-header: #F9F9F9;
+  --color-sidebar: #f2f2f2;
+  --color-header: #f9f9f9;
   --color-footer: #f8f9fa;
   --color-card-bg: #f8f9fa;
   --color-modal-bg: #ffffff;
   --color-dropdown-bg: #ffffff;
 
   /* Tablas */
-  --color-table:#dee2e6;
-  --color-stripet-table:#dee2e6;
+  --color-table: #dee2e6;
+  --color-stripet-table: #dee2e6;
   --color-table-border: #dee2e6;
-  --color-table-head-border:#a5a9ad;
-  
+  --color-table-head-border: #a5a9ad;
+
   /* Bordes y sombras */
   --color-border: #a5a9ad;
   --color-shadow: rgba(0, 0, 0, 0.05);
 
   /* Estados */
-  --color-success: #009688;
-  --color-error: #D30035;
-  --color-warning: #FF9800;
+  --color-primary: #19247f;
+  --color-success: #5b860b;
+  --color-error: #d30035;
+  --color-warning: #ff9800;
   --color-info: #0084db;
 
   /* Inputs y elementos interactivos */
@@ -107,7 +111,7 @@
   --color-input-border: #ced4da;
   --color-input-text: #212529;
   --color-placeholder: #6c757d;
-  --color-hover: #E5E5E5;
+  --color-hover: #e5e5e5;
   --color-active: #e2e6ea;
 
   /* Texto especial */
@@ -127,12 +131,12 @@
 
 :root {
   /* Tipografías base para escritorio (≥ 992px) */
-  --font-size-h1: 2.25rem;     /* Títulos grandes */
+  --font-size-h1: 2.25rem; /* Títulos grandes */
   --font-size-h2: 1.625rem; /* Títulos secundarios */
-  --font-size-h3: 1.375rem; /* Subtítulos / paneles */
-  --font-size-p: 1.05rem;  /* Texto general */
-  --font-size-sm: 0.93rem;  /* Texto secundario (inputs, etc.) */
-  --font-size-xs: 0.85rem;  /* Ayuda, tooltips */
+  --font-size-h3: 1.175rem; /* Subtítulos / paneles */
+  --font-size-p: 0.93rem; /* Texto general */
+  --font-size-sm: 0.9rem; /* Texto secundario (inputs, etc.) */
+  --font-size-xs: 0.85rem; /* Ayuda, tooltips */
   --fw-regular: 400;
   --fw-bold: 700;
 }
@@ -143,8 +147,8 @@
     --font-size-h1: 1.95rem;
     --font-size-h2: 1.5rem;
     --font-size-h3: 1.25rem;
-    --font-size-p: 0.95rem;
-    --font-size-sm: 0.9rem;
+    --font-size-p: 0.9rem;
+    --font-size-sm: 0.89rem;
     --font-size-xs: 0.8rem;
   }
 }
@@ -155,18 +159,30 @@
     --font-size-h1: 1.5rem;
     --font-size-h2: 1.25rem;
     --font-size-h3: 1.125rem;
-    --font-size-p: 0.95rem;
+    --font-size-p: 0.88rem;
     --font-size-sm: 0.875rem;
     --font-size-xs: 0.75rem;
   }
 }
 
-.text-xs { font-size: var(--font-size-xs); }
-.text-sm { font-size: var(--font-size-sm); }
-.text-md { font-size: var(--font-size-p); }
-.text-lg { font-size: var(--font-size-h2); }
-.fw-regular { font-weight: var(--fw-regular); }
-.fw-bold { font-weight: var(--fw-bold); }
+.text-xs {
+  font-size: var(--font-size-xs);
+}
+.text-sm {
+  font-size: var(--font-size-sm);
+}
+.text-md {
+  font-size: var(--font-size-p);
+}
+.text-lg {
+  font-size: var(--font-size-h2);
+}
+.fw-regular {
+  font-weight: var(--fw-regular);
+}
+.fw-bold {
+  font-weight: var(--fw-bold);
+}
 
 /* ==========================================
    TIPOGRAFÍA ELEMENTOS
@@ -180,9 +196,11 @@ h2 {
   font-size: var(--font-size-h2);
   font-weight: 600;
 }
+
 h3 {
   font-size: var(--font-size-h3);
 }
+
 p {
   font-size: var(--font-size-p);
 }
@@ -195,7 +213,7 @@ small {
    ESTILOS GENERALES
    ========================================== */
 
-*{
+* {
   font-family: var(--font-family-base);
   box-sizing: border-box;
   margin: 0;
@@ -204,15 +222,14 @@ small {
 
 body {
   height: 100dvh;
+  background-color: var(--color-bg);
+  transition: var(--transition-general);
+  color: var(--color-text);
 }
 
 a {
   text-decoration: none;
-  color: var(--color-link);
-}
-
-a:hover {
-  color: var(--color-link-hover);
+  color: var(--color-text);
 }
 
 li {
@@ -220,114 +237,8 @@ li {
 }
 
 ::selection {
-  background-color: var(--color-primary);
-  color: var(--color-text);
-}
-
-/* ==========================================
-  TABLAS
-   ========================================== */
-
-/* ======= Tabla personalizada ======= */
-table {
-  background-color: var(--color-header) !important;
-  border-radius: var(--border-radio-card) !important;
-  color: var(--color-texto) !important;
-  transition: var(--transition-general);
-  margin: 20px 0px;
-  font-size: var(--font-size-p);
-}
-
-table td{
-  text-align: center !important;
-}
-
-table td,
-table th {
-  background-color: transparent !important;
-  vertical-align: middle !important;
-  color: var(--color-texto) !important;
-  padding-inline: 10px !important;
-  border: 1px solid var(--color-border);
-  transition: var(--transition-general);
-}
-
-table th:hover{
-  background-color: var(--color-primary) !important;
-  color: whitesmoke !important;
-}
-
-table thead {
-  background-color: var(--color-sidebar) !important;
-  text-transform: uppercase;
-  transition: var(--transition-general);
-  border-top: 1px solid var(--color-table-head-border);
-  border-bottom: 1px solid var(--color-table-head-border);
-  height: 40px;
-}
-
-table tbody tr:nth-child(even) {
-  background-color: var(--color-sidebar) !important;
-  transition: var(--transition-general);
-}
-
-table tbody tr:hover {
-  background-color: var(--color-hover) !important;
-  transition: background-color 0.3s ease;
-}
-
-@media (max-width: 768px) {
-
-  table .btn .boton-text{
-    display: none;
-  }
-  .tabla-responsive thead {
-    display: none;
-  }
-
-  .tabla-responsive, 
-  .tabla-responsive tbody, 
-  .tabla-responsive tr, 
-  .tabla-responsive td {
-    display: block;
-    width: 100%;
-  }
- 
-  .tabla-responsive tr:hover {
-    background-color: var(--color-bg) !important;
-  }
-
-  .tabla-responsive tr {
-    margin-bottom: 1rem;
-    background-color: var(--color-sidebar);
-    border: 1px solid var(--color-border);
-    border-radius: var(--border-radio-card);
-    padding: 0.5rem;
-    transition: var(--transition-general);
-  }
-
-  .tabla-responsive td {
-    position: relative;
-    text-align: end !important;
-    border: none;
-    border-bottom: 1px solid var(--color-border);
-    transition: var(--transition-general);
-  }
-
-  .tabla-responsive td::before {
-    content: attr(data-label);
-    position: absolute;
-    left: -10px;
-    width: 50%;
-    padding-left: 1rem;
-    font-weight: 700;
-    text-align: left;
-    color: var(--color-text);
-  }
-
-  .tabla-responsive td:last-child {
-    border-bottom: none;
-  }
+  background-color: var(--color-primario);
+  color: white;
 }
 
 /* ==========================================
@@ -367,17 +278,175 @@ form div .form-control {
   }
 }
 
-.targeta{
+/* ==========================================
+   CARD/TARGETA
+   ========================================== */
+
+.targeta {
   border-radius: var(--border-radio-card);
   overflow: hidden;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: var(--transition-general);
   background-color: transparent;
   text-transform: uppercase;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--sombra-material);
+  background-color: var(--color-header);
+  color: var(--color-text);
 }
 
 .targeta:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
+.card-icon-bg {
+  width: 33%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-icon-bg.danger {
+  background-color: rgba(255, 224, 211, 1);
+}
+
+.card-icon-bg.success {
+  background-color: rgba(211, 255, 230, 1);
+}
+
+.card-icon-bg.primary {
+  background-color: rgba(211, 229, 255, 1);
+}
+
+.card-icon-bg.warning {
+  background-color: rgba(255, 247, 211, 1);
+}
+
+.card-icon-bg.info {
+  background-color: rgba(211, 248, 255, 1);
+}
+
+.card-icon-bg.secondary {
+  background-color: rgba(234, 234, 234, 1);
+}
+
+.targeta h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.targeta small {
+  font-weight: bold;
+  color: var(--color-placeholder);
+}
+/* ==========================================
+   CONTENEDOR FLOTANTE
+   ========================================== */
+
+
+.fab-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1050;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+/* Fondo centrado detrás del botón principal */
+.fab-container::before {
+  content: "";
+  position: absolute;
+  bottom: -10px; /* corregido */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 70px;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+
+/* Al expandirse, crece hacia arriba */
+.fab-container.fab-open::before {
+  height: 250px;
+  border-radius: 50px;
+}
+
+/* Botón principal */
+.fab-btn.toggle {
+  background-color: #333;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  border: none;
+  z-index: 1;
+}
+
+/* Animación de rotación del botón */
+.fab-container.fab-open .fab-btn.toggle {
+  transform: rotate(45deg);
+}
+
+/* Contenedor de botones adicionales */
+.fab-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* Estilos base para los botones adicionales */
+.fab-actions .fab-btn {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+  transition: all 0.3s ease;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Mostrar los botones cuando está abierto */
+.fab-container.fab-open .fab-actions .fab-btn {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Animación escalonada */
+.fab-container.fab-open .fab-btn:nth-child(1) { transition-delay: 0.1s; }
+.fab-container.fab-open .fab-btn:nth-child(2) { transition-delay: 0.2s; }
+.fab-container.fab-open .fab-btn:nth-child(3) { transition-delay: 0.3s; }
+
+/* Colores */
+.fab-btn.agregar { background-color: var(--color-primary); }
+.fab-btn.pdf     { background-color: #B51308; }
+.fab-btn.excel   { background-color: #1D613E; }
+
+.fab-btn.agregar:hover,
+.fab-btn.pdf:hover,
+.fab-btn.excel:hover {
+  background-color: var(--color-bw);
+  color: var(--color-bw-inverted);
+  font-size: 23px;
+}

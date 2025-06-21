@@ -1,53 +1,27 @@
 <?php headerAdmin(); ?>
 
-<style>
-    .bg-danger-dark { background-color: #a30000; }
-    .bg-success-dark { background-color: #00786D; }
-    .bg-primary-dark { background-color: #003c8f; }
-    .bg-secondary-dark { background-color: #5a6268; }
-    .bg-warning-dark { background-color: #b37f00; }
-    .bg-info-dark { background-color: #017e9f; }
-</style>
-
-<h1 class="text-center m-4">Panel Administrativo</h1>
-<div class="contenedor">
-
+<div class="contenedor-header">
+    <h1 class="text-center">Panel Administrativo</h1>
+    <p class="text-center">
+        Desde esta sección puedes gestionar todos los productos registrados.
+    </p>
+</div>
+<div class="">
     <div class="row g-4">
-        <!-- Categorías -->
-        <div class="col-md-6 col-lg-3">
-            <div class="card targeta h-100 border-0">
-                <a href="<?= BASE_URL ?>/categorias" class="text-decoration-none h-100">
-                    <div class="d-flex p-0 align-items-stretch h-100">
-                        <div class="flex-shrink-0 d-flex align-items-center justify-content-center bg-success-dark" style="width: 33%;">
-                            <i class="ri-folders-line display-4 text-white"></i>
-                        </div>
-                        <div class="flex-grow-1 bg-success d-flex flex-column justify-content-between px-3 py-3">
-                            <div>
-                                <h6 class="card-title text-white mb-1">Categorías</h6>
-                            </div>
-                            <div class="text-end mt-auto">
-                                <small class="text-white-50">Total: <?= $totalCategorias ?? 0 ?></small>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
         <!-- Productos -->
-        <div class="col-md-6 col-lg-3">
+        <div class="col-sm-6 col-md-6 col-lg-3">
             <div class="card targeta h-100 border-0">
-                <a href="<?= BASE_URL ?>/producto" class="text-decoration-none h-100">
-                    <div class="d-flex p-0 align-items-stretch h-100">
-                        <div class="flex-shrink-0 d-flex align-items-center justify-content-center bg-danger-dark" style="width: 33%;">
+                <a href="<?= BASE_URL ?>producto" class="h-100">
+                    <div class="d-flex p-2 align-items-stretch h-100">
+                        <div class="card-icon-bg danger">
                             <i class="ri-shirt-line display-4 text-danger"></i>
                         </div>
-                        <div class="flex-grow-1 bg-danger d-flex flex-column justify-content-between px-3 py-3">
-                            <div>
-                                <h6 class="card-title text-white mb-1">Productos</h6>
+                        <div class="flex-grow-1 d-flex flex-column justify-content-between px-3 py-3">
+                            <div class="text-start mt-auto">
+                                <h1><?= $totalProductos ?? 0 ?></h1>
                             </div>
-                            <div class="text-end mt-auto">
-                                <small class="text-white-50">Total: <?= $totalProductos ?? 0 ?></small>
+                            <div>
+                                <small class="card-title">Productos</small>
                             </div>
                         </div>
                     </div>
@@ -58,17 +32,17 @@
         <!-- Clientes -->
         <div class="col-md-6 col-lg-3">
             <div class="card targeta h-100 border-0">
-                <a href="<?= BASE_URL ?>/clientes" class="text-decoration-none h-100">
-                    <div class="d-flex p-0 align-items-stretch h-100">
-                        <div class="flex-shrink-0 d-flex align-items-center justify-content-center bg-primary-dark" style="width: 33%;">
-                            <i class="ri-user-3-line display-4 text-primary"></i>
+                <a href="<?= BASE_URL ?>cliente" class="h-100">
+                    <div class="d-flex p-2 align-items-stretch h-100">
+                        <div class="card-icon-bg success">
+                            <i class="ri-user-line display-4 text-success"></i>
                         </div>
-                        <div class="flex-grow-1 bg-primary d-flex flex-column justify-content-between px-3 py-3">
-                            <div>
-                                <h6 class="card-title text-white mb-1">Clientes</h6>
+                        <div class="flex-grow-1 d-flex flex-column justify-content-between px-3 py-3">
+                            <div class="text-start mt-auto">
+                                <h1><?= $totalClientes ?? 0 ?></h1>
                             </div>
-                            <div class="text-end mt-auto">
-                                <small class="text-white-50">Total: <?= $totalClientes ?? 0 ?></small>
+                            <div>
+                                <small class="card-title">Clientes</small>
                             </div>
                         </div>
                     </div>
@@ -79,17 +53,17 @@
         <!-- Usuarios -->
         <div class="col-md-6 col-lg-3">
             <div class="card targeta h-100 border-0">
-                <a href="<?= BASE_URL ?>/usuarios" class="text-decoration-none h-100">
-                    <div class="d-flex p-0 align-items-stretch h-100">
-                        <div class="flex-shrink-0 d-flex align-items-center justify-content-center bg-secondary-dark" style="width: 33%;">
-                            <i class="ri-admin-line display-4 text-secondary"></i>
+                <a href="<?= BASE_URL ?>usuario" class="h-100">
+                    <div class="d-flex p-2 align-items-stretch h-100">
+                        <div class="card-icon-bg primary">
+                            <i class="ri-admin-line display-4 text-primary"></i>
                         </div>
-                        <div class="flex-grow-1 bg-secondary d-flex flex-column justify-content-between px-3 py-3">
-                            <div>
-                                <h6 class="card-title text-white mb-1">Usuarios</h6>
+                        <div class="flex-grow-1 d-flex flex-column justify-content-between px-3 py-3">
+                            <div class="text-start mt-auto">
+                                <h1><?= $totalUsuarios ?? 0 ?></h1>
                             </div>
-                            <div class="text-end mt-auto">
-                                <small class="text-white-50">Total: <?= $totalUsuarios ?? 0 ?></small>
+                            <div>
+                                <small class="card-title">Usuarios</small>
                             </div>
                         </div>
                     </div>
@@ -100,17 +74,17 @@
         <!-- Pedidos -->
         <div class="col-md-6 col-lg-3">
             <div class="card targeta h-100 border-0">
-                <a href="<?= BASE_URL ?>/pedidos" class="text-decoration-none h-100">
-                    <div class="d-flex p-0 align-items-stretch h-100">
-                        <div class="flex-shrink-0 d-flex align-items-center justify-content-center bg-warning-dark" style="width: 33%;">
+                <a href="<?= BASE_URL ?>pedido" class="h-100">
+                    <div class="d-flex p-2 align-items-stretch h-100">
+                        <div class="card-icon-bg warning">
                             <i class="ri-shopping-cart-2-line display-4 text-warning"></i>
                         </div>
-                        <div class="flex-grow-1 bg-warning d-flex flex-column justify-content-between px-3 py-3">
-                            <div>
-                                <h6 class="card-title text-dark mb-1">Pedidos</h6>
+                        <div class="flex-grow-1 d-flex flex-column justify-content-between px-3 py-3">
+                            <div class="text-start mt-auto">
+                                <h1><?= $totalPedidos ?? 0 ?></h1>
                             </div>
-                            <div class="text-end mt-auto">
-                                <small class="text-muted">Total: <?= $totalPedidos ?? 0 ?></small>
+                            <div>
+                                <small class="card-title">Pedidos</small>
                             </div>
                         </div>
                     </div>
@@ -121,17 +95,17 @@
         <!-- Servicios -->
         <div class="col-md-6 col-lg-3">
             <div class="card targeta h-100 border-0">
-                <a href="<?= BASE_URL ?>/servicios" class="text-decoration-none h-100">
-                    <div class="d-flex p-0 align-items-stretch h-100">
-                        <div class="flex-shrink-0 d-flex align-items-center justify-content-center bg-info-dark" style="width: 33%;">
+                <a href="<?= BASE_URL ?>servicio" class="h-100">
+                    <div class="d-flex p-2 align-items-stretch h-100">
+                        <div class="card-icon-bg info">
                             <i class="ri-tools-line display-4 text-info"></i>
                         </div>
-                        <div class="flex-grow-1 bg-info d-flex flex-column justify-content-between px-3 py-3">
-                            <div>
-                                <h6 class="card-title text-white mb-1">Servicios</h6>
+                        <div class="flex-grow-1 d-flex flex-column justify-content-between px-3 py-3">
+                            <div class="text-start mt-auto">
+                                <h1><?= $totalServicios ?? 0 ?></h1>
                             </div>
-                            <div class="text-end mt-auto">
-                                <small class="text-white-50">Total: <?= $totalServicios ?? 0 ?></small>
+                            <div>
+                                <small class="card-title">Servicios</small>
                             </div>
                         </div>
                     </div>
@@ -142,17 +116,17 @@
         <!-- Blog -->
         <div class="col-md-6 col-lg-3">
             <div class="card targeta h-100 border-0">
-                <a href="<?= BASE_URL ?>/blog" class="text-decoration-none h-100">
-                    <div class="d-flex p-0 align-items-stretch h-100">
-                        <div class="flex-shrink-0 d-flex align-items-center justify-content-center bg-dark" style="width: 33%;">
-                            <i class="ri-article-line display-4 text-white"></i>
+                <a href="<?= BASE_URL ?>blog" class="h-100">
+                    <div class="d-flex p-2 align-items-stretch h-100">
+                        <div class="card-icon-bg secondary">
+                            <i class="ri-article-line display-4 text-secondary"></i>
                         </div>
-                        <div class="flex-grow-1 bg-dark d-flex flex-column justify-content-between px-3 py-3">
-                            <div>
-                                <h6 class="card-title text-white mb-1">Blog</h6>
+                        <div class="flex-grow-1 d-flex flex-column justify-content-between px-3 py-3">
+                            <div class="text-start mt-auto">
+                                <h1><?= $totalBlog ?? 0 ?></h1>
                             </div>
-                            <div class="text-end mt-auto">
-                                <small class="text-white-50">Total: <?= $totalBlog ?? 0 ?></small>
+                            <div>
+                                <small class="card-title">Blog</small>
                             </div>
                         </div>
                     </div>
@@ -161,30 +135,31 @@
         </div>
 
         <!-- Mensajes -->
-        <div class="col-md-6 col-lg-3 border-0">
+        <div class="col-md-6 col-lg-3">
             <div class="card targeta h-100 border-0">
-                <a href="<?= BASE_URL ?>/mensajes" class="text-decoration-none h-100">
-                    <div class="d-flex p-0 align-items-stretch h-100">
-                        <div class="flex-shrink-0 d-flex align-items-center justify-content-center bg-dark" style="width: 33%;">
-                            <i class="ri-mail-line display-4 text-white"></i>
+                <a href="<?= BASE_URL ?>mensaje" class="h-100">
+                    <div class="d-flex p-2 align-items-stretch h-100">
+                        <div class="card-icon-bg primary">
+                            <i class="ri-mail-line display-4 text-primary"></i>
                         </div>
-                        <div class="flex-grow-1 bg-dark d-flex flex-column justify-content-between px-3 py-3">
-                            <div>
-                                <h6 class="card-title text-white mb-1">Mensajes</h6>
+                        <div class="flex-grow-1 d-flex flex-column justify-content-between px-3 py-3">
+                            <div class="text-start mt-auto">
+                                <h1><?= $totalMensajes ?? 0 ?></h1>
                             </div>
-                            <div class="text-end mt-auto">
-                                <small class="text-white-50">Total: <?= $totalMensajes ?? 0 ?></small>
+                            <div>
+                                <small class="card-title">Mensajes</small>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
         </div>
+
     </div>
 </div>
 
 <?php
-    modalConfirmacion();
-    modalFlash($mensaje);
-    footerAdmin();
+modalConfirmacion();
+modalFlash($mensaje);
+footerAdmin();
 ?>

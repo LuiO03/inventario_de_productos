@@ -27,7 +27,9 @@
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="<?= BASE_URL ?>public/css/base.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>public/css/sidebar.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>public/css/tabla-productos.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/css/datatable.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/css/tabla.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>public/css/breadcrumb.css">
     
       <script>
         (function() {
