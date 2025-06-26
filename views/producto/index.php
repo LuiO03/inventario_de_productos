@@ -3,27 +3,29 @@
     partialBreadcrumb();
 ?>
 
+<!-- Contenido de la informacion y botones -->
 <div class="contenedor-header">
     <h1 class="text-center">Lista de Productos</h1>
-    <p class="text-center">Esta es la página de productos.</p>
+    <p class="text-center mb-4">Esta es la página de productos.</p>
 
     <div class=" d-flex justify-content-center align-items-center flex-wrap gap-3">
-        <div class="button-borders">
+        <div class="button-borders d-none d-md-block">
             <button class="btn-export btn-copy" title="Copiar Registros"> <i class="ri-file-copy-line"></i> Copiar </button>
         </div>
-        <div class="button-borders">
+        <div class="button-borders d-none d-md-block">
             <button class="btn-export btn-excel" title="Exportar Excel"> <i class="ri-file-excel-2-line"></i> Excel </button>
         </div>
-        <div class="button-borders">
+        <div class="button-borders d-none d-md-block">
             <button class="btn-export btn-pdf" title="Exportar PDF"> <i class="ri-file-pdf-2-line"></i> PDF </button>
         </div>
-        <div class="button-borders">
+        <div class="button-borders d-none d-md-block">
             <button class="btn-export btn-print" title="Imprimir Tabla"> <i class="ri-printer-line"></i> Imprimir </button>
         </div>
     </div>
 
 </div>
 
+<!-- Contenido de la tabla -->
 <div class="contenedor">
     <table id="tablaProductos" class="table-sm d-none w-100 tabla-responsive">
         <thead>
@@ -52,15 +54,15 @@
                                     data-bs-toggle="modal"
                                     data-bs-target="#viewModal">
                                     <span class="boton-text">Ver</span>
-                                    <span class="boton-icon"><i class="ri-eye-2-fill"></i></i></span>
+                                    <span class="boton-icon"><i class="ri-eye-2-fill"></i></span>
                                 </button>
                                 <a href="<?= BASE_URL ?>producto/edit/<?= $producto->getId() ?>" title="Editar Producto" class="btn btn-sm btn-warning">
-                                    <span class="boton-icon"><i class="ri-edit-circle-fill"></i></i></span>
+                                    <span class="boton-icon"><i class="ri-edit-circle-fill"></i></span>
                                     <span class="boton-text">Editar</span>
                                 </a>
                                 <button type="button" title="Eliminar Producto" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $producto->getId() ?>">
                                     <span class="boton-text">Eliminar</span>
-                                    <span class="boton-icon"><i class="ri-delete-bin-2-fill"></i></i></span>
+                                    <span class="boton-icon"><i class="ri-delete-bin-2-fill"></i></span>
                                 </button>
                             </div>
                         </td>
@@ -118,45 +120,12 @@
     </div>
 </div>
 
-<div class="fab-container d-block d-sm-none" id="fabMenu">
-    <button class="fab-btn toggle" id="fabToggle" title="Acciones rápidas">
-        <i class="ri-add-large-fill"></i>
-    </button>
-
-    <div class="fab-actions">
-        <button title="Exportar PDF" class="fab-btn pdf">
-            <i class="ri-file-pdf-2-fill"></i>
-        </button>
-        <button title="Exportar Excel" class="fab-btn excel">
-            <i class="ri-file-excel-fill"></i>
-        </button>
-        <a href="<?= BASE_URL ?>producto/create" title="Agregar Producto" class="fab-btn agregar">
-            <i class="ri-add-circle-fill"></i>
-        </a>
-    </div>
-</div>
 
 
 
-<script>
-  const fabMenu = document.getElementById('fabMenu');
-  const fabToggle = document.getElementById('fabToggle');
 
-  // Abrir/cerrar con botón
-  fabToggle.addEventListener('click', (e) => {
-    e.stopPropagation(); // evita que el clic se propague al document
-    fabMenu.classList.toggle('fab-open');
-  });
-
-  // Cerrar si se hace clic fuera
-  document.addEventListener('click', (e) => {
-    // Si el clic no fue dentro del fabMenu
-    if (!fabMenu.contains(e.target)) {
-      fabMenu.classList.remove('fab-open');
-    }
-  });
-</script>
 <?php
+menuFlotante();
 modalFlash($mensaje);
 modalConfirmacion();
 footerAdmin();

@@ -46,7 +46,7 @@
 }
 
 .breadcrumb a:hover {
-  color: var(--color-primary);
+  color: var(--color-primario);
   font-weight: var(fw-bold);
 }
 
@@ -55,6 +55,12 @@
   display: flex;
   align-items: center;
   gap: 0.3rem;
+}
+
+.breadcrumb-container .btn .boton-text{
+  padding: 1px 45px 1px 5px;
+  margin: 0px;
+  transition: color 200ms ease;
 }
 
 .breadcrumb-container .btn{
@@ -76,7 +82,7 @@
 /* PRIMARY */
 .breadcrumb-container .btn-primary {
   background-color: var(--color-primary);
-  padding: 8px 20px 0px 20px;
+  padding: 5px 20px 0px 20px;
 }
 
 

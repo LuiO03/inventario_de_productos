@@ -77,7 +77,7 @@ $(document).ready(function () {
         $('#tablaProductos tbody').html(`
             <tr>
                 <td colspan="5" class="text-center py-3">
-                    <div class="d-flex flex-column align-items-center justify-content-center">
+                    <div class="d-flex flex-column align-items-center text-center justify-content-center">
                         <i class="ri-folder-warning-line fs-1 mb-2"></i>
                         <span>No hay productos registrados.</span>
                     </div>

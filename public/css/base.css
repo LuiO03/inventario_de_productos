@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
 
 /* ==========================================
    VARIABLES GLOBALES - MODO CLARO
@@ -7,7 +7,7 @@
 :root {
   /* Tipografía */
   --font-family-base: "Poppins", sans-serif;
-
+  --font-family-dashboard: 'Lato', sans-serif;
   --color-text: #e9e9e9;
   --color-bw: #ffffff;
   --color-bw-inverted: #000000;
@@ -60,7 +60,7 @@
     color 0.3s ease,
     border-color 0.3s ease,
     transform 0.3s ease-in-out,
-    font-size 0.2s ease, box-shadow 0.3s ease;
+    font-size 0.2s ease, box-shadow 0.3s ease, border-color 0.2s ease;
   --border-radio-card: 3px;
   --color-primario-s: rgb(252, 13, 65);
   --color-primario-rgb: 252, 13, 65;
@@ -73,7 +73,7 @@
    ========================================== */
 .light-mode {
   /* Colores base */
-  --color-bg: #eeeeee;
+  --color-bg: #EEEEEE;
   --color-text: #342e37;
   --color-bw: #000000;
   --color-bw-inverted: #ffffff;
@@ -131,7 +131,7 @@
 
 :root {
   /* Tipografías base para escritorio (≥ 992px) */
-  --font-size-h1: 2.25rem; /* Títulos grandes */
+  --font-size-h1: 2.4rem; /* Títulos grandes */
   --font-size-h2: 1.625rem; /* Títulos secundarios */
   --font-size-h3: 1.175rem; /* Subtítulos / paneles */
   --font-size-p: 0.93rem; /* Texto general */
@@ -189,7 +189,7 @@
    ========================================== */
 h1 {
   font-size: var(--font-size-h1);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 h2 {
@@ -203,6 +203,7 @@ h3 {
 
 p {
   font-size: var(--font-size-p);
+  margin: 0px;
 }
 
 small {
@@ -214,17 +215,9 @@ small {
    ========================================== */
 
 * {
-  font-family: var(--font-family-base);
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-body {
-  height: 100dvh;
-  background-color: var(--color-bg);
-  transition: var(--transition-general);
-  color: var(--color-text);
 }
 
 a {
@@ -338,115 +331,4 @@ form div .form-control {
 .targeta small {
   font-weight: bold;
   color: var(--color-placeholder);
-}
-/* ==========================================
-   CONTENEDOR FLOTANTE
-   ========================================== */
-
-
-.fab-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1050;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-  transition: all 0.3s ease;
-}
-
-/* Fondo centrado detrás del botón principal */
-.fab-container::before {
-  content: "";
-  position: absolute;
-  bottom: -10px; /* corregido */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70px;
-  height: 70px;
-  background-color: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(2px);
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  z-index: -1;
-}
-
-
-/* Al expandirse, crece hacia arriba */
-.fab-container.fab-open::before {
-  height: 250px;
-  border-radius: 50px;
-}
-
-/* Botón principal */
-.fab-btn.toggle {
-  background-color: #333;
-  color: white;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease;
-  border: none;
-  z-index: 1;
-}
-
-/* Animación de rotación del botón */
-.fab-container.fab-open .fab-btn.toggle {
-  transform: rotate(45deg);
-}
-
-/* Contenedor de botones adicionales */
-.fab-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-/* Estilos base para los botones adicionales */
-.fab-actions .fab-btn {
-  opacity: 0;
-  transform: translateY(20px);
-  pointer-events: none;
-  transition: all 0.3s ease;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  border: none;
-  outline: none;
-  box-shadow: none;
-}
-
-/* Mostrar los botones cuando está abierto */
-.fab-container.fab-open .fab-actions .fab-btn {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-/* Animación escalonada */
-.fab-container.fab-open .fab-btn:nth-child(1) { transition-delay: 0.1s; }
-.fab-container.fab-open .fab-btn:nth-child(2) { transition-delay: 0.2s; }
-.fab-container.fab-open .fab-btn:nth-child(3) { transition-delay: 0.3s; }
-
-/* Colores */
-.fab-btn.agregar { background-color: var(--color-primary); }
-.fab-btn.pdf     { background-color: #B51308; }
-.fab-btn.excel   { background-color: #1D613E; }
-
-.fab-btn.agregar:hover,
-.fab-btn.pdf:hover,
-.fab-btn.excel:hover {
-  background-color: var(--color-bw);
-  color: var(--color-bw-inverted);
-  font-size: 23px;
 }

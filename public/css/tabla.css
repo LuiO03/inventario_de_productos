@@ -132,10 +132,11 @@ table .btn {
 }
 
 /* TEXTO del botón */
-table .btn .boton-text, .breadcrumb-container .btn .boton-text{
+table .btn .boton-text{
   flex: 1;
   white-space: nowrap;
-  padding: 1px 45px 1px 5px;
+  padding: 1px 45px 4px 5px;
+  margin: 0px;
   transition: color 200ms ease;
 }
 

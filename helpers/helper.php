@@ -20,7 +20,6 @@
         require_once "views/templates/layouts/footer.php";
     }
 
-    
     function modalFlash($mensaje) {
         if (!empty($mensaje)) {
             include "views/templates/components/modal_mensaje.php";
@@ -29,6 +28,10 @@
 
     function modalConfirmacion() {
         require_once "views/templates/components/modal_confirmacion.php";
+    }
+    
+    function menuFlotante() {
+        require_once "views/templates/components/menuflotante.php";
     }
 
     function getBreadcrumbData(): array {

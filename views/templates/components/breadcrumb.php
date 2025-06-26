@@ -6,7 +6,7 @@
     <ol class="breadcrumb">
         <li>
             <a href="<?= BASE_URL ?>">
-                <i class="ri-home-4-fill"></i> Inicio
+                <i class="ri-home-heart-fill"></i> Inicio
             </a>
             <i class="ri-arrow-right-s-line separator"></i>
         </li>

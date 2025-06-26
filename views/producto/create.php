@@ -4,11 +4,11 @@
 ?>
 
 <div class="contenedor-header">
-    <h1 class="text-center mb-3">
+    <h1 class="text-center">
         Agregar Producto
     </h1>
-    <p class="text-center mb-4">
-        Aquí puedes agregar un nuevo producto al inventario. Completa los campos requeridos y haz clic en <strong>"Agregar Producto"</strong>.
+    <p class="text-center">
+        Aquí puedes agregar un nuevo producto al inventario.
     </p>
 </div>
 

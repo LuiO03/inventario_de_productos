@@ -4,11 +4,11 @@
 ?>
 
 <div class="contenedor-header">
-    <h1 class="text-center mb-3">
+    <h1 class="text-center">
         Editar Producto
     </h1>
-    <p class="text-center mb-4">
-        Aquí puedes editar la información del producto seleccionado. Completa los campos y haz clic en <strong>"Actualizar Producto"</strong>.
+    <p class="text-center">
+        Aquí puedes editar la información del producto seleccionado.
     </p>
 </div>
 <div class="contenedor">
