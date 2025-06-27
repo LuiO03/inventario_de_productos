@@ -34,7 +34,7 @@
 
   --color-primary: #19247f;
   --color-success: #5b860b;
-  --color-error: #cd1a57;
+  --color-error: #d30035;
   --color-warning: #ffa000;
   --color-info: #2979ff;
 
@@ -55,12 +55,13 @@
 
   /* variable unicas */
   --color-focus: #66b2ff;
-  --transition-general: 
+  --transition-general:
+    width 0.2s ease-in-out,
     background-color 0.3s ease-in-out, 
-    color 0.3s ease,
-    border-color 0.3s ease,
+    color 0.3s ease-in-out,
+    border-color 0.3s ease-in-out,
     transform 0.3s ease-in-out,
-    font-size 0.2s ease, box-shadow 0.3s ease, border-color 0.2s ease;
+    font-size 0.2s ease, box-shadow 0.3s ease;
   --border-radio-card: 3px;
   --color-primario-s: rgb(252, 13, 65);
   --color-primario-rgb: 252, 13, 65;
@@ -82,7 +83,8 @@
   --color-accent: #198754;
 
   /* Fondos */
-  --color-sidebar: #f2f2f2;
+  /*--color-sidebar: #f2f2f2;*/
+  --color-sidebar: #f9f9f9;
   --color-header: #f9f9f9;
   --color-footer: #f8f9fa;
   --color-card-bg: #f8f9fa;
@@ -162,6 +164,11 @@
     --font-size-p: 0.88rem;
     --font-size-sm: 0.875rem;
     --font-size-xs: 0.75rem;
+
+    --transition-general:
+    border-color 0.3s ease-in-out,
+    transform 0.3s ease-in-out,
+    font-size 0.2s ease, box-shadow 0.3s ease;
   }
 }
 
@@ -269,66 +276,4 @@ form div .form-control {
     transform: scale(1);
     opacity: 1;
   }
-}
-
-/* ==========================================
-   CARD/TARGETA
-   ========================================== */
-
-.targeta {
-  border-radius: var(--border-radio-card);
-  overflow: hidden;
-  transition: var(--transition-general);
-  background-color: transparent;
-  text-transform: uppercase;
-  box-shadow: var(--sombra-material);
-  background-color: var(--color-header);
-  color: var(--color-text);
-}
-
-.targeta:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.card-icon-bg {
-  width: 33%;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.card-icon-bg.danger {
-  background-color: rgba(255, 224, 211, 1);
-}
-
-.card-icon-bg.success {
-  background-color: rgba(211, 255, 230, 1);
-}
-
-.card-icon-bg.primary {
-  background-color: rgba(211, 229, 255, 1);
-}
-
-.card-icon-bg.warning {
-  background-color: rgba(255, 247, 211, 1);
-}
-
-.card-icon-bg.info {
-  background-color: rgba(211, 248, 255, 1);
-}
-
-.card-icon-bg.secondary {
-  background-color: rgba(234, 234, 234, 1);
-}
-
-.targeta h1 {
-  font-size: 2rem;
-  margin: 0;
-}
-
-.targeta small {
-  font-weight: bold;
-  color: var(--color-placeholder);
 }

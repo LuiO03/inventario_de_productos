@@ -30,9 +30,9 @@
 
 /* Botón principal */
 .fab-btn.toggle {
-  background-color: #333;
+  background-color: var(--color-bw);
   z-index: 2;
-  color: white;
+  color: var(--color-bw-inverted);
   width: 60px;
   height: 60px;
   border-radius: 50%;

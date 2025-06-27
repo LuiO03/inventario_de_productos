@@ -129,14 +129,17 @@ table .btn {
   color: whitesmoke;
   font-size: var(--font-size-xs);
   margin: 2px 0px;
+  
 }
 
 /* TEXTO del botón */
 table .btn .boton-text{
-  flex: 1;
-  white-space: nowrap;
-  padding: 1px 45px 4px 5px;
-  margin: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding-right: 40px;
+  align-items: center;
   transition: color 200ms ease;
 }
 

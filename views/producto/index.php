@@ -1,4 +1,4 @@
-<?php 
+<?php
     headerAdmin();
     partialBreadcrumb();
 ?>
@@ -6,23 +6,22 @@
 <!-- Contenido de la informacion y botones -->
 <div class="contenedor-header">
     <h1 class="text-center">Lista de Productos</h1>
-    <p class="text-center mb-4">Esta es la página de productos.</p>
+    <p class="text-center">Esta es la página de productos.</p>
+</div>
 
-    <div class=" d-flex justify-content-center align-items-center flex-wrap gap-3">
-        <div class="button-borders d-none d-md-block">
-            <button class="btn-export btn-copy" title="Copiar Registros"> <i class="ri-file-copy-line"></i> Copiar </button>
-        </div>
-        <div class="button-borders d-none d-md-block">
-            <button class="btn-export btn-excel" title="Exportar Excel"> <i class="ri-file-excel-2-line"></i> Excel </button>
-        </div>
-        <div class="button-borders d-none d-md-block">
-            <button class="btn-export btn-pdf" title="Exportar PDF"> <i class="ri-file-pdf-2-line"></i> PDF </button>
-        </div>
-        <div class="button-borders d-none d-md-block">
-            <button class="btn-export btn-print" title="Imprimir Tabla"> <i class="ri-printer-line"></i> Imprimir </button>
-        </div>
+<div class=" d-flex justify-content-center align-items-center flex-wrap gap-3 mb-4">
+    <div class="button-borders d-none d-md-block">
+        <button class="btn-export btn-copy" title="Copiar Registros"> <i class="ri-file-copy-line"></i> Copiar </button>
     </div>
-
+    <div class="button-borders d-none d-md-block">
+        <button class="btn-export btn-excel" title="Exportar Excel"> <i class="ri-file-excel-2-line"></i> Excel </button>
+    </div>
+    <div class="button-borders d-none d-md-block">
+        <button class="btn-export btn-pdf" title="Exportar PDF"> <i class="ri-file-pdf-2-line"></i> PDF </button>
+    </div>
+    <div class="button-borders d-none d-md-block">
+        <button class="btn-export btn-print" title="Imprimir Tabla"> <i class="ri-printer-line"></i> Imprimir </button>
+    </div>
 </div>
 
 <!-- Contenido de la tabla -->
@@ -61,7 +60,7 @@
                                     <span class="boton-text">Editar</span>
                                 </a>
                                 <button type="button" title="Eliminar Producto" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="<?= $producto->getId() ?>">
-                                    <span class="boton-text">Eliminar</span>
+                                    <span class="boton-text">Borrar</span>
                                     <span class="boton-icon"><i class="ri-delete-bin-2-fill"></i></span>
                                 </button>
                             </div>
@@ -120,13 +119,9 @@
     </div>
 </div>
 
-
-
-
-
 <?php
-menuFlotante();
-modalFlash($mensaje);
-modalConfirmacion();
-footerAdmin();
+    menuFlotante();
+    modalFlash($mensaje);
+    modalConfirmacion();
+    footerAdmin();
 ?>

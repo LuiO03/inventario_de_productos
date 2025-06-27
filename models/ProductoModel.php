@@ -1,7 +1,7 @@
 <?php 
 
     require_once 'core/model.php';
-    require_once 'entities/producto.php';
+    require_once 'entities/Producto.php';
     class ProductoModel extends Model{
 
         public function __construct(){

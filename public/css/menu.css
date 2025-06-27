@@ -1,0 +1,144 @@
+/* ==========================================
+   CARD/TARGETA menu
+   ========================================== */
+
+.grid-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin: 20px;
+}
+
+.targeta {
+  display: flex;
+  border-radius: var(--border-radio-card);
+  overflow: hidden;
+  box-shadow: var(--sombra-material);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: var(--color-header, #1a1a1a);
+  text-decoration: none;
+  color: var(--color-text);
+  height: 100%;
+}
+
+.targeta:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.tarjeta-icono {
+  flex: 0 0 35%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tarjeta-icono i {
+  font-size: 60px;
+}
+
+.tarjeta-contenido {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 15px;
+}
+
+.tarjeta-contenido h1{
+  margin: 0px;
+  padding: 0px;
+}
+
+/* RESPONSIVE - MODO COLUMNA EN MÓVILES */
+@media (max-width: 800px) {
+  .grid-tarjetas {
+    margin: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+  }
+  .targeta {
+    flex-direction: column;
+  }
+
+  .tarjeta-icono,
+  .tarjeta-contenido {
+    flex: 1 1 100%;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* COLORES PERSONALIZADOS */
+.bg-rojo-dark {
+  background-color: #a00034;
+}
+
+.bg-rojo-light {
+  background-color: #c6284a;
+}
+
+.bg-verde-dark {
+  background-color: #14532d;
+}
+
+.bg-verde-light {
+  background-color: #1f6f3a;
+}
+
+.bg-azul-dark {
+  background-color: rgb(20, 8, 85);
+}
+
+.bg-azul-light {
+  background-color: rgb(30, 11, 116);
+}
+
+.bg-naranja-dark {
+  background-color: #a84300;
+}
+
+.bg-naranja-light {
+  background-color: #e86c09;
+}
+
+.bg-marron-dark {
+  background-color: #4e342e;
+}
+
+.bg-marron-light {
+  background-color: #6d4c41;
+}
+
+.bg-negro-dark {
+  background-color: #0f0f0f;
+}
+
+.bg-negro-light {
+  background-color: #1c1c1c;
+}
+
+.bg-gris-dark {
+  background-color: #4b5563;
+}
+
+.bg-gris-light {
+  background-color: #6b7280;
+}
+
+.bg-celeste-dark {
+  background-color: #007a8c;
+}
+
+.bg-celeste-light {
+  background-color: #00a0b3;
+}
+
+.text-rojo-light    { color: #c6284a; }
+.text-verde-light   { color: #1f6f3a; }
+.text-azul-light    { color: rgb(30, 11, 116); }
+.text-naranja-light { color: #e86c09; }
+.text-celeste-light { color: #00a0b3; }
+.text-marron-light  { color: #6d4c41; }
+.text-gris-light    { color: #6b7280; }
+.text-negro-light   { color: #1c1c1c; }

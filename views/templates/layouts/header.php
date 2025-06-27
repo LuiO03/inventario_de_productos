@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="<?= BASE_URL ?>public/css/tabla.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>public/css/breadcrumb.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>public/css/menuflotante.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/menu.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>public/css/dashboard.css">
   <script>
     if (localStorage.getItem("sidebar-estado") === "close") {
@@ -132,6 +133,9 @@
       </div>
       <div class="topbar-center">
         <span class="current-date"><?= fechaC(); ?></span>
+        <div class="logo-central">
+          <p class="central-logo-texto"><strong>Gecko</strong><span>merce</span></p>
+        </div>
       </div>
       <div class="topbar-right">
         <img src="<?= BASE_URL ?>public/images/pikachu.jpg" alt="Avatar" class="user-avatar" />

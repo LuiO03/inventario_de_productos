@@ -1,6 +1,6 @@
 <?php 
-    require_once 'core/View.php';
-    require_once 'core/Model.php';
+    require_once 'core/view.php';
+    require_once 'core/model.php';
     
     class Controller{
         protected $view;

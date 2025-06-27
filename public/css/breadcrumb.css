@@ -42,7 +42,7 @@
   display: flex;
   align-items: center;
   gap: 0.3rem;
-  transition: color 0.2s;
+  transition: var(--transition-general);
 }
 
 .breadcrumb a:hover {
@@ -58,9 +58,13 @@
 }
 
 .breadcrumb-container .btn .boton-text{
-  padding: 1px 45px 1px 5px;
-  margin: 0px;
-  transition: color 200ms ease;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  padding-right: 40px;
+  align-items: center;
+  transition: var(--transition-general);
 }
 
 .breadcrumb-container .btn{

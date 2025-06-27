@@ -31,7 +31,7 @@ body.no-scroll {
   font-family: var(--font-family-dashboard);
   font-size: var(--font-size-p);
   background-color: var(--color-sidebar);
-  transition: width 300ms ease-in-out, background-color 300ms ease-in-out;
+  transition: var(--transition-general);
 }
 
 .sidebar-cerrado #sidebar {
@@ -55,8 +55,9 @@ body.no-scroll {
   align-items: center;
   gap: 15px;
   justify-content: start;
-  padding-left: 20px;
+  padding-left: 14px;
   height: 100px;
+  transition: var(--transition-general);
 }
 
 #sidebar.close .sidebar-header {
@@ -67,7 +68,6 @@ body.no-scroll {
   width: 100%;
   display: flex;
   flex-direction: column;
-  transition: var(--transition-general);
 }
 
 .sidebar-footer .sidebar-footer-content {
@@ -76,9 +76,10 @@ body.no-scroll {
   justify-content: space-between;
   gap: 0.5em;
   padding: 0.85em;
-  border-radius: 8px;
-  transition: background-color 0.3s;
+  border-radius: var(--border-radio-card);
   cursor: pointer;
+  background-color: transparent;
+  transition: var(--transition-general);
 }
 
 .sidebar-footer-content:hover {
@@ -90,7 +91,7 @@ body.no-scroll {
 }
 
 .sidebar-header .sidebar-logo {
-  width: 20px;
+  width: 35px;
   object-fit: 1/1;
 }
 
@@ -101,6 +102,10 @@ body.no-scroll {
   text-transform: uppercase;
   transition: opacity 0.3s ease, visibility 0.3s ease;
   margin: 0px;
+}
+
+.sidebar-header .sidebar-logo-texto span{
+  font-weight: 200;
 }
 
 #sidebar.close .sidebar-logo {
@@ -131,7 +136,6 @@ body.no-scroll {
   white-space: nowrap;
   border-radius: var(--border-radio-card);
   z-index: 10;
-  transition: var(--transition-general);
   box-shadow: var(--sombra-material);
   border: 1px solid var(--color-muted);
   pointer-events: none;
@@ -156,11 +160,6 @@ body.no-scroll {
   overflow-x: hidden;
   height: 100%;
   padding: 0px;
-}
-
-.sidebar-menu li {
-  transition: var(--transition-general);
-  background-color: var(--color-sidebar)
 }
 
 .sidebar-menu::-webkit-scrollbar,
@@ -268,17 +267,14 @@ main::-webkit-scrollbar-thumb:hover {
 /* =========================================
    ESTADO ACTIVE Y VECINOS
 ========================================= */
-#sidebar li.active {
-  background-color: var(--color-bg);
-  border-radius: 60px 0 0 60px;
-  transition: var(--transition-general);
-  font-weight: 700;
-}
+
 
 #sidebar li.active a {
-  background-color: var(--color-sidebar);
-  border: 5px solid var(--color-bg);
-  transition: var(--transition-general);
+  /*background-color: var(--color-sidebar);
+  transition: background-color 0.3s ease-in-out;*/
+  border-color: var(--color-bg);
+  border-width: 5px;
+  border-style: solid;
   border-radius: 60px;
 }
 
@@ -295,27 +291,28 @@ main::-webkit-scrollbar-thumb:hover {
   padding: 10px 14px;
 }
 
-#sidebar li.before-active,
-#sidebar li.after-active {
+/*
+#sidebar li.active {
   background-color: var(--color-bg);
-  overflow: hidden;
+  border-radius: 60px 0 0 60px;
   transition: var(--transition-general);
+  font-weight: 700;
 }
 
-#sidebar li.before-active a,
-#sidebar li.before-active .dropdown-btn {
-  background-color: var(--color-sidebar);
+#sidebar li.before-active,
+#sidebar li.after-active {
+  overflow: hidden;
+  background-color: var(--color-bg);
   transition: var(--transition-general);
-  border-radius: 0 0 20px 0;
 }
 
 #sidebar li.after-active a,
 #sidebar li.after-active .dropdown-btn {
-  background-color: var(--color-sidebar);
   transition: var(--transition-general);
+  background-color: var(--color-sidebar);
   border-radius: 0 20px 0 0;
 }
-
+*/
 /* =========================================
    EFECTOS HOVER
 ========================================= */
@@ -392,13 +389,13 @@ main::-webkit-scrollbar-thumb:hover {
   width: 16px;
   left: 3px;
   bottom: 3px;
-  background-color: var(--color-bw);
+  background-color: var(--color-bw-inverted);
   border-radius: 50%;
   transition: transform 0.4s;
 }
 
 .dark-toggle-switch input:checked + .dark-toggle-slider {
-  background-color: var(--color-warning);
+  background-color: var(--color-primario);
 }
 
 .dark-toggle-switch input:checked + .dark-toggle-slider::before {
@@ -584,7 +581,6 @@ main p {
   cursor: pointer;
   padding: 10px;
   border-radius: var(--border-radio-card);
-  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .edit-user-btn:hover {
@@ -657,7 +653,7 @@ main p {
 
   main {
     width: 100%;
-    padding: 1em;
+    padding: 10px;
     min-height: calc(100dvh - 60px);
     border-radius: 0px;
   }
@@ -682,6 +678,29 @@ main p {
 }
 
 /*====== main ======*/
+.logo-central{
+  display: none;
+  align-items: center;
+  gap: 15px;
+  justify-content: start;
+  padding-left: 20px;
+  height: 100px;
+  transition: var(--transition-general);
+}
+
+.logo-central .central-logo-texto {
+  opacity: 1;
+  visibility: visible;
+  font-size: 23px;
+  text-transform: uppercase;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  margin: 0px;
+}
+
+.logo-central .central-logo-texto span{
+  font-weight: 200;
+}
+
 .contenedor {
   background-color: var(--color-header);
   padding: 20px;
@@ -689,6 +708,24 @@ main p {
   margin: 20px 0px;
   transition: var(--transition-general);
   box-shadow: var(--sombra-material);
+}
+
+@media (max-width: 450px) {
+  main {
+    padding: 0px;
+  }
+  .contenedor {
+    padding: 0px 15px;
+    margin: 0px;
+  }
+
+  .logo-central{
+    display: flex;
+  }
+
+  .current-date{
+    display: none;
+  }
 }
 
 .modal-content {
@@ -701,6 +738,16 @@ main p {
 
 form div .form-control {
   background-color: var(--color-input-bg);
+}
+
+/*========== switch modo oscuro/claro ===========*/
+
+form div .form-control {
+  background-color: var(--color-input-bg) !important;
+  color: var(--color-text);
+}
+
+@media (max-width: 768px) {
 }
 
 /*====== CONTENEDOR-HEADER ======*/
@@ -800,17 +847,4 @@ form div .form-control {
 /* Imprimir - Azul noche */
 .btn-print {
   background: #430199;
-}
-
-/*========== switch modo oscuro/claro ===========*/
-
-form div .form-control {
-  background-color: var(--color-input-bg) !important;
-  color: var(--color-text);
-}
-
-@media (max-width: 768px) {
-  .nav-fecha {
-    display: none;
-  }
 }

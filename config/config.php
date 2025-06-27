@@ -1,18 +1,22 @@
 <?php
-
     // ==============================
     // ENTORNO Y BASE URL
     // ==============================
 
-    // Detecta si el entorno es local (localhost)
+    // Detecta si el entorno es local
     $isLocalhost = in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1']);
 
-    // Define la carpeta raíz del proyecto (ajústalo si está en otro directorio)
+    // Carpeta donde está tu proyecto
     $baseFolder = '/inventario_de_productos/';
 
-    // Define la URL base para recursos como CSS, JS, imágenes
-    define('BASE_URL', 'http://localhost/inventario_de_productos/');
-    //define('BASE_URL', ($isLocalhost ? 'http://localhost' : 'https://' . $_SERVER['SERVER_NAME']) . $baseFolder);
+    // Protocolo (http para localhost, https para producción)
+    $protocol = $isLocalhost ? 'http' : 'https';
+
+    // Dominio (localhost o dominio real)
+    $host = $_SERVER['HTTP_HOST']; // Más flexible que SERVER_NAME
+
+    // BASE_URL completa
+    define('BASE_URL', $protocol . '://' . $host . $baseFolder);
 
     // ==============================
     // CONFIGURACIÓN GENERAL
@@ -25,7 +29,7 @@
     define('APP_DESCRIPTION', 'Aplicación para gestionar un inventario de productos de manera eficiente y sencilla.');
     define('APP_KEYWORDS', 'inventario, productos, gestión, administración, PHP, MySQL'); // Palabras clave para SEO
     define('APP_LICENSE', 'MIT'); // Licencia de uso
-    define('APP_LOGO', BASE_URL.'public/images/logos/logo.png'); // Ruta del logo (relativa a la raíz del proyecto)
+    define('APP_LOGO', BASE_URL . 'public/images/logos/logo.png'); // Ruta del logo (relativa a la raíz del proyecto)
 
     // ==============================
     // ZONA HORARIA Y CONFIGURACIONES
@@ -45,3 +49,11 @@
     define('DB_PORT', '3306');                 // Puerto MySQL por defecto
     define('DB_COLLATE', 'utf8mb4_unicode_ci');
     define('DB_PREFIX', 'inv_');               // Prefijo de tablas
+
+    /*
+    define('DB_HOST', 'sql310.infinityfree.com');
+    define('DB_NAME', 'if0_39085781_inventario');
+    define('DB_USER', 'if0_39085781');
+    define('DB_PASS', '0afolwKzE0gI4V');
+    */
+?>
