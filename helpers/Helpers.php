@@ -34,17 +34,18 @@
         require_once "views/templates/components/menuflotante.php";
     }
 
-    function getBreadcrumbData(): array {
+    function getEntidadDinamica(): array {
         $controlador = strtolower(Router::$controller ?? 'main');
         $metodo = Router::$method ?? 'index';
 
         $titulo = ucfirst($controlador);
         $icono = match($controlador) {
             'producto' => 'ri-t-shirt-fill',
-            'cliente'  => 'ri-user-line',
-            'usuario'  => 'ri-shield-user-line',
-            'servicio' => 'ri-store-line',
-            default    => 'ri-folder-line'
+            'cliente'  => 'ri-user-fill',
+            'categoria'  => 'ri-price-tag-3-fill',
+            'usuario'  => 'ri-shield-user-fill',
+            'servicio' => 'ri-store-fill',
+            default    => 'ri-folder-fill'
         };
 
         return [
@@ -114,5 +115,36 @@
         require_once("Views/{$url}.php");
         $file = ob_get_clean();
         return $file;        
+    }
+
+    // llamar fecha actual en el nav
+    function fechaC(){
+        $mes = array(
+            "",
+            "Enero", 
+            "Febrero", 
+            "Marzo", 
+            "Abril", 
+            "Mayo", 
+            "Junio",
+            "Julio", 
+            "Agosto", 
+            "Septiembre", 
+            "Octubre", 
+            "Noviembre", 
+            "Diciembre"
+        );
+
+        $dia = array(
+            "domingo", 
+            "lunes", 
+            "martes", 
+            "miércoles", 
+            "jueves", 
+            "viernes", 
+            "sábado"
+        );
+
+        return "Hoy es " . $dia[date("w")] . ", " . date("d") . " de " . $mes[date('n')] . " de " . date('Y');
     }
 ?>

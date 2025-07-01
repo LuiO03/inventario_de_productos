@@ -49,7 +49,7 @@
     define('DB_PORT', '3306');                 // Puerto MySQL por defecto
     define('DB_COLLATE', 'utf8mb4_unicode_ci');
     define('DB_PREFIX', 'inv_');               // Prefijo de tablas
-
+    
     /*
     define('DB_HOST', 'sql310.infinityfree.com');
     define('DB_NAME', 'if0_39085781_inventario');

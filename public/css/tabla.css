@@ -5,7 +5,7 @@
 /* ======= Tabla personalizada ======= */
 table {
   background-color: var(--color-header) !important;
-  border-radius: var(--border-radio-card) !important;
+  border-radius: var(--border-radio-elements) !important;
   color: var(--color-texto) !important;
   transition: var(--transition-general);
   margin: 0px;
@@ -32,7 +32,7 @@ table th:hover {
 }
 
 table thead {
-  background-color: var(--color-sidebar) !important;
+  background-color: var(--color-stripet-table) !important;
   text-transform: uppercase;
   transition: var(--transition-general);
   border-top: 1px solid var(--color-table-head-border);
@@ -41,13 +41,27 @@ table thead {
 }
 
 table tbody tr:nth-child(even) {
-  background-color: var(--color-sidebar) !important;
+  background-color: var(--color-stripet-table) !important;
   transition: var(--transition-general);
 }
 
 table tbody tr:hover {
   background-color: var(--color-hover) !important;
   transition: background-color 0.3s ease;
+}
+
+/* Para la cabecera */
+.tabla-responsive thead tr th:last-child {
+  width: 150px; /* o el valor que desees */
+  max-width: 100%;
+  text-align: center;
+}
+
+/* Para las filas del cuerpo */
+.tabla-responsive tbody tr td:last-child {
+  width: 150px;
+  max-width: 100%;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
@@ -71,7 +85,7 @@ table tbody tr:hover {
     margin-bottom: 1rem;
     background-color: var(--color-sidebar);
     border: 1px solid var(--color-border);
-    border-radius: var(--border-radio-card);
+    border-radius: var(--border-radio-elements);
     padding: 0.5rem;
     transition: var(--transition-general);
   }
@@ -89,7 +103,7 @@ table tbody tr:hover {
     position: absolute;
     left: -10px;
     width: 50%;
-    padding-left: 1rem;
+    padding-left: 10px;
     font-weight: 700;
     text-align: left;
     color: var(--color-text);
@@ -97,6 +111,25 @@ table tbody tr:hover {
 
   .tabla-responsive td:last-child {
     border-bottom: none;
+  }
+
+  .tabla-responsive thead tr th:last-child {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Para las filas del cuerpo */
+  .tabla-responsive tbody tr td:last-child {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 468px) {
+  
+  table td,
+  table th {
+    padding-inline: 0px !important;
   }
 }
 
@@ -129,11 +162,16 @@ table .btn {
   color: whitesmoke;
   font-size: var(--font-size-xs);
   margin: 2px 0px;
-  
+}
+
+table .badge{
+  border-radius: var(--border-radio-elements);
+  padding: 5px 8px;
+  width: 60px;
 }
 
 /* TEXTO del botón */
-table .btn .boton-text{
+table .btn .boton-text {
   width: 100%;
   height: 100%;
   display: flex;
@@ -144,7 +182,8 @@ table .btn .boton-text{
 }
 
 /* ÍCONO */
-table .btn .boton-icon, .breadcrumb-container .btn .boton-icon {
+table .btn .boton-icon,
+.breadcrumb-container .btn .boton-icon {
   height: 100%;
   width: 40px;
   display: flex;
@@ -160,11 +199,13 @@ table .btn .boton-icon, .breadcrumb-container .btn .boton-icon {
 }
 
 /* HOVER EFFECTS */
-table .btn:hover .boton-text, .breadcrumb-container .btn:hover .boton-text {
+table .btn:hover .boton-text,
+.breadcrumb-container .btn:hover .boton-text {
   color: transparent;
 }
 
-table .btn:hover .boton-icon, .breadcrumb-container .btn:hover .boton-icon {
+table .btn:hover .boton-icon,
+.breadcrumb-container .btn:hover .boton-icon {
   width: 100%;
   border-left: none;
   right: 0;
@@ -173,7 +214,8 @@ table .btn:hover .boton-icon, .breadcrumb-container .btn:hover .boton-icon {
 }
 
 /* Active */
-table .btn:active .boton-icon i, .breadcrumb-container .btn:active .boton-icon i {
+table .btn:active .boton-icon i,
+.breadcrumb-container .btn:active .boton-icon i {
   transform: scale(0.85);
 }
 
@@ -217,8 +259,6 @@ table .btn-success:hover .boton-icon,
 table .btn-success:hover {
   background-color: #007d71;
 }
-
-
 
 /* 
 table .btn {

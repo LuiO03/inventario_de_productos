@@ -1,3 +1,6 @@
+<?php
+  $entidad = getEntidadDinamica();
+?>
 <!-- Modal de Confirmación de Eliminación -->
 <div class="modal fade modal-slide-animate" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -11,7 +14,7 @@
       <div class="modal-body text-center">
         <i class="ri-close-circle-line text-danger mb-3" style="font-size: 6rem;"></i>
         <h3 class="fw-bold">
-          ¿Estás seguro de que deseas eliminar este producto?<br>
+          ¿Estás seguro de que deseas eliminar este registro?<br>
         </h3>
         <p>Esta acción no se puede deshacer.</p>
       </div>
@@ -40,6 +43,6 @@
         const button = event.relatedTarget;
         const id = button.getAttribute('data-id');
         const form = document.getElementById('deleteForm');
-        form.action = "<?= BASE_URL ?>producto/delete/" + id;
+        form.action = "<?= BASE_URL . $entidad['titulo']?>/delete/" + id;
     });
 </script>

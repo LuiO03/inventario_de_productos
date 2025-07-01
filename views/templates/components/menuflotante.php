@@ -1,5 +1,5 @@
 <?php
-    $datos = getBreadcrumbData();
+  $entidad = getEntidadDinamica();
 ?>
 <div class="fab-wrapper d-block d-sm-none" id="fabWrapper">
   <!-- Fondo externo independiente -->
@@ -9,7 +9,7 @@
   <div class="fab-actions">
     <button class="fab-btn pdf" title="Exportar PDF"><i class="ri-file-pdf-2-fill"></i></button>
     <button class="fab-btn excel" title="Exportar Excel"><i class="ri-file-excel-fill"></i></button>
-    <a href="<?= BASE_URL .$datos['titulo']?>/create" class="fab-btn agregar" title="Agregar <?= $datos['titulo'] ?>">
+    <a href="<?= BASE_URL .$entidad['titulo']?>/create" class="fab-btn agregar" title="Agregar <?= $entidad['titulo'] ?>">
       <i class="ri-add-circle-fill"></i>
     </a>
   </div>

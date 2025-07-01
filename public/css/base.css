@@ -25,7 +25,7 @@
 
   /* Tablas */
   --color-table: #1e1e1e;
-  --color-stripet-table: #dee2e6;
+  --color-stripet-table: #181818;
   --color-table-border: #0a0a0a;
   --color-table-head-border: #000000;
 
@@ -62,7 +62,9 @@
     border-color 0.3s ease-in-out,
     transform 0.3s ease-in-out,
     font-size 0.2s ease, box-shadow 0.3s ease;
-  --border-radio-card: 3px;
+  --border-radio-card: 15px;
+  --border-radio-elements: 3px;
+
   --color-primario-s: rgb(252, 13, 65);
   --color-primario-rgb: 252, 13, 65;
   --sombra-material: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
@@ -93,7 +95,7 @@
 
   /* Tablas */
   --color-table: #dee2e6;
-  --color-stripet-table: #dee2e6;
+  --color-stripet-table: #EEEEEE;
   --color-table-border: #dee2e6;
   --color-table-head-border: #a5a9ad;
 

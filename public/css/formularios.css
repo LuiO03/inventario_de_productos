@@ -1,0 +1,102 @@
+
+.formulario {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    background-color: var(--color-card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    color: var(--color-text);
+    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+}
+
+.input-group {
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group.w-100 {
+    flex: 1 1 100%;
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.input-icono {
+    position: relative;
+}
+
+.input-icono i {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    color: #777;
+    font-size: 1rem;
+}
+
+.input-icono input,
+.input-icono textarea {
+    width: 100%;
+    padding: 0.6rem 0.8rem 0.6rem 2.5rem;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease;
+}
+
+.input-icono input:focus,
+.input-icono textarea:focus {
+    border-color: var(--color-primario);
+    outline: none;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.acciones {
+    flex: 1 1 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.btn-success, .btn-primary {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+}

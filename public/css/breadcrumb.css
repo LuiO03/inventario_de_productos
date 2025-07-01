@@ -2,7 +2,7 @@
 /*====== MIGA DE NAVEGACIÓN ======*/
 
 .breadcrumb-container {
-  background-color: var(--color-header);
+  background-color: var(--color-card-bg);
   padding: 10px 20px;
   height: 55px;
   width: 100%;
@@ -14,6 +14,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media (max-width: 450px) {
+  .breadcrumb-container {
+    border-radius: 0px;
+  }
 }
 
 .breadcrumb {
@@ -47,7 +53,7 @@
 
 .breadcrumb a:hover {
   color: var(--color-primario);
-  font-weight: var(fw-bold);
+  font-weight: var(--fw-regular);
 }
 
 .breadcrumb .active {
@@ -88,6 +94,3 @@
   background-color: var(--color-primary);
   padding: 5px 20px 0px 20px;
 }
-
-
-

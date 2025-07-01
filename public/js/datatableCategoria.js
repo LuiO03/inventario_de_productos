@@ -10,7 +10,7 @@ const language_es = {
     info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
     infoEmpty: "Mostrando 0 a 0 de 0 registros",
     infoFiltered: "(filtrado de _MAX_ registros totales)",
-    lengthMenu: "Mostrar _MENU_ registros",
+    lengthMenu: "Filas por página _MENU_ ",
     loadingRecords: "Cargando...",
     processing: "Procesando...",
     search: "Buscar:",
@@ -30,7 +30,7 @@ const language_es = {
 
 // Actualiza los íconos de orden en las columnas de la tabla
 function actualizarIconosOrden() {
-    $('#tablaProductos thead th').each(function () {
+    $('#tablaCategorias thead th').each(function () {
         const $th = $(this);
         const $orderSpan = $th.find('.dt-column-order');
         $orderSpan.html(''); // Limpiar íconos previos
@@ -47,7 +47,7 @@ function actualizarIconosOrden() {
 
 // Inicialización del DataTable y personalización
 $(document).ready(function () {
-    const tabla = $('#tablaProductos').DataTable({
+    const tabla = $('#tablaCategorias').DataTable({
         order: [[0, 'desc']],            // Orden inicial por la primera columna descendente
         pageLength: 10,                  // Cantidad de registros por página
         deferRender: true,              // Mejora rendimiento en tablas grandes
@@ -58,23 +58,23 @@ $(document).ready(function () {
         language: language_es,
         initComplete: function () {
             // Mostrar tabla una vez inicializada
-            $('#tablaProductos').removeClass('d-none');
+            $('#tablaCategorias').removeClass('d-none');
             actualizarIconosOrden();
 
             // Placeholder para el campo de búsqueda
             $('.dt-search input[type="search"]').attr(
                 'placeholder',
-                'Buscar productos por nombre, código, categoría, precio, etc....'
+                'Buscar categorías por nombre o descripción.'
             );
         }
     });
 
     // Actualizar íconos cuando cambia el orden o se redibuja
-    $('#tablaProductos').on('draw.dt order.dt', actualizarIconosOrden);
+    $('#tablaCategorias').on('draw.dt order.dt', actualizarIconosOrden);
 
     // Si no hay datos, mostrar un mensaje personalizado
     if (tabla.data().count() === 0) {
-        $('#tablaProductos tbody').html(`
+        $('#tablaCategorias tbody').html(`
             <tr>
                 <td colspan="5" class="text-center py-3">
                     <div class="d-flex flex-column align-items-center text-center justify-content-center">
@@ -113,7 +113,7 @@ $(document).ready(function () {
     // Animación de filas al redibujar (opcional)
     /*
     tabla.on('draw', () => {
-        const filas = document.querySelectorAll('#tablaProductos tbody tr');
+        const filas = document.querySelectorAll('#tablaCategorias tbody tr');
         filas.forEach(fila => {
             fila.style.animation = 'none';
             void fila.offsetWidth;

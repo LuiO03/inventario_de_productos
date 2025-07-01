@@ -11,6 +11,8 @@
 
 .dt-container > div:nth-child(1) {
   padding: 10px 0px 20px 0px;
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .dt-layout-end {
@@ -24,7 +26,7 @@
 
 @media (max-width: 450px) {
   .dt-container > div:nth-child(1) {
-    padding: 10px 0px 10px 0px;
+    padding: 0px 0px 15px 0px;
   }
 
   .dt-layout-end {
@@ -39,7 +41,7 @@
 .dt-search input[type="search"]
 {
   border: 2px solid var(--color-boton-datatable);
-  border-radius: var(--border-radio-card);
+  border-radius: var(--border-radio-elements);
   background-color: var(--color-sidebar);
   color: var(--color-texto);
   transition: var(--transition-general);
@@ -146,7 +148,7 @@
   content: "\ea4e"; /* flecha hacia abajo (ri-arrow-down-s-line) */
   font-family: 'remixicon';
   position: absolute;
-  right: 65px;
+  right: 9px;
   display: flex;
   align-items: center;
   height: 34px;
@@ -161,7 +163,7 @@
 
 @media (max-width: 468px) {
   .dt-length label::after {
-    right: 63px;
+    right: 8px;
   }
 }
 
@@ -182,7 +184,7 @@
 .dt-paging .page-item .page-link{
   margin: 2px;
   border: 1px solid var(--color-boton-datatable);
-  border-radius: var(--border-radio-card);
+  border-radius: var(--border-radio-elements);
   background-color: var(--color-sidebar);
   color: var(--color-texto);
   transition: var(--transition-general);
@@ -191,7 +193,7 @@
 
 .dt-paging li.page-item.disabled button.page-link{
   background-color: var(--color-header);
-  color: #888;
+  color: var(--color-muted);
   box-shadow: none;
   cursor: not-allowed;
   pointer-events: none;
@@ -199,7 +201,7 @@
 }
 
 .dt-paging li.page-item.disabled button.page-link i{
-  color: var(--color-border) !important;
+  color: var(--color-muted) !important;
   transition: var(--transition-general);
 }
 

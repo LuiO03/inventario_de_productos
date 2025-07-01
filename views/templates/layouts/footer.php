@@ -1,7 +1,9 @@
-        
         </main>
     </div>
-
+    <?php
+        $entidad = getEntidadDinamica();
+    ?>
+    
     <!-- Overlay reutilizable -->
     <div class="overlay" id="overlay"></div>
     <!-- jQuery -->
@@ -13,7 +15,7 @@
     <!-- DataTables Bootstrap 5 JS -->
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.min.js"></script>
 
-    <script src="<?= BASE_URL ?>public/js/datatable.js"></script>
+    <script src="<?= BASE_URL ?>public/js/datatable<?= $entidad['titulo'] ?>.js"></script>
     <script src="<?= BASE_URL ?>public/js/dashboard.js" defer></script>
   </body>
 </html>

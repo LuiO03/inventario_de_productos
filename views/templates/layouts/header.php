@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="<?= BASE_URL ?>public/css/menuflotante.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>public/css/menu.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>public/css/dashboard.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/formularios.css">
   <script>
     if (localStorage.getItem("sidebar-estado") === "close") {
       document.documentElement.classList.add("sidebar-cerrado");
@@ -69,6 +70,11 @@
         </a>
       </li>
       <li>
+        <a href="<?= BASE_URL ?>categoria" data-label="Categorías">
+          <i class="ri-price-tag-3-line icon"></i><span>Categorías</span>
+        </a>
+      </li>
+      <li>
         <button
           class="dropdown-btn"
           onclick="toggleSubMenu(this)"
@@ -98,11 +104,6 @@
       <li>
         <a href="#" data-label="Clientes">
           <i class="ri-account-box-line icon"></i><span>Clientes</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" data-label="Categorías">
-          <i class="ri-price-tag-3-line icon"></i><span>Categorías</span>
         </a>
       </li>
       <li>
@@ -152,7 +153,7 @@
 
         <div class="user-info-wrapper">
           <div class="user-text">
-            <h6 class="user-name">Luis Quispe Osorio</h6>
+            <h6 class="user-name"><?= $_SESSION['nombre_usuario'] ?></h6>
             <p class="user-role">Administrador</p>
           </div>
           <button class="edit-user-btn" title="Editar perfil">
