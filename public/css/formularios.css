@@ -1,102 +1,359 @@
-
+/* =============================
+   FORMULARIO GENERAL
+============================= */
 .formulario {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
-    background-color: var(--color-card-bg);
-    padding: 2rem;
-    border-radius: 12px;
-    color: var(--color-text);
-    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+  max-width: var(--max-width);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-card-bg);
+  padding: 40px 20px;
+  border-radius: var(--border-radio-card);
+  color: var(--color-text);
+  box-shadow: var(--sombra-material);
+  transition: var(--transition-general);
+  margin: 0px;
+  gap: 10px;
+}
+
+.formulario-contenido {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 450px) {
+  .formulario {
+    padding: 40px 15px;
+    border-radius: 0px;
+  }
+
+  .formulario-acciones {
+    width: 100%;
+  }
+}
+
+.formulario-columna {
+  flex: 1 1 350px;
+  min-width: 350px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .input-group {
-    flex: 1 1 300px;
-    display: flex;
-    flex-direction: column;
-}
-
-.input-group.w-100 {
-    flex: 1 1 100%;
+  flex: 1 1 350px;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  margin: 0px;
+  padding: 0px;
 }
 
 .form-label {
-    font-weight: 500;
-    margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
+/* =============================
+   INPUTS CON ÍCONO
+============================= */
 .input-icono {
-    position: relative;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .input-icono i {
-    position: absolute;
-    top: 50%;
-    left: 12px;
-    transform: translateY(-50%);
-    color: #777;
-    font-size: 1rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 2.5rem;
+  background-color: var(--color-boton-datatable);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radio-elements);
+  transition: var(--transition-general);
 }
 
 .input-icono input,
+.input-icono textarea,
+.input-icono select {
+  width: 100%;
+  padding: 0.6rem 0.8rem 0.6rem 2.9rem;
+  border: 1px solid var(--color-boton-datatable);
+  border-radius: var(--border-radio-elements);
+  font-size: 0.95rem;
+  transition: var(--transition-general);
+  background-color: var(--color-input-bg);
+  color: var(--color-text);
+}
+
 .input-icono textarea {
-    width: 100%;
-    padding: 0.6rem 0.8rem 0.6rem 2.5rem;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    transition: border-color 0.3s ease;
+  field-sizing: content;
+  resize: none;
+}
+
+.input-icono select {
+  appearance: none;
+  cursor: pointer;
 }
 
 .input-icono input:focus,
-.input-icono textarea:focus {
-    border-color: var(--color-primario);
-    outline: none;
+.input-icono textarea:focus,
+.input-icono select:focus {
+  border-color: var(--color-primario);
+  box-shadow: var(--sombra-material);
+  outline: none;
 }
 
-.checkbox {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+.input-icono:focus-within i {
+  background-color: var(--color-primario);
 }
 
-.acciones {
-    flex: 1 1 100%;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
+/* =============================
+   BOTONES FORMULARIO
+============================= */
+.formulario-acciones {
+  width: 60%;
+  margin: 20px auto 0px auto;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.btn-success, .btn-primary {
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+@media (max-width: 750px) {
+  .formulario-acciones {
+    width: 100%;
+    margin: 0px;
+  }
 }
 
-.btn-success {
-    background-color: #28a745;
-    color: #fff;
+.boton-form {
+  flex: 1 1 150px;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  z-index: 1;
+  color: white;
+  font-size: var(--font-size-p);
+  border: none;
+  border-radius: 50px;
+  overflow: hidden;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: color 0.3s ease-in-out;
+  position: relative;
 }
 
-.btn-success:hover {
-    background-color: #218838;
+.boton-form:hover {
+  color: var(--color-bw-inverted);
 }
 
-.btn-primary {
-    background-color: #007bff;
-    color: #fff;
+.boton-form::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -210%;
+  width: 200%;
+  height: 100%;
+  background-color: var(--color-bw);
+  transform: skewX(-20deg);
+  z-index: -1;
+  transition: left 0.6s ease-in-out;
 }
 
-.btn-primary:hover {
-    background-color: #0069d9;
+.boton-form:hover::after {
+  left: -40%;
+}
+
+.boton-form i {
+  font-size: 20px;
+}
+
+.boton-agregar {
+  background-color: var(--color-success);
+}
+
+.boton-actualizar {
+  background-color: var(--color-primary);
+}
+
+.boton-limpiar {
+  background-color: var(--color-warning);
+  color: #000;
+}
+
+.boton-volver {
+  background-color: var(--color-primario);
+}
+
+/* =============================
+   SWITCH EN TABLA
+============================= */
+.switch-tabla {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch-tabla input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: var(--color-card-bg);
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.switch-tabla input:checked + .slider {
+  background-color: var(--color-primario);
+}
+
+.switch-tabla input:checked + .slider::before {
+  transform: translateX(24px);
+}
+
+/* =============================
+   ESTILO SUBIDA DE IMAGEN CUSTOM
+============================= */
+
+.contenedor-upload {
+  width: 100%;
+  border-radius: var(--border-radio-elements);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.upload-header.arrastrando {
+  border: 2px dashed var(--color-primario);
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 10px var(--color-primario);
+}
+
+.upload-header {
+  width: 100%;
+  height: 200px;
+  border: 2px dashed var(--color-primario);
+  border-radius: var(--border-radio-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Usa 'cover' si quieres que llene sin dejar espacios */
+  border-radius: 20px;
+  padding: 10px;
+  pointer-events: none;      /* Opcional: bloquea interacciones como click derecho */
+}
+
+.upload-header i{
+  font-size: 4rem;
+  color: var(--color-primario);
+  z-index: 2;
+  position: relative;
+}
+
+.upload-header p {
+  color: var(--color-text);
+  font-size: 0.95rem;
+  transition: opacity 0.3s ease;
+}
+
+.upload-footer{
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  padding: 0px;
+}
+
+.info-imagen {
+  background-color: var(--color-input-bg);
+  border: 1px solid var(--color-boton-datatable);
+  width: 100%;
+  padding: 5px 10px;
+  border-radius: var(--border-radio-elements);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--transition-general);
+}
+
+.info-imagen:hover {
+  background-color: var(--color-primario);
+}
+
+.info-imagen i {
+  font-size: 1.2rem;
+}
+
+.info-imagen p {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-size: var(--font-size-p);
+}
+
+#imagen {
+  display: none;
+}
+
+.boton-quitar-imagen {
+  background-color: var(--color-danger);
+  color: white;
+  padding: 5px 10px;
+  border-radius: var(--border-radio-elements);
+  border: none;
+  cursor: pointer;
+  gap: 6px;
+  width: 200px;
+  font-size: var(--font-size-p);
+  transition: background-color 0.3s ease;
+}
+.boton-quitar-imagen:hover {
+  background-color: #b6022f;
+}
+
+#nombre-archivo {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  max-width: 250px;
 }

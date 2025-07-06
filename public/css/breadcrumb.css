@@ -4,21 +4,22 @@
 .breadcrumb-container {
   background-color: var(--color-card-bg);
   padding: 10px 20px;
-  height: 55px;
+  height: 60px;
   width: 100%;
   font-size: var(--font-size-p);
   border-radius: var(--border-radio-card);
-  margin: 20px 0px;
   transition: var(--transition-general);
   box-shadow: var(--sombra-material);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  max-width: var(--max-width);
 }
 
 @media (max-width: 450px) {
   .breadcrumb-container {
     border-radius: 0px;
+    justify-content: center;
   }
 }
 

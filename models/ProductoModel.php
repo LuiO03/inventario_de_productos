@@ -146,4 +146,6 @@ class ProductoModel extends Model
             return 0;
         }
     }
+
+    
 }

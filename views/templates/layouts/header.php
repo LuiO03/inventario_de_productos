@@ -84,14 +84,14 @@
         </button>
         <ul class="sub-menu">
           <div>
-            <li>
-              <a href="#" data-label="Folder"><i class="ri-folder-line icon"></i> Folder</a>
+            <li">
+              <a href="#" data-label="Folder"><i class="ri-folder-line icon"></i><span>Folder</span></a>
             </li>
             <li>
-              <a href="#" data-label="Document"><i class="ri-file-line icon"></i> Document</a>
+              <a href="#" data-label="Document"><i class="ri-file-line icon"></i><span>Document</span></a>
             </li>
             <li>
-              <a href="#" data-label="Project"><i class="ri-lightbulb-line icon"></i> Project</a>
+              <a href="#" data-label="Project"><i class="ri-lightbulb-line icon"></i><span>Project</span></a>
             </li>
           </div>
         </ul>

@@ -10,7 +10,7 @@ partialBreadcrumb();
     <div class="contenedor-botones">
         <div class="button-borders">
             <button class="btn-export btn-copy" title="Copiar Registros"> <i class="ri-file-copy-line"></i> Copiar </button>
-        </div>
+        </div> 
         <div class="button-borders">
             <button class="btn-export btn-excel" title="Exportar Excel"> <i class="ri-file-excel-2-line"></i> Excel </button>
         </div>
@@ -41,13 +41,20 @@ partialBreadcrumb();
                 <?php foreach ($categorias as $categoria): ?>
                     <tr>
                         <td data-label="ID:"><?= htmlspecialchars($categoria->getId()) ?></td>
-                        <td class="text-start" data-label="Nombre:" style="width: 100px;"><?= htmlspecialchars($categoria->getNombre()) ?></td>
+                        <td class="text-start" data-label="Nombre:"><?= htmlspecialchars($categoria->getNombre()) ?></td>
                         <td class="text-start" data-label="Descripción:"><?= htmlspecialchars($categoria->getDescripcion()) ?></td>
                         <td data-label="Estado:">
-                            <span class="badge bg-<?= $categoria->getEstado() ? 'success' : 'secondary' ?>">
-                                <?= $categoria->getEstado() ? 'Activo' : 'Inactivo' ?>
-                            </span>
+                            <label class="switch-tabla">
+                                <input
+                                    type="checkbox"
+                                    id="switch-categoria-<?= $categoria->getId() ?>"
+                                    class="toggle-estado"
+                                    data-id="<?= $categoria->getId() ?>"
+                                    <?= $categoria->getEstado() ? 'checked' : '' ?>>
+                                <span class="slider"></span>
+                            </label>
                         </td>
+
                         <td>
                             <div class="table-botones">
                                 <button
@@ -95,8 +102,8 @@ partialBreadcrumb();
                         document.getElementById('modal-nombre').textContent = data.nombre || '-';
                         document.getElementById('modal-descripcion').textContent = data.descripcion || '(Sin descripción)';
                         document.getElementById('modal-estado').innerHTML = data.estado ?
-                            '<span class="badge bg-success">Activo</span>' :
-                            '<span class="badge bg-secondary">Inactivo</span>';
+                            '<span class="badge bg-success">Habilitado</span>' :
+                            '<span class="badge bg-secondary">Deshabilitado</span>';
                         document.getElementById('modal-creado-por').textContent = data.creado_por ?? '-';
                         document.getElementById('modal-modificado-por').textContent = data.modificado_por ?? '-';
                         document.getElementById('modal-created-at').textContent = data.created_at || '-';
@@ -108,6 +115,35 @@ partialBreadcrumb();
                         document.getElementById('modal-nombre').textContent = 'Error';
                         document.getElementById('modal-descripcion').textContent = '-';
                         document.getElementById('modal-estado').innerHTML = '<span class="badge bg-danger">Error</span>';
+                    });
+            });
+        });
+        document.querySelectorAll('.toggle-estado').forEach(input => {
+            input.addEventListener('change', function() {
+                const id = this.dataset.id;
+                const nuevoEstado = this.checked ? 1 : 0;
+
+                fetch(`<?= BASE_URL ?>categoria/toggleEstado/${id}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: JSON.stringify({
+                            estado: nuevoEstado
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.success) {
+                            alert('Error al actualizar el estado');
+                            this.checked = !nuevoEstado; // revertir si falla
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Error:', err);
+                        alert('Error al actualizar el estado');
+                        this.checked = !nuevoEstado;
                     });
             });
         });
@@ -132,43 +168,39 @@ partialBreadcrumb();
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="text-start">ID:</td>
-                                <td class="text-start"><span id="modal-id"></span></td>
+                                <td class="text-start fw-bolder px-2">ID:</td>
+                                <td class="text-start px-2"><span id="modal-id"></span></td>
                             </tr>
                             <tr>
-                                <td class="text-start">Nombre:</td>
-                                <td class="text-start"><span id="modal-nombre"></span></td>
+                                <td class="text-start fw-bolder px-2">Nombre:</td>
+                                <td class="text-start px-2"><span id="modal-nombre"></span></td>
                             </tr>
                             <tr>
-                                <td class="text-start">Descripción:</td>
-                                <td class="text-start"><span id="modal-descripcion"></span></td>
+                                <td class="text-start fw-bolder px-2">Descripción:</td>
+                                <td class="text-start px-2"><span id="modal-descripcion"></span></td>
                             </tr>
                             <tr>
-                                <td class="text-start">Estado:</td>
-                                <td class="text-start"><span id="modal-estado"></span></td>
+                                <td class="text-start fw-bolder px-2">Estado:</td>
+                                <td class="text-start px-2"><span id="modal-estado"></span></td>
                             </tr>
                             <tr>
-                                <td class="text-start">Creado por:</td>
-                                <td class="text-start"><span id="modal-creado-por"></span></td>
+                                <td class="text-start fw-bolder px-2">Creado por:</td>
+                                <td class="text-start px-2">
+                                    <span id="modal-creado-por"></span> -
+                                    <span class="text-primario fw-bolder" id="modal-created-at"></span>
+                                </td>
                             </tr>
                             <tr>
-                                <td class="text-start">Modificado por:</td>
-                                <td class="text-start"><span id="modal-modificado-por"></span></td>
+                                <td class="text-start fw-bolder px-2">Modificado por:</td>
+                                <td class="text-start px-2">
+                                    <span id="modal-modificado-por"></span> -
+                                    <span class="text-primario fw-bolder" id="modal-updated-at"></span>
+                                </td>
                             </tr>
-                            <tr>
-                                <td class="text-start">Creado el:</td>
-                                <td class="text-start"><span id="modal-created-at"></span></td>
-                            </tr>
-                            <tr>
-                                <td class="text-start">Modificado el:</td>
-                                <td class="text-start"><span id="modal-updated-at"></span></td>
-                            </tr>
-
                         </tbody>
                     </table>
                 </div>
             </div>
-
             <div class="modal-footer border-0 justify-content-center">
                 <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal"><i class="ri-close-line"></i> Cerrar</button>
             </div>

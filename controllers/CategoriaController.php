@@ -1,7 +1,6 @@
 <?php
 class CategoriaController extends Controller
 {
-
     protected $model;
 
     public function __construct()
@@ -14,7 +13,7 @@ class CategoriaController extends Controller
     {
         $nombre = trim($_POST['nombre'] ?? '');
         $descripcion = trim($_POST['descripcion'] ?? '');
-        $estado = isset($_POST['estado']) ? true : false;
+        $estado = isset($_POST['estado']) && $_POST['estado'] === '1' ? 1 : 0;
 
         return !empty($nombre);
     }
@@ -56,7 +55,6 @@ class CategoriaController extends Controller
             $this->redirigirConMensaje('categoria/create', 'danger', 'Atención', 'Por favor, completa todos los campos obligatorios.');
         }
 
-        // Validar si ya existe
         $existe = $this->model->findByNombre($nombre);
         if ($existe) {
             flash::set('mensaje', [
@@ -68,12 +66,32 @@ class CategoriaController extends Controller
             exit;
         }
 
+        // Procesar imagen si se subió
+        $nombreArchivo = null;
+        if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+            $nombreOriginal = basename($_FILES['imagen']['name']);
+            $extension = pathinfo($nombreOriginal, PATHINFO_EXTENSION);
+            $nombreArchivo = uniqid('cat_', true) . '.' . strtolower($extension);
+
+            $rutaCarpeta = 'public/images/categorias/';
+            if (!file_exists($rutaCarpeta)) {
+                mkdir($rutaCarpeta, 0777, true);
+            }
+
+            $rutaDestino = $rutaCarpeta . $nombreArchivo;
+            move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino);
+        }
+
         $categoria = new Categoria(
             0,
             $nombre,
             $descripcion,
             $estado,
-            $_SESSION['usuario_id'] ?? null // creado_por
+            $_SESSION['usuario_id'] ?? null,
+            null,
+            null,
+            null,
+            $nombreArchivo // Imagen
         );
 
         $id = $this->model->create($categoria);
@@ -95,6 +113,7 @@ class CategoriaController extends Controller
         exit;
     }
 
+
     public function edit($id)
     {
         if (!is_numeric($id)) {
@@ -102,9 +121,16 @@ class CategoriaController extends Controller
         }
 
         $categoria = $this->model->getById($id);
-
         if (!$categoria) {
             $this->redirigirConMensaje('categoria/index', 'warning', 'No encontrada', 'Categoría no encontrada.');
+        }
+
+        // ✅ Verificar existencia física de la imagen
+        if ($categoria && $categoria->getImagen()) {
+            $ruta = 'public/images/categorias/' . $categoria->getImagen();
+            if (!file_exists($ruta)) {
+                $categoria->setImagen(null);
+            }
         }
 
         $GLOBALS['pageTitle'] = 'Editar Categoría ' . $id;
@@ -113,6 +139,7 @@ class CategoriaController extends Controller
             'mensaje' => $this->view->mensaje
         ]);
     }
+
 
     public function update($id)
     {
@@ -141,6 +168,31 @@ class CategoriaController extends Controller
         $categoria->setEstado($estado);
         $categoria->setModificadoPor($_SESSION['usuario_id'] ?? null);
 
+        // Procesar imagen nueva si se sube
+        if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+            $nombreOriginal = basename($_FILES['imagen']['name']);
+            $extension = pathinfo($nombreOriginal, PATHINFO_EXTENSION);
+            $nombreArchivo = uniqid('cat_', true) . '.' . strtolower($extension);
+
+            $rutaCarpeta = 'public/images/categorias/';
+            if (!file_exists($rutaCarpeta)) {
+                mkdir($rutaCarpeta, 0777, true);
+            }
+
+            $rutaDestino = $rutaCarpeta . $nombreArchivo;
+            move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino);
+
+            // Eliminar imagen anterior si existe
+            if ($categoria->getImagen()) {
+                $anterior = $rutaCarpeta . $categoria->getImagen();
+                if (file_exists($anterior)) {
+                    unlink($anterior);
+                }
+            }
+
+            $categoria->setImagen($nombreArchivo);
+        }
+
         $actualizado = $this->model->update($categoria);
 
         if ($actualizado) {
@@ -161,48 +213,51 @@ class CategoriaController extends Controller
         exit;
     }
 
+
     public function delete($id)
-{
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_numeric($id)) {
-        protegerContraCSRF();
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_numeric($id)) {
+            protegerContraCSRF();
 
-        // Cargar modelo de productos sin reemplazar el modelo actual
-        $this->loadModel('Producto', 'productoModel');
+            $this->loadModel('Producto', 'productoModel');
 
-        // Contar productos relacionados
-        $cantidad = $this->productoModel->contarPorCategoria((int)$id);
+            $cantidad = $this->productoModel->contarPorCategoria((int)$id);
 
-        if ($cantidad > 0) {
-            flash::set('mensaje', [
-                'type' => 'warning',
-                'header' => 'No se puede eliminar',
-                'message' => "No puedes eliminar esta categoría porque tiene <strong>$cantidad producto(s)</strong> asociado(s)."
-            ]);
+            if ($cantidad > 0) {
+                flash::set('mensaje', [
+                    'type' => 'warning',
+                    'header' => 'No se puede eliminar',
+                    'message' => "No puedes eliminar esta categoría porque tiene <strong>$cantidad producto(s)</strong> asociado(s)."
+                ]);
+            } else {
+                $categoria = $this->model->getById($id);
+                if ($categoria && $categoria->getImagen()) {
+                    $ruta = 'public/images/categorias/' . $categoria->getImagen();
+                    if (file_exists($ruta)) unlink($ruta); // Elimina la imagen del servidor
+                }
+
+                $this->model->delete((int)$id);
+                flash::set('mensaje', [
+                    'type' => 'success',
+                    'header' => 'Eliminación exitosa',
+                    'message' => 'Categoría eliminada correctamente.'
+                ]);
+            }
         } else {
-            $this->model->delete((int)$id);
             flash::set('mensaje', [
-                'type' => 'success',
-                'header' => 'Eliminación exitosa',
-                'message' => 'Categoría eliminada correctamente.'
+                'type' => 'danger',
+                'header' => 'Error',
+                'message' => 'Acceso no permitido o ID inválido.'
             ]);
         }
-    } else {
-        flash::set('mensaje', [
-            'type' => 'danger',
-            'header' => 'Error',
-            'message' => 'Acceso no permitido o ID inválido.'
-        ]);
+
+        header('Location: ' . BASE_URL . 'categoria/index');
+        exit;
     }
-
-    header('Location: ' . BASE_URL . 'categoria/index');
-    exit;
-}
-
-
 
     public function show($id)
     {
-        $categoria = $this->model->getById($id); // Devuelve objeto Categoria
+        $categoria = $this->model->getById($id);
 
         if ($_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
             if ($categoria) {
@@ -211,6 +266,7 @@ class CategoriaController extends Controller
                     'nombre' => $categoria->getNombre(),
                     'descripcion' => $categoria->getDescripcion(),
                     'estado' => $categoria->getEstado(),
+                    'imagen' => $categoria->getImagen(),
                     'creado_por' => $categoria->nombreCreador ?? 'Desconocido',
                     'modificado_por' => $categoria->nombreModificador ?? 'Desconocido',
                     'created_at' => FechaHelper::formatoCorto($categoria->getCreatedAt()),
@@ -221,8 +277,31 @@ class CategoriaController extends Controller
                 echo json_encode(['error' => 'Categoría no encontrada']);
             }
         } else {
-            // Renderizar vista normal si no es petición AJAX
             $this->view->render('categoria/show', ['categoria' => $categoria]);
         }
+    }
+
+    public function toggleEstado($id)
+    {
+        if (
+            $_SERVER['REQUEST_METHOD'] === 'POST' &&
+            isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+        ) {
+            $data = json_decode(file_get_contents('php://input'), true);
+
+            $nuevoEstado = isset($data['estado']) ? (int)$data['estado'] : null;
+
+            if ($nuevoEstado !== null) {
+                $this->loadModel('Categoria');
+                $actualizado = $this->model->actualizarEstado($id, $nuevoEstado);
+
+                echo json_encode(['success' => $actualizado]);
+                exit;
+            }
+        }
+
+        echo json_encode(['success' => false]);
+        exit;
     }
 }

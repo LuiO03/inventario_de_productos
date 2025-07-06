@@ -5,7 +5,7 @@
     <p>Desde esta sección puedes gestionar todos los módulos del sistema.</p>
 </div>
 
-<div class="grid-tarjetas">
+<div class="grid-tarjetas contenedor">
     <?php
     $colores = ['rojo', 'verde', 'azul', 'naranja', 'celeste', 'marron', 'gris', 'negro'];
 
@@ -38,6 +38,6 @@
 </div>
 
 <?php
-modalFlash($mensaje);
-footerAdmin();
+    modalFlash($mensaje);
+    footerAdmin();
 ?>

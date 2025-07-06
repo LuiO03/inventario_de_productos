@@ -41,10 +41,20 @@
     // ==============================
     // CONEXIÓN A BASE DE DATOS
     // ==============================
-    define('DB_HOST', 'localhost');
-    define('DB_NAME', 'inv_productos');      // ⚠️ Reemplaza por el nombre real de tu BD
-    define('DB_USER', 'root');
-    define('DB_PASS', '');
+    if (in_array($_SERVER['HTTP_HOST'], ['localhost', '127.0.0.1'])) {
+    // Entorno local
+        define('DB_HOST', 'localhost');
+        define('DB_NAME', 'inv_productos');
+        define('DB_USER', 'root');
+        define('DB_PASS', '');
+    } else {
+        // Entorno de producción
+        define('DB_HOST', 'sql310.infinityfree.com');
+        define('DB_NAME', 'if0_39085781_inventario');
+        define('DB_USER', 'if0_39085781');
+        define('DB_PASS', '0afolwKzE0gI4V');
+    }
+
     define('DB_CHARSET', 'utf8mb4');
     define('DB_PORT', '3306');                 // Puerto MySQL por defecto
     define('DB_COLLATE', 'utf8mb4_unicode_ci');

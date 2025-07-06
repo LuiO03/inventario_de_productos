@@ -93,6 +93,7 @@ CREATE TABLE categorias (
     nombre VARCHAR(100) NOT NULL UNIQUE,
     descripcion TEXT,
     estado TINYINT(1) DEFAULT 1,
+    imagen VARCHAR(255) DEFAULT NULL,
     creado_por INT,
     modificado_por INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -101,13 +102,13 @@ CREATE TABLE categorias (
     FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
 );
 
-INSERT INTO categorias (nombre, descripcion, estado, creado_por, modificado_por)
+INSERT INTO categorias (nombre, descripcion, estado,imagen, creado_por, modificado_por)
 VALUES
-('Ropa de Hombre', 'Categoría que agrupa prendas para caballeros.', 1, 1, 1),
-('Ropa de Mujer', 'Categoría dedicada a vestimenta femenina.', 0, 2, 2),
-('Niños', 'Prendas para niños de todas las edades.', 1, 1, 2),
-('Accesorios', 'Bolsos, cinturones, sombreros, etc.', 0, 2, 1),
-('Ofertas', 'Productos en promoción o con descuentos.', 1, 1, 1);
+('Ropa de Hombre', 'Categoría que agrupa prendas para caballeros.', 1,'imagen.jpg', 1, 1),
+('Ropa de Mujer', 'Categoría dedicada a vestimenta femenina.', 0,'imagen.jpg', 2, 2),
+('Niños', 'Prendas para niños de todas las edades.', 1,'imagen.jpg', 1, 2),
+('Accesorios', 'Bolsos, cinturones, sombreros, etc.', 0,'imagen.jpg', 2, 1),
+('Ofertas', 'Productos en promoción o con descuentos.', 1,'imagen.jpg', 1, 1);
 
 CREATE TABLE marcas (
     id INT AUTO_INCREMENT PRIMARY KEY,

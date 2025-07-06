@@ -75,6 +75,7 @@ table tbody tr:hover {
   .tabla-responsive td {
     display: block;
     width: 100%;
+    text-align: left !important;
   }
 
   .tabla-responsive tr:hover {
@@ -82,40 +83,33 @@ table tbody tr:hover {
   }
 
   .tabla-responsive tr {
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
     background-color: var(--color-sidebar);
     border: 1px solid var(--color-border);
-    border-radius: var(--border-radio-elements);
-    padding: 0.5rem;
+    border-radius: var(--border-radio-card);
+    padding: 15px;
     transition: var(--transition-general);
   }
 
-  .tabla-responsive td {
-    position: relative;
-    text-align: end !important;
+  .tabla-responsive td[data-label] {
+    display: flex;
+    align-items: flex-start;
     border: none;
-    border-bottom: 1px solid var(--color-border);
     transition: var(--transition-general);
   }
 
-  .tabla-responsive td::before {
+  .tabla-responsive td[data-label]::before {
     content: attr(data-label);
-    position: absolute;
-    left: -10px;
-    width: 50%;
-    padding-left: 10px;
     font-weight: 700;
+    min-width: 100px;
+    max-width: 110px;
+    flex-shrink: 0;     /* no se reduce */
     text-align: left;
-    color: var(--color-text);
+    display: inline-block;
   }
 
   .tabla-responsive td:last-child {
-    border-bottom: none;
-  }
-
-  .tabla-responsive thead tr th:last-child {
-    width: 100%;
-    text-align: center;
+    border: none;
   }
 
   /* Para las filas del cuerpo */
@@ -167,7 +161,6 @@ table .btn {
 table .badge{
   border-radius: var(--border-radio-elements);
   padding: 5px 8px;
-  width: 60px;
 }
 
 /* TEXTO del botón */
@@ -223,7 +216,11 @@ table .btn:active .boton-icon i,
 
 /* DANGER */
 table .btn-danger {
-  background-color: var(--color-error);
+  background-color: var(--color-danger);
+}
+
+.btn-light{
+  border: 1px solid var(--color-table-head-border);
 }
 
 table .btn-danger:hover .boton-icon,

@@ -186,13 +186,6 @@ function aplicarEstadosIniciales() {
   } else {
     sidebar.classList.remove("close");
   }
-
-  // Aplicar clases para destacar el ítem activo
-  const activeItem = sidebar.querySelector("li.active");
-  if (activeItem) {
-    activeItem.previousElementSibling?.classList.add("before-active");
-    activeItem.nextElementSibling?.classList.add("after-active");
-  }
 }
 
 // ========== TOGGLE MODO OSCURO ========== //

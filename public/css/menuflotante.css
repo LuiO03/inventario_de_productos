@@ -16,7 +16,7 @@
   height: 70px;
   background-color: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(3px);
-  border-radius: 50%;
+  border-radius: var(--border-radio-card);
   z-index: 1;
   transition: all 0.1s ease;
   pointer-events: none;
@@ -35,7 +35,7 @@
   color: var(--color-bw-inverted);
   width: 60px;
   height: 60px;
-  border-radius: 50%;
+  border-radius: var(--border-radio-card);
   font-size: 22px;
   border: none;
   display: flex;
@@ -43,6 +43,10 @@
   justify-content: center;
   transition: transform 0.3s ease;
   position: relative;
+}
+
+.fab-btn.toggle i {
+  font-size: 23px;
 }
 
 .fab-wrapper.open .fab-btn.toggle {
@@ -85,8 +89,8 @@
 
 /* Colores */
 .fab-btn.agregar { background-color: var(--color-primary); }
-.fab-btn.pdf     { background-color: #B51308; }
-.fab-btn.excel   { background-color: #1D613E; }
+.fab-btn.pdf     { background-color: #b51308; }
+.fab-btn.excel   { background-color: #1d613e; }
 
 .fab-btn:hover {
   background-color: var(--color-bw);

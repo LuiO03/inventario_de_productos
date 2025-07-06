@@ -2,7 +2,6 @@
 
 .dt-container {
   font-size: var(--font-size-p);
-  
 }
 
 .dt-container > div:nth-child(3){
@@ -24,7 +23,7 @@
   margin: 0px 5px 0px 5px !important;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 540px) {
   .dt-container > div:nth-child(1) {
     padding: 0px 0px 15px 0px;
   }
@@ -40,9 +39,9 @@
 .dt-length select,
 .dt-search input[type="search"]
 {
-  border: 2px solid var(--color-boton-datatable);
+  border: 1px solid var(--color-boton-datatable);
   border-radius: var(--border-radio-elements);
-  background-color: var(--color-sidebar);
+  background-color: var(--color-input-bg);
   color: var(--color-texto);
   transition: var(--transition-general);
 }
@@ -83,19 +82,19 @@
   content: "\f0cf"; /* ri-search-line */
   font-family: "remixicon";
   position: absolute;
-  left: 9px;
-  top: 19px;
+  left: 7px;
+  top: 0%;
+  height: 100%;
+  width: 2.3rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.3rem;
-  height: 35px;
-  transform: translateY(-50%);
   color: white;
   font-size: 1.2rem;
   pointer-events: none;
   background-color: var(--color-boton-datatable);
   transition: var(--transition-general);
+  border-radius: var(--border-radio-elements);
 }
 
 .dt-search:focus-within::before {
@@ -148,30 +147,25 @@
   content: "\ea4e"; /* flecha hacia abajo (ri-arrow-down-s-line) */
   font-family: 'remixicon';
   position: absolute;
-  right: 9px;
+  right: 0px;
+  top: 0%;
+  height: 100%;
+  width: 2.3rem;
   display: flex;
   align-items: center;
-  height: 34px;
   justify-content: center;
-  width: 2.2rem;
   background-color: var(--color-boton-datatable);
   pointer-events: none;
   color: white;
   font-size: 1.3rem;
   transition: var(--transition-general);
-}
-
-@media (max-width: 468px) {
-  .dt-length label::after {
-    right: 8px;
-  }
+  border-radius: var(--border-radio-elements);
 }
 
 .dt-length label:has(select:focus)::after {
   background-color: var(--color-primario);
   font-size: 1.5rem;
 }
-
 
 /* ==== INFO DE FILAS MOSTRADAS ==== */
 
@@ -285,6 +279,3 @@ th.dt-ordering-desc::after {
   content: none !important;
   display: none !important;
 }
-
-
-

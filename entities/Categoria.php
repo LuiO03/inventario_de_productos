@@ -5,6 +5,7 @@ class Categoria
     private string $nombre;
     private ?string $descripcion;
     private bool $estado;
+    private ?string $imagen = null;
     private ?int $creadoPor;
     private ?int $modificadoPor;
     private ?string $createdAt;
@@ -17,6 +18,7 @@ class Categoria
         string $nombre = '',
         ?string $descripcion = null,
         bool $estado = true,
+        ?string $imagen = null,
         ?int $creadoPor = null,
         ?int $modificadoPor = null,
         ?string $createdAt = null,
@@ -26,6 +28,7 @@ class Categoria
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->estado = $estado;
+        $this->imagen = $imagen;
         $this->creadoPor = $creadoPor;
         $this->modificadoPor = $modificadoPor;
         $this->createdAt = $createdAt;
@@ -78,6 +81,15 @@ class Categoria
     public function setEstado(bool $estado): void
     {
         $this->estado = $estado;
+    }
+    public function getImagen(): ?string
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen(?string $imagen): void
+    {
+        $this->imagen = $imagen;
     }
     public function setCreadoPor(?int $creadoPor): void
     {
