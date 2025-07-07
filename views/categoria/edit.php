@@ -18,9 +18,10 @@ partialBreadcrumb();
 
   <div class="formulario-contenido">
     <!-- Columna de inputs -->
-    <div class="formulario-columna">
+    <div class="formulario-columna-nowrap">
+      <?php alertValidate(); ?>
       <!-- Nombre -->
-      <div class="input-group">
+      <div class="input-group-nowrap">
         <label for="nombre" class="form-label">Nombre de la Categoría</label>
         <div class="input-icono">
           <i class="ri-price-tag-3-line"></i>
@@ -29,7 +30,7 @@ partialBreadcrumb();
       </div>
 
       <!-- Estado -->
-      <div class="input-group">
+      <div class="input-group-nowrap">
         <label for="estado" class="form-label">Estado</label>
         <div class="input-icono">
           <i class="ri-focus-2-line"></i>
@@ -41,7 +42,7 @@ partialBreadcrumb();
       </div>
 
       <!-- Descripción -->
-      <div class="input-group">
+      <div class="input-group-nowrap">
         <label for="descripcion" class="form-label">Descripción</label>
         <div class="input-icono">
           <i class="ri-file-text-line"></i>
@@ -49,9 +50,9 @@ partialBreadcrumb();
         </div>
       </div>
     </div>
-    <div class="formulario-columna">
+    <div class="formulario-columna-nowrap">
       <!-- Subir nueva imagen o mostrar actual -->
-      <div class="input-group">
+      <div class="input-group-nowrap">
 
         <label class="form-label">Imagen de la categoría</label>
 
@@ -63,7 +64,8 @@ partialBreadcrumb();
                 alt="Vista previa de la imagen" draggable="false" style="display: block;">
               <i class="ri-image-add-line upload-icon" id="upload-icon" style="display: none;"></i>
               <p id="preview-texto" style="<?= $categoria->getImagen() ? 'display: none;' : 'display: block;' ?>">
-                ¡Arrastra o selecciona una imagen!
+                ¡Arrastre una imagen aquí! <br>
+                o seleccionelo desde su dispositivo.
               </p>
             <?php else : ?>
               <img id="preview-imagen" src="" alt="Vista previa vacía" draggable="false" style="display: none;">
@@ -75,7 +77,7 @@ partialBreadcrumb();
           <!-- Footer con archivo, botón quitar y botón subir imagen -->
           <div class="upload-footer">
             <!-- Nombre del archivo -->
-            <label for="imagen" class="info-imagen" title="<?= $categoria->getImagen() ? 'Imagen actual o anterior: ' . $categoria->getImagen() : 'Ningún archivo seleccionado' ?>">
+            <label for="imagen" class="info-imagen">
 
               <i class="ri-upload-2-line"></i>
               <p id="nombre-archivo" title="<?= $categoria->getImagen() ?>"><?= $categoria->getImagen() ?: 'Ningún archivo seleccionado' ?></p>
@@ -85,7 +87,8 @@ partialBreadcrumb();
             <!-- Botón: quitar imagen -->
             <?php if ($categoria->getImagen()) : ?>
               <button type="button" id="btn-quitar-imagen" class="boton-quitar-imagen" title="Quitar imagen actual">
-                <i class="ri-delete-bin-line"></i> Quitar imagen
+                <i class="ri-delete-bin-line"></i>
+                <span>Quitar imagen</span>
               </button>
             <?php endif; ?>
             <!-- Input oculto + file -->
@@ -96,9 +99,7 @@ partialBreadcrumb();
         </div>
       </div>
     </div>
-
   </div>
-
   <!-- Botones -->
   <div class="formulario-acciones">
     <a href="<?= BASE_URL ?>categoria/index" class="boton-form boton-volver">
@@ -109,7 +110,6 @@ partialBreadcrumb();
     </button>
   </div>
 </form>
-
 <script>
   const inputImagen = document.getElementById('imagen');
   const imgPreview = document.getElementById('preview-imagen');

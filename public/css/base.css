@@ -47,6 +47,10 @@
   --grad-color-2: #FF0C45;
   --grad-color-3: #d11e4b;
   --grad-color-4: #d30035;*/
+  --grad-color-1: #d30035;
+  --grad-color-2: #FF0C45;
+  --grad-color-3: #d11e4b;
+  --grad-color-4: #9b0127;
 
   --color-sidebar: #181818;
   --color-header: #1e1e1e;
@@ -120,6 +124,11 @@
   --grad-color-3: #23a6d5;
   --grad-color-4: #23d5ab;*/
 
+  --grad-color-1: #0356c2;
+  --grad-color-2: #00d4c3;
+  --grad-color-3: #23a6d5;
+  --grad-color-4: #23d5ab;
+
   --color-text: #342e37;
   --color-bw: #000000;
   --color-bw-inverted: #ffffff;
@@ -180,7 +189,7 @@
   /* Tipografías base para escritorio (≥ 992px) */
   --font-size-h1: 2.4rem; /* Títulos grandes */
   --font-size-h2: 1.625rem; /* Títulos secundarios */
-  --font-size-h3: 1.175rem; /* Subtítulos / paneles */
+  --font-size-h3: 1.1rem; /* Subtítulos / paneles */
   --font-size-p: 0.93rem; /* Texto general */
   --font-size-sm: 0.9rem; /* Texto secundario (inputs, etc.) */
   --font-size-xs: 0.85rem; /* Ayuda, tooltips */

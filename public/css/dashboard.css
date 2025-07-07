@@ -497,7 +497,6 @@ main {
   font-family: var(--poppins);
   padding: 15px;
   width: 100%;
-  background-color: var(--color-bg);
   height: 100%;
   border-radius: 20px 0 0 0px;
   overflow-y: auto;
@@ -512,6 +511,12 @@ main {
     var(--grad-color-3),
     var(--grad-color-4)
   );*/
+  background: linear-gradient(-45deg,
+    var(--grad-color-1),
+    var(--grad-color-2),
+    var(--grad-color-3),
+    var(--grad-color-4)
+  );
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }

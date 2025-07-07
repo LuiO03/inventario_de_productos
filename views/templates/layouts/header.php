@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="<?= BASE_URL ?>public/css/menu.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>public/css/dashboard.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>public/css/formularios.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/alert-validate.css">
   <script>
     if (localStorage.getItem("sidebar-estado") === "close") {
       document.documentElement.classList.add("sidebar-cerrado");

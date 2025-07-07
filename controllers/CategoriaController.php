@@ -9,18 +9,27 @@ class CategoriaController extends Controller
         $this->loadModel('Categoria');
     }
 
-    private function validarDatosCategoria(&$nombre, &$descripcion, &$estado): bool
+    // Validaciones de datos de formulario
+    private function validarDatosCategoria(&$nombre, &$descripcion, &$estado, &$errores): bool
     {
         $nombre = trim($_POST['nombre'] ?? '');
         $descripcion = trim($_POST['descripcion'] ?? '');
         $estado = isset($_POST['estado']) && $_POST['estado'] === '1' ? 1 : 0;
 
-        return !empty($nombre);
+        $errores = [];
+
+        if ($e = Validador::campoObligatorio($nombre, 'Nombre')) $errores[] = $e;
+        if ($e = Validador::texto($nombre, 'Nombre', 3, 50)) $errores[] = $e;
+        if ($e = Validador::texto($descripcion, 'Descripción', 0, 255)) $errores[] = $e;
+        if ($e = Validador::booleano($estado, 'Estado')) $errores[] = $e;
+        if ($e = Validador::imagen($_FILES['imagen'] ?? [])) $errores[] = $e;
+
+        return empty($errores);
     }
 
     private function redirigirConMensaje($ruta, $tipo, $header, $mensaje)
     {
-        flash::set('mensaje', [
+        Flash::set('mensaje', [
             'type' => $tipo,
             'header' => $header,
             'message' => $mensaje
@@ -51,116 +60,77 @@ class CategoriaController extends Controller
     public function store()
     {
         protegerContraCSRF();
-        if (!$this->validarDatosCategoria($nombre, $descripcion, $estado)) {
-            $this->redirigirConMensaje('categoria/create', 'danger', 'Atención', 'Por favor, completa todos los campos obligatorios.');
-        }
 
-        $existe = $this->model->findByNombre($nombre);
-        if ($existe) {
-            flash::set('mensaje', [
-                'type' => 'warning',
-                'header' => 'Categoría existente',
-                'message' => 'La categoría <strong>"' . htmlspecialchars($nombre) . '"</strong> ya está registrada.'
-            ]);
+        if (!$this->validarDatosCategoria($nombre, $descripcion, $estado, $errores)) {
+            Flash::setValidate($errores); // ✅ usando estructura correcta
             header('Location: ' . BASE_URL . 'categoria/create');
             exit;
         }
 
-        // Procesar imagen si se subió
+        if ($this->model->findByNombre($nombre)) {
+            $this->redirigirConMensaje('categoria/create', 'warning', 'Duplicado', 'Ya existe una categoría con ese nombre.');
+        }
+
+        // Imagen
         $nombreArchivo = null;
         if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-            $nombreOriginal = basename($_FILES['imagen']['name']);
-            $extension = pathinfo($nombreOriginal, PATHINFO_EXTENSION);
-            $nombreArchivo = uniqid('cat_', true) . '.' . strtolower($extension);
+            $extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
+            $nombreArchivo = uniqid('cat_') . '.' . strtolower($extension);
 
             $rutaCarpeta = 'public/images/categorias/';
-            if (!file_exists($rutaCarpeta)) {
-                mkdir($rutaCarpeta, 0777, true);
-            }
-
-            $rutaDestino = $rutaCarpeta . $nombreArchivo;
-            move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino);
+            if (!file_exists($rutaCarpeta)) mkdir($rutaCarpeta, 0777, true);
+            move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaCarpeta . $nombreArchivo);
         }
 
-        $categoria = new Categoria(
-            0,
-            $nombre,
-            $descripcion,
-            $estado,
-            $_SESSION['usuario_id'] ?? null,
-            null,
-            null,
-            null,
-            $nombreArchivo // Imagen
-        );
+        $categoria = new Categoria(0, $nombre, $descripcion, $estado, $_SESSION['usuario_id'] ?? null, null, null, null, $nombreArchivo);
 
-        $id = $this->model->create($categoria);
-        if ($id) {
-            flash::set('mensaje', [
-                'type' => 'success',
-                'header' => 'Categoría creada',
-                'message' => 'La categoría <strong>"' . htmlspecialchars($nombre) . '"</strong> se ha creado correctamente.'
-            ]);
+        if ($this->model->create($categoria)) {
+            $this->redirigirConMensaje('categoria/index', 'success', 'Registro exitoso', 'Categoría creada correctamente.');
         } else {
-            flash::set('mensaje', [
-                'type' => 'danger',
-                'header' => 'Error',
-                'message' => 'Error al crear la categoría.'
-            ]);
+            $this->redirigirConMensaje('categoria/create', 'danger', 'Error', 'No se pudo registrar la categoría.');
         }
-
-        header('Location: ' . BASE_URL . 'categoria/index');
-        exit;
     }
-
 
     public function edit($id)
     {
-        if (!is_numeric($id)) {
-            $this->redirigirConMensaje('categoria/index', 'danger', 'ID inválido', 'El ID proporcionado no es válido.');
-        }
+        if (!is_numeric($id)) $this->redirigirConMensaje('categoria/index', 'danger', 'ID inválido', 'ID inválido.');
 
         $categoria = $this->model->getById($id);
-        if (!$categoria) {
-            $this->redirigirConMensaje('categoria/index', 'warning', 'No encontrada', 'Categoría no encontrada.');
+        if (!$categoria) $this->redirigirConMensaje('categoria/index', 'warning', 'No encontrada', 'Categoría no encontrada.');
+
+        if ($categoria->getImagen() && !file_exists('public/images/categorias/' . $categoria->getImagen())) {
+            $categoria->setImagen(null);
         }
 
-        // ✅ Verificar existencia física de la imagen
-        if ($categoria && $categoria->getImagen()) {
-            $ruta = 'public/images/categorias/' . $categoria->getImagen();
-            if (!file_exists($ruta)) {
-                $categoria->setImagen(null);
-            }
-        }
-
-        $GLOBALS['pageTitle'] = 'Editar Categoría ' . $id;
+        $GLOBALS['pageTitle'] = 'Editar Categoría';
         $this->view->render('categoria/edit', [
             'categoria' => $categoria,
             'mensaje' => $this->view->mensaje
         ]);
     }
 
-
     public function update($id)
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !is_numeric($id)) {
-            $this->redirigirConMensaje('categoria/index', 'danger', 'Acceso denegado', 'Solicitud inválida o ID incorrecto.');
+            $this->redirigirConMensaje('categoria/index', 'danger', 'Acceso denegado', 'Solicitud inválida.');
         }
 
         protegerContraCSRF();
 
-        if (!$this->validarDatosCategoria($nombre, $descripcion, $estado)) {
-            $this->redirigirConMensaje('categoria/edit/' . $id, 'danger', 'Atención', 'Completa todos los campos correctamente.');
+        if (!$this->validarDatosCategoria($nombre, $descripcion, $estado, $errores)) {
+            Flash::setValidate($errores); // ✅ usando estructura correcta
+            header('Location: ' . BASE_URL . 'categoria/edit/' . $id);
+            exit;
         }
 
         $existe = $this->model->findByNombre($nombre);
         if ($existe && $existe->getId() != $id) {
-            $this->redirigirConMensaje('categoria/edit/' . $id, 'warning', 'Duplicado', 'Ya existe otra categoría con el nombre <strong>' . htmlspecialchars($nombre) . '</strong>.');
+            $this->redirigirConMensaje('categoria/edit/' . $id, 'warning', 'Duplicado', 'Nombre en uso por otra categoría.');
         }
 
         $categoria = $this->model->getById($id);
         if (!$categoria) {
-            $this->redirigirConMensaje('categoria/index', 'danger', 'Error', 'La categoría no existe.');
+            $this->redirigirConMensaje('categoria/index', 'danger', 'No encontrada', 'La categoría no existe.');
         }
 
         $categoria->setNombre($nombre);
@@ -168,91 +138,54 @@ class CategoriaController extends Controller
         $categoria->setEstado($estado);
         $categoria->setModificadoPor($_SESSION['usuario_id'] ?? null);
 
-        // Procesar imagen nueva si se sube
+        // Imagen nueva
         if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
-            $nombreOriginal = basename($_FILES['imagen']['name']);
-            $extension = pathinfo($nombreOriginal, PATHINFO_EXTENSION);
-            $nombreArchivo = uniqid('cat_', true) . '.' . strtolower($extension);
+            $extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
+            $nuevoArchivo = uniqid('cat_') . '.' . strtolower($extension);
+            $ruta = 'public/images/categorias/';
+            if (!file_exists($ruta)) mkdir($ruta, 0777, true);
 
-            $rutaCarpeta = 'public/images/categorias/';
-            if (!file_exists($rutaCarpeta)) {
-                mkdir($rutaCarpeta, 0777, true);
-            }
+            move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta . $nuevoArchivo);
 
-            $rutaDestino = $rutaCarpeta . $nombreArchivo;
-            move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaDestino);
-
-            // Eliminar imagen anterior si existe
+            // Borrar anterior
             if ($categoria->getImagen()) {
-                $anterior = $rutaCarpeta . $categoria->getImagen();
-                if (file_exists($anterior)) {
-                    unlink($anterior);
-                }
+                $anterior = $ruta . $categoria->getImagen();
+                if (file_exists($anterior)) unlink($anterior);
             }
 
-            $categoria->setImagen($nombreArchivo);
+            $categoria->setImagen($nuevoArchivo);
         }
 
-        $actualizado = $this->model->update($categoria);
-
-        if ($actualizado) {
-            flash::set('mensaje', [
-                'type' => 'success',
-                'header' => 'Actualización exitosa',
-                'message' => 'La categoría <strong>"' . htmlspecialchars($nombre) . '"</strong> se ha actualizado correctamente.'
-            ]);
+        if ($this->model->update($categoria)) {
+            $this->redirigirConMensaje('categoria/index', 'success', 'Actualizado', 'Categoría actualizada con éxito.');
         } else {
-            flash::set('mensaje', [
-                'type' => 'danger',
-                'header' => 'Error',
-                'message' => 'No se pudo actualizar la categoría.'
-            ]);
+            $this->redirigirConMensaje('categoria/index', 'danger', 'Error', 'No se pudo actualizar.');
         }
-
-        header('Location: ' . BASE_URL . 'categoria/index');
-        exit;
     }
-
 
     public function delete($id)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_numeric($id)) {
             protegerContraCSRF();
-
             $this->loadModel('Producto', 'productoModel');
 
             $cantidad = $this->productoModel->contarPorCategoria((int)$id);
 
             if ($cantidad > 0) {
-                flash::set('mensaje', [
-                    'type' => 'warning',
-                    'header' => 'No se puede eliminar',
-                    'message' => "No puedes eliminar esta categoría porque tiene <strong>$cantidad producto(s)</strong> asociado(s)."
-                ]);
+                $this->redirigirConMensaje('categoria/index', 'warning', 'No se puede eliminar', "Tiene $cantidad producto(s) asociado(s).");
             } else {
                 $categoria = $this->model->getById($id);
                 if ($categoria && $categoria->getImagen()) {
                     $ruta = 'public/images/categorias/' . $categoria->getImagen();
-                    if (file_exists($ruta)) unlink($ruta); // Elimina la imagen del servidor
+                    if (file_exists($ruta)) unlink($ruta);
                 }
 
                 $this->model->delete((int)$id);
-                flash::set('mensaje', [
-                    'type' => 'success',
-                    'header' => 'Eliminación exitosa',
-                    'message' => 'Categoría eliminada correctamente.'
-                ]);
+                $this->redirigirConMensaje('categoria/index', 'success', 'Eliminada', 'Categoría eliminada correctamente.');
             }
         } else {
-            flash::set('mensaje', [
-                'type' => 'danger',
-                'header' => 'Error',
-                'message' => 'Acceso no permitido o ID inválido.'
-            ]);
+            $this->redirigirConMensaje('categoria/index', 'danger', 'Error', 'Solicitud inválida.');
         }
-
-        header('Location: ' . BASE_URL . 'categoria/index');
-        exit;
     }
 
     public function show($id)
@@ -274,7 +207,7 @@ class CategoriaController extends Controller
                 ]);
             } else {
                 http_response_code(404);
-                echo json_encode(['error' => 'Categoría no encontrada']);
+                echo json_encode(['error' => 'No encontrada']);
             }
         } else {
             $this->view->render('categoria/show', ['categoria' => $categoria]);
@@ -289,13 +222,11 @@ class CategoriaController extends Controller
             strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
         ) {
             $data = json_decode(file_get_contents('php://input'), true);
-
             $nuevoEstado = isset($data['estado']) ? (int)$data['estado'] : null;
 
             if ($nuevoEstado !== null) {
                 $this->loadModel('Categoria');
                 $actualizado = $this->model->actualizarEstado($id, $nuevoEstado);
-
                 echo json_encode(['success' => $actualizado]);
                 exit;
             }

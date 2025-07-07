@@ -13,13 +13,7 @@
   box-shadow: var(--sombra-material);
   transition: var(--transition-general);
   margin: 0px;
-  gap: 10px;
-}
-
-.formulario-contenido {
-  display: flex;
   gap: 20px;
-  flex-wrap: wrap;
 }
 
 @media (max-width: 450px) {
@@ -27,18 +21,30 @@
     padding: 40px 15px;
     border-radius: 0px;
   }
+}
 
-  .formulario-acciones {
-    width: 100%;
-  }
+.formulario-contenido {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .formulario-columna {
   flex: 1 1 350px;
-  min-width: 350px;
+  width: 100%;
+  flex-shrink: 0;
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
+}
+
+.formulario-columna-nowrap{
+  flex: 1 1 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: start;
 }
 
 .input-group {
@@ -46,8 +52,12 @@
   display: flex;
   flex-direction: column;
   height: fit-content;
-  margin: 0px;
-  padding: 0px;
+}
+
+.input-group-nowrap {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
 }
 
 .form-label {
@@ -117,19 +127,11 @@
    BOTONES FORMULARIO
 ============================= */
 .formulario-acciones {
-  width: 60%;
-  margin: 20px auto 0px auto;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
+  width: 100%;
   flex-wrap: wrap;
-}
-
-@media (max-width: 750px) {
-  .formulario-acciones {
-    width: 100%;
-    margin: 0px;
-  }
 }
 
 .boton-form {
@@ -143,12 +145,13 @@
   color: white;
   font-size: var(--font-size-p);
   border: none;
-  border-radius: 50px;
+  border-radius: var(--border-radio-elements);
   overflow: hidden;
   padding: 5px 15px;
   cursor: pointer;
-  transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease;
   position: relative;
+  max-width: 200px;
 }
 
 .boton-form:hover {
@@ -177,11 +180,11 @@
 }
 
 .boton-agregar {
-  background-color: var(--color-success);
+  background-color: var(--color-primario);
 }
 
 .boton-actualizar {
-  background-color: var(--color-primary);
+  background-color: var(--color-primario);
 }
 
 .boton-limpiar {
@@ -190,7 +193,9 @@
 }
 
 .boton-volver {
-  background-color: var(--color-primario);
+  border: 2px solid var(--color-primario);
+  color: var(--color-primario);
+  background-color: transparent;
 }
 
 /* =============================
@@ -250,7 +255,6 @@
   border-radius: var(--border-radio-elements);
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 10px;
 }
 
@@ -262,24 +266,23 @@
 
 .upload-header {
   width: 100%;
-  height: 200px;
+  height: 350px;
   border: 2px dashed var(--color-primario);
   border-radius: var(--border-radio-card);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  position: relative;
   overflow: hidden;
+  gap: 0px;
+  padding: 10px;
 }
 
 .upload-header img {
   width: 100%;
   height: 100%;
   object-fit: cover; /* Usa 'cover' si quieres que llene sin dejar espacios */
-  border-radius: 20px;
-  padding: 10px;
+  border-radius: var(--border-radio-card);
   pointer-events: none;      /* Opcional: bloquea interacciones como click derecho */
 }
 
@@ -288,12 +291,15 @@
   color: var(--color-primario);
   z-index: 2;
   position: relative;
+  transition: var(--transition-general);
 }
 
 .upload-header p {
+  text-align: center;
   color: var(--color-text);
   font-size: 0.95rem;
   transition: opacity 0.3s ease;
+  transition: var(--transition-general);
 }
 
 .upload-footer{
@@ -305,7 +311,6 @@
 
 .info-imagen {
   background-color: var(--color-input-bg);
-  border: 1px solid var(--color-boton-datatable);
   width: 100%;
   padding: 5px 10px;
   border-radius: var(--border-radio-elements);
@@ -336,14 +341,17 @@
 }
 
 .boton-quitar-imagen {
+  width: 200px;
   background-color: var(--color-danger);
   color: white;
+  display: flex;
   padding: 5px 10px;
   border-radius: var(--border-radio-elements);
   border: none;
   cursor: pointer;
   gap: 6px;
-  width: 200px;
+  align-items: center;
+  justify-content: center;
   font-size: var(--font-size-p);
   transition: background-color 0.3s ease;
 }
@@ -351,9 +359,19 @@
   background-color: #b6022f;
 }
 
+@media (max-width: 450px){
+  .boton-quitar-imagen{
+    width: 50px;
+  }
+  .boton-quitar-imagen span{
+    display: none;
+  }
+}
+
 #nombre-archivo {
+  text-wrap: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   width: 100%;
-  max-width: 250px;
+  max-width: 220px;
 }
