@@ -134,7 +134,7 @@
         </button>
       </div>
       <div class="topbar-center">
-        <span class="current-date"><?= fechaC(); ?></span>
+        <span class="current-date"><?= FechaHelper::fechaActual(); ?></span>
         <div class="logo-central">
           <p class="central-logo-texto"><strong>Gecko</strong><span>merce</span></p>
         </div>

@@ -8,7 +8,6 @@
     require_once 'config/config.php';
     require_once 'helpers/FechaHelper.php';
     require_once 'helpers/LayoutHelper.php';
-    require_once 'helpers/Helpers.php';
     require_once 'helpers/ValidationHelper.php';
     require_once 'helpers/FlashHelper.php';
     require_once 'core/csrf.php';

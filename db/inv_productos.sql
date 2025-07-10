@@ -94,6 +94,7 @@ CREATE TABLE categorias (
     descripcion TEXT,
     estado TINYINT(1) DEFAULT 1,
     imagen VARCHAR(255) DEFAULT NULL,
+    slug VARCHAR(100) UNIQUE,
     creado_por INT,
     modificado_por INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -102,13 +103,17 @@ CREATE TABLE categorias (
     FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
 );
 
-INSERT INTO categorias (nombre, descripcion, estado,imagen, creado_por, modificado_por)
+INSERT INTO categorias (nombre, descripcion, estado, imagen, slug, creado_por, modificado_por)
 VALUES
-('Ropa de Hombre', 'Categoría que agrupa prendas para caballeros.', 1,'imagen.jpg', 1, 1),
-('Ropa de Mujer', 'Categoría dedicada a vestimenta femenina.', 0,'imagen.jpg', 2, 2),
-('Niños', 'Prendas para niños de todas las edades.', 1,'imagen.jpg', 1, 2),
-('Accesorios', 'Bolsos, cinturones, sombreros, etc.', 0,'imagen.jpg', 2, 1),
-('Ofertas', 'Productos en promoción o con descuentos.', 1,'imagen.jpg', 1, 1);
+('Ropa para Hombre', 'Categoría que agrupa prendas para caballeros.', 1, 'imagen.jpg', 'ropa-de-hombre', 1, 1),
+('Ropa para Ancianos', 'Categoría enfocada en vestimenta cómoda y funcional para personas mayores.', 0, 'imagen.jpg', 'ropa-de-ancianos', 2, 2),
+('Ropa para Perros', 'Categoría de ropa y accesorios diseñados para perros.', 0, 'imagen.jpg', 'ropa-para-perros', 2, 2),
+('Ropa para Gatos', 'Ropa y complementos pensados para gatos domésticos.', 0, 'imagen.jpg', 'ropa-para-gatos', 2, 2),
+('Ropa para Conejos', 'Pequeñas prendas y accesorios para conejos como mascotas.', 0, 'imagen.jpg', 'ropa-para-conejos', 2, 2),
+('Ropa para Niñas', 'Categoría de vestimenta infantil femenina.', 0, 'imagen.jpg', 'ropa-de-ninas', 2, 2),
+('Ropa para Aliens', 'Colección imaginaria de ropa futurista para seres extraterrestres.', 0, 'imagen.jpg', 'ropa-para-aliens', 2, 2),
+('Ropa para Adolescentes', 'Moda juvenil para adolescentes en tendencia.', 0, 'imagen.jpg', 'ropa-de-adolescentes', 2, 2);
+
 
 CREATE TABLE marcas (
     id INT AUTO_INCREMENT PRIMARY KEY,

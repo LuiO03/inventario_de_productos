@@ -156,11 +156,7 @@ table .btn {
   color: whitesmoke;
   font-size: var(--font-size-xs);
   margin: 2px 0px;
-}
-
-table .badge{
-  border-radius: var(--border-radio-elements);
-  padding: 5px 8px;
+  padding: 0px;
 }
 
 /* TEXTO del botón */
@@ -171,9 +167,12 @@ table .btn .boton-text {
   justify-content: center;
   padding-right: 40px;
   align-items: center;
-  transition: color 200ms ease;
 }
 
+table .badge{
+  border-radius: var(--border-radio-elements);
+  padding: 9px 8px 6px 8px !important;
+}
 /* ÍCONO */
 table .btn .boton-icon,
 .breadcrumb-container .btn .boton-icon {
@@ -241,7 +240,7 @@ table .btn-info:hover {
 /* WARNING */
 table .btn-warning {
   background-color: var(--color-warning);
-  color: black;
+  color: black !important;
 }
 table .btn-warning:hover .boton-icon,
 table .btn-warning:hover {

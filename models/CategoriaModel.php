@@ -14,14 +14,15 @@ class CategoriaModel extends Model
     public function create(Categoria $categoria): int|false
     {
         try {
-            $sql = "INSERT INTO categorias (nombre, descripcion, estado, creado_por, imagen)
-            VALUES (:nombre, :descripcion, :estado, :creado_por, :imagen)";
+            $sql = "INSERT INTO categorias (nombre, descripcion, estado, creado_por, imagen, slug)
+            VALUES (:nombre, :descripcion, :estado, :creado_por, :imagen, :slug)";
             $query = $this->PDO->prepare($sql);
 
             $query->bindValue(':nombre', $categoria->getNombre(), PDO::PARAM_STR);
             $query->bindValue(':descripcion', $categoria->getDescripcion(), PDO::PARAM_STR);
             $query->bindValue(':estado', $categoria->getEstado() ? 1 : 0, PDO::PARAM_INT);
             $query->bindValue(':imagen', $categoria->getImagen(), PDO::PARAM_STR);
+            $query->bindValue(':slug', $categoria->getSlug(), PDO::PARAM_STR);
             $query->bindValue(':creado_por', $categoria->getCreadoPor(), PDO::PARAM_INT);
 
             $query->execute();
@@ -36,13 +37,16 @@ class CategoriaModel extends Model
     {
         try {
             $sql = "UPDATE categorias 
-            SET nombre = :nombre, descripcion = :descripcion, estado = :estado, modificado_por = :modificado_por, imagen = :imagen WHERE id = :id";
+            SET nombre = :nombre, descripcion = :descripcion, estado = :estado, 
+            modificado_por = :modificado_por, imagen = :imagen, slug = :slug 
+            WHERE id = :id";
             $query = $this->PDO->prepare($sql);
 
             $query->bindValue(':nombre', $categoria->getNombre(), PDO::PARAM_STR);
             $query->bindValue(':descripcion', $categoria->getDescripcion(), PDO::PARAM_STR);
             $query->bindValue(':estado', $categoria->getEstado() ? 1 : 0, PDO::PARAM_INT);
             $query->bindValue(':imagen', $categoria->getImagen(), PDO::PARAM_STR);
+            $query->bindValue(':slug', $categoria->getSlug(), PDO::PARAM_STR);
             $query->bindValue(':modificado_por', $categoria->getModificadoPor(), PDO::PARAM_INT);
             $query->bindValue(':id', $categoria->getId(), PDO::PARAM_INT);
 
@@ -76,17 +80,7 @@ class CategoriaModel extends Model
 
             $categorias = [];
             foreach ($result as $row) {
-                $categorias[] = new Categoria(
-                    (int)$row['id'],
-                    $row['nombre'],
-                    $row['descripcion'],
-                    (bool)$row['estado'],
-                    $row['imagen'] ?? null,
-                    isset($row['creado_por']) ? (int)$row['creado_por'] : null,
-                    isset($row['modificado_por']) ? (int)$row['modificado_por'] : null,
-                    $row['created_at'],
-                    $row['updated_at']
-                );
+                $categorias[] = Categoria::fromArray($row);
             }
             return $categorias;
         } catch (PDOException $e) {
@@ -113,18 +107,7 @@ class CategoriaModel extends Model
             $row = $query->fetch(PDO::FETCH_ASSOC);
 
             if ($row) {
-                $categoria = new Categoria(
-                    (int)$row['id'],
-                    $row['nombre'],
-                    $row['descripcion'],
-                    (bool)$row['estado'],
-                    $row['imagen'] ?? null,
-                    $row['creado_por'] ? (int)$row['creado_por'] : null,
-                    $row['modificado_por'] ? (int)$row['modificado_por'] : null,
-                    $row['created_at'],
-                    $row['updated_at']
-                );
-
+                $categoria = Categoria::fromArray($row);
                 // Extra: guardamos también los nombres de los usuarios si los quieres mostrar
                 $categoria->nombreCreador = $row['nombre_creador'] ?? null;
                 $categoria->nombreModificador = $row['nombre_modificador'] ?? null;
@@ -150,17 +133,7 @@ class CategoriaModel extends Model
             $row = $query->fetch(PDO::FETCH_ASSOC);
 
             if ($row) {
-                return new Categoria(
-                    (int)$row['id'],
-                    $row['nombre'],
-                    $row['descripcion'],
-                    (bool)$row['estado'],
-                    $row['imagen'] ?? null,
-                    isset($row['creado_por']) ? (int)$row['creado_por'] : null,
-                    isset($row['modificado_por']) ? (int)$row['modificado_por'] : null,
-                    $row['created_at'],
-                    $row['updated_at']
-                );
+                return Categoria::fromArray($row);
             }
 
             return null;
@@ -170,10 +143,34 @@ class CategoriaModel extends Model
         }
     }
 
+    public function findBySlug(string $slug): ?Categoria
+    {
+        try {
+            $sql = "SELECT * FROM categorias WHERE slug = :slug LIMIT 1";
+            $query = $this->PDO->prepare($sql);
+            $query->bindParam(':slug', $slug, PDO::PARAM_STR);
+            $query->execute();
+            $row = $query->fetch(PDO::FETCH_ASSOC);
+
+            if ($row) {
+                return Categoria::fromArray($row);
+            }
+            return null;
+        } catch (PDOException $e) {
+            error_log("Error al buscar por slug: " . $e->getMessage());
+            return null;
+        }
+    }
+
     public function actualizarEstado($id, $estado)
     {
         $sql = "UPDATE categorias SET estado = :estado, updated_at = NOW() WHERE id = :id";
         $stmt = $this->PDO->prepare($sql);
         return $stmt->execute(['estado' => $estado, 'id' => $id]);
+    }
+    public function contar() {
+        $sql = "SELECT COUNT(*) as total FROM categorias";
+        $stmt = $this->PDO->query($sql);
+        return $stmt->fetch()['total'];
     }
 }

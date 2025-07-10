@@ -14,7 +14,7 @@
   right: 15px;
   width: 70px;
   height: 70px;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: var(--color-bg-transparent);
   backdrop-filter: blur(3px);
   border-radius: var(--border-radio-card);
   z-index: 1;
@@ -41,7 +41,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, border-radius 0.3s ease;
   position: relative;
 }
 
@@ -51,6 +51,8 @@
 
 .fab-wrapper.open .fab-btn.toggle {
   transform: rotate(45deg);
+  border-radius: 50px;
+  font-size: 25px;
 }
 
 /* Acciones */

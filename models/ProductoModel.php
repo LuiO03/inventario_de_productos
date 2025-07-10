@@ -147,5 +147,9 @@ class ProductoModel extends Model
         }
     }
 
-    
+    public function contar() {
+        $sql = "SELECT COUNT(*) as total FROM productos";
+        $stmt = $this->PDO->query($sql);
+        return $stmt->fetch()['total'];
+    }
 }

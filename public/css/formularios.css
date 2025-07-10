@@ -7,19 +7,19 @@
   display: flex;
   flex-direction: column;
   background-color: var(--color-card-bg);
-  padding: 40px 20px;
+  padding: 30px 20px;
   border-radius: var(--border-radio-card);
   color: var(--color-text);
   box-shadow: var(--sombra-material);
   transition: var(--transition-general);
-  margin: 0px;
   gap: 20px;
 }
 
 @media (max-width: 450px) {
   .formulario {
-    padding: 40px 15px;
+    padding: 10px 15px;
     border-radius: 0px;
+    gap: 30px;
   }
 }
 
@@ -52,12 +52,14 @@
   display: flex;
   flex-direction: column;
   height: fit-content;
+  gap: 5px;
 }
 
 .input-group-nowrap {
   display: flex;
   flex-direction: column;
   height: fit-content;
+  gap: 5px;
 }
 
 .form-label {
@@ -126,6 +128,7 @@
 /* =============================
    BOTONES FORMULARIO
 ============================= */
+
 .formulario-acciones {
   display: flex;
   justify-content: center;
@@ -137,6 +140,7 @@
 .boton-form {
   flex: 1 1 150px;
   display: inline-flex;
+  max-width: 200px;
   gap: 10px;
   align-items: center;
   justify-content: center;
@@ -151,7 +155,8 @@
   cursor: pointer;
   transition: color 0.3s ease;
   position: relative;
-  max-width: 200px;
+  border: 2px solid transparent;
+  transition: var(--transition-general);
 }
 
 .boton-form:hover {
@@ -256,17 +261,18 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: 0px;
 }
 
 .upload-header.arrastrando {
-  border: 2px dashed var(--color-primario);
   background-color: rgba(255, 255, 255, 0.05);
   box-shadow: 0 0 10px var(--color-primario);
 }
 
 .upload-header {
+  position: relative;
   width: 100%;
-  height: 350px;
+  height: 300px;
   border: 2px dashed var(--color-primario);
   border-radius: var(--border-radio-card);
   display: flex;
@@ -275,15 +281,39 @@
   justify-content: center;
   overflow: hidden;
   gap: 0px;
-  padding: 10px;
+  box-shadow: var(--sombra-material);
+  background-color: var(--color-bg);
+  transition: var(--transition-general);
+}
+
+.upload-header .info-imagen{
+  position: absolute;
+  text-align: center;
+  margin: 0;
+  font-size: var(--font-size-p);
+  text-wrap: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  padding: 15px;
+  border-radius: 0px 0px var(--border-radio-elements) var(--border-radio-elements);
+  bottom: 0px;
+  color: white;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.7));
+
 }
 
 .upload-header img {
   width: 100%;
   height: 100%;
   object-fit: cover; /* Usa 'cover' si quieres que llene sin dejar espacios */
-  border-radius: var(--border-radio-card);
-  pointer-events: none;      /* Opcional: bloquea interacciones como click derecho */
+  border-radius: var(--border-radio-elements);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.upload-header img:hover {
+  filter: brightness(0.7);
+  transform: scale(1.2);
 }
 
 .upload-header i{
@@ -296,9 +326,8 @@
 
 .upload-header p {
   text-align: center;
-  color: var(--color-text);
+  color: var(--color-placeholder);
   font-size: 0.95rem;
-  transition: opacity 0.3s ease;
   transition: var(--transition-general);
 }
 
@@ -306,72 +335,60 @@
   display: flex;
   width: 100%;
   gap: 10px;
-  padding: 0px;
-}
-
-.info-imagen {
-  background-color: var(--color-input-bg);
-  width: 100%;
-  padding: 5px 10px;
-  border-radius: var(--border-radio-elements);
-  cursor: pointer;
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  transition: var(--transition-general);
+  flex-wrap: wrap;
 }
 
-.info-imagen:hover {
-  background-color: var(--color-primario);
-}
-
-.info-imagen i {
-  font-size: 1.2rem;
-}
-
-.info-imagen p {
-  flex: 1;
-  text-align: center;
-  margin: 0;
-  font-size: var(--font-size-p);
-}
-
-#imagen {
-  display: none;
-}
-
-.boton-quitar-imagen {
-  width: 200px;
-  background-color: var(--color-danger);
+.btn-image{
+  flex: 1 1 150px;
   color: white;
   display: flex;
-  padding: 5px 10px;
-  border-radius: var(--border-radio-elements);
+  padding: 0.6rem 10px;
+  transition: var(--transition-general);
   border: none;
   cursor: pointer;
   gap: 6px;
   align-items: center;
   justify-content: center;
   font-size: var(--font-size-p);
-  transition: background-color 0.3s ease;
 }
+
+.boton-subir-imagen {
+  background-color: var(--color-boton-datatable);
+  border-radius: var(--border-radio-elements);
+}
+.boton-subir-imagen:hover {
+  background-color: var(--color-primario);
+}
+
+.boton-quitar-imagen {
+  background-color: var(--color-danger);
+  border-radius: var(--border-radio-elements);
+}
+
 .boton-quitar-imagen:hover {
   background-color: #b6022f;
 }
 
-@media (max-width: 450px){
-  .boton-quitar-imagen{
-    width: 50px;
-  }
-  .boton-quitar-imagen span{
-    display: none;
-  }
+.info-imagen i {
+  font-size: 1.2rem;
 }
 
-#nombre-archivo {
-  text-wrap: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  max-width: 220px;
+#imagen {
+  display: none;
+}
+
+@media (max-width: 450px){
+
+  .boton-form {
+    max-width: 100%;
+  }
+
+  .formulario-acciones{
+    gap: 10px;
+  }
+
+  .upload-header {
+    height: 250px;
+  }
 }

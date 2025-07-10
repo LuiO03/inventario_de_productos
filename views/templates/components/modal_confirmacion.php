@@ -8,12 +8,12 @@
       
       <div class="modal-header bg-danger border-0">
         <h6 class="modal-title fw-bold" id="deleteModalLabel">Confirmar Eliminación</h6>
-        <button type="button" class="btn-close btn-close-white bg-white rounded-circle p-2" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
       
       <div class="modal-body text-center">
         <i class="ri-close-circle-line text-danger mb-3" style="font-size: 6rem;"></i>
-        <h3 class="fw-bold">
+        <h3>
           ¿Estás seguro de que deseas eliminar este registro?<br>
         </h3>
         <p>Esta acción no se puede deshacer.</p>
@@ -25,10 +25,10 @@
           <input type="hidden" name="csrf_token" value="<?= generarTokenCSRF(); ?>">
 
           <button type="button" class="btn btn-sm btn-light d-flex align-items-center gap-1" data-bs-dismiss="modal">
-            <i class="ri-close-line"></i> Cancelar
+            <i class="ri-close-line"></i> No, cancelar
           </button>
           <button type="submit" class="btn btn-sm btn-danger d-flex align-items-center gap-1">
-            <i class="ri-delete-bin-line"></i> Eliminar
+            <i class="ri-delete-bin-line"></i> Si, elimínalo
           </button>
         </form>
       </div>

@@ -66,9 +66,21 @@
     function pageTitle($default = null) {
         return $GLOBALS['pageTitle'] ?? ($default ?? APP_NAME);
     }
+    
     function getModal(string $nameModal, $data)
     {
         $view_modal = "Views/templates/modals/{$nameModal}.php";
         require_once $view_modal;        
+    }
+
+    function htmlEscape($valor): string {
+        return Validador::escape($valor);
+    }
+
+    function generarSlug(string $cadena): string {
+        $cadena = strtolower(trim($cadena));
+        $cadena = preg_replace('/[^a-z0-9\s-]/', '', $cadena); // quita símbolos
+        $cadena = preg_replace('/[\s-]+/', '-', $cadena);       // reemplaza espacios por guión
+        return rtrim($cadena, '-');
     }
 ?>

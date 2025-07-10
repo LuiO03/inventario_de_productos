@@ -135,9 +135,9 @@ body.no-scroll {
   padding: 6px 10px;
   white-space: nowrap;
   border-radius: var(--border-radio-elements);
-  z-index: 10;
+  z-index: 999;
   box-shadow: var(--sombra-material);
-  border: 1px solid var(--color-boton-datatable);
+  border: 1px solid var(--color-primario);
   pointer-events: none;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   opacity: 0;
@@ -304,7 +304,7 @@ main::-webkit-scrollbar-thumb:hover {
 }
 
 #sidebar .sidebar-menu li.active a{
-  background-color: var(--color-sidebar);
+  background-color: var(--color-accent);
   border-radius: 0px 60px 60px 0px;
   padding: 10px 15px;
   border-left: 4px solid var(--color-primario);
@@ -468,6 +468,7 @@ main::-webkit-scrollbar-thumb:hover {
   background-color: var(--color-sidebar);
   font-family: var(--lato);
   transition: var(--transition-general);
+  box-sizing: border-box;
 }
 
 .topbar-left,
@@ -494,23 +495,20 @@ main::-webkit-scrollbar-thumb:hover {
 ========================================= */
 main {
   box-shadow: inset var(--sombra-material); /* sombra interna */
-  font-family: var(--poppins);
+  font-family: var(--font-family-base);
   padding: 15px;
   width: 100%;
   height: 100%;
-  border-radius: 20px 0 0 0px;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /*place-items: center;*/
+  justify-items: center;
+  gap: 10px;
+  border-radius: 20px 0 0 0px;
+  overflow-y: auto;
   transition: var(--transition-general);
+  background-color: var(--color-bg);
   /*
-  background: linear-gradient(-45deg,
-    var(--grad-color-1),
-    var(--grad-color-2),
-    var(--grad-color-3),
-    var(--grad-color-4)
-  );*/
   background: linear-gradient(-45deg,
     var(--grad-color-1),
     var(--grad-color-2),
@@ -518,7 +516,7 @@ main {
     var(--grad-color-4)
   );
   background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+  animation: gradient 15s ease infinite;*/
 }
 
 @keyframes gradient {
@@ -676,6 +674,8 @@ main {
   }
 
   .topbar {
+    border-bottom: 1px solid var(--color-bw);
+    
     padding: 0px 5px;
   }
 
@@ -724,9 +724,8 @@ main {
 
 .contenedor {
   background-color: var(--color-card-bg);
-  padding: 20px;
+  padding: 10px 20px;
   border-radius: var(--border-radio-card);
-  margin: 20px 0px;
   transition: var(--transition-general);
   box-shadow: var(--sombra-material);
   width: 100%;
@@ -735,12 +734,13 @@ main {
 
 @media (max-width: 450px) {
   main {
-    padding: 0px;
+    padding: 20px 0px;
     background:none;
     background-color: var(--color-card-bg);
   }
+
   .contenedor {
-    padding: 20px 15px;
+    padding: 10px 15px;
     border-radius: 0px;
   }
 
@@ -753,12 +753,46 @@ main {
   }
 }
 
+/*========== modales ===========*/
+
 .modal-content {
-  background-color: var(--color-bg);
+  background-color: var(--color-modal-bg);
+}
+
+.modal-content .btn-close{
+  font-size: 15px;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-header {
   color: white;
+  background-color: var(--color-primario);
+}
+
+.modal-slide-animate {
+  animation: zoomIn 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 /*========== inputs ===========*/
@@ -772,10 +806,11 @@ form div .form-control {
 
 .contenedor-header {
   padding: 20px;
-  margin: 20px 0px;
   display: flex;
   flex-direction: column;
-  gap: 0px;
+  gap: 5px;
+  width: 100%;
+  text-align: center;
   border-radius: var(--border-radio-card);
 }
 
@@ -789,6 +824,9 @@ form div .form-control {
 @media (max-width: 458px) {
   .contenedor-botones{
     display: none;
+  }
+  .contenedor-header {
+    padding: 20px 15px;
   }
 }
 

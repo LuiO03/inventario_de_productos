@@ -4,10 +4,10 @@ partialBreadcrumb();
 ?>
 
 <div class="contenedor-header">
-    <h1 class="text-center">
+    <h1>
         Agregar Categoría
     </h1>
-    <p class="text-center">
+    <p>
         Aquí puedes agregar una nueva categoría para los productos.
     </p>
 </div>
@@ -66,15 +66,14 @@ partialBreadcrumb();
                         </p>
                     </div>
 
-                    <!-- Footer -->
+                    <!-- Footer con archivo, botón quitar y botón subir imagen -->
                     <div class="upload-footer">
-                        <label for="imagen" class="info-imagen" title="Ningún archivo seleccionado">
-                            <i class="ri-upload-2-line"></i>
-                            <p id="nombre-archivo">Ningún archivo seleccionado</p>
-                            <i class="ri-folder-open-line"></i>
+                        <!-- Nombre del archivo -->
+                        <label for="imagen" class="btn-image boton-subir-imagen" title="Subir nueva imagen">
+                            <i class="ri-upload-cloud-2-fill"></i>
+                            <span>Subir imagen</span>
                         </label>
-
-                        <input type="hidden" name="quitar_imagen" id="quitar-imagen" value="0">
+                        <!-- Input oculto + file -->
                         <input type="file" name="imagen" id="imagen" accept="image/*">
                     </div>
                 </div>
@@ -85,14 +84,14 @@ partialBreadcrumb();
 
     <!-- Botones -->
     <div class="formulario-acciones">
-        <a href="<?= BASE_URL ?>categoria/index" class="boton-form boton-volver">
+        <a href="<?= BASE_URL ?>categoria/" class="boton-form boton-volver">
             <i class="ri-arrow-left-circle-fill"></i> Volver
         </a>
         <button type="button" class="boton-form boton-limpiar" id="btnLimpiar">
             <i class="ri-paint-brush-fill"></i> Limpiar
         </button>
         <button type="submit" class="boton-form boton-agregar">
-            <i class="ri-save-3-fill"></i> Guardar Categoría
+            <i class="ri-save-3-fill"></i> Guardar
         </button>
     </div>
 

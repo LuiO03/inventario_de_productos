@@ -26,4 +26,10 @@ class UsuarioModel extends Model
             return null;
         }
     }
+
+    public function contar() {
+        $sql = "SELECT COUNT(*) as total FROM usuarios";
+        $stmt = $this->PDO->query($sql);
+        return $stmt->fetch()['total'];
+    }
 }

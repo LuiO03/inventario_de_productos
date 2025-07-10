@@ -158,7 +158,7 @@ class Validador
 
     public static function escape($valor)
     {
-        return htmlspecialchars($valor, ENT_QUOTES, 'UTF-8');
+        return htmlspecialchars((string) $valor, ENT_QUOTES, 'UTF-8');
     }
 
     // =========================

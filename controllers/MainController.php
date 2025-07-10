@@ -1,31 +1,51 @@
 <?php
-    class MainController extends Controller {
+class MainController extends Controller
+{
 
 
-        public function __construct() {
-            parent::__construct(); // Solo inicializa el controlador, sin renderizar vistas
-        }
-
-        public function index() {
-            $this->view->render('main/index', ['mensaje' => $this->view->mensaje]);// Renderiza la vista principal
-        }
-        // Método de ejemplo que imprime un saludo
-
-        public function saludo() {
-            flash::set('mensaje', [
-                'type' => 'success',
-                'message' => 'Hola, bienvenido al sistema de inventario'
-            ]);
-            header('Location: ' . BASE_URL . 'main'); // Redirige para que no se repita el mensaje si recargas
-        }
-
-        public function error() {
-            flash::set('mensaje', [
-                'type' => 'danger',
-                'message' => 'Hubo un error al procesar la solicitud'
-            ]);
-            header('Location: ' . BASE_URL . 'main');
-            exit;
-        }
+    public function __construct()
+    {
+        parent::__construct(); // Solo inicializa el controlador, sin renderizar vistas
     }
-?>
+
+    public function index()
+    {
+        $entidades = [
+            'producto'   => 'ProductoModel',
+            'categoria'  => 'CategoriaModel',
+            'cliente'    => 'ClienteModel',
+            'usuario'    => 'UsuarioModel',
+            'pedido'     => 'PedidoModel',
+            'servicio'   => 'ServicioModel',
+            'blog'       => 'BlogModel',
+            'mensaje'    => 'MensajeModel'
+        ];
+
+        $totales = [];
+
+        foreach ($entidades as $key => $modelo) {
+            $rutaModelo = "models/$modelo.php";
+
+            // Verifica si el archivo del modelo existe
+            if (file_exists($rutaModelo)) {
+                require_once $rutaModelo;
+                if (class_exists($modelo)) {
+                    $instancia = new $modelo();
+                    if (method_exists($instancia, 'contar')) {
+                        $totales["total" . ucfirst($key) . "s"] = $instancia->contar();
+                    } else {
+                        $totales["total" . ucfirst($key) . "s"] = 0; // No tiene método contar
+                    }
+                }
+            } else {
+                $totales["total" . ucfirst($key) . "s"] = 0; // Modelo no existe aún
+            }
+        }
+
+        // Agrega el mensaje a los datos
+        $totales['mensaje'] = $this->view->mensaje ?? null;
+
+        // Renderizar con los datos dinámicos
+        $this->view->render('main/index', $totales);
+    }
+}

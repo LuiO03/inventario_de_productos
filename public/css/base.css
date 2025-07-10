@@ -38,25 +38,23 @@
   --color-bw: #ffffff;
   --color-bw-inverted: #000000;
   --color-primario: #d11e4b;
-  --color-secondary: #51009d;
-  --color-accent: #23c17e;
+  --color-secundario: #51009d;
+  --color-accent: #181818;
 
   --color-bg: #111111;
+  --color-bg-transparent: rgba(255, 255, 255, 0.2);
   /*
   --grad-color-1: #d30035;
   --grad-color-2: #FF0C45;
   --grad-color-3: #d11e4b;
-  --grad-color-4: #d30035;*/
-  --grad-color-1: #d30035;
-  --grad-color-2: #FF0C45;
-  --grad-color-3: #d11e4b;
-  --grad-color-4: #9b0127;
-
+  --grad-color-4: #9b0127;*/
+  
   --color-sidebar: #181818;
   --color-header: #1e1e1e;
   --color-footer: #1e1e1e;
-  --color-card-bg: #1f1f1f;
-  --color-modal-bg: #222222;
+  /*--color-card-bg: #1f1f1f;*/
+  --color-card-bg: #181818;
+  --color-modal-bg: #181818;
   --color-dropdown-bg: #2a2a2a;
 
   /* Tablas */
@@ -68,11 +66,17 @@
   --color-border: #202020;
   --color-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14);
 
+  /* Estados */
   --color-primary: #19247f;
+  --color-secondary: #6c757d;
   --color-success: #1d613e;
   --color-danger: #d30035;
   --color-warning: #ffa000;
-  --color-info: #2979ff;
+  --color-info: #1D61D0;
+  --color-light:   #f8f9fa;
+  --color-dark:    #212529;
+  --color-white:   #ffffff;
+  --color-black:   #000000;
 
   --color-input-bg: #2a2a2a;
   --color-input-border: #444;
@@ -93,14 +97,14 @@
   --max-width: 1200px;
   --color-focus: #66b2ff;
   --transition-general: 
-    width 0.2s ease-in-out,
-    background-color 0.3s ease-in-out,
-    background 0.3s ease-in-out,
-    color 0.3s ease-in-out, 
-    border-color 0.3s ease-in-out,
-    transform 0.3s ease-in-out, 
-    font-size 0.2s ease, 
-    box-shadow 0.3s ease-in-out;
+  background-color 0.3s ease-in-out,
+  background 0.3s ease-in-out,
+  color 0.3s ease-in-out, 
+  border-color 0.3s ease-in-out,
+  width 0.2s ease-in-out,
+  transform 0.3s ease-in-out, 
+  font-size 0.2s ease, 
+  box-shadow 0.3s ease-in-out;
   --border-radio-card: 15px;
   --border-radio-elements: 3px;
 
@@ -118,31 +122,26 @@
 .light-mode {
   /* Colores base */
   --color-bg: #eeeeee;
+  --color-bg-transparent: rgba(0, 0, 0, 0.1);
   /*
   --grad-color-1: #0356c2;
   --grad-color-2: #00d4c3;
   --grad-color-3: #23a6d5;
   --grad-color-4: #23d5ab;*/
 
-  --grad-color-1: #0356c2;
-  --grad-color-2: #00d4c3;
-  --grad-color-3: #23a6d5;
-  --grad-color-4: #23d5ab;
-
   --color-text: #342e37;
   --color-bw: #000000;
   --color-bw-inverted: #ffffff;
   --color-primario: #3D31B2;
   --color-secundario: #51009d;
-  --color-accent: #198754;
+  --color-accent: #E5FAFF;
 
   /* Fondos */
-  /*--color-sidebar: #f2f2f2;*/
   --color-sidebar: #f9f9f9;
   --color-header: #f9f9f9;
   --color-footer: #f8f9fa;
   --color-card-bg: #f8f9fa;
-  --color-modal-bg: #ffffff;
+  --color-modal-bg: #f9f9f9;
   --color-dropdown-bg: #ffffff;
 
   /* Tablas */
@@ -155,17 +154,10 @@
   --color-border: #a5a9ad;
   --color-shadow: rgba(0, 0, 0, 0.05);
 
-  /* Estados */
-  --color-primary: #19247f;
-  --color-success: #1d613e;
-  --color-danger: #d30035;
-  --color-warning: #ff9800;
-  --color-info: #0084db;
-
   /* Inputs y elementos interactivos */
   --color-input-bg: #eeeeee;
   --color-input-border: #ced4da;
-  --color-input-text: #212529;
+  --color-input-text: #342e37;
   --color-placeholder: #6c757d;
   --color-hover: #e5e5e5;
   --color-active: #e2e6ea;
@@ -190,9 +182,9 @@
   --font-size-h1: 2.4rem; /* Títulos grandes */
   --font-size-h2: 1.625rem; /* Títulos secundarios */
   --font-size-h3: 1.1rem; /* Subtítulos / paneles */
-  --font-size-p: 0.93rem; /* Texto general */
-  --font-size-sm: 0.9rem; /* Texto secundario (inputs, etc.) */
-  --font-size-xs: 0.85rem; /* Ayuda, tooltips */
+  --font-size-p: 0.91rem; /* Texto general */
+  --font-size-sm: 0.89rem; /* Texto secundario (inputs, etc.) */
+  --font-size-xs: 0.82rem; /* Ayuda, tooltips */
   --fw-regular: 400;
   --fw-bold: 700;
 }
@@ -204,7 +196,7 @@
     --font-size-h2: 1.5rem;
     --font-size-h3: 1.25rem;
     --font-size-p: 0.9rem;
-    --font-size-sm: 0.89rem;
+    --font-size-sm: 0.88rem;
     --font-size-xs: 0.8rem;
   }
 }
@@ -220,7 +212,10 @@
     --font-size-xs: 0.75rem;
     --sombra-material: 0px;
     --transition-general: border-color 0.3s ease-in-out,
-      transform 0.3s ease-in-out, font-size 0.2s ease;
+      width 0.2s ease-in-out,
+      transform 0.3s ease-in-out, 
+      font-size 0.2s ease, 
+      box-shadow 0.3s ease-in-out;
   }
 }
 
@@ -243,23 +238,47 @@
   font-weight: var(--fw-bold);
 }
 
+.btn-danger, .bg-danger{
+  background-color: var(--color-danger)!important;
+}
+
+.btn-primary, .bg-primary {
+  background-color: var(--color-primary) !important;
+}
+.btn-secondary, .bg-secondary {
+  background-color: var(--color-secondary) !important;
+}
+.btn-success, .bg-success {
+  background-color: var(--color-success) !important;
+}
+.btn-warning, .bg-warning {
+  background-color: var(--color-warning) !important;
+  color: var(--color-text) !important;
+}
+.btn-info, .bg-info {
+  background-color: var(--color-info) !important;
+}
+
 .text-primario {
   color: var(--color-primario) !important;
 }
 .text-secundario {
-  color: var(--color-secundario);
+  color: var(--color-secundario)!important;
 }
 .text-primary {
-  color: var(--color-primary);
+  color: var(--color-primary)!important;
 }
 .text-success {
-  color: var(--color-success);
+  color: var(--color-success)!important;
 }
 .text-danger {
-  color: var(--color-danger);
+  color: var(--color-danger)!important;
 }
 .text-warning {
-  color: var(--color-warning);
+  color: var(--color-warning)!important;
+}
+.text-info {
+  color: var(--color-info)!important;
 }
 
 /* ==========================================
@@ -320,33 +339,4 @@ li {
 ::selection {
   background-color: var(--color-primario);
   color: white;
-}
-
-/* ==========================================
-   ANIMACIONES
-   ========================================== */
-.modal-slide-animate {
-  animation: zoomIn 0.2s ease-out;
-}
-
-@keyframes slideDown {
-  from {
-    transform: translateY(-100px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes zoomIn {
-  from {
-    transform: scale(0.7);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
 }

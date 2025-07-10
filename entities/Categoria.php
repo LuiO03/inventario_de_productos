@@ -6,6 +6,7 @@ class Categoria
     private ?string $descripcion;
     private bool $estado;
     private ?string $imagen = null;
+    private ?string $slug = null;
     private ?int $creadoPor;
     private ?int $modificadoPor;
     private ?string $createdAt;
@@ -18,6 +19,7 @@ class Categoria
         string $nombre = '',
         ?string $descripcion = null,
         bool $estado = true,
+        ?string $slug = null,
         ?string $imagen = null,
         ?int $creadoPor = null,
         ?int $modificadoPor = null,
@@ -28,11 +30,28 @@ class Categoria
         $this->nombre = $nombre;
         $this->descripcion = $descripcion;
         $this->estado = $estado;
+        $this->slug = $slug;
         $this->imagen = $imagen;
         $this->creadoPor = $creadoPor;
         $this->modificadoPor = $modificadoPor;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
+    }
+
+    public static function fromArray(array $row): Categoria
+    {
+        return new Categoria(
+            (int)$row['id'],
+            $row['nombre'],
+            $row['descripcion'],
+            (bool)$row['estado'],
+            $row['slug'] ?? null,
+            $row['imagen'] ?? null,
+            isset($row['creado_por']) ? (int)$row['creado_por'] : null,
+            isset($row['modificado_por']) ? (int)$row['modificado_por'] : null,
+            $row['created_at'] ?? null,
+            $row['updated_at'] ?? null
+        );
     }
 
     // Getters
@@ -47,6 +66,14 @@ class Categoria
     public function getDescripcion(): ?string
     {
         return $this->descripcion;
+    }
+    public function getImagen(): ?string
+    {
+        return $this->imagen;
+    }
+    public function getSlug(): ?string
+    {
+        return $this->slug;
     }
     public function getEstado(): bool
     {
@@ -82,14 +109,13 @@ class Categoria
     {
         $this->estado = $estado;
     }
-    public function getImagen(): ?string
-    {
-        return $this->imagen;
-    }
-
     public function setImagen(?string $imagen): void
     {
         $this->imagen = $imagen;
+    }
+    public function setSlug(?string $slug): void
+    {
+        $this->slug = $slug;
     }
     public function setCreadoPor(?int $creadoPor): void
     {

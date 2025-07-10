@@ -29,7 +29,7 @@
                     <h6 class="modal-title fw-bold" id="flashModalLabel">
                         <?= htmlspecialchars($mensaje['header']) ?>
                     </h6>
-                    <button type="button" class="btn-close btn-close-white bg-white rounded-circle p-2" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 
                 <div class="modal-body text-center">

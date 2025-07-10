@@ -1,14 +1,14 @@
 <?php
-headerAdmin();
-partialBreadcrumb();
+  headerAdmin();
+  partialBreadcrumb();
 ?>
 
 <div class="contenedor-header">
-  <h1 class="text-center">
+  <h1>
     Editar Categoría - #<?= htmlspecialchars($categoria->getId()) ?>
   </h1>
-  <p class="text-center">
-    Aquí puedes editar la información de la categoría seleccionada.
+  <p>
+    Aquí puedes editar los detalles de la categoría.
   </p>
 </div>
 
@@ -55,17 +55,20 @@ partialBreadcrumb();
       <div class="input-group-nowrap">
 
         <label class="form-label">Imagen de la categoría</label>
-
         <div class="contenedor-upload">
           <div class="upload-header" id="preview-container">
             <?php if ($categoria->getImagen()) : ?>
               <img id="preview-imagen"
                 src="<?= BASE_URL . 'public/images/categorias/' . $categoria->getImagen() ?>"
                 alt="Vista previa de la imagen" draggable="false" style="display: block;">
+
+              <span class="info-imagen" id="nombre-archivo" title="<?= $categoria->getImagen() ?>"><?= $categoria->getImagen() ?: 'Ningún archivo seleccionado' ?></span>
+
               <i class="ri-image-add-line upload-icon" id="upload-icon" style="display: none;"></i>
               <p id="preview-texto" style="<?= $categoria->getImagen() ? 'display: none;' : 'display: block;' ?>">
-                ¡Arrastre una imagen aquí! <br>
-                o seleccionelo desde su dispositivo.
+                Arrastre una imagen aquí<br>
+                o<br>
+                selecciónelo desde su dispositivo.
               </p>
             <?php else : ?>
               <img id="preview-imagen" src="" alt="Vista previa vacía" draggable="false" style="display: none;">
@@ -77,17 +80,14 @@ partialBreadcrumb();
           <!-- Footer con archivo, botón quitar y botón subir imagen -->
           <div class="upload-footer">
             <!-- Nombre del archivo -->
-            <label for="imagen" class="info-imagen">
-
-              <i class="ri-upload-2-line"></i>
-              <p id="nombre-archivo" title="<?= $categoria->getImagen() ?>"><?= $categoria->getImagen() ?: 'Ningún archivo seleccionado' ?></p>
-              <i class="ri-folder-open-line"></i>
+            <label for="imagen" class="btn-image boton-subir-imagen" title="Subir nueva imagen">
+              <i class="ri-upload-cloud-2-fill"></i>
+              <span>Subir imagen</span>
             </label>
-
             <!-- Botón: quitar imagen -->
             <?php if ($categoria->getImagen()) : ?>
-              <button type="button" id="btn-quitar-imagen" class="boton-quitar-imagen" title="Quitar imagen actual">
-                <i class="ri-delete-bin-line"></i>
+              <button type="button" id="btn-quitar-imagen" class="btn-image boton-quitar-imagen" title="Quitar imagen actual">
+                <i class="ri-delete-bin-2-fill"></i>
                 <span>Quitar imagen</span>
               </button>
             <?php endif; ?>
@@ -102,11 +102,11 @@ partialBreadcrumb();
   </div>
   <!-- Botones -->
   <div class="formulario-acciones">
-    <a href="<?= BASE_URL ?>categoria/index" class="boton-form boton-volver">
+    <a href="<?= BASE_URL ?>categoria/" class="boton-form boton-volver">
       <i class="ri-arrow-left-circle-fill"></i> Volver
     </a>
     <button type="submit" class="boton-form boton-actualizar">
-      <i class="ri-loop-left-line"></i> Actualizar Categoría
+      <i class="ri-loop-left-line"></i> Actualizar
     </button>
   </div>
 </form>
@@ -130,6 +130,7 @@ partialBreadcrumb();
         imgPreview.style.display = 'block';
         icono.style.display = 'none';
         texto.style.display = 'none';
+        nombreArchivo.style.display = 'block';
         nombreArchivo.textContent = archivo.name;
         nombreArchivo.title = archivo.name;
         inputQuitar.value = '0';
@@ -142,6 +143,7 @@ partialBreadcrumb();
   btnQuitar?.addEventListener('click', () => {
     imgPreview.src = '';
     imgPreview.style.display = 'none';
+    nombreArchivo.style.display = 'none';
     icono.style.display = 'block';
     texto.style.display = 'block';
     nombreArchivo.textContent = 'Ningún archivo seleccionado';

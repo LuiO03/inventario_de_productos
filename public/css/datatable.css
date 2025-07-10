@@ -176,13 +176,19 @@
 /* ==== PAGINACIÓN ==== */
 
 .dt-paging .page-item .page-link{
-  margin: 2px;
-  border: 1px solid var(--color-boton-datatable);
+  margin: 3px;
+  border: 1px solid var(--color-muted);
   border-radius: var(--border-radio-elements);
-  background-color: var(--color-sidebar);
+  background-color: var(--color-stripet-table);
   color: var(--color-texto);
   transition: var(--transition-general);
   font-size: var(--font-size-p);
+}
+
+.dt-paging .page-item .page-link:hover{
+  background-color: var(--color-primario);
+  color: white;
+  box-shadow: var(--sombra-material);
 }
 
 .dt-paging li.page-item.disabled button.page-link{
@@ -191,7 +197,7 @@
   box-shadow: none;
   cursor: not-allowed;
   pointer-events: none;
-  border-color: var(--color-border);
+  
 }
 
 .dt-paging li.page-item.disabled button.page-link i{
