@@ -2,11 +2,8 @@
    FORMULARIO GENERAL
 ============================= */
 .formulario {
-  max-width: var(--max-width);
-  width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-card-bg);
   padding: 30px 20px;
   border-radius: var(--border-radio-card);
   color: var(--color-text);

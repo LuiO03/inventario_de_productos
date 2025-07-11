@@ -23,15 +23,15 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
 
   <!--=============== CSS ===============-->
-  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/base.css">
-  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/datatable.css">
-  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/tabla.css">
-  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/breadcrumb.css">
-  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/menuflotante.css">
-  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/menu.css">
-  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/dashboard.css">
-  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/formularios.css">
-  <link rel="stylesheet" href="<?= BASE_URL ?>public/css/alert-validate.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/css/base.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/css/datatable.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/css/tabla.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/css/breadcrumb.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/css/menuflotante.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/css/menu.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/css/dashboard.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/css/formularios.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/css/alert-validate.css">
   <script>
     if (localStorage.getItem("sidebar-estado") === "close") {
       document.documentElement.classList.add("sidebar-cerrado");
@@ -56,43 +56,39 @@
   <!-- Sidebar principal -->
   <nav id="sidebar">
     <div class="sidebar-header">
-      <img class="sidebar-logo" src="<?= BASE_URL ?>public/images/logos/logo.png" alt="logo del proyecto" />
+      <img class="sidebar-logo" src="<?=base_url()?>public/images/logos/logo.png" alt="logo del proyecto" />
       <p class="sidebar-logo-texto"><strong>Gecko</strong><span>merce</span></p>
     </div>
     <ul class="sidebar-menu">
-      <li>
-        <a href="<?= BASE_URL ?>" data-label="Inicio">
-          <i class="ri-home-4-line icon"></i><span>Home</span>
-        </a>
-      </li>
       <li class="active">
-        <a href="<?= BASE_URL ?>producto" data-label="Productos">
-          <i class="ri-box-3-line icon"></i><span>Productos</span>
-        </a>
-      </li>
-      <li>
-        <a href="<?= BASE_URL ?>categoria" data-label="Categorías">
-          <i class="ri-price-tag-3-line icon"></i><span>Categorías</span>
+        <a href="<?=base_url()?>" data-label="Inicio">
+          <i class="ri-home-4-line icon"></i><span>Home</span>
         </a>
       </li>
       <li>
         <button
           class="dropdown-btn"
           onclick="toggleSubMenu(this)"
-          data-label="Crear" data-id="create">
-          <i class="ri-add-circle-line icon"></i><span>Create</span>
+          data-label="Tienda" data-id="create">
+          <i class="ri-store-2-line icon"></i><span>Tienda</span>
           <i class="ri-arrow-down-s-line arrow-icon"></i>
         </button>
         <ul class="sub-menu">
           <div>
-            <li">
-              <a href="#" data-label="Folder"><i class="ri-folder-line icon"></i><span>Folder</span></a>
+            <li>
+              <a href="<?=base_url()?>producto" data-label="Producto">
+                <i class="ri-box-3-line icon"></i><span>Producto</span>
+              </a>
             </li>
             <li>
-              <a href="#" data-label="Document"><i class="ri-file-line icon"></i><span>Document</span></a>
+              <a href="<?=base_url()?>categoria" data-label="Categorías">
+                <i class="ri-price-tag-3-line icon"></i><span>Categorías</span>
+              </a>
             </li>
             <li>
-              <a href="#" data-label="Project"><i class="ri-lightbulb-line icon"></i><span>Project</span></a>
+              <a href="#" data-label="Carga Masiva">
+                <i class="ri-upload-cloud-line icon"></i><span>Carga Masiva</span>
+              </a>
             </li>
           </div>
         </ul>
@@ -105,6 +101,21 @@
       <li>
         <a href="#" data-label="Clientes">
           <i class="ri-account-box-line icon"></i><span>Clientes</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-label="Ventas">
+          <i class="ri-shopping-cart-line icon"></i><span>Ventas</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-label="Ventas">
+          <i class="ri-shopping-cart-line icon"></i><span>Ventas</span>
+        </a>
+      </li>
+      <li>
+        <a href="#" data-label="Ventas">
+          <i class="ri-shopping-cart-line icon"></i><span>Ventas</span>
         </a>
       </li>
       <li>
@@ -140,7 +151,7 @@
         </div>
       </div>
       <div class="topbar-right">
-        <img src="<?= BASE_URL ?>public/images/pikachu.jpg" alt="Avatar" class="user-avatar" />
+        <img src="<?=media()?>/images/usuarios/pikachu.jpg" alt="Avatar" class="user-avatar" />
         <button class="icon-button">
           <i class="ri-expand-up-down-line"></i>
         </button>
@@ -150,7 +161,7 @@
     <!-- Sidebar del usuario -->
     <aside class="user-sidebar" id="userSidebar">
       <div class="user-sidebar-header">
-        <img src="<?= BASE_URL ?>public/images/pikachu.jpg" alt="Avatar" class="user-avatar-large" />
+        <img src="<?=media()?>/images/usuarios/pikachu.jpg" alt="Avatar" class="user-avatar-large" />
 
         <div class="user-info-wrapper">
           <div class="user-text">

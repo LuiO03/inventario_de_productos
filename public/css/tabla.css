@@ -69,6 +69,10 @@ table tbody tr:hover {
     display: none;
   }
 
+  .tabla-responsive{
+    background-color: transparent !important;
+  }
+
   .tabla-responsive,
   .tabla-responsive tbody,
   .tabla-responsive tr,
@@ -76,6 +80,10 @@ table tbody tr:hover {
     display: block;
     width: 100%;
     text-align: left !important;
+  }
+
+  .tabla-responsive tr, .tabla-responsive tr:nth-child(even) {
+    background-color: var(--color-card-bg) !important;
   }
 
   .tabla-responsive tr:hover {

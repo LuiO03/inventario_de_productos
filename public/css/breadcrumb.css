@@ -2,9 +2,7 @@
 /*====== MIGA DE NAVEGACIÓN ======*/
 
 .breadcrumb-container {
-  background-color: var(--color-card-bg);
   padding: 10px 20px;
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,7 +10,6 @@
   border-radius: var(--border-radio-card);
   transition: var(--transition-general);
   box-shadow: var(--sombra-material);
-  max-width: var(--max-width);
 }
 
 @media (max-width: 450px) {
@@ -38,8 +35,10 @@
 
 .breadcrumb li:not(:last-child) .separator {
   margin: 0 0.5rem;
-  color: #aaa;
-  font-size: 1rem;
+  color: var(--color-primario);
+  font-size: var(--font-size-h3);
+  font-weight: var(--fw-bold);
+  transition: var(--transition-general);
 }
 
 .breadcrumb a {

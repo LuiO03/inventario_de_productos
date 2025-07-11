@@ -39,7 +39,7 @@
   --color-bw-inverted: #000000;
   --color-primario: #d11e4b;
   --color-secundario: #51009d;
-  --color-accent: #181818;
+  --color-accent: #ffe5e5;
 
   --color-bg: #111111;
   --color-bg-transparent: rgba(255, 255, 255, 0.2);
@@ -52,8 +52,7 @@
   --color-sidebar: #181818;
   --color-header: #1e1e1e;
   --color-footer: #1e1e1e;
-  /*--color-card-bg: #1f1f1f;*/
-  --color-card-bg: #181818;
+  --color-card-bg: #1f1f1f;
   --color-modal-bg: #181818;
   --color-dropdown-bg: #2a2a2a;
 
@@ -183,7 +182,7 @@
   --font-size-h2: 1.625rem; /* Títulos secundarios */
   --font-size-h3: 1.1rem; /* Subtítulos / paneles */
   --font-size-p: 0.91rem; /* Texto general */
-  --font-size-sm: 0.89rem; /* Texto secundario (inputs, etc.) */
+  --font-size-sm: 0.87rem; /* Texto secundario (inputs, etc.) */
   --font-size-xs: 0.82rem; /* Ayuda, tooltips */
   --fw-regular: 400;
   --fw-bold: 700;
@@ -196,7 +195,7 @@
     --font-size-h2: 1.5rem;
     --font-size-h3: 1.25rem;
     --font-size-p: 0.9rem;
-    --font-size-sm: 0.88rem;
+    --font-size-sm: 0.85rem;
     --font-size-xs: 0.8rem;
   }
 }
@@ -261,24 +260,31 @@
 
 .text-primario {
   color: var(--color-primario) !important;
+  transition: color 0.3s ease-in-out;
 }
 .text-secundario {
   color: var(--color-secundario)!important;
+  transition: color 0.3s ease-in-out;
 }
 .text-primary {
   color: var(--color-primary)!important;
+  transition: color 0.3s ease-in-out;
 }
 .text-success {
   color: var(--color-success)!important;
+  transition: color 0.3s ease-in-out;
 }
 .text-danger {
   color: var(--color-danger)!important;
+  transition: color 0.3s ease-in-out;
 }
 .text-warning {
   color: var(--color-warning)!important;
+  transition: color 0.3s ease-in-out;
 }
 .text-info {
   color: var(--color-info)!important;
+  transition: color 0.3s ease-in-out;
 }
 
 /* ==========================================
@@ -302,7 +308,7 @@ h1 {
 
 h2 {
   font-size: var(--font-size-h2);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 h3 {
@@ -314,7 +320,7 @@ p {
 }
 
 small {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
 }
 
 /* ==========================================

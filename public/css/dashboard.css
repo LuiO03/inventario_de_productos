@@ -31,6 +31,7 @@ body.no-scroll {
   font-family: var(--font-family-dashboard);
   font-size: var(--font-size-p);
   background-color: var(--color-sidebar);
+  z-index: 10;
   transition: var(--transition-general);
 }
 
@@ -135,9 +136,8 @@ body.no-scroll {
   padding: 6px 10px;
   white-space: nowrap;
   border-radius: var(--border-radio-elements);
-  z-index: 999;
   box-shadow: var(--sombra-material);
-  border: 1px solid var(--color-primario);
+  border: 2px solid var(--color-primario);
   pointer-events: none;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   opacity: 0;
@@ -270,37 +270,8 @@ main::-webkit-scrollbar-thumb:hover {
 ========================================= */
 
 #sidebar li.active {
-  background-color: var(--color-bg);
   transition: var(--transition-general);
   font-weight: 700;
-  padding: 6px 0px;
-  position: relative;
-}
-
-#sidebar li.active::before{
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  transition: var(--transition-general);
-  background-color: transparent;
-  bottom: 100%;
-  right: 0px;
-  border-bottom-right-radius: var(--border-radio-card);
-  box-shadow: 4px 0.3rem 0 var(--color-bg);
-}
-
-#sidebar li.active::after{
-  content: '';
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  transition: var(--transition-general);
-  background-color: transparent;
-  top: 100%;
-  right: 0px;
-  border-top-right-radius: var(--border-radio-card);
-  box-shadow: 4px -0.3rem 0 var(--color-bg);
 }
 
 #sidebar .sidebar-menu li.active a{
@@ -324,6 +295,8 @@ main::-webkit-scrollbar-thumb:hover {
 #sidebar .sidebar-menu .dropdown-btn:hover{
   background-color: var(--color-hover);
   border-left: 4px solid var(--color-primario);
+  font-weight: 700;
+  color: var(--color-primario);
 }
 
 /* =========================================
@@ -503,6 +476,7 @@ main {
   flex-direction: column;
   /*place-items: center;*/
   justify-items: center;
+  align-items: center;
   gap: 10px;
   border-radius: 20px 0 0 0px;
   overflow-y: auto;
@@ -538,6 +512,7 @@ main {
 #userSidebar {
   font-size: var(--font-size-sm);
 }
+
 .user-sidebar {
   position: fixed;
   top: 0;
@@ -722,21 +697,23 @@ main {
   font-weight: 200;
 }
 
+.contenedor, .formulario, .breadcrumb-container{
+  background-color: var(--color-sidebar);
+  max-width: var(--max-width);
+  width: 100%;
+}
+
 .contenedor {
-  background-color: var(--color-card-bg);
   padding: 10px 20px;
   border-radius: var(--border-radio-card);
   transition: var(--transition-general);
   box-shadow: var(--sombra-material);
-  width: 100%;
-  max-width: var(--max-width);
 }
 
 @media (max-width: 450px) {
   main {
     padding: 20px 0px;
-    background:none;
-    background-color: var(--color-card-bg);
+    background-color: var(--color-sidebar);
   }
 
   .contenedor {
