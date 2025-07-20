@@ -10,6 +10,7 @@ table {
   transition: var(--transition-general);
   margin: 0px;
   font-size: var(--font-size-p);
+  font-family: var(--font-family-dashboard);
 }
 
 table td {
@@ -38,6 +39,8 @@ table thead {
   border-top: 1px solid var(--color-table-head-border);
   border-bottom: 1px solid var(--color-table-head-border);
   height: 40px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--fw-bold);
 }
 
 table tbody tr:nth-child(even) {
@@ -50,21 +53,64 @@ table tbody tr:hover {
   transition: background-color 0.3s ease;
 }
 
-/* Para la cabecera */
-.tabla-responsive thead tr th:last-child {
-  width: 150px; /* o el valor que desees */
+
+.tabla-responsive thead tr th:first-child {
+  width: 55px;
+  max-width: 100%;
+  text-align: start;
+}
+.tabla-responsive tbody tr td:first-child {
+  width: 55px;
   max-width: 100%;
   text-align: center;
 }
-
-/* Para las filas del cuerpo */
-.tabla-responsive tbody tr td:last-child {
-  width: 150px;
+.tabla-responsive tbody tr th:nth-last-child(2) {
+  width: 90px;
+  max-width: 100%;
+  text-align: start;
+}
+.tabla-responsive tbody tr td:nth-last-child(2) {
+  width: 90px;
   max-width: 100%;
   text-align: center;
+}
+.tabla-responsive thead tr th:last-child {
+  width: 330px;
+  max-width: 100%;
+  text-align: center;
+}
+.tabla-responsive tbody tr td:last-child {
+  width: 330px;
+  max-width: 100%;
+  text-align: center;
+}
+@media (max-width: 950px){
+  .tabla-responsive thead tr th:last-child {
+    width: 200px;
+  }
+  .tabla-responsive tbody tr td:last-child {
+    width: 200px;
+  }
+}
+
+
+#tablaCategorias, #tablaProductos {
+  visibility: hidden;
+  opacity: 0;
+  transition: var(--transition-general);
+}
+#tablaCategorias.ready, #tablaProductos.ready {
+  visibility: visible;
+  opacity: 1;
 }
 
 @media (max-width: 768px) {
+  .tabla-responsive tbody tr th:nth-last-child(2) {
+    width: auto;
+  }
+  .tabla-responsive tbody tr td:nth-last-child(2) {
+    width: auto;
+  }
   .tabla-responsive thead {
     display: none;
   }
@@ -177,10 +223,6 @@ table .btn .boton-text {
   align-items: center;
 }
 
-table .badge{
-  border-radius: var(--border-radio-elements);
-  padding: 9px 8px 6px 8px !important;
-}
 /* ÍCONO */
 table .btn .boton-icon,
 .breadcrumb-container .btn .boton-icon {

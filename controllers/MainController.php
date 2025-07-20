@@ -13,6 +13,7 @@ class MainController extends Controller
         $entidades = [
             'producto'   => 'ProductoModel',
             'categoria'  => 'CategoriaModel',
+            'marca'      => 'MarcaModel',
             'cliente'    => 'ClienteModel',
             'usuario'    => 'UsuarioModel',
             'pedido'     => 'PedidoModel',

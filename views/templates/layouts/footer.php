@@ -19,5 +19,6 @@
         <script src="<?= BASE_URL ?>public/js/datatable<?= $entidad['titulo'] ?>.js"></script>
     <?php endif; ?>
     <script src="<?= BASE_URL ?>public/js/dashboard.js" defer></script>
+    <script src="<?= BASE_URL ?>public/js/formularios.js" defer></script>
   </body>
 </html>

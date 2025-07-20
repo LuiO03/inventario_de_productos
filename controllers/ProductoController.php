@@ -16,7 +16,7 @@
         }
 
         private function redirigirConMensaje($ruta, $tipo, $header, $mensaje) {
-            flash::set('mensaje', [
+            FlashHelper::set('mensaje', [
                 'type' => $tipo,
                 'header' => $header,
                 'message' => $mensaje
@@ -57,7 +57,7 @@
             // Validar si ya existe un producto con el mismo nombre
             $existe = $this->model->findByNombre($nombre);
             if ($existe) {
-                flash::set('mensaje', [
+                FlashHelper::set('mensaje', [
                     'type' => 'warning',
                     'header'=> 'Producto ya existente',
                     'message' => 'El producto <strong>"'.htmlspecialchars($nombre).'"</strong> ya está registrado.'
@@ -72,13 +72,13 @@
             // Pasar el objeto al modelo
             $id = $this->model->create($producto);
             if ($id) {
-                flash::set('mensaje', [
+                FlashHelper::set('mensaje', [
                     'type' => 'success',
                     'header'=> 'Producto agregado',
                     'message' => 'El producto <strong>"'.htmlspecialchars($nombre).'"</strong> se ha creado exitosamente.'
                 ]);
             } else {
-                flash::set('mensaje', [
+                FlashHelper::set('mensaje', [
                     'type' => 'danger',
                     'header'=> 'Error',
                     'message' => 'Error al crear el producto.'
@@ -91,7 +91,7 @@
 
         public function edit($id) {
             if (!is_numeric($id)) {
-                flash::set('mensaje', [
+                FlashHelper::set('mensaje', [
                     'type' => 'danger',
                     'header' => 'ID Inválido',
                     'message' => 'El ID proporcionado no es válido.'
@@ -103,7 +103,7 @@
             $producto = $this->model->getById($id);
 
             if (!$producto) {
-                flash::set('mensaje', [
+                FlashHelper::set('mensaje', [
                     'type' => 'warning',
                     'header' => 'No encontrado',
                     'message' => 'No se encontró el producto con ID: ' . htmlspecialchars($id)
@@ -121,7 +121,7 @@
 
         public function update($id) {
             if ($_SERVER['REQUEST_METHOD'] !== 'POST' || !is_numeric($id)) {
-                flash::set('mensaje', [
+                FlashHelper::set('mensaje', [
                     'type' => 'danger',
                     'header' => 'Acceso no permitido',
                     'message' => 'Solicitud inválida o ID incorrecto.'
@@ -132,7 +132,7 @@
             protegerContraCSRF(); // <--- Protección CSRF aquí
 
             if (!$this->validarDatosProducto($nombre, $precio, $stock)) {
-                flash::set('mensaje', [
+                FlashHelper::set('mensaje', [
                     'type' => 'danger',
                     'header'=> 'Atención',
                     'message' => 'Por favor, completa todos los campos correctamente.'
@@ -144,7 +144,7 @@
             // Validar si existe otro producto con el mismo nombre
             $existe = $this->model->findByNombre($nombre);
             if ($existe && $existe->getId() != $id) {
-                flash::set('mensaje', [
+                FlashHelper::set('mensaje', [
                     'type' => 'warning',
                     'header'=> 'Nombre duplicado',
                     'message' => 'Ya existe otro producto llamado <strong>"' . htmlspecialchars($nombre) . '"</strong>.'
@@ -160,13 +160,13 @@
             $actualizado = $this->model->update($producto);
 
             if ($actualizado) {
-                flash::set('mensaje', [
+                FlashHelper::set('mensaje', [
                     'type' => 'success',
                     'header'=> 'Actualización exitosa',
                     'message' => 'El producto <strong>"' . htmlspecialchars($nombre) . '"</strong> (ID: ' . $id . ') se ha actualizado correctamente.'
                 ]);
             } else {
-                flash::set('mensaje', [
+                FlashHelper::set('mensaje', [
                     'type' => 'danger',
                     'header'=> 'Error',
                     'message' => 'Error al actualizar el producto.'
@@ -182,13 +182,13 @@
                 protegerContraCSRF(); // <--- Protección CSRF aquí
                 $this->model->delete((int)$id);
                 
-                flash::set('mensaje', [
+                FlashHelper::set('mensaje', [
                     'type' => 'success',
                     'header' => 'Eliminación Exitosa',
                     'message' => 'Producto eliminado correctamente.'
                 ]);
             } else {
-                flash::set('mensaje', [
+                FlashHelper::set('mensaje', [
                     'type' => 'danger',
                     'header' => 'Error',
                     'message' => 'Acceso no permitido o ID inválido.'

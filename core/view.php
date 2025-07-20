@@ -5,7 +5,7 @@
         public $products;
         public $mensaje; // Variable para almacenar el mensaje flash
         function __construct(){
-            $this->mensaje = flash::get('mensaje'); // Obtener el mensaje flash
+            $this->mensaje = FlashHelper::get('mensaje'); // Obtener el mensaje flash
         }
 
         function render($nombre, $datos = []) {

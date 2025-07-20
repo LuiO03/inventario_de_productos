@@ -1,6 +1,6 @@
 <?php 
-if (Flash::hasValidate()):
-    $data = Flash::getValidate();
+if (FlashHelper::hasValidate()):
+    $data = FlashHelper::getValidate();
     $tipo = $data['type'] ?? 'danger';
     $mensajes = $data['mensajes'] ?? [];
 
@@ -24,7 +24,7 @@ if (Flash::hasValidate()):
             <?php else: ?>
                 <ul>
                     <?php foreach ($mensajes as $msg): ?>
-                        <li><i class="ri-arrow-right-double-fill"></i> <?= $msg ?></li>
+                        <li> <?= $msg ?></li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>

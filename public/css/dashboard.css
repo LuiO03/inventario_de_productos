@@ -1,7 +1,3 @@
-html {
-  font-family: Poppins, "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
 body {
   height: 100vh;
   background-color: var(--color-sidebar);
@@ -33,6 +29,7 @@ body.no-scroll {
   background-color: var(--color-sidebar);
   z-index: 10;
   transition: var(--transition-general);
+  box-shadow: var(--sombra-material);
 }
 
 .sidebar-cerrado #sidebar {
@@ -189,8 +186,6 @@ main::-webkit-scrollbar-thumb:hover {
   align-items: center;
   gap: 1em;
   padding: 10px 14px;
-  border-top-right-radius:var(--border-radio-card);
-  border-bottom-right-radius:var(--border-radio-card);
   text-decoration: none;
   color: var(--color-text);
 }
@@ -256,8 +251,6 @@ main::-webkit-scrollbar-thumb:hover {
 #sidebar .sub-menu div li,
 #sidebar .sub-menu div li a {
   background-color: transparent;
-  border-top-right-radius:var(--border-radio-card);
-  border-bottom-right-radius:var(--border-radio-card);
 }
 
 #sidebar .sub-menu.show {
@@ -271,11 +264,11 @@ main::-webkit-scrollbar-thumb:hover {
 
 #sidebar li.active {
   transition: var(--transition-general);
-  font-weight: 700;
+  font-weight: 800;
 }
 
 #sidebar .sidebar-menu li.active a{
-  background-color: var(--color-accent);
+  background-color: var(--color-hover);
   border-radius: 0px 60px 60px 0px;
   padding: 10px 15px;
   border-left: 4px solid var(--color-primario);
@@ -295,7 +288,7 @@ main::-webkit-scrollbar-thumb:hover {
 #sidebar .sidebar-menu .dropdown-btn:hover{
   background-color: var(--color-hover);
   border-left: 4px solid var(--color-primario);
-  font-weight: 700;
+  font-weight: 800;
   color: var(--color-primario);
 }
 
@@ -377,7 +370,7 @@ main::-webkit-scrollbar-thumb:hover {
 }
 
 #sidebar.close .dark-toggle-switch input:checked + .dark-toggle-slider::before {
-  transform: translateX(10px);
+  transform: translateX(13px);
 }
 
 /* =========================================
@@ -439,7 +432,6 @@ main::-webkit-scrollbar-thumb:hover {
   height: 60px;
   width: 100%;
   background-color: var(--color-sidebar);
-  font-family: var(--lato);
   transition: var(--transition-general);
   box-sizing: border-box;
 }
@@ -463,35 +455,6 @@ main::-webkit-scrollbar-thumb:hover {
   font-weight: 500;
 }
 
-/* =========================================
-   MAIN
-========================================= */
-main {
-  box-shadow: inset var(--sombra-material); /* sombra interna */
-  font-family: var(--font-family-base);
-  padding: 15px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  /*place-items: center;*/
-  justify-items: center;
-  align-items: center;
-  gap: 10px;
-  border-radius: 20px 0 0 0px;
-  overflow-y: auto;
-  transition: var(--transition-general);
-  background-color: var(--color-bg);
-  /*
-  background: linear-gradient(-45deg,
-    var(--grad-color-1),
-    var(--grad-color-2),
-    var(--grad-color-3),
-    var(--grad-color-4)
-  );
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;*/
-}
 
 @keyframes gradient {
 	0% {
@@ -527,7 +490,6 @@ main {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  font-family: var(--lato);
 }
 
 .user-sidebar.open {
@@ -619,7 +581,7 @@ main {
 }
 
 /* =========================================
-   RESPONSIVE (MÓVIL)
+   RESPONSIVE (Tablet)
 ========================================= */
 @media (max-width: 800px) {
   body {
@@ -671,8 +633,34 @@ main {
   }
 }
 
-
-/*====== main ======*/
+/* =========================================
+   MAIN
+========================================= */
+main {
+  font-family: var(--font-family-base);
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  gap: 10px;
+  transition: var(--transition-general);
+  overflow-y: auto;
+  
+  /*
+  border-radius: 20px 0 0 0px;
+  background-color: var(--color-bg);
+  background: linear-gradient(-45deg,
+    var(--grad-color-1),
+    var(--grad-color-2),
+    var(--grad-color-3),
+    var(--grad-color-4)
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;*/
+}
 
 .logo-central {
   display: none;
@@ -713,10 +701,11 @@ main {
 @media (max-width: 450px) {
   main {
     padding: 20px 0px;
-    background-color: var(--color-sidebar);
+    /*background-color: var(--color-sidebar);*/
   }
 
   .contenedor {
+    background-color: transparent;
     padding: 10px 15px;
     border-radius: 0px;
   }

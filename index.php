@@ -10,6 +10,7 @@
     require_once 'helpers/LayoutHelper.php';
     require_once 'helpers/ValidationHelper.php';
     require_once 'helpers/FlashHelper.php';
+    require_once 'helpers/TextoHelper.php';
     require_once 'core/csrf.php';
     require_once 'core/controller.php';
     require_once 'core/model.php';

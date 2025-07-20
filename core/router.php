@@ -41,10 +41,12 @@ class Router {
             } else {
                 // Método no encontrado
                 $error = new ErrorController();
+                $error->index();
             }
         } else {
             // Controlador no encontrado
             $error = new ErrorController();
+            $error->index();
         }
     }
 }

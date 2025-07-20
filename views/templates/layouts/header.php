@@ -32,6 +32,7 @@
   <link rel="stylesheet" href="<?=base_url()?>public/css/dashboard.css">
   <link rel="stylesheet" href="<?=base_url()?>public/css/formularios.css">
   <link rel="stylesheet" href="<?=base_url()?>public/css/alert-validate.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/css/fondo-main.css">
   <script>
     if (localStorage.getItem("sidebar-estado") === "close") {
       document.documentElement.classList.add("sidebar-cerrado");
@@ -83,6 +84,11 @@
             <li>
               <a href="<?=base_url()?>categoria" data-label="Categorías">
                 <i class="ri-price-tag-3-line icon"></i><span>Categorías</span>
+              </a>
+            </li>
+            <li>
+              <a href="<?=base_url()?>marca" data-label="Marcas">
+                <i class="ri-award-line icon"></i><span>Marcas</span>
               </a>
             </li>
             <li>
@@ -196,6 +202,16 @@
         </ul>
       </div>
     </aside>
-
+    
+    
     <!-- Contenido principal -->
     <main>
+      <div class="background">
+
+        <span class="ball"></span>
+        <span class="ball"></span>
+        <span class="ball"></span>
+        <span class="ball"></span>
+        <span class="ball"></span>
+        <span class="ball"></span>
+      </div>

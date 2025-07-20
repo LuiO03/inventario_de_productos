@@ -16,7 +16,7 @@
     function protegerContraCSRF() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!isset($_POST['csrf_token']) || !validarTokenCSRF($_POST['csrf_token'])) {
-                flash::set('mensaje', [
+                FlashHelper::set('mensaje', [
                     'type' => 'danger',
                     'header' => 'Error de seguridad',
                     'message' => 'Token CSRF inválido o ausente.'

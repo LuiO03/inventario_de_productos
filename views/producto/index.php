@@ -26,10 +26,10 @@
 
 <!-- Contenido de la tabla -->
 <div class="contenedor">
-    <table id="tablaProductos" class="table-sm d-none w-100 tabla-responsive">
+    <table id="tablaProductos" class="table-sm w-100 tabla-responsive">
         <thead>
             <tr>
-                <th class="text-center">ID</th>
+                <th class="text-start">ID</th>
                 <th class="text-center">Nombre</th>
                 <th class="text-center">Precio</th>
                 <th class="text-center">Stock</th>
@@ -41,7 +41,7 @@
             <?php if (!empty($productos)): ?>
                 <?php foreach ($productos as $producto): ?>
                     <tr>
-                        <td class="" data-label="ID:"><?= htmlspecialchars($producto->getId()) ?></td>
+                        <td data-label="ID:"><?= htmlspecialchars($producto->getId()) ?></td>
                         <td data-label="Nombre:"><?= htmlspecialchars($producto->getNombre()) ?></td>
                         <td class="" data-label="Precio:">S/. <?= htmlspecialchars($producto->getPrecio()) ?></td>
                         <td class="" data-label="Stock:"><?= htmlspecialchars($producto->getStock()) ?></td>

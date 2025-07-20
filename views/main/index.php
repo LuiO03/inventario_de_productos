@@ -3,267 +3,266 @@
 <div class="contenedor-header-home">
     <img src="<?= media() ?>/images/usuarios/pikachu.jpg" alt="Avatar" class="header-user-avatar">
     <div class="header-user-info">
-        <h2 class="text-primario">Buen día, Luis Osorio</h2>
-        <div>
-            <small>
-                Eres <strong>Administrador</strong>
-            </small>
-            <p>
-                Puedes gestionar todos los módulos del sistema.
-            </p>
+        <h2 class="text-primario">Buen día, Luis Q. Osorio</h2>
+        <div class="">
+            <p>Eres <strong>Administrador(a)</strong></p>
+            <small>Puedes gestionar todos los módulos del sistema.</small>
         </div>
     </div>
 </div>
 <div class="contenedor-footer-home">
-    <div class="tabs-container">
-        <div class="tabs-inner">
-            <button class="tab-button active" data-tab="inicio">Inicio</button>
-            <button class="tab-button" data-tab="colaboradores">Colaboradores</button>
-            <div class="tab-indicator"></div>
+    <div class="wrapper_tabs">
+        <input type="radio" class="radio_tab" name="tabs" id="tab1" checked>
+        <input type="radio" class="radio_tab" name="tabs" id="tab2">
+
+        <div class="tabs">
+            <label for="tab1" class="label_tab">Inicio</label>
+            <label for="tab2" class="label_tab">Colaboradores</label>
         </div>
-    </div>
-    <div id="tab-inicio" class="tab-content">
-        <div class="contenedor-menu">
-            <div class="row gx-2 gy-2 gy-md-4 gx-md-4">
-                <!-- Productos -->
-                <div class="col-4 col-md-4 col-lg-3">
-                    <div class="card targeta h-100 border-0">
-                        <a href="<?= BASE_URL ?>producto" class="h-100">
-                            <div class="targeta-conteiner">
-                                <div class="card-icon-bg danger">
-                                    <i class="ri-shirt-line display-4 text-danger"></i>
+        <div id="tab-inicio" class="tab-content">
+            <div class="contenedor-menu">
+                <div class="row gx-2 gy-2 gy-md-4 gx-md-4">
+                    <!-- Productos -->
+                    <div class="col-4 col-md-4 col-lg-3">
+                        <div class="card targeta h-100 border-0">
+                            <a href="<?= BASE_URL ?>producto" class="h-100">
+                                <div class="targeta-conteiner">
+                                    <div class="card-icon-bg danger">
+                                        <i class="ri-shirt-line display-4 text-danger"></i>
+                                    </div>
+                                    <div class="card-info">
+                                        <h1><?= $totalProductos ?? 0 ?></h1>
+                                        <p>Productos</p>
+                                    </div>
                                 </div>
-                                <div class="card-info">
-                                    <h1><?= $totalProductos ?? 0 ?></h1>
-                                    <p>Productos</p>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
-                </div>
     
-                <!-- Categorías -->
-                <div class="col-4 col-md-4 col-lg-3">
-                    <div class="card targeta h-100 border-0">
-                        <a href="<?= BASE_URL ?>categoria" class="h-100">
-                            <div class="targeta-conteiner">
-                                <div class="card-icon-bg info">
-                                    <i class="ri-price-tag-3-line display-4 text-info"></i>
+                    <!-- Categorías -->
+                    <div class="col-4 col-md-4 col-lg-3">
+                        <div class="card targeta h-100 border-0">
+                            <a href="<?= BASE_URL ?>categoria" class="h-100">
+                                <div class="targeta-conteiner">
+                                    <div class="card-icon-bg info">
+                                        <i class="ri-price-tag-3-line display-4 text-info"></i>
+                                    </div>
+                                    <div class="card-info">
+                                        <h1><?= $totalCategorias ?? 0 ?></h1>
+                                        <p>Categorías</p>
+                                    </div>
                                 </div>
-                                <div class="card-info">
-                                    <h1><?= $totalCategorias ?? 0 ?></h1>
-                                    <p>Categorías</p>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
-                </div>
-    
-                <!-- Clientes -->
-                <div class="col-4 col-md-4 col-lg-3">
-                    <div class="card targeta h-100 border-0">
-                        <a href="<?= BASE_URL ?>cliente" class="h-100">
-                            <div class="targeta-conteiner">
-                                <div class="card-icon-bg success">
-                                    <i class="ri-user-line display-4 text-success"></i>
+
+                    <!-- Marcas -->
+                    <div class="col-4 col-md-4 col-lg-3">
+                        <div class="card targeta h-100 border-0">
+                            <a href="<?= BASE_URL ?>marca" class="h-100">
+                                <div class="targeta-conteiner">
+                                    <div class="card-icon-bg primary">
+                                        <i class="ri-award-line display-4 text-primary"></i>
+                                    </div>
+                                    <div class="card-info">
+                                        <h1><?= $totalMarcas ?? 0 ?></h1>
+                                        <p>Marcas</p>
+                                    </div>
                                 </div>
-                                <div class="card-info">
-                                    <h1><?= $totalClientes ?? 0 ?></h1>
-                                    <p>Clientes</p>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
-                </div>
     
-                <!-- Usuarios -->
-                <div class="col-4 col-md-4 col-lg-3">
-                    <div class="card targeta h-100 border-0">
-                        <a href="<?= BASE_URL ?>usuario" class="h-100">
-                            <div class="targeta-conteiner">
-                                <div class="card-icon-bg primary">
-                                    <i class="ri-admin-line display-4 text-primary"></i>
+                    <!-- Clientes -->
+                    <div class="col-4 col-md-4 col-lg-3">
+                        <div class="card targeta h-100 border-0">
+                            <a href="<?= BASE_URL ?>cliente" class="h-100">
+                                <div class="targeta-conteiner">
+                                    <div class="card-icon-bg success">
+                                        <i class="ri-user-line display-4 text-success"></i>
+                                    </div>
+                                    <div class="card-info">
+                                        <h1><?= $totalClientes ?? 0 ?></h1>
+                                        <p>Clientes</p>
+                                    </div>
                                 </div>
-                                <div class="card-info">
-                                    <h1><?= $totalUsuarios ?? 0 ?></h1>
-                                    <p>Usuarios</p>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
-                </div>
     
-                <!-- Pedidos -->
-                <div class="col-4 col-md-4 col-lg-3">
-                    <div class="card targeta h-100 border-0">
-                        <a href="<?= BASE_URL ?>pedido" class="h-100">
-                            <div class="targeta-conteiner">
-                                <div class="card-icon-bg warning">
-                                    <i class="ri-shopping-cart-2-line display-4 text-warning"></i>
+                    <!-- Usuarios -->
+                    <div class="col-4 col-md-4 col-lg-3">
+                        <div class="card targeta h-100 border-0">
+                            <a href="<?= BASE_URL ?>usuario" class="h-100">
+                                <div class="targeta-conteiner">
+                                    <div class="card-icon-bg primary">
+                                        <i class="ri-admin-line display-4 text-primary"></i>
+                                    </div>
+                                    <div class="card-info">
+                                        <h1><?= $totalUsuarios ?? 0 ?></h1>
+                                        <p>Usuarios</p>
+                                    </div>
                                 </div>
-                                <div class="card-info">
-                                    <h1><?= $totalPedidos ?? 0 ?></h1>
-                                    <p>Pedidos</p>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
-                </div>
     
-                <!-- Servicios -->
-                <div class="col-4 col-md-4 col-lg-3">
-                    <div class="card targeta h-100 border-0">
-                        <a href="<?= BASE_URL ?>servicio" class="h-100">
-                            <div class="targeta-conteiner">
-                                <div class="card-icon-bg info">
-                                    <i class="ri-tools-line display-4 text-info"></i>
+                    <!-- Pedidos -->
+                    <div class="col-4 col-md-4 col-lg-3">
+                        <div class="card targeta h-100 border-0">
+                            <a href="<?= BASE_URL ?>pedido" class="h-100">
+                                <div class="targeta-conteiner">
+                                    <div class="card-icon-bg warning">
+                                        <i class="ri-shopping-cart-2-line display-4 text-warning"></i>
+                                    </div>
+                                    <div class="card-info">
+                                        <h1><?= $totalPedidos ?? 0 ?></h1>
+                                        <p>Pedidos</p>
+                                    </div>
                                 </div>
-                                <div class="card-info">
-                                    <h1><?= $totalServicios ?? 0 ?></h1>
-                                    <p>Servicios</p>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
-                </div>
     
-                <!-- Blog -->
-                <div class="col-4 col-md-4 col-lg-3">
-                    <div class="card targeta h-100 border-0">
-                        <a href="<?= BASE_URL ?>blog" class="h-100">
-                            <div class="targeta-conteiner">
-                                <div class="card-icon-bg secondary">
-                                    <i class="ri-article-line display-4 text-secondary"></i>
+                    <!-- Servicios -->
+                    <div class="col-4 col-md-4 col-lg-3">
+                        <div class="card targeta h-100 border-0">
+                            <a href="<?= BASE_URL ?>servicio" class="h-100">
+                                <div class="targeta-conteiner">
+                                    <div class="card-icon-bg info">
+                                        <i class="ri-tools-line display-4 text-info"></i>
+                                    </div>
+                                    <div class="card-info">
+                                        <h1><?= $totalServicios ?? 0 ?></h1>
+                                        <p>Servicios</p>
+                                    </div>
                                 </div>
-                                <div class="card-info">
-                                    <h1><?= $totalBlog ?? 0 ?></h1>
-                                    <p>Blog</p>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
-                </div>
     
-                <!-- Mensajes -->
-                <div class="col-4 col-md-4 col-lg-3">
-                    <div class="card targeta h-100 border-0">
-                        <a href="<?= BASE_URL ?>mensaje" class="h-100">
-                            <div class="targeta-conteiner">
-                                <div class="card-icon-bg primary">
-                                    <i class="ri-mail-line display-4 text-primary"></i>
+                    <!-- Blog -->
+                    <div class="col-4 col-md-4 col-lg-3">
+                        <div class="card targeta h-100 border-0">
+                            <a href="<?= BASE_URL ?>blog" class="h-100">
+                                <div class="targeta-conteiner">
+                                    <div class="card-icon-bg secondary">
+                                        <i class="ri-article-line display-4 text-secondary"></i>
+                                    </div>
+                                    <div class="card-info">
+                                        <h1><?= $totalBlog ?? 0 ?></h1>
+                                        <p>Blog</p>
+                                    </div>
                                 </div>
-                                <div class="card-info">
-                                    <h1><?= $totalMensajes ?? 0 ?></h1>
-                                    <p>Mensajes</p>
-                                </div>
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     </div>
-                </div>
     
+                    <!-- Mensajes -->
+                    <div class="col-4 col-md-4 col-lg-3">
+                        <div class="card targeta h-100 border-0">
+                            <a href="<?= BASE_URL ?>mensaje" class="h-100">
+                                <div class="targeta-conteiner">
+                                    <div class="card-icon-bg primary">
+                                        <i class="ri-mail-line display-4 text-primary"></i>
+                                    </div>
+                                    <div class="card-info">
+                                        <h1><?= $totalMensajes ?? 0 ?></h1>
+                                        <p>Mensajes</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+    
+                </div>
             </div>
         </div>
-    </div>
-    <div id="tab-colaboradores" class="tab-content">
-        <div class="contenedor-menu">
-            <div class="row gx-2 gy-2 gy-md-4 gx-md-4">
+        <div id="tab-colaboradores" class="tab-content">
+            <div class="contenedor-menu">
+                <div class="row gx-2 gy-2 gy-md-4 gx-md-4">
     
-                <!-- Colaborador 1 -->
-                <div class="col-6 col-md-2">
-                    <div class="card targeta h-100 border-0">
-                        <div class="targeta-conteiner-user">
-                            <img src="https://i.pravatar.cc/100?img=1" class="avatar-user" alt="Usuario 1">
-                            <div class="card-info-user">
-                                <h3>Lucía Ramírez</h3>
-                                <small>Administradora</small>
+                    <!-- Colaborador 5 -->
+                    <div class="col-6 col-md-3 col-lg-2">
+                        <div class="card targeta h-100 border-0">
+                            <div class="targeta-conteiner-user">
+                                <img src="<?= media() ?>/images/usuarios/pikachu.jpg" class="avatar-user" alt="Usuario 5">
+                                <div class="card-info-user">
+                                    <p class="fw-bolder">Luis Alberto</p>
+                                    <small>Administrador</small>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-    
-                <!-- Colaborador 2 -->
-                <div class="col-6 col-md-2">
-                    <div class="card targeta h-100 border-0">
-                        <div class="targeta-conteiner-user">
-                            <img src="https://i.pravatar.cc/100?img=2" class="avatar-user" alt="Usuario 2">
-                            <div class="card-info-user">
-                                <h3>Carlos Gómez</h3>
-                                <small>Editor</small>
+                    <!-- Colaborador 6 -->
+                    <div class="col-6 col-md-3 col-lg-2">
+                        <div class="card targeta h-100 border-0">
+                            <div class="targeta-conteiner-user">
+                                <img src="<?= media() ?>/images/usuarios/roku.jpg" class="avatar-user" alt="Usuario 6">
+                                <div class="card-info-user">
+                                    <p class="fw-bolder">Eucladiana</p>
+                                    <small>Administrador</small>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-    
-                <!-- Colaborador 3 -->
-                <div class="col-6 col-md-2">
-                    <div class="card targeta h-100 border-0">
-                        <div class="targeta-conteiner-user">
-                            <img src="https://i.pravatar.cc/100?img=3" class="avatar-user" alt="Usuario 3">
-                            <div class="card-info-user">
-                                <h3>Andrea Soto</h3>
-                                <small>Diseñadora</small>
+                    <!-- Colaborador 1 -->
+                    <div class="col-6 col-md-3 col-lg-2">
+                        <div class="card targeta h-100 border-0">
+                            <div class="targeta-conteiner-user">
+                                <img src="https://i.pravatar.cc/100?img=1" class="avatar-user" alt="Usuario 1">
+                                <div class="card-info-user">
+                                    <p class="fw-bolder">Lucía Ramírez</p>
+                                    <small>Administradora</small>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
     
-                <!-- Colaborador 4 -->
-                <div class="col-6 col-md-2">
-                    <div class="card targeta h-100 border-0">
-                        <div class="targeta-conteiner-user">
-                            <img src="https://i.pravatar.cc/100?img=4" class="avatar-user" alt="Usuario 4">
-                            <div class="card-info-user">
-                                <h3>Pedro Luján</h3>
-                                <small>Soporte Técnico</small>
+                    <!-- Colaborador 2 -->
+                    <div class="col-6 col-md-3 col-lg-2">
+                        <div class="card targeta h-100 border-0">
+                            <div class="targeta-conteiner-user">
+                                <img src="https://i.pravatar.cc/100?img=2" class="avatar-user" alt="Usuario 2">
+                                <div class="card-info-user">
+                                    <p class="fw-bolder">Carlos Gómez</p>
+                                    <small>Editor</small>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
     
+                    <!-- Colaborador 3 -->
+                    <div class="col-6 col-md-3 col-lg-2">
+                        <div class="card targeta h-100 border-0">
+                            <div class="targeta-conteiner-user">
+                                <img src="https://i.pravatar.cc/100?img=3" class="avatar-user" alt="Usuario 3">
+                                <div class="card-info-user">
+                                    <p class="fw-bolder">Andrea Soto</p>
+                                    <small>Diseñadora</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <!-- Colaborador 4 -->
+                    <div class="col-6 col-md-3 col-lg-2">
+                        <div class="card targeta h-100 border-0">
+                            <div class="targeta-conteiner-user">
+                                <img src="https://i.pravatar.cc/100?img=4" class="avatar-user" alt="Usuario 4">
+                                <div class="card-info-user">
+                                    <p class="fw-bolder">Pedro Luján</p>
+                                    <small>Soporte Técnico</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-  const tabButtons = document.querySelectorAll('.tab-button');
-  const tabContents = document.querySelectorAll('.tab-content');
-  const tabIndicator = document.querySelector('.tab-indicator');
-  const tabs = Array.from(tabButtons);
-  const totalTabs = tabs.length;
-  let currentTab = 0;
-  let startX = 0;
-
-  function activateTab(index) {
-    const selectedBtn = tabs[index];
-    currentTab = index;
-
-    // Activar botón y contenido
-    tabButtons.forEach(btn => btn.classList.remove('active'));
-    selectedBtn.classList.add('active');
-
-    tabContents.forEach(content => {
-      content.classList.toggle('active', content.id === `tab-${selectedBtn.dataset.tab}`);
-    });
-
-    // Actualizar indicador
-    const rect = selectedBtn.getBoundingClientRect();
-    const parentRect = selectedBtn.parentElement.getBoundingClientRect();
-    tabIndicator.style.left = `${rect.left - parentRect.left}px`;
-    tabIndicator.style.width = `${rect.width}px`;
-  }
-
-  // Eventos click en tabs
-  tabButtons.forEach((btn, index) => {
-    btn.addEventListener('click', () => activateTab(index));
-  });
-
-  // Al cargar
-  window.addEventListener("DOMContentLoaded", () => {
-    const activeIndex = tabs.findIndex(btn => btn.classList.contains("active"));
-    activateTab(activeIndex >= 0 ? activeIndex : 0);
-  });
-</script>
 
 <?php
     modalFlash($mensaje);

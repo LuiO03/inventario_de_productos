@@ -14,7 +14,7 @@ class Validador
         return null;
     }
 
-    public static function texto($valor, $nombreCampo, $min, $max, $mensaje = null)
+    public static function limitarTexto($valor, $nombreCampo, $min, $max, $mensaje = null)
     {
         $longitud = mb_strlen(trim($valor));
         if ($longitud < $min || $longitud > $max) {
@@ -119,46 +119,12 @@ class Validador
         return null;
     }
 
-    // =========================
-    // LIMPIEZA / SANITIZACIÓN
-    // =========================
-
-    public static function limpiarCadena($cadena)
+    public static function noSoloNumeros($texto, $campo): ?string
     {
-        $string = trim(preg_replace(['/\s+/', '/^\s|\s$/'], [' ', ''], $cadena));
-        $string = stripslashes($string);
-        $string = strip_tags($string);
-
-        $peligros = [
-            "/<script\b[^>]*>(.*?)<\/script>/is",
-            "/(SELECT|DELETE|INSERT|DROP|COUNT|LIKE)\s+/i",
-            "/OR\s+['\"´]?[a-z0-9]+['\"´]?\s*=\s*['\"´]?[a-z0-9]+['\"´]?/i",
-            "/--/", "/\^/", "/\[/", "/\]/", "/==/"
-        ];
-
-        return preg_replace($peligros, "", $string);
-    }
-
-    public static function limpiarTildes($cadena)
-    {
-        return str_replace(
-            ['Á','À','Â','Ä','á','à','ä','â','ª','É','È','Ê','Ë','é','è','ë','ê',
-            'Í','Ì','Ï','Î','í','ì','ï','î','Ó','Ò','Ö','Ô','ó','ò','ö','ô',
-            'Ú','Ù','Û','Ü','ú','ù','ü','û','Ñ','ñ','Ç','ç',',','.',';',':'],
-            ['A','A','A','A','a','a','a','a','a','E','E','E','E','e','e','e','e',
-            'I','I','I','I','i','i','i','i','O','O','O','O','o','o','o','o',
-            'U','U','U','U','u','u','u','u','N','n','C','c','','','',''],
-            $cadena
-        );
-    }
-
-    // =========================
-    // ESCAPE DE SALIDA
-    // =========================
-
-    public static function escape($valor)
-    {
-        return htmlspecialchars((string) $valor, ENT_QUOTES, 'UTF-8');
+        if (preg_match('/^\d+$/', $texto)) {
+            return "El campo <strong>{$campo}</strong> no puede contener solo números.";
+        }
+        return null;
     }
 
     // =========================

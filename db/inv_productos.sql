@@ -99,20 +99,29 @@ CREATE TABLE categorias (
     modificado_por INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    parent_id INT DEFAULT NULL,
+
     FOREIGN KEY (creado_por) REFERENCES usuarios(id),
-    FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
+    FOREIGN KEY (modificado_por) REFERENCES usuarios(id),
+    FOREIGN KEY (parent_id) REFERENCES categorias(id) ON DELETE RESTRICT
 );
 
-INSERT INTO categorias (nombre, descripcion, estado, imagen, slug, creado_por, modificado_por)
+INSERT INTO categorias (nombre, descripcion, estado, imagen, slug, creado_por, modificado_por, parent_id) 
 VALUES
-('Ropa para Hombre', 'Categoría que agrupa prendas para caballeros.', 1, 'imagen.jpg', 'ropa-de-hombre', 1, 1),
-('Ropa para Ancianos', 'Categoría enfocada en vestimenta cómoda y funcional para personas mayores.', 0, 'imagen.jpg', 'ropa-de-ancianos', 2, 2),
-('Ropa para Perros', 'Categoría de ropa y accesorios diseñados para perros.', 0, 'imagen.jpg', 'ropa-para-perros', 2, 2),
-('Ropa para Gatos', 'Ropa y complementos pensados para gatos domésticos.', 0, 'imagen.jpg', 'ropa-para-gatos', 2, 2),
-('Ropa para Conejos', 'Pequeñas prendas y accesorios para conejos como mascotas.', 0, 'imagen.jpg', 'ropa-para-conejos', 2, 2),
-('Ropa para Niñas', 'Categoría de vestimenta infantil femenina.', 0, 'imagen.jpg', 'ropa-de-ninas', 2, 2),
-('Ropa para Aliens', 'Colección imaginaria de ropa futurista para seres extraterrestres.', 0, 'imagen.jpg', 'ropa-para-aliens', 2, 2),
-('Ropa para Adolescentes', 'Moda juvenil para adolescentes en tendencia.', 0, 'imagen.jpg', 'ropa-de-adolescentes', 2, 2);
+('Ropa para Hombre', 'Categoría que agrupa prendas para caballeros.', 1, 'imagen.jpg', 'ropa-para-hombre', 2, NULL, NULL),
+('Ropa para Niñas', 'Categoría de vestimenta infantil femenina.', 1, 'imagen.jpg', 'ropa-para-ninas', 2, NULL, NULL),
+('Ropa para Adolescentes', 'Moda juvenil para adolescentes en tendencia.', 1, 'imagen.jpg', 'ropa-para-adolescentes', 2, NULL, NULL),
+('Ropa para Ancianos', 'Categoría enfocada en vestimenta cómoda y funcional para personas mayores.', 1, 'imagen.jpg', 'ropa-para-ancianos', 2, NULL, NULL),
+('Ropa para Mascotas', 'Ropa y accesorios diseñados para mascotas.', 1, 'imagen.jpg', 'ropa-para-mascotas', 2, NULL, NULL),
+
+-- Subcategorías ejemplo bajo "Ropa para Hombre" (id = 1)
+('Polos para Hombre', 'Polos cómodos y frescos para caballeros.', 1, 'imagen.jpg', 'polos-para-hombre', 1, NULL, 1),
+('Pantalones para Hombre', 'Pantalones formales y casuales para hombres.', 1, 'imagen.jpg', 'pantalones-para-hombre', 1, NULL, 1),
+
+-- Subcategorías bajo "Ropa para Mascotas" (id = 5)
+('Ropa para Perros', 'Ropa y accesorios diseñados para perros.', 1, 'imagen.jpg', 'ropa-para-perros', 1, NULL, 5),
+('Ropa para Gatos', 'Ropa y complementos pensados para gatos.', 1, 'imagen.jpg', 'ropa-para-gatos', 1, NULL, 5),
+('Ropa para Conejos', 'Prendas y accesorios para conejos como mascotas.', 1, 'imagen.jpg', 'ropa-para-conejos', 1, NULL, 5);
 
 
 CREATE TABLE marcas (
@@ -120,6 +129,8 @@ CREATE TABLE marcas (
     nombre VARCHAR(100) NOT NULL UNIQUE,
     descripcion TEXT,
     estado TINYINT(1) DEFAULT 1,
+    imagen VARCHAR(255) DEFAULT NULL,
+    slug VARCHAR(100) UNIQUE,
     creado_por INT,
     modificado_por INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -128,11 +139,13 @@ CREATE TABLE marcas (
     FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
 );
 
-INSERT INTO marcas (nombre, descripcion, estado, creado_por, modificado_por)
-VALUES
-('Nike', 'Marca deportiva internacional', 1, 1, 1),
-('Adidas', 'Marca reconocida por su ropa y calzado deportivo', 1, 2, 2),
-('Zara', 'Marca de moda urbana y casual', 1, 1, 2);
+INSERT INTO marcas (nombre, descripcion, estado, imagen, slug, creado_por, modificado_por)
+VALUES 
+('Nike', 'Marca líder en ropa y calzado deportivo', 1, 'nike.png', 'nike', 1, NULL),
+('Adidas', 'Marca reconocida mundialmente por calzado y ropa deportiva', 1, 'adidas.png', 'adidas', 1, NULL),
+('Puma', 'Marca deportiva con estilo urbano', 1, 'puma.png', 'puma', 1, NULL),
+('Reebok', 'Marca especializada en fitness y deportes de alto rendimiento', 1, 'reebok.png', 'reebok', 1, NULL),
+('Under Armour', 'Marca de ropa deportiva con tecnología avanzada', 1, 'underarmour.png', 'under-armour', 1, NULL);
 
 CREATE TABLE productos (
     id INT AUTO_INCREMENT PRIMARY KEY,

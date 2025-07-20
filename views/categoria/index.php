@@ -23,13 +23,13 @@
 </div>
 <!-- Contenido de la tabla -->
 <div class="contenedor">
-    <table id="tablaCategorias" class="table-sm d-none w-100 tabla-responsive">
+    <table id="tablaCategorias" class="table-sm w-100 tabla-responsive">
         <thead>
             <tr>
-                <th class="text-center">ID</th>
-                <th class="text-center">Nombre</th>
-                <th class="text-center">Descripción</th>
-                <th class="text-center">Estado</th>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Estado</th>
                 <th class="text-center">Opciones</th>
             </tr>
         </thead>
@@ -100,8 +100,8 @@
                         document.getElementById('modal-nombre').textContent = data.nombre || '-';
                         document.getElementById('modal-descripcion').textContent = data.descripcion || '(Sin descripción)';
                         document.getElementById('modal-estado').innerHTML = data.estado ?
-                            '<span class="badge bg-success p-2"><i class="ri-eye-line"></i> Habilitado</span>' :
-                            '<span class="badge bg-secondary p-2"><i class="ri-eye-off-line"></i> Deshabilitado</span>';
+                            '<span class="medalla bg-success"><i class="ri-eye-line"></i> Habilitado</span>' :
+                            '<span class="medalla bg-secondary"><i class="ri-eye-off-line"></i> Deshabilitado</span>';
                         document.getElementById('modal-creado-por').textContent = data.creado_por ?? '-';
                         document.getElementById('modal-modificado-por').textContent = data.modificado_por ?? '-';
                         document.getElementById('modal-created-at').textContent = data.created_at || '-';
@@ -112,7 +112,7 @@
                         document.getElementById('modal-id').textContent = '-';
                         document.getElementById('modal-nombre').textContent = 'Error';
                         document.getElementById('modal-descripcion').textContent = '-';
-                        document.getElementById('modal-estado').innerHTML = '<span class="badge bg-danger">Error</span>';
+                        document.getElementById('modal-estado').innerHTML = '<span class="medalla bg-danger">Error</span>';
                     });
             });
         });
@@ -200,7 +200,9 @@
                 </div>
             </div>
             <div class="modal-footer border-0 justify-content-center mt-0 pt-0">
-                <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal"><i class="ri-close-line"></i> Cerrar</button>
+                <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
+                    <i class="ri-close-line"></i> Cerrar
+                </button>
             </div>
         </div>
     </div>

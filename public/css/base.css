@@ -287,6 +287,17 @@
   transition: color 0.3s ease-in-out;
 }
 
+.medalla{
+  display: flex;
+  gap: 5px;
+  width: fit-content;
+  padding: 3px 10px;
+  border-radius: var(--border-radio-elements);
+  font-size: 12px;
+  color: white;
+  font-weight: var(--fw-bold);
+}
+
 /* ==========================================
    TIPOGRAFÍA ELEMENTOS
    ========================================== */
@@ -321,6 +332,7 @@ p {
 
 small {
   font-size: var(--font-size-xs);
+  display: inline-block;
 }
 
 /* ==========================================

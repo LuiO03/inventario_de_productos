@@ -1,5 +1,5 @@
 <?php
-class Flash
+class FlashHelper
 {
 
     public static function set($key, $message, $type = 'success')
@@ -63,5 +63,25 @@ class Flash
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
         return isset($_SESSION['flash_validate']);
+    }
+
+    public static function setOld($oldData)
+    {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        $_SESSION['flash_old'] = $oldData;
+    }
+
+    public static function getOld()
+    {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        $old = $_SESSION['flash_old'] ?? null;
+        unset($_SESSION['flash_old']);
+        return $old;
+    }
+
+    public static function hasOld()
+    {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        return isset($_SESSION['flash_old']);
     }
 }

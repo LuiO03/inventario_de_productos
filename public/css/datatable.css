@@ -223,6 +223,10 @@
   animation: slideInLeft 0.3s ease-in-out;
 }
 
+#tablaCategorias tbody tr {
+  animation: slideInLeft 0.3s ease-in-out;
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;

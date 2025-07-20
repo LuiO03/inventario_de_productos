@@ -37,7 +37,7 @@
         require_once "views/templates/components/alert-validate.php";
     }
 
-        function getEntidadDinamica(): array {
+    function getEntidadDinamica(): array {
         $controlador = strtolower(Router::$controller ?? 'main');
         $metodo = Router::$method ?? 'index';
 
@@ -58,6 +58,7 @@
             'icono'       => $icono
         ];
     }
+    
     function partialBreadcrumb() {
         require_once "views/templates/components/breadcrumb.php";
     }
@@ -74,7 +75,7 @@
     }
 
     function htmlEscape($valor): string {
-        return Validador::escape($valor);
+        return TextoHelper::escape($valor);
     }
 
     function generarSlug(string $cadena): string {

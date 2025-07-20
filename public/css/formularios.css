@@ -10,10 +10,12 @@
   box-shadow: var(--sombra-material);
   transition: var(--transition-general);
   gap: 20px;
+  font-family: var(--font-family-dashboard);
 }
 
 @media (max-width: 450px) {
   .formulario {
+    background-color: transparent;
     padding: 10px 15px;
     border-radius: 0px;
     gap: 30px;

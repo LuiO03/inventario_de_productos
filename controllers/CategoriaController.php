@@ -10,19 +10,25 @@ class CategoriaController extends Controller
     }
 
     // Validaciones de datos de formulario
-    private function validarDatosCategoria(&$nombre, &$descripcion, &$estado, &$errores): bool
+    private function validarDatosCategoria(&$nombre, &$descripcion, &$estado, &$parentId, &$errores): bool
     {
         $nombre = trim($_POST['nombre'] ?? '');
         $descripcion = trim($_POST['descripcion'] ?? '');
         $estado = isset($_POST['estado']) && $_POST['estado'] === '1' ? 1 : 0;
+        $parentId = !empty($_POST['parent_id']) ? (int)$_POST['parent_id'] : null;
 
         $errores = [];
 
         if ($e = Validador::campoObligatorio($nombre, 'Nombre')) $errores[] = $e;
-        if ($e = Validador::texto($nombre, 'Nombre', 3, 50)) $errores[] = $e;
-        if ($e = Validador::texto($descripcion, 'Descripción', 0, 255)) $errores[] = $e;
+        if ($e = Validador::limitarTexto($nombre, 'Nombre', 3, 50)) $errores[] = $e;
+        if ($e = Validador::limitarTexto($descripcion, 'Descripción', 0, 255)) $errores[] = $e;
+        if ($e = Validador::noSoloNumeros($descripcion, 'Descripción')) $errores[] = $e;
         if ($e = Validador::booleano($estado, 'Estado')) $errores[] = $e;
+        if ($e = Validador::noSoloNumeros($nombre, 'Nombre')) $errores[] = $e;
         if ($e = Validador::imagen($_FILES['imagen'] ?? [])) $errores[] = $e;
+
+        // Validar que parent_id no sea igual a sí mismo o inválido (opcional)
+        if ($parentId !== null && !is_numeric($parentId)) $errores[] = "La categoría padre es inválida.";
 
         return empty($errores);
     }
@@ -37,7 +43,7 @@ class CategoriaController extends Controller
     }
     private function redirigirConMensaje($ruta, $tipo, $header, $mensaje)
     {
-        Flash::set('mensaje', [
+        FlashHelper::set('mensaje', [
             'type' => $tipo,
             'header' => $header,
             'message' => $mensaje
@@ -61,19 +67,24 @@ class CategoriaController extends Controller
     {
         $GLOBALS['pageTitle'] = 'Agregar Categoría';
         $this->view->render('categoria/create', [
-            'mensaje' => $this->view->mensaje
+            'mensaje' => $this->view->mensaje,
+            'old' => FlashHelper::getOld(),
         ]);
     }
-
     public function store()
     {
         protegerContraCSRF();
 
-        if (!$this->validarDatosCategoria($nombre, $descripcion, $estado, $errores)) {
-            Flash::setValidate($errores);
+        if (!$this->validarDatosCategoria($nombre, $descripcion, $estado, $parentId, $errores)) {
+            FlashHelper::setOld($_POST);
+            FlashHelper::setValidate($errores);
             header('Location: ' . BASE_URL . 'categoria/create');
             exit;
         }
+
+        // Formatear antes de guardar
+        $nombre = TextoHelper::formatearNombre($nombre);
+        $descripcion = TextoHelper::primeraLetraMayuscula($descripcion);
 
         if ($this->model->findByNombre($nombre)) {
             $this->redirigirConMensaje('categoria/create', 'warning', 'Duplicado', 'Ya existe una categoría con el nombre <strong>"' . htmlspecialchars($nombre) . '"</strong>.');
@@ -97,16 +108,17 @@ class CategoriaController extends Controller
         }
 
         $categoria = new Categoria(
-            0,
-            $nombre,
-            $descripcion,
-            $estado,
-            $nombreArchivo,
-            isset($_SESSION['usuario_id']) ? (int)$_SESSION['usuario_id'] : null,
-            null,
-            $slug
+            id: 0,
+            nombre: $nombre,
+            descripcion: $descripcion,
+            estado: $estado,
+            imagen: $nombreArchivo,
+            slug: $slug,
+            creadoPor: isset($_SESSION['usuario_id']) ? (int)$_SESSION['usuario_id'] : null,
+            modificadoPor: null
         );
         $categoria->setSlug($slug);
+        $categoria->setParentId($parentId);
 
         if ($this->model->create($categoria)) {
             $this->redirigirConMensaje('categoria/index', 'success', 'Registro exitoso', 'Categoría <strong>"' . htmlspecialchars($nombre) . '"</strong> creada correctamente.');
@@ -114,7 +126,6 @@ class CategoriaController extends Controller
             $this->redirigirConMensaje('categoria/create', 'danger', 'Error', 'No se pudo registrar la categoría.');
         }
     }
-
     public function edit($slugOrId)
     {
         $categoria = $this->obtenerCategoriaPorIdOSlug($slugOrId);
@@ -133,7 +144,6 @@ class CategoriaController extends Controller
         ]);
     }
 
-
     public function update($slugOrId)
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -142,11 +152,14 @@ class CategoriaController extends Controller
 
         protegerContraCSRF();
 
-        if (!$this->validarDatosCategoria($nombre, $descripcion, $estado, $errores)) {
-            Flash::setValidate($errores);
+        if (!$this->validarDatosCategoria($nombre, $descripcion, $estado, $parentId, $errores)) {
+            FlashHelper::setValidate($errores);
             header('Location: ' . BASE_URL . 'categoria/edit/' . urlencode($slugOrId));
             exit;
         }
+
+        $nombre = TextoHelper::formatearNombre($nombre);
+        $descripcion = TextoHelper::primeraLetraMayuscula($descripcion);
 
         $categoria = $this->obtenerCategoriaPorIdOSlug($slugOrId);
         if (!$categoria) {
@@ -162,6 +175,7 @@ class CategoriaController extends Controller
         $categoria->setNombre($nombre);
         $categoria->setDescripcion($descripcion);
         $categoria->setEstado($estado);
+        $categoria->setParentId($parentId);
         $categoria->setModificadoPor(isset($_SESSION['usuario_id']) ? (int)$_SESSION['usuario_id'] : null);
 
         // Slug actualizado si cambió el nombre
@@ -195,8 +209,6 @@ class CategoriaController extends Controller
             $this->redirigirConMensaje('categoria/index', 'danger', 'Error', 'No se pudo actualizar.');
         }
     }
-
-
     public function delete($id)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_numeric($id)) {
@@ -257,10 +269,10 @@ class CategoriaController extends Controller
         ) {
             $data = json_decode(file_get_contents('php://input'), true);
             $nuevoEstado = isset($data['estado']) ? (int)$data['estado'] : null;
+            $usuarioId = $_SESSION['usuario_id'] ?? null;
 
-            if ($nuevoEstado !== null) {
-                $this->loadModel('Categoria');
-                $actualizado = $this->model->actualizarEstado($id, $nuevoEstado);
+            if ($nuevoEstado !== null && $usuarioId) {
+                $actualizado = $this->model->actualizarEstado($id, $nuevoEstado, $usuarioId);
                 echo json_encode(['success' => $actualizado]);
                 exit;
             }
@@ -269,4 +281,5 @@ class CategoriaController extends Controller
         echo json_encode(['success' => false]);
         exit;
     }
+
 }

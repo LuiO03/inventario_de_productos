@@ -4,11 +4,11 @@ partialBreadcrumb();
 ?>
 
 <div class="contenedor-header">
-    <h1>Agregar Categoría</h1>
-    <p>Aquí puedes agregar una nueva categoría para los productos.</p>
+    <h1>Agregar Marca</h1>
+    <p>Aquí puedes agregar una nueva marca para los productos.</p>
 </div>
 
-<form action="<?= BASE_URL ?>categoria/store" method="post" enctype="multipart/form-data" class="formulario" autocomplete="off">
+<form action="<?= BASE_URL ?>marca/store" method="post" enctype="multipart/form-data" class="formulario" autocomplete="off">
     <input type="hidden" name="csrf_token" value="<?= generarTokenCSRF(); ?>">
 
     <div class="formulario-contenido">
@@ -16,7 +16,7 @@ partialBreadcrumb();
             <?php alertValidate(); ?>
             <!-- Nombre -->
             <div class="input-group-nowrap">
-                <label for="nombre" class="form-label">Nombre de la Categoría</label>
+                <label for="nombre" class="form-label">Nombre de la Marca</label>
                 <div class="input-icono">
                     <i class="ri-price-tag-3-line"></i>
                     <input type="text" id="nombre" name="nombre" required placeholder="Ingrese el nombre" value="<?= htmlspecialchars($old['nombre'] ?? '') ?>">
@@ -49,7 +49,7 @@ partialBreadcrumb();
         <div class="formulario-columna-nowrap">
             <!-- Imagen -->
             <div class="input-group-nowrap">
-                <label class="form-label">Imagen de la categoría</label>
+                <label class="form-label">Imagen de la marca</label>
                 <div class="contenedor-upload">
                     <div class="upload-header" id="preview-container">
                         <img id="preview-imagen" src="" alt="Vista previa vacía" draggable="false" style="display: none;">
@@ -71,7 +71,7 @@ partialBreadcrumb();
     </div>
 
     <div class="formulario-acciones">
-        <a href="<?= BASE_URL ?>categoria/" class="boton-form boton-volver">
+        <a href="<?= BASE_URL ?>marca/" class="boton-form boton-volver">
             <i class="ri-arrow-left-circle-fill"></i> Volver
         </a>
         <button type="button" class="boton-form boton-limpiar" id="btnLimpiar">
@@ -84,7 +84,6 @@ partialBreadcrumb();
 </form>
 
 <script>
-    // Botón limpiar
     document.getElementById('btnLimpiar').addEventListener('click', () => {
         document.getElementById('nombre').value = '';
         document.getElementById('descripcion').value = '';
@@ -98,6 +97,6 @@ partialBreadcrumb();
 </script>
 
 <?php
-    modalFlash($mensaje);
-    footerAdmin();
+modalFlash($mensaje);
+footerAdmin();
 ?>

@@ -36,11 +36,11 @@ function actualizarIconosOrden() {
         $orderSpan.html(''); // Limpiar íconos previos
 
         if ($th.hasClass('dt-ordering-asc')) {
-            $orderSpan.html('<i class="ri-arrow-up-fill text-info pe-3"></i>');
+            $orderSpan.html('<i class="ri-arrow-up-fill text-info pe-2"></i>');
         } else if ($th.hasClass('dt-ordering-desc')) {
-            $orderSpan.html('<i class="ri-arrow-down-fill text-info pe-3"></i>');
+            $orderSpan.html('<i class="ri-arrow-down-fill text-info pe-2"></i>');
         } else if ($th.hasClass('dt-orderable-asc') && $th.hasClass('dt-orderable-desc')) {
-            $orderSpan.html('<i class="ri-arrow-up-down-line text-info pe-3"></i>');
+            $orderSpan.html('<i class="ri-arrow-up-down-line text-info pe-2"></i>');
         }
     });
 }
@@ -58,7 +58,7 @@ $(document).ready(function () {
         language: language_es,
         initComplete: function () {
             // Mostrar tabla una vez inicializada
-            $('#tablaCategorias').removeClass('d-none');
+            $('#tablaCategorias').addClass('ready');
             actualizarIconosOrden();
 
             // Placeholder para el campo de búsqueda
@@ -90,7 +90,7 @@ $(document).ready(function () {
     const $searchInput = $('.dt-search input[type="search"]');
     const $searchWrapper = $('.dt-search');
     const $clearBtn = $(`
-        <button class="clear-search text-danger" type="button">
+        <button class="clear-search text-danger fs-4" type="button">
             <i class="ri-close-circle-fill"></i>
         </button>
     `);
@@ -109,16 +109,4 @@ $(document).ready(function () {
         tabla.search('').draw();
         $clearBtn.hide();
     });
-
-    // Animación de filas al redibujar (opcional)
-    /*
-    tabla.on('draw', () => {
-        const filas = document.querySelectorAll('#tablaCategorias tbody tr');
-        filas.forEach(fila => {
-            fila.style.animation = 'none';
-            void fila.offsetWidth;
-            fila.style.animation = 'fadeInUp 0.3s ease-in-out';
-        });
-    });
-    */
 });

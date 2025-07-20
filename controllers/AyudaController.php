@@ -5,7 +5,7 @@
         }
 
         public function index() {
-            $this->view->mensaje = Flash::get('mensaje'); // Recupera el mensaje flash
+            $this->view->mensaje = FlashHelper::get('mensaje'); // Recupera el mensaje flash
             $this->view->render('ayuda/index');           // Renderiza la vista principal
         }
     }

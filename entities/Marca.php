@@ -1,5 +1,5 @@
 <?php
-class Categoria
+class Marca
 {
     private int $id;
     private string $nombre;
@@ -11,7 +11,6 @@ class Categoria
     private ?int $modificadoPor;
     private ?string $createdAt;
     private ?string $updatedAt;
-    private ?int $parentId;
     public ?string $nombreCreador = null;
     public ?string $nombreModificador = null;
 
@@ -26,7 +25,6 @@ class Categoria
         ?int $modificadoPor = null,
         ?string $createdAt = null,
         ?string $updatedAt = null,
-        ?int $parentId = null
     ) {
         $this->id = $id;
         $this->nombre = $nombre;
@@ -38,23 +36,21 @@ class Categoria
         $this->modificadoPor = $modificadoPor;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
-        $this->parentId = $parentId;
     }
 
-    public static function fromArray(array $row): Categoria
+    public static function fromArray(array $row): Marca
     {
-        return new Categoria(
+        return new Marca(
             (int)$row['id'],
             $row['nombre'],
-            $row['descripcion'],
+            $row['descripcion'] ?? null,
             (bool)$row['estado'],
             $row['slug'] ?? null,
             $row['imagen'] ?? null,
             isset($row['creado_por']) ? (int)$row['creado_por'] : null,
             isset($row['modificado_por']) ? (int)$row['modificado_por'] : null,
             $row['created_at'] ?? null,
-            $row['updated_at'] ?? null,
-            isset($row['parent_id']) ? (int)$row['parent_id'] : null
+            $row['updated_at'] ?? null
         );
     }
 
@@ -62,14 +58,13 @@ class Categoria
     public function getId(): int { return $this->id; }
     public function getNombre(): string { return $this->nombre; }
     public function getDescripcion(): ?string { return $this->descripcion; }
+    public function getEstado(): bool { return $this->estado; }
     public function getImagen(): ?string { return $this->imagen; }
     public function getSlug(): ?string { return $this->slug; }
-    public function getEstado(): bool { return $this->estado; }
     public function getCreadoPor(): ?int { return $this->creadoPor; }
     public function getModificadoPor(): ?int { return $this->modificadoPor; }
     public function getCreatedAt(): ?string { return $this->createdAt; }
     public function getUpdatedAt(): ?string { return $this->updatedAt; }
-    public function getParentId(): ?int { return $this->parentId; } // ✅ Nuevo getter
 
     // Setters
     public function setNombre(string $nombre): void { $this->nombre = $nombre; }
@@ -81,5 +76,4 @@ class Categoria
     public function setModificadoPor(?int $modificadoPor): void { $this->modificadoPor = $modificadoPor; }
     public function setCreatedAt(?string $createdAt): void { $this->createdAt = $createdAt; }
     public function setUpdatedAt(?string $updatedAt): void { $this->updatedAt = $updatedAt; }
-    public function setParentId(?int $parentId): void { $this->parentId = $parentId; }
 }
