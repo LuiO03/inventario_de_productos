@@ -67,15 +67,27 @@
 
   /* Estados */
   --color-primary: #19247f;
+  --color-primary-pastel: #e5f0ff;
+
   --color-secondary: #6c757d;
+  --color-secondary-pastel: #f0eefc;
+
   --color-success: #1d613e;
+  --color-success-pastel: #e5f9e7;
+
   --color-danger: #d30035;
+  --color-danger-pastel: #ffe5e5;
+
   --color-warning: #ffa000;
+  --color-warning-pastel: #fff7e0;
+
   --color-info: #1D61D0;
-  --color-light:   #f8f9fa;
-  --color-dark:    #212529;
-  --color-white:   #ffffff;
-  --color-black:   #000000;
+  --color-info-pastel: #e5faff;
+
+  --color-light: #f8f9fa;
+  --color-dark: #212529;
+  --color-white: #ffffff;
+  --color-black: #000000;
 
   --color-input-bg: #2a2a2a;
   --color-input-border: #444;
@@ -97,6 +109,7 @@
   --color-focus: #66b2ff;
   --transition-general: 
   background-color 0.3s ease-in-out,
+  
   background 0.3s ease-in-out,
   color 0.3s ease-in-out, 
   border-color 0.3s ease-in-out,

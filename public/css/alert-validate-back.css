@@ -5,6 +5,16 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   color: #fff;
   padding: 10px 1.25rem;
+
+  --s: 100px;
+  --_g: #0000 8%,var(--c1) 0 17%,#0000 0 58%;
+  background: 
+    linear-gradient(135deg,#0000 20.5%,var(--c1) 0 29.5%,#0000 0) 0 calc(var(--s)/4),
+    linear-gradient( 45deg,var(--_g)) calc(var(--s)/2) 0,
+    linear-gradient(135deg,var(--_g),var(--c1) 0 67%,#0000 0),        
+    linear-gradient( 45deg,var(--_g),var(--c1) 0 67%,#0000 0 83%,var(--c1) 0 92%,#0000 0),
+    var(--c2); 
+  background-size: var(--s) var(--s);
 }
 
 /* Contenido alineado */
@@ -49,23 +59,28 @@
 
 /* Tipos de alerta */
 .alert-danger {
-  background-color: var(--color-danger, #d30035);
   border-left: 5px solid #ff7b8a;
+  --c2: var(--color-danger);
+  --c1: #d11e4b;
 }
 .alert-warning {
-  background-color: var(--color-warning, #ffa000);
+  --c2: var(--color-warning);
+  --c1: #ffa000;
   border-left: 5px solid #ffe58f;
   color: #212529;
 }
 .alert-info {
-  background-color: var(--color-info, #1d61d0);
+  --c2: var(--color-info);
+  --c1: #1d61d0;
   border-left: 5px solid #b8f1ff;
 }
 .alert-success {
-  background-color: var(--color-success, #1d613e);
+  --c2: var(--color-success);
+  --c1: #1d613e;
   border-left: 5px solid #b4f2c1;
 }
 .alert-secondary {
-  background-color: var(--color-secondary, #6c757d);
+  --c2: var(--color-secondary);
+  --c1: #6c757d;
   border-left: 5px solid #d6d8db;
 }

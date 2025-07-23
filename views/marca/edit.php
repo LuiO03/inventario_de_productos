@@ -8,7 +8,7 @@ partialBreadcrumb();
     Editar Marca - #<?= htmlspecialchars($marca->getId()) ?>
   </h1>
   <p>
-    Aquí puedes editar los detalles de la marca.
+    <?= htmlspecialchars($marca->getNombre()) ?> 
   </p>
 </div>
 
@@ -23,31 +23,37 @@ partialBreadcrumb();
       <!-- Nombre -->
       <div class="input-group-nowrap">
         <label for="nombre" class="form-label">Nombre de la Marca</label>
-        <div class="input-icono">
-          <i class="ri-price-tag-3-line"></i>
+        <div class="input-contenedor">
+          <i class="ri-price-tag-3-line" id="input-icono-nombre" ></i>
           <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($marca->getNombre()) ?>" required placeholder="Ingrese el nombre">
+          <i id="input-estado-nombre" class="input-estado"></i>
         </div>
+        <small id="error-nombre" class="error-text"></small>
       </div>
 
       <!-- Estado -->
       <div class="input-group-nowrap">
         <label for="estado" class="form-label">Estado</label>
-        <div class="input-icono">
-          <i class="ri-focus-2-line"></i>
+        <div class="input-contenedor">
+          <i class="ri-focus-2-line" id="input-icono-estado"></i>
           <select id="estado" name="estado" class="form-select">
             <option value="1" <?= $marca->getEstado() ? 'selected' : '' ?>>Habilitado</option>
             <option value="0" <?= !$marca->getEstado() ? 'selected' : '' ?>>Deshabilitado</option>
           </select>
+          <i id="input-estado-estado" class="input-estado"></i>
         </div>
+        <small id="error-estado" class="error-text"></small>
       </div>
 
       <!-- Descripción -->
       <div class="input-group-nowrap">
         <label for="descripcion" class="form-label">Descripción</label>
-        <div class="input-icono">
-          <i class="ri-file-text-line"></i>
+        <div class="input-contenedor">
+          <i class="ri-file-text-line" id="input-icono-descripcion"></i>
           <textarea id="descripcion" name="descripcion" rows="3" placeholder="Describe brevemente..."><?= htmlspecialchars($marca->getDescripcion()) ?></textarea>
+          <i id="input-estado-descripcion" class="input-estado"></i>
         </div>
+        <small id="error-descripcion" class="error-text"></small>
       </div>
     </div>
 
@@ -67,7 +73,7 @@ partialBreadcrumb();
               <p id="preview-texto" style="display: block;">Imagen no disponible o eliminada</p>
             <?php endif; ?>
           </div>
-
+          <small id="error-imagen" class="error-text"></small>
           <div class="upload-footer">
             <label for="imagen" class="btn-image boton-subir-imagen" title="Subir nueva imagen">
               <i class="ri-upload-cloud-2-fill"></i> <span>Subir imagen</span>
@@ -81,6 +87,7 @@ partialBreadcrumb();
             <input type="file" name="imagen" id="imagen" accept="image/*">
           </div>
         </div>
+        <small id="error-imagen" class="error-text"></small>
       </div>
     </div>
   </div>
@@ -95,6 +102,18 @@ partialBreadcrumb();
   </div>
 </form>
 
+<script type="module">
+    import { validarCampo, validarFormulario, validarImagen } from '<?= BASE_URL ?>public/js/validaciones-generales.js';
+
+    const campos = [
+        { id: 'nombre', iconoId: 'input-icono-nombre', estadoId: 'input-estado-nombre', errorId: 'error-nombre', label: 'Nombre', min: 3, max: 50 },
+        { id: 'descripcion', iconoId: 'input-icono-descripcion', estadoId: 'input-estado-descripcion', errorId: 'error-descripcion', label: 'Descripción', min: 5, max: 150 },
+        { id: 'estado', iconoId: 'input-icono-estado', estadoId: 'input-estado-estado', errorId: 'error-estado', label: 'Estado', esSelect: true }
+    ];
+
+    campos.forEach(validarCampo);
+    validarFormulario({ formSelector: '.formulario', campos });
+</script>
 <?php
 modalFlash($mensaje);
 footerAdmin();

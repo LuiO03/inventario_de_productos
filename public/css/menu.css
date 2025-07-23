@@ -80,12 +80,13 @@
 }
 
 /* Colores de fondo de íconos */
-.card-icon-bg.danger    { background-color: #ffe5e5; } /* pastel rojo */
-.card-icon-bg.success   { background-color: #e5f9e7; } /* pastel verde */
-.card-icon-bg.primary   { background-color: #e5f0ff; } /* pastel azul */
-.card-icon-bg.warning   { background-color: #fff7e0; } /* pastel amarillo */
-.card-icon-bg.info      { background-color: #e5faff; } /* pastel celeste */
-.card-icon-bg.secondary { background-color: #f0eefc; } /* pastel morado/gris */
+.card-icon-bg.danger    { background-color: var(--color-danger-pastel); }    /* pastel rojo */
+.card-icon-bg.success   { background-color: var(--color-success-pastel); }   /* pastel verde */
+.card-icon-bg.primary   { background-color: var(--color-primary-pastel); }   /* pastel azul */
+.card-icon-bg.warning   { background-color: var(--color-warning-pastel); }   /* pastel amarillo */
+.card-icon-bg.info      { background-color: var(--color-info-pastel); }      /* pastel celeste */
+.card-icon-bg.secondary { background-color: var(--color-secondary-pastel); } /* pastel morado/gris */
+
 
 /* === CARDS COLABORADORES === */
 .targeta-conteiner-user {

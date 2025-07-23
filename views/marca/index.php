@@ -18,7 +18,7 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Imagen</th>
+                <th>Img</th>
                 <th class="text-center">Nombre</th>
                 <th class="text-center">Descripción</th>
                 <th>Estado</th>

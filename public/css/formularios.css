@@ -68,13 +68,13 @@
 /* =============================
    INPUTS CON ÍCONO
 ============================= */
-.input-icono {
+.input-contenedor {
   display: flex;
   align-items: center;
   position: relative;
 }
 
-.input-icono i {
+#input-icono-descripcion, #input-icono-nombre, #input-icono-estado {
   position: absolute;
   left: 0;
   top: 0;
@@ -89,11 +89,11 @@
   transition: var(--transition-general);
 }
 
-.input-icono input,
-.input-icono textarea,
-.input-icono select {
+.input-contenedor input,
+.input-contenedor textarea,
+.input-contenedor select {
   width: 100%;
-  padding: 0.6rem 0.8rem 0.6rem 2.9rem;
+  padding: 0.6rem 2.5rem 0.6rem 2.9rem;
   border: 1px solid var(--color-boton-datatable);
   border-radius: var(--border-radio-elements);
   font-size: 0.95rem;
@@ -102,26 +102,32 @@
   color: var(--color-text);
 }
 
-.input-icono textarea {
+.input-contenedor textarea {
   field-sizing: content;
   resize: none;
 }
 
-.input-icono select {
+.input-contenedor select {
   appearance: none;
   cursor: pointer;
 }
 
-.input-icono input:focus,
-.input-icono textarea:focus,
-.input-icono select:focus {
-  border-color: var(--color-primario);
+.input-contenedor input:focus,
+.input-contenedor textarea:focus,
+.input-contenedor select:focus {
+  border-color: var(--color-primario) !important;
   box-shadow: var(--sombra-material);
   outline: none;
 }
 
-.input-icono:focus-within i {
-  background-color: var(--color-primario);
+.input-contenedor:focus-within .input-estado{
+  color: var(--color-primario) !important;
+}
+
+.input-contenedor:focus-within #input-icono-descripcion,
+.input-contenedor:focus-within #input-icono-nombre,
+.input-contenedor:focus-within #input-icono-estado {
+  background-color: var(--color-primario) !important;
 }
 
 /* =============================
@@ -282,6 +288,18 @@
   gap: 0px;
   box-shadow: var(--sombra-material);
   background-color: var(--color-bg);
+  /*
+  --s: 150px; 
+  
+  --_g: var(--color-bg)        6.1%,var(--color-sidebar )  6.4% 18.6%,var(--color-bg) 18.9% 31.1%,
+        var(--color-sidebar ) 31.4% 43.6%,var(--color-bg) 43.9% 56.1%,var(--color-sidebar ) 56.4% 68.6%,#0000 68.9%;
+  background:
+    radial-gradient(var(--s) at 100% 0   ,var(--_g)),
+    radial-gradient(var(--s) at 0    0   ,var(--_g)),
+    radial-gradient(var(--s) at 0    100%,var(--_g)),
+    radial-gradient(var(--s) at 100% 100%,var(--_g)) var(--color-bg);
+  background-size: var(--s) var(--s);*/
+  
   transition: var(--transition-general);
 }
 
@@ -325,7 +343,7 @@
 
 .upload-header p {
   text-align: center;
-  color: var(--color-placeholder);
+  color: var(--color-bw);
   font-size: 0.95rem;
   transition: var(--transition-general);
 }
@@ -391,3 +409,4 @@
     height: 250px;
   }
 }
+

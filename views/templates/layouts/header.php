@@ -31,7 +31,8 @@
   <link rel="stylesheet" href="<?=base_url()?>public/css/menu.css">
   <link rel="stylesheet" href="<?=base_url()?>public/css/dashboard.css">
   <link rel="stylesheet" href="<?=base_url()?>public/css/formularios.css">
-  <link rel="stylesheet" href="<?=base_url()?>public/css/alert-validate.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/css/alert-validate-front.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/css/alert-validate-back.css">
   <link rel="stylesheet" href="<?=base_url()?>public/css/fondo-main.css">
   <script>
     if (localStorage.getItem("sidebar-estado") === "close") {

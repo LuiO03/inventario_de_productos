@@ -17,32 +17,38 @@ partialBreadcrumb();
             <!-- Nombre -->
             <div class="input-group-nowrap">
                 <label for="nombre" class="form-label">Nombre de la Categoría</label>
-                <div class="input-icono">
-                    <i class="ri-price-tag-3-line"></i>
+                <div class="input-contenedor">
+                    <i class="ri-price-tag-3-line" id="input-icono-nombre" ></i>
                     <input type="text" id="nombre" name="nombre" required placeholder="Ingrese el nombre" value="<?= htmlspecialchars($old['nombre'] ?? '') ?>">
+                    <i id="input-estado-nombre" class="input-estado"></i>
                 </div>
+                <small id="error-nombre" class="error-text"></small>
             </div>
 
             <!-- Estado -->
             <div class="input-group-nowrap">
                 <label for="estado" class="form-label">Estado</label>
-                <div class="input-icono">
-                    <i class="ri-focus-2-line"></i>
+                <div class="input-contenedor">
+                    <i class="ri-focus-2-line" id="input-icono-estado"></i>
                     <select id="estado" name="estado" class="form-select" required>
                         <option value="">Seleccione un estado</option>
                         <option value="1" <?= (isset($old['estado']) && $old['estado'] == '1') ? 'selected' : '' ?>>Habilitado</option>
                         <option value="0" <?= (isset($old['estado']) && $old['estado'] == '0') ? 'selected' : '' ?>>Deshabilitado</option>
                     </select>
+                    <i id="input-estado-estado" class="input-estado"></i>
                 </div>
+                <small id="error-estado" class="error-text"></small>
             </div>
 
             <!-- Descripción -->
             <div class="input-group-nowrap">
                 <label for="descripcion" class="form-label">Descripción</label>
-                <div class="input-icono">
-                    <i class="ri-file-text-line"></i>
+                <div class="input-contenedor">
+                    <i class="ri-file-text-line" id="input-icono-descripcion"></i>
                     <textarea id="descripcion" name="descripcion" rows="3" placeholder="Describe brevemente..."><?= htmlspecialchars($old['descripcion'] ?? '') ?></textarea>
+                    <i id="input-estado-descripcion" class="input-estado"></i>
                 </div>
+                <small id="error-descripcion" class="error-text"></small>
             </div>
         </div>
 
@@ -58,7 +64,8 @@ partialBreadcrumb();
                             ¡Arrastre una imagen aquí!<br>o selecciónelo desde su dispositivo.
                         </p>
                     </div>
-
+                    
+                    <small id="error-imagen" class="error-text"></small>
                     <div class="upload-footer">
                         <label for="imagen" class="btn-image boton-subir-imagen" title="Subir imagen">
                             <i class="ri-upload-cloud-2-fill"></i> <span>Subir imagen</span>
@@ -83,18 +90,17 @@ partialBreadcrumb();
     </div>
 </form>
 
-<script>
-    // Botón limpiar
-    document.getElementById('btnLimpiar').addEventListener('click', () => {
-        document.getElementById('nombre').value = '';
-        document.getElementById('descripcion').value = '';
-        document.getElementById('estado').selectedIndex = 0;
-        inputImagen.value = '';
-        imgPreview.src = '';
-        imgPreview.style.display = 'none';
-        icono.style.display = 'block';
-        texto.style.display = 'block';
-    });
+<script type="module">
+    import { validarCampo, validarFormulario, validarImagen } from '<?= BASE_URL ?>public/js/validaciones-generales.js';
+
+    const campos = [
+        { id: 'nombre', iconoId: 'input-icono-nombre', estadoId: 'input-estado-nombre', errorId: 'error-nombre', label: 'Nombre', min: 3, max: 50 },
+        { id: 'descripcion', iconoId: 'input-icono-descripcion', estadoId: 'input-estado-descripcion', errorId: 'error-descripcion', label: 'Descripción', min: 5, max: 150 },
+        { id: 'estado', iconoId: 'input-icono-estado', estadoId: 'input-estado-estado', errorId: 'error-estado', label: 'Estado', esSelect: true }
+    ];
+
+    campos.forEach(validarCampo);
+    validarFormulario({ formSelector: '.formulario', campos });
 </script>
 
 <?php

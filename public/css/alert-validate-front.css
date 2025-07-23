@@ -1,0 +1,71 @@
+.input-estado {
+  position: absolute;
+  width: 2.5rem;
+  right: 1px;
+  top: 1px;
+  height: calc(100% - 2px);
+  text-align: center;
+  font-size: 1.5rem;
+  align-content: center;
+  background-color: var(--color-input-bg);
+  transition: var(--transition-general);
+}
+
+.ri-close-circle-fill.input-estado {
+  cursor: pointer;
+}
+
+.error-text {
+  color: var(--color-danger-pastel);
+  font-size: 0.9rem;
+  padding: 2px 12px;
+  border: 2px solid var(--color-danger);
+  border-radius: 30px;
+  --s: 100px; /* control the size*/
+  --c2: var(--color-danger);
+  --c1: #d11e4b;
+
+  --g: var(--c1) 3.125%, var(--c2) 0 9.375%, var(--c1) 0 15.625%,
+    var(--c2) 0 21.875%, var(--c1) 0 28.125%, #0000 0;
+  background: linear-gradient(
+        225deg,
+        #0000 3.125%,
+        var(--c2) 0 9.375%,
+        #0000 0 78.125%,
+        var(--c2) 0 84.375%,
+        #0000 0
+      )
+      0 calc(var(--s) / 2),
+    linear-gradient(45deg, var(--g)) 0 var(--s),
+    linear-gradient(45deg, var(--g)) calc(var(--s) / -2) calc(var(--s) / -2),
+    linear-gradient(225deg, var(--g)) var(--s) 0,
+    linear-gradient(225deg, var(--g)) calc(var(--s) / 2) var(--s),
+    repeating-linear-gradient(
+      -45deg,
+      var(--c1) -3.125% 3.125%,
+      var(--c2) 0 9.375%
+    );
+  background-size: calc(2 * var(--s)) calc(2 * var(--s));
+}
+
+.error-text:empty {
+  display: none;
+}
+
+.input-error {
+  border: 1px solid var(--color-danger) !important;
+}
+
+.icono-error {
+  background-color: var(--color-danger) !important;
+  color: white;
+}
+
+.input-success {
+  border: 1px solid var(--color-success) !important;
+}
+
+.icono-success {
+  background-color: var(--color-success) !important;
+  color: white;
+}

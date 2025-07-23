@@ -44,12 +44,12 @@
 }
 
 /* Colores únicos */
-.ball:nth-child(1) { color: var(--color-primary); }   /* Coral */
-.ball:nth-child(2) { color: var(--color-secundario); }   /* Azul cielo */
-.ball:nth-child(3) { color: var(--color-success); }   /* Verde menta */
-.ball:nth-child(4) { color: var(--color-warning); }   /* Amarillo */
-.ball:nth-child(5) { color: var(--color-danger); }   /* Rojo */
-.ball:nth-child(6) { color: var(--color-info); }   /* Celeste */
+/*.ball:nth-child(1) { color: var(--color-primary); }   /* Coral */
+/*.ball:nth-child(2) { color: var(--color-secundario); }   /* Azul cielo */
+/*.ball:nth-child(3) { color: var(--color-success); }   /* Verde menta */
+/*.ball:nth-child(4) { color: var(--color-warning); }   /* Amarillo */
+/*.ball:nth-child(5) { color: var(--color-danger); }   /* Rojo */
+/*.ball:nth-child(6) { color: var(--color-info); }   /* Celeste */
 
 /* Ejemplo de bolas */
 .ball:nth-child(1) {
