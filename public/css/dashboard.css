@@ -27,7 +27,7 @@ body.no-scroll {
   font-family: var(--font-family-dashboard);
   font-size: var(--font-size-p);
   background-color: var(--color-sidebar);
-  z-index: 10;
+  z-index: 2;
   transition: var(--transition-general);
   box-shadow: var(--sombra-material);
 }
@@ -141,11 +141,13 @@ body.no-scroll {
   transition: var(--transition-general);
   animation: fadeIn 0.2s forwards;
   font-size: var(--font-size-xs);
+  translate: -10px 0px;
 }
 
 @keyframes fadeIn {
   to {
     opacity: 1;
+    translate: 0px 0px;
   }
 }
 
@@ -154,21 +156,24 @@ body.no-scroll {
 ========================================= */
 #sidebar .sidebar-menu {
   list-style: none;
-  overflow-y: hidden;
+  overflow-y: scroll;
   overflow-x: hidden;
   height: 100%;
   padding: 0px;
+  margin: 0px;
 }
 
 .sidebar-menu::-webkit-scrollbar,
 main::-webkit-scrollbar {
   width: 5px;
+  transition: var(--transition-general);
 }
 
 .sidebar-menu::-webkit-scrollbar-thumb,
 main::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar-track);
   border-radius: 4px;
+  transition: var(--transition-general);
 }
 .sidebar-menu::-webkit-scrollbar-thumb:hover,
 main::-webkit-scrollbar-thumb:hover {
@@ -210,7 +215,7 @@ main::-webkit-scrollbar-thumb:hover {
 }
 
 #sidebar.close li a span,
-#sidebar.close  .sub-menu li a span,
+#sidebar.close .sub-menu li a span,
 #sidebar.close button span {
   opacity: 0;
   visibility: hidden;
@@ -226,7 +231,6 @@ main::-webkit-scrollbar-thumb:hover {
   visibility: visible;
   width: auto;
   transition: opacity 0.3s ease, visibility 0.3s ease, width 0.3s ease;
-  
 }
 
 /* =========================================
@@ -237,7 +241,8 @@ main::-webkit-scrollbar-thumb:hover {
   grid-template-rows: 0fr;
   padding-left: 0px;
   background-color: var(--color-bg);
-  transition: background-color 0.3s ease-in-out, grid-template-rows 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out,
+    grid-template-rows 0.3s ease-in-out;
 }
 @media (max-width: 576px) {
   #sidebar .sub-menu {
@@ -257,7 +262,6 @@ main::-webkit-scrollbar-thumb:hover {
   grid-template-rows: 1fr;
 }
 
-
 /* =========================================
    ESTADO ACTIVE Y VECINOS
 ========================================= */
@@ -267,7 +271,7 @@ main::-webkit-scrollbar-thumb:hover {
   font-weight: 700;
 }
 
-#sidebar .sidebar-menu li.active a{
+#sidebar .sidebar-menu li.active a {
   background-color: var(--color-hover);
   border-radius: 0px 60px 60px 0px;
   padding: 10px 15px;
@@ -285,7 +289,7 @@ main::-webkit-scrollbar-thumb:hover {
 ========================================= */
 
 #sidebar .sidebar-menu li a:hover,
-#sidebar .sidebar-menu .dropdown-btn:hover{
+#sidebar .sidebar-menu .dropdown-btn:hover {
   background-color: var(--color-hover);
   border-left: 4px solid var(--color-primario);
   font-weight: 700;
@@ -385,7 +389,7 @@ main::-webkit-scrollbar-thumb:hover {
   padding: 0.3em;
   border-radius: var(--border-radio-elements);
   font-size: 25px;
-  transition: var(--transition-general)
+  transition: var(--transition-general);
 }
 
 #toggle-btn:hover,
@@ -455,17 +459,16 @@ main::-webkit-scrollbar-thumb:hover {
   font-weight: 500;
 }
 
-
 @keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* =========================================
@@ -612,13 +615,13 @@ main::-webkit-scrollbar-thumb:hover {
 
   .topbar {
     border-bottom: 1px solid var(--color-bw);
-    
+
     padding: 0px 5px;
   }
 
   main {
     width: 100%;
-    padding: 10px;
+    padding: 15px;
     min-height: calc(100dvh - 60px);
     border-radius: 0px;
   }
@@ -648,7 +651,7 @@ main {
   gap: 10px;
   transition: var(--transition-general);
   overflow-y: auto;
-  
+
   /*
   border-radius: 20px 0 0 0px;
   background-color: var(--color-bg);
@@ -685,14 +688,18 @@ main {
   font-weight: 200;
 }
 
-.contenedor, .formulario, .breadcrumb-container{
+.contenedor,
+.breadcrumb-container {
   background-color: var(--color-sidebar);
   max-width: var(--max-width);
   width: 100%;
 }
 
 .contenedor {
-  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 20px;
   border-radius: var(--border-radio-card);
   transition: var(--transition-general);
   box-shadow: var(--sombra-material);
@@ -700,13 +707,13 @@ main {
 
 @media (max-width: 450px) {
   main {
-    padding: 20px 0px;
+    padding: 20px 15px;
     /*background-color: var(--color-sidebar);*/
   }
 
   .contenedor {
     background-color: transparent;
-    padding: 10px 15px;
+    padding: 10px 0px;
     border-radius: 0px;
   }
 
@@ -723,11 +730,17 @@ main {
 
 .modal-content {
   background-color: var(--color-modal-bg);
+  font-family: var(--font-family-dashboard) !important;
 }
 
-.modal-content .btn-close{
-  font-size: 15px;
-  background-color: rgba(0, 0, 0, 0.4);
+.modal::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.modal {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .modal-header {
@@ -735,8 +748,44 @@ main {
   background-color: var(--color-primario);
 }
 
+.modal-imagen-sm, .modal-imagen{
+  object-fit: cover;
+  margin-top: 20px;
+  border-radius: var(--border-radio-elements);
+}
+
+.modal-imagen-sm {
+  width: 120px;
+  height: 120px;
+  
+}
+
+.modal-imagen{
+  width: 100%;
+}
+
+.modal-sin-imagen {
+  display: block;
+  text-align: center;
+  color: var(--color-primario);
+  font-weight: var(--fw-bold);
+  margin-top: 10px;
+}
+
+.modal-sin-imagen i {
+  font-size: 50px;
+}
+
 .modal-slide-animate {
   animation: zoomIn 0.2s ease-out;
+}
+
+.modal-nombre {
+  width: 100%;
+  text-align: center;
+  font-weight: 800;
+  font-family: var(--font-family-base);
+  padding: 10px 0px 20px 0px;
 }
 
 @keyframes slideDown {
@@ -780,7 +829,7 @@ form div .form-control {
   border-radius: var(--border-radio-card);
 }
 
-.contenedor-botones{
+.contenedor-botones {
   display: flex;
   justify-content: center;
   gap: 20px;
@@ -788,7 +837,7 @@ form div .form-control {
 }
 
 @media (max-width: 458px) {
-  .contenedor-botones{
+  .contenedor-botones {
     display: none;
   }
   .contenedor-header {
@@ -799,6 +848,8 @@ form div .form-control {
 .button-borders {
   position: relative;
   display: inline-block;
+  font-size: var(--font-size-p);
+  font-family: var(--font-family-dashboard);
 }
 
 .button-borders:before {

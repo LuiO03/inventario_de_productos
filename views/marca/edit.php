@@ -7,7 +7,7 @@ partialBreadcrumb();
   <h1>
     Editar Marca - #<?= htmlspecialchars($marca->getId()) ?>
   </h1>
-  <p>
+  <p class="fw-bolder">
     <?= htmlspecialchars($marca->getNombre()) ?> 
   </p>
 </div>
@@ -15,14 +15,18 @@ partialBreadcrumb();
 <form action="<?= BASE_URL ?>marca/update/<?= urlencode($marca->getSlug()) ?>" method="post" enctype="multipart/form-data" class="formulario" autocomplete="off">
   <input type="hidden" name="csrf_token" value="<?= generarTokenCSRF(); ?>">
   <input type="hidden" name="id" value="<?= htmlspecialchars($marca->getId()) ?>">
-
+  <small class="form-aviso">
+    Los campos con asterisco (<span class="text-primario"><i class="ri-asterisk"></i></span>) son obligatorios.
+  </small>
   <div class="formulario-contenido">
     <div class="formulario-columna-nowrap">
       <?php alertValidate(); ?>
 
       <!-- Nombre -->
       <div class="input-group-nowrap">
-        <label for="nombre" class="form-label">Nombre de la Marca</label>
+        <label for="nombre" class="form-label">
+          Nombre de la Marca<small class="text-primario"><i class="ri-asterisk"></i></small>
+        </label>
         <div class="input-contenedor">
           <i class="ri-price-tag-3-line" id="input-icono-nombre" ></i>
           <input type="text" id="nombre" name="nombre" value="<?= htmlspecialchars($marca->getNombre()) ?>" required placeholder="Ingrese el nombre">
@@ -33,7 +37,9 @@ partialBreadcrumb();
 
       <!-- Estado -->
       <div class="input-group-nowrap">
-        <label for="estado" class="form-label">Estado</label>
+        <label for="estado" class="form-label">
+          Estado<small class="text-primario"><i class="ri-asterisk"></i></small>
+        </label>
         <div class="input-contenedor">
           <i class="ri-focus-2-line" id="input-icono-estado"></i>
           <select id="estado" name="estado" class="form-select">
@@ -47,7 +53,9 @@ partialBreadcrumb();
 
       <!-- Descripción -->
       <div class="input-group-nowrap">
-        <label for="descripcion" class="form-label">Descripción</label>
+        <label for="descripcion" class="form-label">
+          Descripción<small class="text-primario"><i class="ri-asterisk"></i></small>
+        </label>
         <div class="input-contenedor">
           <i class="ri-file-text-line" id="input-icono-descripcion"></i>
           <textarea id="descripcion" name="descripcion" rows="3" placeholder="Describe brevemente..."><?= htmlspecialchars($marca->getDescripcion()) ?></textarea>

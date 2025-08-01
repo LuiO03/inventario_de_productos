@@ -1,4 +1,5 @@
 <?php
+use Mpdf\Mpdf;
 class MarcaController extends Controller
 {
     protected $model;
@@ -7,6 +8,25 @@ class MarcaController extends Controller
     {
         parent::__construct();
         $this->loadModel('Marca');
+    }
+
+    public function exportarPdf()
+    {
+        $marcas = $this->model->getAll();
+
+        ob_start();
+        include './views/marca/exportar-pdf.php';
+        $html = ob_get_clean();
+
+        $mpdf = new Mpdf([
+            'default_font' => 'dejavusans',
+            'tempDir' => __DIR__ . '/../../tmp' // si tu sistema necesita un directorio temporal
+        ]);
+        
+        $fechaHora = date('Y-m-d_H-i-s');
+        $nombreArchivo = "marcas_$fechaHora.pdf";
+        $mpdf->WriteHTML($html);
+        $mpdf->Output($nombreArchivo, 'I'); // 'I' muestra en el navegador, 'D' descarga
     }
 
     private function validarDatosMarca(&$nombre, &$descripcion, &$estado, &$errores): bool
@@ -48,12 +68,15 @@ class MarcaController extends Controller
     {
         $GLOBALS['pageTitle'] = 'Lista de Marcas';
         $marcas = $this->model->getAll();
+        // Añadir imagen_url verificada a cada objeto marca
+        foreach ($marcas as $marca) {
+            $marca->imagen_url = verificarImagen('images/marcas', $marca->getImagen());
+        }
         $this->view->render('marca/index', [
             'mensaje' => $this->view->mensaje,
             'marcas' => $marcas
         ]);
     }
-
     public function create()
     {
         $GLOBALS['pageTitle'] = 'Agregar Marca';
@@ -62,7 +85,6 @@ class MarcaController extends Controller
             'old' => FlashHelper::getOld()
         ]);
     }
-
     public function store()
     {
         protegerContraCSRF();
@@ -111,7 +133,6 @@ class MarcaController extends Controller
             $this->redirigirConMensaje('marca/create', 'danger', 'Error', 'No se pudo registrar la marca.');
         }
     }
-
     public function edit($slugOrId)
     {
         $marca = $this->obtenerMarcaPorIdOSlug($slugOrId);
@@ -119,7 +140,7 @@ class MarcaController extends Controller
             $this->redirigirConMensaje('marca/index', 'warning', 'No encontrada', 'Marca no encontrada.');
         }
 
-        if ($marca->getImagen() && !file_exists('public/images/marcas/' . $marca->getImagen())) {
+        if (!verificarImagen('images/marcas', $marca->getImagen())) {
             $marca->setImagen(null);
         }
 
@@ -129,7 +150,6 @@ class MarcaController extends Controller
             'mensaje' => $this->view->mensaje
         ]);
     }
-
     public function update($slugOrId)
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -188,7 +208,6 @@ class MarcaController extends Controller
             $this->redirigirConMensaje('marca/index', 'danger', 'Error', 'No se pudo actualizar.');
         }
     }
-
     public function delete($id)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_numeric($id)) {
@@ -206,7 +225,6 @@ class MarcaController extends Controller
             $this->redirigirConMensaje('marca/index', 'danger', 'Error', 'Solicitud inválida.');
         }
     }
-
     public function show($id)
     {
         $marca = $this->model->getById($id);
@@ -218,6 +236,7 @@ class MarcaController extends Controller
                     'descripcion' => $marca->getDescripcion(),
                     'estado' => $marca->getEstado(),
                     'imagen' => $marca->getImagen(),
+                    'imagen_url' => verificarImagen('images/marcas', $marca->getImagen()),
                     'creado_por' => $marca->nombreCreador ?? 'Desconocido',
                     'modificado_por' => $marca->nombreModificador ?? 'Desconocido',
                     'created_at' => FechaHelper::formatoCorto($marca->getCreatedAt()),
@@ -231,7 +250,6 @@ class MarcaController extends Controller
             $this->view->render('marca/show', ['marca' => $marca]);
         }
     }
-
     public function toggleEstado($id)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' &&
@@ -247,4 +265,6 @@ class MarcaController extends Controller
         echo json_encode(['success' => false]);
         exit;
     }
+
+    
 }

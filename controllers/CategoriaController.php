@@ -57,20 +57,65 @@ class CategoriaController extends Controller
         $GLOBALS['pageTitle'] = 'Lista de Categorías';
         $categorias = $this->model->getAll();
 
+        // Añadir imagen_url verificada a cada objeto categoría
+        foreach ($categorias as $cat) {
+            $cat->imagen_url = verificarImagen('images/categorias', $cat->getImagen());
+        }
+
         $this->view->render('categoria/index', [
             'mensaje' => $this->view->mensaje,
             'categorias' => $categorias
         ]);
     }
 
-    public function create()
+    public function arbol()
+    {
+        $GLOBALS['pageTitle'] = 'Arbol de Categorías';
+        $categorias = $this->model->getAll(); // Asegúrate de traer: id, nombre, parent_id, estado
+        $agrupadas = [];
+
+        foreach ($categorias as $cat) {
+            $agrupadas[$cat->getParentId()][] = $cat;
+        }
+
+        // Pasar a la vista
+        $this->view->render('categoria/arbol', ['agrupadas' => $agrupadas]);
+    }
+
+    public function create($parentSlugOrId = null)
     {
         $GLOBALS['pageTitle'] = 'Agregar Categoría';
+        $categorias = $this->model->getAll(); // obtener todas para el select
+
+        $old = FlashHelper::getOld();
+        $parentId = $old['parent_id'] ?? null;
+        $nombrePadre = '';
+
+        if ($parentSlugOrId) {
+            $categoriaPadre = $this->obtenerCategoriaPorIdOSlug($parentSlugOrId);
+            if ($categoriaPadre) {
+                $parentId = $categoriaPadre->getId();
+                $nombrePadre = $categoriaPadre->getNombre();
+            }
+        }
+        $nombrePadre = '';
+
+        if ($parentId) {
+            $categoriaPadre = $this->model->getById((int)$parentId);
+            if ($categoriaPadre) {
+                $nombrePadre = $categoriaPadre->getNombre();
+            }
+        }
+
         $this->view->render('categoria/create', [
             'mensaje' => $this->view->mensaje,
-            'old' => FlashHelper::getOld(),
+            'old' => $old,
+            'categorias' => $categorias,
+            'parentId' => $parentId,
+            'nombrePadre' => $nombrePadre
         ]);
     }
+
     public function store()
     {
         protegerContraCSRF();
@@ -133,17 +178,21 @@ class CategoriaController extends Controller
             $this->redirigirConMensaje('categoria/index', 'warning', 'No encontrada', 'Categoría no encontrada.');
         }
 
-        if ($categoria->getImagen() && !file_exists('public/images/categorias/' . $categoria->getImagen())) {
+        if (!verificarImagen('images/categorias', $categoria->getImagen())) {
             $categoria->setImagen(null);
         }
+
+        $categorias = $this->model->getAllExcept($slugOrId); // Para el select
+        $subcategorias = $this->model->getByParentId($categoria->getId()); // 👈 OBTENER SUBCATEGORÍAS
 
         $GLOBALS['pageTitle'] = 'Editar Categoría';
         $this->view->render('categoria/edit', [
             'categoria' => $categoria,
+            'categorias' => $categorias,
+            'subcategorias' => $subcategorias, // 👈 PASAR A LA VISTA
             'mensaje' => $this->view->mensaje
         ]);
     }
-
     public function update($slugOrId)
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -165,7 +214,6 @@ class CategoriaController extends Controller
         if (!$categoria) {
             $this->redirigirConMensaje('categoria/index', 'danger', 'No encontrada', 'La categoría no existe.');
         }
-
         // Validar duplicados
         $existe = $this->model->findByNombre($nombre);
         if ($existe && $existe->getId() != $categoria->getId()) {
@@ -240,16 +288,30 @@ class CategoriaController extends Controller
 
         if ($_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
             if ($categoria) {
+                $subcategorias = $this->model->getByParentId($id);
+                $categoriaPadre = $categoria->getParentId() ? $this->model->getById($categoria->getParentId()) : null;
+
                 echo json_encode([
                     'id' => $categoria->getId(),
                     'nombre' => $categoria->getNombre(),
                     'descripcion' => $categoria->getDescripcion(),
                     'estado' => $categoria->getEstado(),
                     'imagen' => $categoria->getImagen(),
+                    'imagen_url' => verificarImagen('images/categorias', $categoria->getImagen()),
                     'creado_por' => $categoria->nombreCreador ?? 'Desconocido',
                     'modificado_por' => $categoria->nombreModificador ?? 'Desconocido',
                     'created_at' => FechaHelper::formatoCorto($categoria->getCreatedAt()),
-                    'updated_at' => FechaHelper::formatoCorto($categoria->getUpdatedAt())
+                    'updated_at' => FechaHelper::formatoCorto($categoria->getUpdatedAt()),
+                    'categoria_padre' => $categoriaPadre ? [
+                        'id' => $categoriaPadre->getId(),
+                        'nombre' => $categoriaPadre->getNombre(),
+                        'estado' => $categoriaPadre->getEstado()
+                    ] : null,
+                    'subcategorias' => array_map(fn($sub) => [
+                        'id' => $sub->getId(),
+                        'nombre' => $sub->getNombre(),
+                        'estado' => $sub->getEstado()
+                    ], $subcategorias)
                 ]);
             } else {
                 http_response_code(404);
@@ -259,6 +321,7 @@ class CategoriaController extends Controller
             $this->view->render('categoria/show', ['categoria' => $categoria]);
         }
     }
+
 
     public function toggleEstado($id)
     {
@@ -281,5 +344,4 @@ class CategoriaController extends Controller
         echo json_encode(['success' => false]);
         exit;
     }
-
 }

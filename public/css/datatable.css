@@ -2,6 +2,7 @@
 
 .dt-container {
   font-size: var(--font-size-p);
+  font-family: var(--font-family-dashboard);
 }
 
 .dt-container > div:nth-child(3){
@@ -9,8 +10,8 @@
 }
 
 .dt-container > div:nth-child(1) {
-  padding: 10px 0px 20px 0px;
-  display: flex;
+  padding: 0px 0px 20px 0px;
+  display: flex !important;
   flex-direction: row-reverse;
 }
 
@@ -33,6 +34,8 @@
     margin: 15px 5px 0px 5px !important;
   }
 }
+
+
 
 /* ==== DATATABLES: ESTILOS DE FUNCIONES FOCUS, HOVER, SELECTED ==== */
 
@@ -214,49 +217,6 @@
 @media (max-width: 576px) {
   .dt-paging .page-item .text-label {
     display: none;
-  }
-}
-
-/* ==== ANIMACIÓN DE FILAS ==== */
-
-#tablaProductos tbody tr {
-  animation: slideInLeft 0.3s ease-in-out;
-}
-
-#tablaCategorias tbody tr {
-  animation: slideInLeft 0.3s ease-in-out;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
   }
 }
 

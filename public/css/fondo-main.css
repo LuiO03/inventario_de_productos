@@ -51,7 +51,7 @@
 /*.ball:nth-child(5) { color: var(--color-danger); }   /* Rojo */
 /*.ball:nth-child(6) { color: var(--color-info); }   /* Celeste */
 
-/* Ejemplo de bolas */
+/* Ejemplo de bolas 
 .ball:nth-child(1) {
   width: 20vmin;
   height: 20vmin;
@@ -111,6 +111,49 @@
   height: 20vmin;
   top: 25%;
   left: 80%;
+  animation-duration: 80s;
+  animation-delay: -8s;
+  transform-origin: 16vw -2vh;
+  box-shadow: 40vmin 0 5vmin currentColor;
+}*/
+
+.ball:nth-child(1) {
+  width: 20vmin;
+  height: 20vmin;
+  top: 77%;
+  left: 68%;
+  animation-duration: 40s;
+  animation-delay: -3s;
+  transform-origin: 16vw -2vh;
+  box-shadow: 40vmin 0 5vmin currentColor;
+}
+.ball:nth-child(2) {
+  width: 20vmin;
+  height: 20vmin;
+  top: 42%;
+  left: 52%;
+  animation-duration: 25s;
+  animation-delay: -29s;
+  transform-origin: -19vw 21vh;
+  box-shadow: -40vmin 0 5vmin currentColor;
+}
+
+.ball:nth-child(3) {
+  width: 20vmin;
+  height: 20vmin;
+  top: 28%;
+  left: 48%;
+  animation-duration: 40s;
+  animation-delay: -8s;
+  transform-origin: 16vw -2vh;
+  box-shadow: 40vmin 0 5vmin currentColor;
+}
+
+.ball:nth-child(4) {
+  width: 20vmin;
+  height: 20vmin;
+  top: 35%;
+  left: -10%;
   animation-duration: 80s;
   animation-delay: -8s;
   transform-origin: 16vw -2vh;

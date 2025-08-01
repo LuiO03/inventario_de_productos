@@ -36,11 +36,11 @@ function actualizarIconosOrden() {
         $orderSpan.html(''); // Limpiar íconos previos
 
         if ($th.hasClass('dt-ordering-asc')) {
-            $orderSpan.html('<i class="ri-arrow-up-fill text-info pe-2"></i>');
+            $orderSpan.html('<i class="ri-arrow-up-fill text-info pe-1"></i>');
         } else if ($th.hasClass('dt-ordering-desc')) {
-            $orderSpan.html('<i class="ri-arrow-down-fill text-info pe-2"></i>');
+            $orderSpan.html('<i class="ri-arrow-down-fill text-info pe-1"></i>');
         } else if ($th.hasClass('dt-orderable-asc') && $th.hasClass('dt-orderable-desc')) {
-            $orderSpan.html('<i class="ri-arrow-up-down-line text-info pe-2"></i>');
+            $orderSpan.html('<i class="ri-arrow-up-down-line text-info pe-1"></i>');
         }
     });
 }
@@ -58,7 +58,7 @@ $(document).ready(function () {
         language: language_es,
         initComplete: function () {
             // Mostrar tabla una vez inicializada
-            $('#tablaCategorias').addClass('ready');
+            $('.tabla-responsive').addClass('ready');
             actualizarIconosOrden();
 
             // Placeholder para el campo de búsqueda

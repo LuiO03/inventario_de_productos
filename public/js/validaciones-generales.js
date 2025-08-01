@@ -79,6 +79,23 @@ export function validarFormulario({ formSelector, campos }) {
     });
 }
 
+document.querySelector('.formulario').addEventListener('submit', function(event) {
+    let hayError = false;
+
+    // Forzar validación de cada campo
+    ['nombre', 'descripcion', 'estado'].forEach(campo => {
+        document.getElementById(campo).dispatchEvent(new Event('blur'));
+        if (document.getElementById('error-' + campo).innerHTML !== '') {
+            hayError = true;
+        }
+    });
+
+    if (hayError) {
+        event.preventDefault();
+    }
+});
+
+
 // ==========================
 // VALIDACIÓN DE IMAGEN
 // ==========================
@@ -96,10 +113,7 @@ export function validarImagen() {
     let valido = true;
     let mensaje = '';
 
-    if (!archivo) {
-        valido = false;
-        mensaje = `<i class="ri-shield-keyhole-fill"></i>&ensp;Debe seleccionar una imagen.`;
-    } else if (archivo.size > maxSize) {
+    if (archivo.size > maxSize) {
         valido = false;
         mensaje = `<i class="ri-shield-keyhole-fill"></i>&ensp;La imagen excede el tamaño máximo de 3 MB.`;
     } else if (!tiposPermitidos.includes(archivo.type)) {

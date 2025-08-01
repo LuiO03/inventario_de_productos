@@ -69,10 +69,10 @@
   --color-primary: #19247f;
   --color-primary-pastel: #e5f0ff;
 
-  --color-secondary: #6c757d;
+  --color-secondary: #342E37;
   --color-secondary-pastel: #f0eefc;
 
-  --color-success: #1d613e;
+  --color-success: #009900;
   --color-success-pastel: #e5f9e7;
 
   --color-danger: #d30035;
@@ -108,19 +108,18 @@
   --max-width: 1200px;
   --color-focus: #66b2ff;
   --transition-general: 
-  background-color 0.3s ease-in-out,
-  
-  background 0.3s ease-in-out,
-  color 0.3s ease-in-out, 
-  border-color 0.3s ease-in-out,
-  width 0.2s ease-in-out,
-  transform 0.3s ease-in-out, 
-  font-size 0.2s ease, 
-  box-shadow 0.3s ease-in-out;
-  --border-radio-card: 15px;
+    background-color 0.3s ease-in-out,
+    background 0.3s ease-in-out,
+    color 0.3s ease-in-out, 
+    border-color 0.3s ease-in-out,
+    width 0.2s ease-in-out,
+    transform 0.2s ease-in-out, 
+    font-size 0.2s ease, 
+    box-shadow 0.3s ease-in-out;
+  --border-radio-card: 16px;
+  --border-radio-card-interno: 10px;
   --border-radio-elements: 3px;
 
-  --color-primario-s: rgb(252, 13, 65);
   --color-primario-rgb: 252, 13, 65;
   --sombra-material:
     0 2px 2px 0 rgba(0, 0, 0, 0.14),
@@ -152,7 +151,7 @@
   --color-sidebar: #f9f9f9;
   --color-header: #f9f9f9;
   --color-footer: #f8f9fa;
-  --color-card-bg: #f8f9fa;
+  --color-card-bg: #eeeeee;
   --color-modal-bg: #f9f9f9;
   --color-dropdown-bg: #ffffff;
 
@@ -194,9 +193,10 @@
   --font-size-h1: 2.4rem; /* Títulos grandes */
   --font-size-h2: 1.625rem; /* Títulos secundarios */
   --font-size-h3: 1.1rem; /* Subtítulos / paneles */
-  --font-size-p: 0.91rem; /* Texto general */
-  --font-size-sm: 0.87rem; /* Texto secundario (inputs, etc.) */
+  --font-size-p: 0.89rem; /* Texto general */
+  --font-size-sm: 0.86rem; /* Texto secundario (inputs, etc.) */
   --font-size-xs: 0.82rem; /* Ayuda, tooltips */
+
   --fw-regular: 400;
   --fw-bold: 700;
 }
@@ -207,7 +207,7 @@
     --font-size-h1: 1.95rem;
     --font-size-h2: 1.5rem;
     --font-size-h3: 1.25rem;
-    --font-size-p: 0.9rem;
+    --font-size-p: 0.88rem;
     --font-size-sm: 0.85rem;
     --font-size-xs: 0.8rem;
   }
@@ -271,6 +271,18 @@
   background-color: var(--color-info) !important;
 }
 
+.btn-light, .bg-light{
+  background-color: var(--color-bw) !important;
+  border: 1px solid var(--color-table-head-border);
+  color: var(--color-bw-inverted) !important;
+  transition: var(--transition-general);
+}
+
+.btn-light:hover{
+  background-color: var(--color-secondary) !important;
+  color: white !important;
+}
+
 .text-primario {
   color: var(--color-primario) !important;
   transition: color 0.3s ease-in-out;
@@ -299,16 +311,19 @@
   color: var(--color-info)!important;
   transition: color 0.3s ease-in-out;
 }
+.text-muted{
+  color: var(--color-muted)!important;
+  transition: color 0.3s ease-in-out;
+}
 
 .medalla{
   display: flex;
   gap: 5px;
   width: fit-content;
   padding: 3px 10px;
-  border-radius: var(--border-radio-elements);
+  border-radius: var(--border-radio-card);
   font-size: 12px;
   color: white;
-  font-weight: var(--fw-bold);
 }
 
 /* ==========================================

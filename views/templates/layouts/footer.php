@@ -14,10 +14,10 @@
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
     <!-- DataTables Bootstrap 5 JS -->
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.bootstrap5.min.js"></script>
-
-    <?php if (!empty($entidad['titulo']) && file_exists("public/js/datatable{$entidad['titulo']}.js")): ?>
-        <script src="<?= BASE_URL ?>public/js/datatable<?= $entidad['titulo'] ?>.js"></script>
-    <?php endif; ?>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    
+    <script src="<?= BASE_URL ?>public/js/datatable.js" defer></script>
     <script src="<?= BASE_URL ?>public/js/dashboard.js" defer></script>
     <script src="<?= BASE_URL ?>public/js/formularios.js" defer></script>
   </body>

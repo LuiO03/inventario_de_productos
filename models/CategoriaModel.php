@@ -75,7 +75,7 @@ class CategoriaModel extends Model
     public function getAll(): array
     {
         try {
-            $sql = "SELECT * FROM categorias ORDER BY id DESC";
+            $sql = "SELECT * FROM categorias ORDER BY parent_id ASC, nombre ASC";
             $query = $this->PDO->prepare($sql);
             $query->execute();
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -157,8 +157,8 @@ class CategoriaModel extends Model
         $sql = "UPDATE categorias 
                 SET estado = :estado, modificado_por = :modificado_por, updated_at = NOW()
                 WHERE id = :id";
-        $stmt = $this->PDO->prepare($sql);
-        return $stmt->execute([
+        $query = $this->PDO->prepare($sql);
+        return $query->execute([
             'estado' => $estado,
             'modificado_por' => $modificadoPor,
             'id' => $id
@@ -168,8 +168,8 @@ class CategoriaModel extends Model
     public function contar(): int
     {
         $sql = "SELECT COUNT(*) as total FROM categorias";
-        $stmt = $this->PDO->query($sql);
-        return (int)$stmt->fetch()['total'];
+        $query = $this->PDO->query($sql);
+        return (int)$query->fetch()['total'];
     }
 
     // ✅ OPCIONAL: Obtener subcategorías por categoría padre
@@ -185,6 +185,34 @@ class CategoriaModel extends Model
             return array_map(fn($row) => Categoria::fromArray($row), $result);
         } catch (PDOException $e) {
             error_log("Error al obtener subcategorías: " . $e->getMessage());
+            return [];
+        }
+    }
+
+    public function getAllExcept($slugOrId): array
+    {
+        try {
+            // Intentar resolver ID real desde slug o directamente usar ID
+            if (is_numeric($slugOrId)) {
+                $id = (int)$slugOrId;
+            } else {
+                $sql = "SELECT id FROM categorias WHERE slug = :slug LIMIT 1";
+                $stmt = $this->PDO->prepare($sql);
+                $stmt->bindParam(':slug', $slugOrId, PDO::PARAM_STR);
+                $stmt->execute();
+                $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                $id = $row ? (int)$row['id'] : 0;
+            }
+
+            $sql = "SELECT * FROM categorias WHERE id != :id";
+            $query = $this->PDO->prepare($sql);
+            $query->bindParam(':id', $id, PDO::PARAM_INT);
+            $query->execute();
+            $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            return array_map(fn($row) => Categoria::fromArray($row), $result);
+        } catch (PDOException $e) {
+            error_log("Error al obtener categorías excluyendo una: " . $e->getMessage());
             return [];
         }
     }

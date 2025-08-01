@@ -1,6 +1,6 @@
 <?php
-    headerAdmin();
-    partialBreadcrumb();
+headerAdmin();
+partialBreadcrumb();
 ?>
 <!-- Contenido de la información y botones -->
 <div class="contenedor-header">
@@ -9,7 +9,7 @@
     <div class="contenedor-botones">
         <div class="button-borders">
             <button class="btn-export btn-copy" title="Copiar Registros"> <i class="ri-file-copy-line"></i> Copiar </button>
-        </div> 
+        </div>
         <div class="button-borders">
             <button class="btn-export btn-excel" title="Exportar Excel"> <i class="ri-file-excel-2-line"></i> Excel </button>
         </div>
@@ -23,14 +23,30 @@
 </div>
 <!-- Contenido de la tabla -->
 <div class="contenedor">
-    <table id="tablaCategorias" class="table-sm w-100 tabla-responsive">
+    <div class="control-panel">
+        <div class="buscador-container">
+            <i class="ri-search-eye-line buscador-icon"></i>
+            <input type="text" id="buscadorPersonalizado" placeholder="Buscar categorías por nombre o descripción." class="control-buscador">
+        </div>
+        <div class="selector-container">
+            <i class="ri-arrow-down-s-line selector-icon"></i>
+            <span>Filas por página</span>
+            
+            <select id="selectorCantidad" class="control-selector">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="25">25</option>
+            </select>
+        </div>
+    </div>
+    <table id="tabla" class="table-sm w-100 tabla-responsive">
         <thead>
             <tr>
-                <th>ID</th>
+                <th class="column-id-th">ID</th>
                 <th>Nombre</th>
                 <th>Descripción</th>
-                <th>Estado</th>
-                <th class="text-center">Opciones</th>
+                <th class="column-estado-th">Estado</th>
+                <th class="column-opciones-th">Opciones</th>
             </tr>
         </thead>
 
@@ -38,10 +54,10 @@
             <?php if (!empty($categorias)): ?>
                 <?php foreach ($categorias as $categoria): ?>
                     <tr>
-                        <td data-label="ID:"><?= htmlspecialchars($categoria->getId()) ?></td>
+                        <td class="column-id-td" data-label="ID:"><?= htmlspecialchars($categoria->getId()) ?></td>
                         <td class="text-start" data-label="Nombre:"><?= htmlspecialchars($categoria->getNombre()) ?></td>
                         <td class="text-start" data-label="Descripción:"><?= htmlspecialchars($categoria->getDescripcion() ?: '[Sin descripción]') ?></td>
-                        <td data-label="Estado:">
+                        <td class="column-estado-td" data-label="Estado:">
                             <label class="switch-tabla">
                                 <input
                                     type="checkbox"
@@ -53,13 +69,11 @@
                             </label>
                         </td>
 
-                        <td>
+                        <td class="column-opciones-td">
                             <div class="table-botones">
                                 <button
                                     class="btn-ver-categoria btn btn-sm btn-info"
                                     data-id="<?= $categoria->getId() ?>"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#viewModal"
                                     title="Ver Categoría">
                                     <span class="boton-text">Ver</span>
                                     <span class="boton-icon"><i class="ri-eye-2-fill"></i></span>
@@ -106,6 +120,61 @@
                         document.getElementById('modal-modificado-por').textContent = data.modificado_por ?? '-';
                         document.getElementById('modal-created-at').textContent = data.created_at || '-';
                         document.getElementById('modal-updated-at').textContent = data.updated_at || '-';
+
+                        const contenedorSubcategorias = document.getElementById('modal-subcategorias');
+                        contenedorSubcategorias.innerHTML = ''; // Limpiar antes
+
+                        if (data.subcategorias && data.subcategorias.length > 0) {
+                            data.subcategorias.forEach(sub => {
+                                const li = document.createElement('li');
+                                li.classList.add(sub.estado ? 'text-primario' : 'text-muted'); // Aplica clase global
+                                li.classList.add('text-md');
+
+                                const icono = sub.estado ? 'ri-eye-fill' : 'ri-eye-close-fill';
+
+                                li.innerHTML = `
+                                    <i class="${icono} me-1"></i> <span>#${sub.id} -</span>
+                                    ${sub.nombre}
+                                `;
+                                contenedorSubcategorias.appendChild(li);
+                            });
+                        } else {
+                            contenedorSubcategorias.innerHTML = `
+                                <li class="medalla bg-secondary text-white">
+                                    <i class="ri-price-tag-line"></i>Sin subcategorías
+                                </li>
+                            `;
+                        }
+
+                        const padre = document.getElementById('modal-categoria-padre');
+                        if (data.categoria_padre) {
+                            const claseEstado = data.categoria_padre.estado ? 'text-primario' : 'text-muted';
+                            padre.classList.add(claseEstado);
+                            const icono = data.categoria_padre.estado ? 'ri-eye-fill' : 'ri-eye-close-fill';
+                            padre.innerHTML = `
+                            <i class="${icono} me-1 ${claseEstado}"></i> 
+                            <span>#${data.categoria_padre.id} -</span> 
+                            ${data.categoria_padre.nombre} `;
+                        } else {
+                            padre.innerHTML = `
+                            <li class="medalla bg-secondary text-white">
+                                <i class="ri-price-tag-2-line"></i>Sin categoría padre
+                            </li>`;
+                        }
+                        const img = document.getElementById('modal-imagen');
+                        const sinImagen = document.getElementById('modal-sin-imagen');
+
+                        if (data.imagen_url) {
+                            img.src = data.imagen_url;
+                            img.classList.remove('d-none');
+                            sinImagen.classList.add('d-none');
+                        } else {
+                            img.classList.add('d-none');
+                            sinImagen.classList.remove('d-none');
+                        }
+                        /* esto es para # mostrar el modal */
+                        const viewModal = new bootstrap.Modal(document.getElementById('viewModal'));
+                        viewModal.show();
                     })
                     .catch(error => {
                         console.error(error);
@@ -156,47 +225,60 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                <div class="table-responsive">
-                    <table class="table-sm w-100">
-                        <tbody>
-                            <tr>
-                                <td class="text-start fw-bolder px-2">ID:</td>
-                                <td class="text-start px-2"><span id="modal-id"></span></td>
-                            </tr>
-                            <tr>
-                                <td class="text-start fw-bolder px-2">Nombre:</td>
-                                <td class="text-start px-2"><span id="modal-nombre"></span></td>
-                            </tr>
-                            <tr>
-                                <td class="text-start fw-bolder px-2">Descripción:</td>
-                                <td class="text-start px-2"><span id="modal-descripcion"></span></td>
-                            </tr>
-                            <tr>
-                                <td class="text-start fw-bolder px-2">Estado:</td>
-                                <td class="text-start px-2" class=""><span id="modal-estado"></span></td>
-                            </tr>
-                            <tr>
-                                <td class="text-start fw-bolder px-2">Creado por:</td>
-                                <td class="text-start px-2">
-                                    <span id="modal-creado-por"></span>
-                                    <div>
-                                        <i class="ri-calendar-schedule-fill text-primario"></i>
-                                        <span class="text-primario" id="modal-created-at"></span>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="text-start fw-bolder px-2">Modificado por:</td>
-                                <td class="text-start px-2">
-                                    <span id="modal-modificado-por"></span>
-                                    <div>
-                                        <i class="ri-calendar-schedule-fill text-primario"></i>
-                                        <span class="text-primario" id="modal-updated-at"></span>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <h2 class="modal-nombre" id="modal-nombre"></h2>
+                <table class="table-sm w-100">
+                    <tbody>
+                        <tr>
+                            <td class="text-start fw-bolder px-2">ID:</td>
+                            <td class="text-start px-2"><span id="modal-id"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-start fw-bolder px-2">Descripción:</td>
+                            <td class="text-start px-2"><span id="modal-descripcion"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-start fw-bolder px-2">Estado:</td>
+                            <td class="text-start px-2" class=""><span id="modal-estado"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-start fw-bolder px-2">Categoría Padre:</td>
+                            <td class="text-start px-2" id="modal-categoria-padre">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-start fw-bolder px-2">Subcategorías:</td>
+                            <td class="text-start px-2">
+                                <ul id="modal-subcategorias" class="mb-0 px-0 small"></ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-start fw-bolder px-2">Creado por:</td>
+                            <td class="text-start px-2">
+                                <span id="modal-creado-por"></span>
+                                <div>
+                                    <i class="ri-calendar-schedule-fill text-primario"></i>
+                                    <span class="text-primario" id="modal-created-at"></span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="text-start fw-bolder px-2">Modificado por:</td>
+                            <td class="text-start px-2">
+                                <span id="modal-modificado-por"></span>
+                                <div>
+                                    <i class="ri-calendar-schedule-fill text-primario"></i>
+                                    <span class="text-primario" id="modal-updated-at"></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    <img id="modal-imagen" class="img-thumbnail d-none modal-imagen" alt="Imagen Marca">
+                    <div id="modal-sin-imagen" class="modal-sin-imagen d-none">
+                        <i class="ri-landscape-fill"></i>
+                        <span>Sin imagen</span>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer border-0 justify-content-center mt-0 pt-0">
@@ -209,8 +291,8 @@
 </div>
 
 <?php
-    menuFlotante();
-    modalFlash($mensaje);
-    modalConfirmacion();
-    footerAdmin();
+menuFlotante();
+modalFlash($mensaje);
+modalConfirmacion();
+footerAdmin();
 ?>

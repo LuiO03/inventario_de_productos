@@ -126,11 +126,11 @@ VALUES
 
 CREATE TABLE marcas (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL UNIQUE,
+    nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     estado TINYINT(1) DEFAULT 1,
     imagen VARCHAR(255) DEFAULT NULL,
-    slug VARCHAR(100) UNIQUE,
+    slug VARCHAR(100) ,
     creado_por INT,
     modificado_por INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -145,7 +145,16 @@ VALUES
 ('Adidas', 'Marca reconocida mundialmente por calzado y ropa deportiva', 1, 'adidas.png', 'adidas', 1, NULL),
 ('Puma', 'Marca deportiva con estilo urbano', 1, 'puma.png', 'puma', 1, NULL),
 ('Reebok', 'Marca especializada en fitness y deportes de alto rendimiento', 1, 'reebok.png', 'reebok', 1, NULL),
-('Under Armour', 'Marca de ropa deportiva con tecnología avanzada', 1, 'underarmour.png', 'under-armour', 1, NULL);
+('Under Armour', 'Marca de ropa deportiva con tecnología avanzada', 1, 'underarmour.png', 'under-armour', 1, NULL),
+('Zara', 'Marca de moda rápida con estilo contemporáneo', 1, 'zara.png', 'zara', 1, NULL),
+('H&M', 'Marca sueca de moda asequible y sostenible', 1, 'hm.png', 'hm', 1, NULL),
+('Levi\'s', 'Marca icónica de jeans y ropa casual', 1, 'levis.png', 'levis', 1, NULL),
+('Tommy Hilfiger', 'Marca de moda americana con estilo clásico y moderno', 1, 'tommy.png', 'tommy-hilfiger', 1, NULL),
+('Calvin Klein', 'Marca de lujo conocida por su ropa interior y perfumes', 1, 'calvinklein.png', 'calvin-klein', 1, NULL),
+('Bershka', 'Marca de moda juvenil con tendencias actuales', 1, 'bershka.png', 'bershka', 1, NULL),
+('Pull&Bear', 'Marca de moda casual y urbana para jóvenes', 1, 'pullandbear.png', 'pull-and-bear', 1, NULL),
+('Stradivarius', 'Marca femenina con estilo elegante y moderno', 1, 'stradivarius.png', 'stradivarius', 1, NULL),
+('Massimo Dutti', 'Marca de moda premium con enfoque en calidad y elegancia', 1, 'massimodutti.png', 'massimo-dutti', 1, NULL);
 
 CREATE TABLE productos (
     id INT AUTO_INCREMENT PRIMARY KEY,

@@ -21,6 +21,8 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.bootstrap5.min.css">
   <!-- DataTables Responsive Bootstrap 5 CSS -->
   <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
+  <!-- Select2 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
   <!--=============== CSS ===============-->
   <link rel="stylesheet" href="<?=base_url()?>public/css/base.css">
@@ -34,6 +36,7 @@
   <link rel="stylesheet" href="<?=base_url()?>public/css/alert-validate-front.css">
   <link rel="stylesheet" href="<?=base_url()?>public/css/alert-validate-back.css">
   <link rel="stylesheet" href="<?=base_url()?>public/css/fondo-main.css">
+  <link rel="stylesheet" href="<?=base_url()?>public/css/categoria-arbol.css">
   <script>
     if (localStorage.getItem("sidebar-estado") === "close") {
       document.documentElement.classList.add("sidebar-cerrado");
@@ -52,6 +55,8 @@
       }
     })();
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/dist/turbo.min.js"></script>
+
 </head>
 
 <body>
@@ -85,6 +90,11 @@
             <li>
               <a href="<?=base_url()?>categoria" data-label="Categorías">
                 <i class="ri-price-tag-3-line icon"></i><span>Categorías</span>
+              </a>
+            </li>
+            <li>
+              <a href="<?=base_url()?>categoria/arbol" data-label="Categorías/arbol"  data-label="Categorías/arbol">
+                <i class="ri-tree-line icon"></i><span>Arbol</span>
               </a>
             </li>
             <li>
@@ -203,9 +213,6 @@
         </ul>
       </div>
     </aside>
-    
-    
-    <!-- Contenido principal -->
     <main>
       <div class="background">
 
@@ -216,3 +223,5 @@
         <span class="ball"></span>
         <span class="ball"></span>
       </div>
+    <!-- Contenido principal -->
+    

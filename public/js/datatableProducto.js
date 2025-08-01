@@ -36,11 +36,11 @@ function actualizarIconosOrden() {
         $orderSpan.html(''); // Limpiar íconos previos
 
         if ($th.hasClass('dt-ordering-asc')) {
-            $orderSpan.html('<i class="ri-arrow-up-fill text-info pe-3"></i>');
+            $orderSpan.html('<i class="ri-arrow-up-fill text-info pe-1"></i>');
         } else if ($th.hasClass('dt-ordering-desc')) {
-            $orderSpan.html('<i class="ri-arrow-down-fill text-info pe-3"></i>');
+            $orderSpan.html('<i class="ri-arrow-down-fill text-info pe-1"></i>');
         } else if ($th.hasClass('dt-orderable-asc') && $th.hasClass('dt-orderable-desc')) {
-            $orderSpan.html('<i class="ri-arrow-up-down-line text-info pe-3"></i>');
+            $orderSpan.html('<i class="ri-arrow-up-down-line text-info pe-1"></i>');
         }
     });
 }

@@ -85,4 +85,14 @@
         $cadena = preg_replace('/[\s-]+/', '-', $cadena);       // reemplaza espacios por guión
         return rtrim($cadena, '-');
     }
+
+    function verificarImagen(string $carpeta, ?string $nombreArchivo): ?string {
+        if (!empty($nombreArchivo)) {
+            $rutaRelativa = "public/{$carpeta}/{$nombreArchivo}";
+            if (file_exists($rutaRelativa)) {
+                return BASE_URL . "/{$rutaRelativa}";
+            }
+        }
+        return null;
+    }
 ?>

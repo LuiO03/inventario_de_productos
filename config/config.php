@@ -49,10 +49,10 @@
         define('DB_PASS', '');
     } else {
         // Entorno de producción
-        define('DB_HOST', 'sql310.infinityfree.com');
-        define('DB_NAME', 'if0_39085781_inventario');
-        define('DB_USER', 'if0_39085781');
-        define('DB_PASS', '0afolwKzE0gI4V');
+        define('DB_HOST', 'sql308.infinityfree.com');
+        define('DB_NAME', 'if0_39566321_inventario');
+        define('DB_USER', 'if0_39566321');
+        define('DB_PASS', 'Rqv52h6DQpvq');
     }
 
     define('DB_CHARSET', 'utf8mb4');

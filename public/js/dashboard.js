@@ -28,12 +28,25 @@ function aplicarSubMenusGuardados() {
   document.querySelectorAll(".dropdown-btn").forEach((btn) => {
     const id = btn.getAttribute("data-id");
     const estado = localStorage.getItem(`submenu-${id}`);
+
     if (estado === "open") {
-      btn.nextElementSibling.classList.add("show");
+      const subMenu = btn.nextElementSibling;
+
+      // 🔧 Desactiva transiciones temporalmente
+      subMenu.style.transition = "none";
+
+      // ✅ Aplica estado abierto inmediatamente
+      subMenu.classList.add("show");
       btn.classList.add("rotate");
+
+      // 🕒 Fuerza reflujo y reactiva animación
+      requestAnimationFrame(() => {
+        subMenu.style.transition = ""; // vuelve a su CSS original
+      });
     }
   });
 }
+
 
 // ========== OVERLAY Y ESCAPE ========== //
 function registrarEventosOverlay() {

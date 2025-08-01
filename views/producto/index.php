@@ -26,7 +26,24 @@
 
 <!-- Contenido de la tabla -->
 <div class="contenedor">
-    <table id="tablaProductos" class="table-sm w-100 tabla-responsive">
+    <div class="control-panel">
+        <div class="buscador-container">
+            <i class="ri-search-eye-line buscador-icon"></i>
+            <input type="text" id="buscadorPersonalizado" placeholder="Buscar productos por nombre, código, categoría, precio, etc." class="control-buscador">
+        </div>
+        <div class="selector-container">
+            <i class="ri-arrow-down-s-line selector-icon"></i>
+            <span>Filas por página</span>
+            
+            <select id="selectorCantidad" class="control-selector">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+            </select>
+        </div>
+    </div>
+    <table id="tabla" class="table-sm w-100 tabla-responsive">
         <thead>
             <tr>
                 <th class="text-start">ID</th>

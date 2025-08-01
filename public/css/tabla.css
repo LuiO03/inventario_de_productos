@@ -28,7 +28,7 @@ table th {
 }
 
 table th:hover {
-  background-color: var(--color-primario) !important;
+  background-color: var(--color-hover) !important;
   color: whitesmoke !important;
 }
 
@@ -53,37 +53,33 @@ table tbody tr:hover {
   transition: background-color 0.3s ease;
 }
 
+.tabla-responsive thead tr th{
+  text-align: center;
+}
 
-.tabla-responsive thead tr th:first-child {
-  width: 55px;
+.column-id-th {
+  min-width: 50px;
   max-width: 100%;
-  text-align: start;
+  text-align: start !important;
 }
-.tabla-responsive tbody tr td:first-child {
-  width: 55px;
+.column-id-td {
+  min-width: 50px;
   max-width: 100%;
-  text-align: center;
 }
-.tabla-responsive tbody tr th:nth-last-child(2) {
+.column-estado-th {
   width: 90px;
   max-width: 100%;
-  text-align: start;
+  text-align: start !important;
 }
-.tabla-responsive tbody tr td:nth-last-child(2) {
+.column-estado-td {
   width: 90px;
   max-width: 100%;
-  text-align: center;
 }
-.tabla-responsive thead tr th:last-child {
+.column-opciones-th,.column-opciones-td {
   width: 330px;
   max-width: 100%;
-  text-align: center;
 }
-.tabla-responsive tbody tr td:last-child {
-  width: 330px;
-  max-width: 100%;
-  text-align: center;
-}
+
 @media (max-width: 950px){
   .tabla-responsive thead tr th:last-child {
     width: 200px;
@@ -94,12 +90,12 @@ table tbody tr:hover {
 }
 
 
-#tablaCategorias, #tablaProductos {
+.tabla-responsive {
   visibility: hidden;
   opacity: 0;
   transition: var(--transition-general);
 }
-#tablaCategorias.ready, #tablaProductos.ready {
+.tabla-responsive.ready {
   visibility: visible;
   opacity: 1;
 }
@@ -190,7 +186,7 @@ table thead tr th:last-child,table tbody tr td:last-child   {
 table td .table-botones {
   max-width: 100%;
   display: flex;
-  gap: 10px;
+  gap: 5px;
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -200,6 +196,22 @@ table .btn {
   max-width: 100%;
   /*width: min-content;*/
   min-width: 40px;
+  min-height: 35px;
+  border: none;
+  border-radius: var(--border-radio-elements);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  color: whitesmoke;
+  font-size: var(--font-size-xs);
+  margin: 2px 0px;
+  padding: 0px;
+}
+
+#tablaSubcategorias .btn{
+  max-width: 40px;
   min-height: 35px;
   border: none;
   cursor: pointer;
@@ -213,6 +225,92 @@ table .btn {
   padding: 0px;
 }
 
+#tablaSubcategorias .btn .boton-icon{
+  background-color: transparent;
+  height: 100%;
+  width: 40px;
+  display: flex;
+  font-size: 17px;
+  align-items: center;
+  justify-content: center;
+  transition: width 200ms ease, font-size 0.1s ease;
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: whitesmoke;
+}
+
+#tablaSubcategorias .btn .boton-text{
+  display: none;
+}
+
+@media (max-width: 468px) {
+  #tablaSubcategorias .btn{
+    flex: 1 1 80px;
+    max-width: 100%;
+  }
+  #tablaSubcategorias .btn .boton-text{
+    display: flex;
+  }
+  #tablaSubcategorias .btn .boton-icon{
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+  #tablaSubcategorias .btn:hover .boton-text{
+    color: transparent;
+  }
+  #tablaSubcategorias .btn:hover .boton-icon{
+    width: 100%;
+    border-left: none;
+    right: 0;
+    justify-content: center;
+    font-size: 20px;
+  }
+
+  #tablaSubcategorias .btn:active .boton-icon i {
+    transform: scale(0.85);
+  }
+}
+
+/* ==== ANIMACIÓN DE FILAS ==== */
+
+.tabla-responsive tbody tr {
+  animation: slideInLeft 0.3s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ==== BOTONES DE TABLA ==== */
 /* TEXTO del botón */
 table .btn .boton-text {
   width: 100%;
@@ -224,8 +322,7 @@ table .btn .boton-text {
 }
 
 /* ÍCONO */
-table .btn .boton-icon,
-.breadcrumb-container .btn .boton-icon {
+table .btn .boton-icon{
   height: 100%;
   width: 40px;
   display: flex;
@@ -241,13 +338,11 @@ table .btn .boton-icon,
 }
 
 /* HOVER EFFECTS */
-table .btn:hover .boton-text,
-.breadcrumb-container .btn:hover .boton-text {
+table .btn:hover .boton-text{
   color: transparent;
 }
 
-table .btn:hover .boton-icon,
-.breadcrumb-container .btn:hover .boton-icon {
+table .btn:hover .boton-icon{
   width: 100%;
   border-left: none;
   right: 0;
@@ -256,8 +351,7 @@ table .btn:hover .boton-icon,
 }
 
 /* Active */
-table .btn:active .boton-icon i,
-.breadcrumb-container .btn:active .boton-icon i {
+table .btn:active .boton-icon i{
   transform: scale(0.85);
 }
 
@@ -266,10 +360,6 @@ table .btn:active .boton-icon i,
 /* DANGER */
 table .btn-danger {
   background-color: var(--color-danger);
-}
-
-.btn-light{
-  border: 1px solid var(--color-table-head-border);
 }
 
 table .btn-danger:hover .boton-icon,

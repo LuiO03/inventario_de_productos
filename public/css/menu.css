@@ -17,7 +17,7 @@
   width: 150px;
   height: 100px;
   object-fit: cover;
-  border-radius: var(--border-radio-card);
+  border-radius: var(--border-radio-card-interno);
   pointer-events: none;
 }
 
@@ -31,7 +31,7 @@
 
 /* === TARGETAS / CARDS === */
 .targeta {
-  background-color: var(--color-card-bg);
+  background-color: var(--color-sidebar);
   box-shadow: var(--sombra-material);
   border-radius: var(--border-radio-card);
   transition: transform 0.1s ease-in-out, background-color 0.3s ease-in-out;
@@ -39,8 +39,16 @@
 }
 
 .targeta:hover {
-  transform: scale(1.02) translateY(-5px);
+  transform: translateY(-5px);
   background-color: var(--color-primario);
+}
+
+.card-icon-bg i{
+  transition: transform 0.3s ease-in-out;
+}
+
+.targeta:hover .card-icon-bg i{
+  transform: scale(1.2) rotate(-10deg);
 }
 
 .targeta:hover .card-info,
@@ -68,7 +76,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: var(--border-radio-card);
+  border-radius: var(--border-radio-card-interno);
 }
 
 .card-info {
@@ -87,7 +95,6 @@
 .card-icon-bg.info      { background-color: var(--color-info-pastel); }      /* pastel celeste */
 .card-icon-bg.secondary { background-color: var(--color-secondary-pastel); } /* pastel morado/gris */
 
-
 /* === CARDS COLABORADORES === */
 .targeta-conteiner-user {
   display: block;
@@ -98,7 +105,7 @@
 .avatar-user {
   width: 100%;
   object-fit: cover;
-  border-radius: var(--border-radio-card);
+  border-radius: var(--border-radio-card-interno);
   pointer-events: none;
 }
 
@@ -117,6 +124,7 @@
   display: block;
   max-width: var(--max-width);
 }
+
 .wrapper_tabs {
   display: flex;
   flex-direction: column;
@@ -137,6 +145,10 @@
   width: 100%;
   max-width: 350px;
   justify-content: center;
+  background-color: var(--color-sidebar);
+  border-radius: var(--border-radio-card) var(--border-radio-card) 0 0;
+  transition: var(--transition-general);
+  box-shadow: var(--sombra-material);
 }
 
 .label_tab {
@@ -212,7 +224,7 @@
 @media (max-width: 768px) {
 
   .wrapper_tabs {
-    padding: 0px 15px;
+    padding: 0px;
   }
 
   .contenedor-menu {
@@ -230,8 +242,8 @@
 
   .contenedor-header-home {
     gap: 10px;
-    padding: 10px 15px;
-    border-radius: var(--border-radio-elements);
+    padding: 10px;
+    border-radius: var(--border-radio-card);
   }
 
   .targeta-conteiner {

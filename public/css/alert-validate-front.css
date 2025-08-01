@@ -7,8 +7,10 @@
   text-align: center;
   font-size: 1.5rem;
   align-content: center;
-  background-color: var(--color-input-bg);
+  background-color: transparent;
   transition: var(--transition-general);
+  border-radius: var(--border-radio-elements);
+  z-index: 2;
 }
 
 .ri-close-circle-fill.input-estado {
@@ -17,10 +19,11 @@
 
 .error-text {
   color: var(--color-danger-pastel);
-  font-size: 0.9rem;
+  font-size: var(--font-size-xs);
   padding: 2px 12px;
+  margin-top: 5px;
   border: 2px solid var(--color-danger);
-  border-radius: 30px;
+  border-radius: var(--border-radio-card);
   --s: 100px; /* control the size*/
   --c2: var(--color-danger);
   --c1: #d11e4b;
