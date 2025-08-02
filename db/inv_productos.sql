@@ -126,11 +126,11 @@ VALUES
 
 CREATE TABLE marcas (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
+    nombre VARCHAR(100) NOT NULL UNIQUE,
     descripcion TEXT,
     estado TINYINT(1) DEFAULT 1,
     imagen VARCHAR(255) DEFAULT NULL,
-    slug VARCHAR(100) ,
+    slug VARCHAR(100) UNIQUE,
     creado_por INT,
     modificado_por INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -162,22 +162,64 @@ CREATE TABLE productos (
     nombre VARCHAR(100) NOT NULL,
     descripcion TEXT,
     precio DECIMAL(10, 2) NOT NULL,
-    stock INT DEFAULT 0,
+    estado TINYINT(1) DEFAULT 1,
     categoria_id INT NOT NULL,
     marca_id INT,
-    estado TINYINT(1) DEFAULT 1,
     creado_por INT,
     modificado_por INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+
     FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE RESTRICT,
     FOREIGN KEY (marca_id) REFERENCES marcas(id),
     FOREIGN KEY (creado_por) REFERENCES usuarios(id),
     FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
 );
 
+-- Índices recomendados
+CREATE INDEX idx_nombre ON productos(nombre);
+CREATE INDEX idx_categoria_id ON productos(categoria_id);
+CREATE INDEX idx_marca_id ON productos(marca_id);
+CREATE INDEX idx_estado ON productos(estado);
+CREATE INDEX idx_precio ON productos(precio);
+
+CREATE TABLE colores (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    codigo_hex VARCHAR(10), -- opcional
+    estado TINYINT(1) DEFAULT 1
+);
+
+CREATE TABLE tallas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(20) NOT NULL, -- Ej: S, M, L, XL
+    descripcion VARCHAR(50),     -- Ej: "Small", "Medium"
+    estado TINYINT(1) DEFAULT 1
+);
+
+CREATE TABLE producto_variantes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    producto_id INT NOT NULL,
+    color_id INT NOT NULL,
+    talla_id INT NOT NULL,
+    stock INT DEFAULT 0,
+    sku VARCHAR(100), -- código interno opcional para variante
+    estado TINYINT(1) DEFAULT 1,
+
+    FOREIGN KEY (producto_id) REFERENCES productos(id) ON DELETE CASCADE,
+    FOREIGN KEY (color_id) REFERENCES colores(id),
+    FOREIGN KEY (talla_id) REFERENCES tallas(id)
+);
+
+-- Índices
+CREATE INDEX idx_producto_color_talla ON producto_variantes(producto_id, color_id, talla_id);
+CREATE INDEX idx_producto_id ON producto_variantes(producto_id);
+
+
 INSERT INTO productos (codigo, nombre, descripcion, precio, stock, categoria_id, marca_id, estado, creado_por, modificado_por)
 VALUES
 ('P001', 'Polo Deportivo Hombre', 'Polo Nike para entrenamientos', 79.90, 15, 1, 1, 1, 1, 1),
 ('P002', 'Leggins Mujer', 'Leggins cómodos para correr marca Adidas', 99.50, 20, 2, 2, 1, 2, 2),
 ('P003', 'Casaca Casual Hombre', 'Casaca Zara estilo urbano para hombres', 149.90, 10, 1, 3, 1, 1, 2);
+
+

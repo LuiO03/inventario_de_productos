@@ -59,9 +59,12 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  cursor: pointer;
   color: var(--color-text);
   transition: var(--transition-general);
+}
+
+.parent{
+  cursor: pointer;
 }
 
 .toggle-control .categoria-nombre {

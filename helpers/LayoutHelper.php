@@ -69,10 +69,15 @@
         return $GLOBALS['pageTitle'] ?? ($default ?? APP_NAME);
     }
     
-    function getModal(string $nameModal, $data)
-    {
-        $view_modal = "Views/templates/modals/{$nameModal}.php";
-        require_once $view_modal;        
+    function getModal(string $nameModal): void{
+        $view_modal = "views/templates/modals/{$nameModal}.php";
+
+        if (file_exists($view_modal)) {
+            require_once $view_modal;
+        } else {
+            error_log("Modal no encontrado: {$view_modal}");
+            echo "<!-- Modal '{$nameModal}' no encontrado -->";
+        }
     }
 
     function htmlEscape($valor): string {

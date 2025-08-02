@@ -36,20 +36,21 @@ function actualizarIconosOrden() {
         $orderSpan.html(''); // Limpiar íconos previos
 
         if ($th.hasClass('dt-ordering-asc')) {
-            $orderSpan.html('<i class="ri-arrow-up-fill text-info pe-1"></i>');
+            $orderSpan.html('<i class="ri-arrow-up-fill orden-icon"></i>');
         } else if ($th.hasClass('dt-ordering-desc')) {
-            $orderSpan.html('<i class="ri-arrow-down-fill text-info pe-1"></i>');
+            $orderSpan.html('<i class="ri-arrow-down-fill orden-icon"></i>');
         } else if ($th.hasClass('dt-orderable-asc') && $th.hasClass('dt-orderable-desc')) {
-            $orderSpan.html('<i class="ri-arrow-up-down-line text-info pe-1"></i>');
+            $orderSpan.html('<i class="ri-arrow-up-down-line orden-icon-none"></i>');
         }
     });
 }
 
 // Inicialización del DataTable y personalización
 $(document).ready(function () {
+    
     const tabla = $('#tabla').DataTable({
         dom: 'tip', 
-        order: [[0, 'desc']],            // Orden inicial por la primera columna descendente
+        order: [[0, 'asc']],            // Orden inicial por la primera columna descendente
         pageLength: 10,                  // Cantidad de registros por página
         deferRender: true,              // Mejora rendimiento en tablas grandes
         lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
@@ -117,14 +118,10 @@ $(document).ready(function () {
     });
 
     // Animación de filas al redibujar (opcional)
-    /*
     tabla.on('draw', () => {
         const filas = document.querySelectorAll('#tabla tbody tr');
         filas.forEach(fila => {
-            fila.style.animation = 'none';
-            void fila.offsetWidth;
-            fila.style.animation = 'fadeInUp 0.3s ease-in-out';
+            fila.style.animation = 'slideInLeft 0.3s ease-in-out';
         });
     });
-    */
 });

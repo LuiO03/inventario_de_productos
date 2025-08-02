@@ -75,7 +75,7 @@ class CategoriaModel extends Model
     public function getAll(): array
     {
         try {
-            $sql = "SELECT * FROM categorias ORDER BY parent_id ASC, nombre ASC";
+            $sql = "SELECT * FROM categorias ORDER BY id ASC";
             $query = $this->PDO->prepare($sql);
             $query->execute();
             $result = $query->fetchAll(PDO::FETCH_ASSOC);

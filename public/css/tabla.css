@@ -28,13 +28,12 @@ table th {
 }
 
 table th:hover {
-  background-color: var(--color-hover) !important;
-  color: whitesmoke !important;
+  background-color: var(--color-stripet-table) !important;
 }
 
 table thead {
   background-color: var(--color-stripet-table) !important;
-  text-transform: uppercase;
+  text-transform: capitalize;
   transition: var(--transition-general);
   border-top: 1px solid var(--color-table-head-border);
   border-bottom: 1px solid var(--color-table-head-border);
@@ -90,15 +89,6 @@ table tbody tr:hover {
 }
 
 
-.tabla-responsive {
-  visibility: hidden;
-  opacity: 0;
-  transition: var(--transition-general);
-}
-.tabla-responsive.ready {
-  visibility: visible;
-  opacity: 1;
-}
 
 @media (max-width: 768px) {
   .tabla-responsive tbody tr th:nth-last-child(2) {
@@ -272,10 +262,10 @@ table .btn {
 }
 
 /* ==== ANIMACIÓN DE FILAS ==== */
-
+/*
 .tabla-responsive tbody tr {
   animation: slideInLeft 0.3s ease-in-out;
-}
+}*/
 
 @keyframes fadeInUp {
   from {

@@ -21,7 +21,7 @@
     <div class="control-panel">
         <div class="buscador-container">
             <i class="ri-search-eye-line buscador-icon"></i>
-            <input type="text" id="buscadorPersonalizado" placeholder="Buscar marca por nombre o descripción..." class="control-buscador">
+            <input type="text" id="buscadorPersonalizado" placeholder="Buscar marca por nombre o descripción..." class="control-buscador" name="buscador">
         </div>
         <div class="selector-container">
             <i class="ri-arrow-down-s-line selector-icon"></i>
@@ -62,7 +62,7 @@
                         <td class="text-start" data-label="Descripción:"><?= htmlspecialchars($marca->getDescripcion() ?: '[Sin descripción]') ?></td>
                         <td class="column-estado-td" data-label="Estado:">
                             <label class="switch-tabla">
-                                <input type="checkbox" class="toggle-estado" data-id="<?= $marca->getId() ?>" <?= $marca->getEstado() ? 'checked' : '' ?>>
+                                <input type="checkbox" class="toggle-estado" data-id="<?= $marca->getId() ?>" <?= $marca->getEstado() ? 'checked' : '' ?> name="estado">
                                 <span class="slider"></span>
                             </label>
                         </td>

@@ -72,7 +72,7 @@ class MarcaModel extends Model
     public function getAll(): array
     {
         try {
-            $sql = "SELECT * FROM marcas ORDER BY id DESC";
+            $sql = "SELECT * FROM marcas ORDER BY id ASC";
             $query = $this->PDO->prepare($sql);
             $query->execute();
             $result = $query->fetchAll(PDO::FETCH_ASSOC);

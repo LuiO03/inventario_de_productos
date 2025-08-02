@@ -55,7 +55,6 @@
       }
     })();
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@7.3.0/dist/turbo.min.js"></script>
 
 </head>
 

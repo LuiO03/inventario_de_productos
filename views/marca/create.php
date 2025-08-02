@@ -10,12 +10,12 @@ partialBreadcrumb();
 
 <form action="<?= BASE_URL ?>marca/store" method="post" enctype="multipart/form-data" class="formulario" autocomplete="off">
     <input type="hidden" name="csrf_token" value="<?= generarTokenCSRF(); ?>">
-    <small class="form-aviso">
-        Los campos con asterisco (<span class="text-primario"><i class="ri-asterisk"></i></span>) son obligatorios.
-    </small>
     <div class="formulario-contenido">
         <div class="formulario-columna-nowrap">
             <?php alertValidate(); ?>
+            <small class="form-aviso">
+                Los campos con asterisco (<span class="text-primario"><i class="ri-asterisk"></i></span>) son obligatorios.
+            </small>
             <!-- Nombre -->
             <div class="input-group-nowrap">
                 <label for="nombre" class="form-label">
