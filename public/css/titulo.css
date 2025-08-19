@@ -1,0 +1,238 @@
+/*====== CONTENEDOR-HEADER ======*/
+
+.contenedor-header {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  text-align: center;
+  border-radius: var(--border-radio-card);
+}
+
+.control-panel{
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-xs);
+  width: 100%;
+  gap: 20px;
+  font-family: var(--font-family-dashboard);
+  flex-wrap: wrap;
+  max-width: var(--max-width);
+  background-color: var(--color-sidebar);
+  border-radius: var(--border-radio-card);
+  padding: 10px 20px;
+  transition: var(--transition-fondo);
+  box-shadow: var(--sombra-material);
+} 
+
+.buscador-container{
+  position: relative;
+  display: flex;
+  position: relative;
+  flex: 1 1 300px;
+}
+
+.selector-container{
+  display: flex;
+  position: relative;
+  flex: 1 1 300px;
+  max-width: 300px;
+  gap: 10px;
+}
+
+@media (max-width: 750px){
+  .selector-container{
+    max-width: 100%;
+  }
+}
+
+.selector-container span{
+  width: fit-content;
+  text-wrap: nowrap;
+  align-content: center;
+}
+
+.control-buscador{
+  padding-left: 45px;
+  padding-right: 2.5rem;;
+}
+
+.buscador-clear {
+  position: absolute;
+  right: 0px;
+  font-size: 20px;
+  color: var(--color-danger);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  width: 2.5rem;
+  font-size: 20px;
+  right: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: transparent;
+}
+
+.buscador-clear:hover {
+  color: var(--color-primario);
+}
+
+.control-buscador,.control-selector {
+  width: 100%;
+  height: 38px;
+  border: 1px solid var(--color-boton-datatable);
+  border-radius: var(--border-radio-elements);
+  background-color: var(--color-input-bg);
+  color: var(--color-text);
+  transition: var(--transition-fondo-texto);
+}
+
+.control-selector{
+  width: 100%;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.control-buscador:focus, .control-selector:focus {
+  border-color: var(--color-primario);
+  box-shadow: var(--sombra-material);
+  outline: none;
+}
+
+.control-buscador::placeholder {
+  color: var(--color-placeholder);
+  transition: var(--transition-color);
+}
+
+.buscador-icon, .selector-icon {
+  position: absolute;
+  width: 2.5rem;
+  font-size: 20px;
+  background-color: var(--color-boton-datatable);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 0;
+  border-radius: var(--border-radio-elements);
+  transition: var(--transition-fondo), var(--transition-borde);
+}
+.buscador-icon{
+  left: 0;
+  top: 0;
+  height: 100%;
+}
+.selector-icon{
+  right: 0;
+  top: 0;
+  height: 100%;
+}
+.buscador-container:focus-within .buscador-icon, .selector-container:focus-within .selector-icon {
+  background-color: var(--color-primario);
+}
+
+.contenedor-botones {
+  position: sticky;
+  top: 0px; /* o la altura del header si tienes uno fijo */
+  z-index: 10;
+  width: fit-content;
+  justify-content: start;
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family-dashboard);
+}
+
+.botones-export{
+  display: flex;
+  gap: 5px;
+}
+
+.eliminar-seleccion, .cancelar-seleccion{
+  display: none !important;
+}
+
+.eliminar-seleccion.visible, .cancelar-seleccion.visible{
+  display: flex !important;
+  animation: zoomIn 0.2s ease-out;
+}
+
+
+@media (max-width: 458px) {
+  .contenedor-header {
+    padding: 20px 15px;
+  }
+}
+
+.btn-export {
+  position: relative;
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+  text-decoration: none;
+  z-index: 1;
+  color: white;
+  font-size: var(--font-size-p);
+  border: none;
+  border-radius: var(--border-radio-elements);
+  overflow: hidden;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: var(--font-size-xs);
+  box-shadow: var(--sombra-material);
+}
+
+.btn-export:hover {
+  color: var(--color-bw-inverted);
+}
+
+/* Fondo animado diagonal */
+.btn-export::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -210%;
+  width: 200%;
+  height: 100%;
+  background-color: var(--color-bw); /* Efecto sutil */
+  transform: skewX(-20deg);
+  z-index: -1;
+  transition: left 0.6s ease-in-out;
+}
+
+/* Animación al pasar el mouse */
+.btn-export:hover::after {
+  left: -40%;
+}
+
+/* Copiar - Azul petróleo oscuro */
+.btn-copy {
+  background: #181818;
+}
+
+/* Excel - Verde bosque profundo */
+.btn-excel {
+  background: #1d613e;
+}
+
+/* PDF - Rojo vino oscuro */
+.btn-pdf {
+  background: #b51308;
+}
+
+@media (max-width: 458px) {
+  .btn-excel, .btn-pdf  {
+    display: none;
+  }
+}
+
+/* Imprimir - Azul noche */
+.btn-recargar {
+  background: #430199;
+}
+
+.estado-texto{
+  display: none;
+}

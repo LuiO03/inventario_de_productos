@@ -165,7 +165,7 @@ class CategoriaModel extends Model
         ]);
     }
 
-    public function contar(): int
+    public function count(): int
     {
         $sql = "SELECT COUNT(*) as total FROM categorias";
         $query = $this->PDO->query($sql);
@@ -215,5 +215,31 @@ class CategoriaModel extends Model
             error_log("Error al obtener categorías excluyendo una: " . $e->getMessage());
             return [];
         }
+    }
+
+    public function deleteMultiple(array $ids): int
+    {
+        $placeholders = implode(',', array_fill(0, count($ids), '?'));
+        $sql = "DELETE FROM categorias WHERE id IN ($placeholders)";
+        $query = $this->PDO->prepare($sql);
+        $query->execute($ids);
+        return $query->rowCount(); // Devuelve cuántas filas fueron eliminadas
+    }
+
+    public function getByIds(array $ids): array
+    {
+        if (empty($ids)) return [];
+
+        $placeholders = implode(',', array_fill(0, count($ids), '?'));
+        $sql = "SELECT * FROM categorias WHERE id IN ($placeholders) ORDER BY id ASC";
+        $query = $this->PDO->prepare($sql);
+        $query->execute($ids);
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        $marcas = [];
+        foreach ($result as $row) {
+            $marcas[] = Marca::fromArray($row); // Igual que en getAll()
+        }
+        return $marcas;
     }
 }

@@ -103,17 +103,20 @@
 
                         if (data.subcategorias && data.subcategorias.length > 0) {
                             data.subcategorias.forEach(sub => {
-                                const li = document.createElement('li');
-                                li.classList.add(sub.estado ? 'text-primario' : 'text-muted'); // Aplica clase global
-                                li.classList.add('text-md');
+                                const a = document.createElement('a');
+                                a.classList.add(sub.estado ? 'text-base' : 'text-muted'); // Aplica clase global
+                                a.classList.add('text-md');
+                                a.href = `${'<?= BASE_URL ?>'}/categoria/edit/${sub.id}`;
 
                                 const icono = sub.estado ? 'ri-eye-fill' : 'ri-eye-close-fill';
 
-                                li.innerHTML = `
-                                    <i class="${icono} me-1"></i> <span>#${sub.id} -</span>
-                                    ${sub.nombre}
+                                a.innerHTML = `
+                                    <li>
+                                        <i class="${icono} me-1"></i> <span>#${sub.id} -</span>
+                                        ${sub.nombre}
+                                    </li>
                                 `;
-                                contenedorSubcategorias.appendChild(li);
+                                contenedorSubcategorias.appendChild(a);
                             });
                         } else {
                             contenedorSubcategorias.innerHTML = `
@@ -124,20 +127,31 @@
                         }
 
                         const padre = document.getElementById('modal-categoria-padre');
+                        padre.innerHTML = ''; // Limpiar antes
+
                         if (data.categoria_padre) {
                             const claseEstado = data.categoria_padre.estado ? 'text-primario' : 'text-muted';
-                            padre.classList.add(claseEstado);
                             const icono = data.categoria_padre.estado ? 'ri-eye-fill' : 'ri-eye-close-fill';
-                            padre.innerHTML = `
-                            <i class="${icono} me-1 ${claseEstado}"></i> 
-                            <span>#${data.categoria_padre.id} -</span> 
-                            ${data.categoria_padre.nombre} `;
+
+                            const a = document.createElement('a');
+                            a.href = `${'<?= BASE_URL ?>'}/categoria/edit/${data.categoria_padre.id}`;
+                            a.classList.add(claseEstado, 'text-md');
+
+                            a.innerHTML = `
+                                <i class="${icono} me-1 ${claseEstado}"></i> 
+                                <span>#${data.categoria_padre.id} -</span> 
+                                ${data.categoria_padre.nombre}
+                            `;
+
+                            padre.appendChild(a);
                         } else {
                             padre.innerHTML = `
-                            <li class="medalla bg-secondary text-white">
-                                <i class="ri-price-tag-2-line"></i>Sin categoría padre
-                            </li>`;
+                                <li class="medalla bg-secondary text-white">
+                                    <i class="ri-price-tag-2-line"></i>Sin categoría padre
+                                </li>
+                            `;
                         }
+
                         const img = document.getElementById('modal-imagen');
                         const sinImagen = document.getElementById('modal-sin-imagen');
 
@@ -162,34 +176,6 @@
                     });
             });
         });
-        document.querySelectorAll('.toggle-estado').forEach(input => {
-            input.addEventListener('change', function() {
-                const id = this.dataset.id;
-                const nuevoEstado = this.checked ? 1 : 0;
-
-                fetch(`<?= BASE_URL ?>categoria/toggleEstado/${id}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-Requested-With': 'XMLHttpRequest'
-                        },
-                        body: JSON.stringify({
-                            estado: nuevoEstado
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (!data.success) {
-                            alert('Error al actualizar el estado');
-                            this.checked = !nuevoEstado; // revertir si falla
-                        }
-                    })
-                    .catch(err => {
-                        console.error('Error:', err);
-                        alert('Error al actualizar el estado');
-                        this.checked = !nuevoEstado;
-                    });
-            });
-        });
+        
     });
 </script>

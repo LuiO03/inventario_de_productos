@@ -27,9 +27,9 @@ class UsuarioModel extends Model
         }
     }
 
-    public function contar() {
+    public function count() {
         $sql = "SELECT COUNT(*) as total FROM usuarios";
-        $stmt = $this->PDO->query($sql);
-        return $stmt->fetch()['total'];
+        $query = $this->PDO->query($sql);
+        return $query->fetch()['total'];
     }
 }

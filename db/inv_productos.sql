@@ -216,10 +216,3 @@ CREATE INDEX idx_producto_color_talla ON producto_variantes(producto_id, color_i
 CREATE INDEX idx_producto_id ON producto_variantes(producto_id);
 
 
-INSERT INTO productos (codigo, nombre, descripcion, precio, stock, categoria_id, marca_id, estado, creado_por, modificado_por)
-VALUES
-('P001', 'Polo Deportivo Hombre', 'Polo Nike para entrenamientos', 79.90, 15, 1, 1, 1, 1, 1),
-('P002', 'Leggins Mujer', 'Leggins cómodos para correr marca Adidas', 99.50, 20, 2, 2, 1, 2, 2),
-('P003', 'Casaca Casual Hombre', 'Casaca Zara estilo urbano para hombres', 149.90, 10, 1, 3, 1, 1, 2);
-
-

@@ -7,34 +7,34 @@ table {
   background-color: var(--color-header) !important;
   border-radius: var(--border-radio-elements) !important;
   color: var(--color-texto) !important;
-  transition: var(--transition-general);
+  transition: var(--transition-fondo-texto);
   margin: 0px;
   font-size: var(--font-size-p);
   font-family: var(--font-family-dashboard);
 }
 
 table td {
-  text-align: center !important;
+  text-align: start !important;
 }
+
 
 table td,
 table th {
-  background-color: transparent !important;
   vertical-align: middle !important;
   color: var(--color-texto) !important;
   padding-inline: 10px !important;
   border: 1px solid var(--color-border);
-  transition: var(--transition-general);
+  transition: var(--transition-fondo-texto), var(--transition-borde);
 }
 
 table th:hover {
-  background-color: var(--color-stripet-table) !important;
+  background-color: var(--color-hover) !important;
 }
 
 table thead {
   background-color: var(--color-stripet-table) !important;
   text-transform: capitalize;
-  transition: var(--transition-general);
+  transition: var(--transition-fondo-texto), var(--transition-borde);
   border-top: 1px solid var(--color-table-head-border);
   border-bottom: 1px solid var(--color-table-head-border);
   height: 40px;
@@ -43,17 +43,85 @@ table thead {
 }
 
 table tbody tr:nth-child(even) {
-  background-color: var(--color-stripet-table) !important;
-  transition: var(--transition-general);
+  background-color: var(--color-stripet-table);
+  transition: var(--transition-fondo);
 }
 
 table tbody tr:hover {
   background-color: var(--color-hover) !important;
-  transition: background-color 0.3s ease;
+  transition: var(--transition-fondo);
 }
 
 .tabla-responsive thead tr th{
   text-align: center;
+}
+
+.column-check-td, .column-check-th {
+  min-width: 45px;
+  max-width: 100%;
+  text-align: center !important;
+  padding: 0px;
+  margin: 0px;
+}
+
+/* Estilo base para las celdas que contienen checkboxes */
+td.column-check-td, th.column-check-th {
+  cursor: pointer;
+  text-align: center;
+  padding: 0.5rem;
+}
+
+/* Ocultar el checkbox original */
+.column-check-td input[type="checkbox"],
+.column-check-th input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  transition: var(--transition-fondo), var(--transition-borde);
+  background-color: var(--color-input-bg);
+  cursor: pointer;
+  position: relative;
+  border: 1px solid var(--color-border);
+}
+
+/* Al pasar el mouse */
+.column-check-td input[type="checkbox"]:hover,
+.column-check-th input[type="checkbox"]:hover {
+  border-color: var(--color-primario);
+}
+
+/* Cuando está activo (check marcado) */
+.column-check-td input[type="checkbox"]:checked,
+.column-check-th input[type="checkbox"]:checked {
+  background-color: var(--color-primario);
+}
+
+/* Icono de check (pseudo-elemento) */
+.column-check-td input[type="checkbox"]:checked::after,
+.column-check-th input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  width: 5px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Enfocado por teclado */
+.column-check-td input[type="checkbox"]:focus,
+.column-check-th input[type="checkbox"]:focus {
+  outline: 1px solid var(--color-bw);
+  outline-offset: 2px;
+}
+
+.fila-seleccionada, .fila-seleccionada:hover {
+  background-color: #111111 !important;
+  transition: background-color 0.1s ease-in-out;
+  color: whitesmoke !important;
 }
 
 .column-id-th {
@@ -64,6 +132,9 @@ table tbody tr:hover {
 .column-id-td {
   min-width: 50px;
   max-width: 100%;
+}
+.column-img-th, .column-img-td {
+  text-align: center !important;
 }
 .column-estado-th {
   width: 90px;
@@ -79,22 +150,24 @@ table tbody tr:hover {
   max-width: 100%;
 }
 
+
 @media (max-width: 950px){
-  .tabla-responsive thead tr th:last-child {
+  .column-opciones-th {
     width: 200px;
   }
-  .tabla-responsive tbody tr td:last-child {
+  .column-opciones-td {
     width: 200px;
   }
 }
 
-
-
 @media (max-width: 768px) {
-  .tabla-responsive tbody tr th:nth-last-child(2) {
+  .column-check-th, .column-id-th, .column-check-td, .column-id-td, .column-img-th, .column-img-td {
+    display: none !important;
+  }
+  .column-estado-th  {
     width: auto;
   }
-  .tabla-responsive tbody tr td:nth-last-child(2) {
+  .column-estado-td {
     width: auto;
   }
   .tabla-responsive thead {
@@ -115,11 +188,11 @@ table tbody tr:hover {
   }
 
   .tabla-responsive tr, .tabla-responsive tr:nth-child(even) {
-    background-color: var(--color-card-bg) !important;
+    background-color: var(--color-card-bg);
   }
 
   .tabla-responsive tr:hover {
-    background-color: var(--color-bg) !important;
+    background-color: var(--color-hover);
   }
 
   .tabla-responsive tr {
@@ -128,26 +201,25 @@ table tbody tr:hover {
     border: 1px solid var(--color-border);
     border-radius: var(--border-radio-card);
     padding: 15px;
-    transition: var(--transition-general);
+    transition: var(--transition-borde), var(--transition-fondo);
   }
 
   .tabla-responsive td[data-label] {
     display: flex;
     align-items: flex-start;
     border: none;
-    transition: var(--transition-general);
   }
-
+  /*
   .tabla-responsive td[data-label]::before {
     content: attr(data-label);
     font-weight: 700;
     min-width: 100px;
     max-width: 110px;
-    flex-shrink: 0;     /* no se reduce */
+    flex-shrink: 0;     /* no se reduce
     text-align: left;
     display: inline-block;
   }
-
+  */
   .tabla-responsive td:last-child {
     border: none;
   }
@@ -319,7 +391,7 @@ table .btn .boton-icon{
   font-size: 17px;
   align-items: center;
   justify-content: center;
-  transition: width 200ms ease, font-size 0.1s ease;
+  transition: width 0.2s ease, font-size 0.1s ease;
   background-color: rgba(0, 0, 0, 0.2);
   position: absolute;
   right: 0;
@@ -385,45 +457,3 @@ table .btn-success:hover .boton-icon,
 table .btn-success:hover {
   background-color: #007d71;
 }
-
-/* 
-table .btn {
-      padding: 0.375rem 0.75rem;
-  font-size: 0.85rem;
-  border-width: 2px;
-  transition: all 0.3s ease;
-  background-color: transparent;
-  box-shadow: none;
-  line-height: 1.5;
-  border-radius: 3px;
-}
-
-table .btn-info {
-  color: rgb(0, 132, 219);
-  border-color: rgb(0, 132, 219);
-}
-
-table .btn-info:hover {
-  background-color: rgb(0, 132, 219);
-  color: #fff;
-}
-
-table .btn-warning {
-  color: #ffc107;
-  border-color: #ffc107;
-}
-
-table .btn-warning:hover {
-  background-color: #ffc107 ;
-  color: #212529;
-}
-
-table .btn-danger {
-  color: rgb(211, 0, 53);
-  border-color: rgb(211, 0, 53);
-}
-
-table .btn-danger:hover {
-  background-color: rgb(211, 0, 53);
-  color: #fff;
-}*/

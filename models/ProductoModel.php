@@ -137,19 +137,19 @@ class ProductoModel extends Model
     {
         try {
             $sql = "SELECT COUNT(*) FROM productos WHERE categoria_id = :categoria_id";
-            $stmt = $this->PDO->prepare($sql);
-            $stmt->bindParam(':categoria_id', $categoriaId, PDO::PARAM_INT);
-            $stmt->execute();
-            return (int) $stmt->fetchColumn();
+            $query = $this->PDO->prepare($sql);
+            $query->bindParam(':categoria_id', $categoriaId, PDO::PARAM_INT);
+            $query->execute();
+            return (int) $query->fetchColumn();
         } catch (PDOException $e) {
             error_log('Error al contar productos por categoría: ' . $e->getMessage());
             return 0;
         }
     }
 
-    public function contar() {
+    public function count() {
         $sql = "SELECT COUNT(*) as total FROM productos";
-        $stmt = $this->PDO->query($sql);
-        return $stmt->fetch()['total'];
+        $query = $this->PDO->query($sql);
+        return $query->fetch()['total'];
     }
 }

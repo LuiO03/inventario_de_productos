@@ -79,19 +79,31 @@ function mostrarCategorias($parentId, $agrupadas, $nivel = 1)
 <div class="contenedor-header">
     <h1>Árbol de Categorías</h1>
     <p>Visualiza la jerarquía de categorías y subcategorías.</p>
-    <div class="contenedor-botones">
-        <div class="button-borders">
-            <button class="btn-export btn-copy" title="Copiar Registros"> <i class="ri-file-copy-line"></i> Copiar </button>
-        </div>
-        <div class="button-borders">
-            <button class="btn-export btn-excel" title="Exportar Excel"> <i class="ri-file-excel-2-line"></i> Excel </button>
-        </div>
-        <div class="button-borders">
-            <button class="btn-export btn-pdf" title="Exportar PDF"> <i class="ri-file-pdf-2-line"></i> PDF </button>
-        </div>
-        <div class="button-borders">
-            <button class="btn-export btn-print" title="Imprimir Tabla"> <i class="ri-printer-line"></i> Imprimir </button>
-        </div>
+</div>
+<div class="contenedor-botones">
+    <div class="botones-export">
+        <form id="formExportarPdf" action="<?= BASE_URL ?>marca/exportarPdf" method="POST" target="_blank" style="display:inline;">
+            <input type="hidden" name="ids" id="idsSeleccionadosPdf">
+            <button type="submit" class="btn-export btn-pdf">
+                <i class="ri-file-pdf-2-line"></i>
+                <span class="export-text">PDF</span>
+            </button>
+        </form>
+        <form id="formExportarExcel" action="<?= BASE_URL ?>marca/exportarExcel" method="POST" style="display:inline;">
+            <input type="hidden" name="ids" id="idsSeleccionadosExcel">
+            <button type="submit" class="btn-export btn-excel">
+                <i class="ri-file-excel-2-line"></i>
+                <span class="export-text">Excel</span>
+            </button>
+        </form>
+        <button class="btn-export btn-primary eliminar-seleccion" id="btnEliminarSeleccionados">
+            <i class="ri-delete-bin-7-line"></i>
+            <span class="export-text">Eliminar</span>
+        </button>
+        <button class="btn-export btn-secondary cancelar-seleccion" id="btnCancelarSeleccion">
+            <i class="ri-close-circle-line"></i>
+            <span class="export-text">Cancelar</span>
+        </button>
     </div>
 </div>
 

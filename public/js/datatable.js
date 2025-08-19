@@ -7,7 +7,7 @@ const language_es = {
             <span>No hay datos disponibles en la tabla</span>
         </div>
     `,
-    info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+    info: "Mostrando del _START_ al _END_ de un total de _TOTAL_ registros",
     infoEmpty: "Mostrando 0 a 0 de 0 registros",
     infoFiltered: "(filtrado de _MAX_ registros totales)",
     lengthMenu: "Filas por página _MENU_ ",
@@ -21,10 +21,10 @@ const language_es = {
         </div>
     `,
     paginate: {
-        first: `<i class="ri-contract-left-fill me-1 text-info"></i> <span class="text-label">Primero</span>`,
-        previous: `<i class="ri-arrow-left-fill me-1 text-info"></i> <span class="text-label">Anterior</span>`,
-        next: `<span class="text-label">Siguiente</span> <i class="ri-arrow-right-fill ms-1 text-info"></i>`,
-        last: `<span class="text-label">Último</span> <i class="ri-contract-right-fill ms-1 text-info"></i>`
+        first: `<i class="ri-skip-left-line me-1 text-primario"></i> <span class="text-label">Primero</span>`,
+        previous: `<i class="ri-arrow-left-s-line me-1 text-primario"></i> <span class="text-label">Anterior</span>`,
+        next: `<span class="text-label">Siguiente</span> <i class="ri-arrow-right-s-line ms-1 text-primario"></i>`,
+        last: `<span class="text-label">Último</span> <i class="ri-skip-right-line ms-1 text-primario"></i>`
     }
 };
 
@@ -36,32 +36,34 @@ function actualizarIconosOrden() {
         $orderSpan.html(''); // Limpiar íconos previos
 
         if ($th.hasClass('dt-ordering-asc')) {
-            $orderSpan.html('<i class="ri-arrow-up-fill orden-icon"></i>');
+            $orderSpan.html('<i class="ri-sort-alphabet-asc orden-icon"></i>');
         } else if ($th.hasClass('dt-ordering-desc')) {
-            $orderSpan.html('<i class="ri-arrow-down-fill orden-icon"></i>');
+            $orderSpan.html('<i class="ri-sort-alphabet-desc orden-icon"></i>');
         } else if ($th.hasClass('dt-orderable-asc') && $th.hasClass('dt-orderable-desc')) {
             $orderSpan.html('<i class="ri-arrow-up-down-line orden-icon-none"></i>');
         }
     });
 }
-
 // Inicialización del DataTable y personalización
 $(document).ready(function () {
     
-    const tabla = $('#tabla').DataTable({
-        dom: 'tip', 
-        order: [[0, 'asc']],            // Orden inicial por la primera columna descendente
+    window.tabla = $('#tabla').DataTable({
+        dom: 'tip',
+        order: [[1, 'asc']],            // Orden inicial por la primera columna descendente
         pageLength: 10,                  // Cantidad de registros por página
         deferRender: true,              // Mejora rendimiento en tablas grandes
         lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
         ordering: true,
         searching: true,
         language: language_es,
+        columnDefs: [
+            { orderable: false, targets: [0, -1] }, // 0 = checkboxes, -1 = acciones
+        ],
         initComplete: function () {
             // Mostrar tabla una vez inicializada
             $('#tabla').addClass('ready');
             actualizarIconosOrden();
-        }
+        },
     });
 
     // Buscador personalizado
@@ -74,7 +76,21 @@ $(document).ready(function () {
     tabla.page.len(this.value).draw();
     });
 
-    
+    $('#filtroEstado').on('change', function () {
+        const valor = this.value;
+        const totalColumnas = tabla.columns().count();
+        const columnaEstado = totalColumnas - 2; // penúltima columna
+
+        if (valor === '') {
+            tabla.column(columnaEstado).search('').draw();
+        } else {
+            tabla.column(columnaEstado).search(valor).draw();
+        }
+    });
+
+    $('#btn-recargar').on('click', function () {
+    tabla.ajax.reload(null, false); // Recarga los datos sin recargar la página
+  });
 
     // Actualizar íconos cuando cambia el orden o se redibuja
     $('#tabla').on('draw.dt order.dt', actualizarIconosOrden);
@@ -93,28 +109,27 @@ $(document).ready(function () {
         `);
     }
 
-    // Funcionalidad del botón para limpiar la búsqueda
-    const $searchInput = $('.dt-search input[type="search"]');
-    const $searchWrapper = $('.dt-search');
-    const $clearBtn = $(`
-        <button class="clear-search text-danger fs-4" type="button">
-            <i class="ri-close-circle-fill"></i>
+    // Botón para limpiar el buscador personalizado
+    const $buscador = $('#buscadorPersonalizado');
+    const $clearBuscador = $(`
+        <button class="buscador-clear" type="button" style="display:none;">
+            <i class="ri-close-circle-line"></i>
         </button>
     `);
 
-    // Agregar botón de limpiar al buscador
-    $searchWrapper.append($clearBtn);
+    // Insertar botón dentro del contenedor del buscador
+    $('.buscador-container').css('position', 'relative').append($clearBuscador);
 
-    // Mostrar/ocultar botón según si hay texto
-    $searchInput.on('input', function () {
-        $clearBtn.toggle($(this).val().length > 0);
+    // Mostrar/ocultar botón
+    $buscador.on('input', function () {
+        $clearBuscador.toggle($(this).val().length > 0);
     });
 
-    // Limpiar búsqueda al hacer clic
-    $clearBtn.on('click', function () {
-        $searchInput.val('');
+    // Limpiar búsqueda
+    $clearBuscador.on('click', function () {
+        $buscador.val('');
         tabla.search('').draw();
-        $clearBtn.hide();
+        $clearBuscador.hide();
     });
 
     // Animación de filas al redibujar (opcional)
@@ -125,3 +140,4 @@ $(document).ready(function () {
         });
     });
 });
+

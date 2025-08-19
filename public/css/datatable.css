@@ -23,7 +23,7 @@
   color: var(--color-muted)!important;
 }
 .orden-icon, .orden-icon-none{
-  font-size: 14px !important;
+  font-size: 15px !important;
   margin-right: 5px !important;
   transition: var(--transition-general);
 }

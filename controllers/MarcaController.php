@@ -1,5 +1,8 @@
 <?php
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Mpdf\Mpdf;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 class MarcaController extends Controller
 {
     protected $model;
@@ -12,23 +15,107 @@ class MarcaController extends Controller
 
     public function exportarPdf()
     {
-        $marcas = $this->model->getAll();
+        // Si vienen IDs por POST, filtramos
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['ids'])) {
+            $idsArray = array_filter(array_map('intval', explode(',', $_POST['ids'])));
+            if (!empty($idsArray)) {
+                $marcas = $this->model->getByIds($idsArray);
+            } else {
+                $this->redirigirConMensaje('marca/index', 'warning', 'Nada seleccionado', 'No se seleccionaron marcas para exportar.');
+                return;
+            }
+        } else {
+            // Si no hay POST o no hay IDs => exportar todo
+            $marcas = $this->model->getAll();
+        }
 
+        // Generar HTML de la vista
         ob_start();
-        include './views/marca/exportar-pdf.php';
+        include './views/templates/pdfs/marca-pdf.php';
         $html = ob_get_clean();
 
+        // Crear PDF con mPDF
         $mpdf = new Mpdf([
             'default_font' => 'dejavusans',
-            'tempDir' => __DIR__ . '/../../tmp' // si tu sistema necesita un directorio temporal
+            'tempDir' => __DIR__ . '/../../tmp'
         ]);
-        
+
+        // Nombre del archivo (según si es todo o seleccionados)
         $fechaHora = date('Y-m-d_H-i-s');
-        $nombreArchivo = "marcas_$fechaHora.pdf";
+        $nombreArchivo = (isset($idsArray) && !empty($idsArray))
+            ? "marcas_seleccionadas_$fechaHora.pdf"
+            : "marcas_$fechaHora.pdf";
+
         $mpdf->WriteHTML($html);
-        $mpdf->Output($nombreArchivo, 'I'); // 'I' muestra en el navegador, 'D' descarga
+        $mpdf->Output($nombreArchivo, 'I'); // 'I' mostrar en navegador, 'D' descargar
     }
 
+    public function exportarExcel()
+    {
+        // Verificar si hay IDs seleccionados
+        if (isset($_POST['ids']) && !empty($_POST['ids'])) {
+            $idsArray = explode(',', $_POST['ids']);
+            $marcas = $this->model->getByIds($idsArray);
+            $titulo = 'Lista de Marcas Seleccionadas';
+            $nombreArchivoBase = 'marcas_seleccionadas';
+        } else {
+            $marcas = $this->model->getAll();
+            $titulo = 'Lista de Marcas';
+            $nombreArchivoBase = 'marcas';
+        }
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setTitle('Marcas');
+
+        // ===== TÍTULO =====
+        $sheet->mergeCells('A1:F1');
+        $sheet->setCellValue('A1', $titulo);
+        $sheet->getStyle('A1')->getFont()->setBold(true)->setSize(16);
+        $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+        // ===== ENCABEZADOS =====
+        $encabezados = ['ID', 'Nombre', 'Descripción', 'Estado', 'Creado', 'Actualizado'];
+        $col = 'A';
+        foreach ($encabezados as $header) {
+            $sheet->setCellValue($col . '2', $header);
+            $col++;
+        }
+
+        // Estilo negrita y centrado para encabezados
+        $sheet->getStyle('A2:F2')->getFont()->setBold(true);
+        $sheet->getStyle('A2:F2')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+
+        // ===== LLENAR DATOS =====
+        $fila = 3;
+        foreach ($marcas as $marca) {
+            $sheet->setCellValue("A{$fila}", $marca->getId());
+            $sheet->setCellValue("B{$fila}", $marca->getNombre());
+            $sheet->setCellValue("C{$fila}", $marca->getDescripcion());
+            $sheet->setCellValue("D{$fila}", $marca->getEstado() ? 'Activo' : 'Inactivo');
+            $sheet->setCellValue("E{$fila}", FechaHelper::formatoCorto($marca->getCreatedAt()));
+            $sheet->setCellValue("F{$fila}", FechaHelper::formatoCorto($marca->getUpdatedAt()));
+            $fila++;
+        }
+
+        // Autoajustar columnas
+        foreach (range('A', 'F') as $col) {
+            $sheet->getColumnDimension($col)->setAutoSize(true);
+        }
+
+        // Descargar archivo
+        $fechaHora = date('Y-m-d_H-i-s');
+        $nombreArchivo = "{$nombreArchivoBase}_$fechaHora.xlsx";
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header("Content-Disposition: attachment; filename=\"$nombreArchivo\"");
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
+    }
+    
     private function validarDatosMarca(&$nombre, &$descripcion, &$estado, &$errores): bool
     {
         $nombre = trim($_POST['nombre'] ?? '');
@@ -231,7 +318,7 @@ class MarcaController extends Controller
         if ($_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest') {
             if ($marca) {
                 echo json_encode([
-                    'id' => $marca->getId(),
+                    'id' => '#'. $marca->getId(),
                     'nombre' => $marca->getNombre(),
                     'descripcion' => $marca->getDescripcion(),
                     'estado' => $marca->getEstado(),
@@ -265,6 +352,32 @@ class MarcaController extends Controller
         echo json_encode(['success' => false]);
         exit;
     }
+    public function deleteMultiple()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            protegerContraCSRF();
 
-    
+            $ids = $_POST['ids'] ?? '';
+            $idsArray = array_filter(array_map('intval', explode(',', $ids)));
+
+            if (empty($idsArray)) {
+                $this->redirigirConMensaje('marca/index', 'warning', 'Nada seleccionado', 'No se seleccionaron marcas para eliminar.');
+            }
+
+            // Eliminar imágenes asociadas
+            foreach ($idsArray as $id) {
+                $marca = $this->model->getById($id);
+                if ($marca && $marca->getImagen()) {
+                    $ruta = 'public/images/marcas/' . $marca->getImagen();
+                    if (file_exists($ruta)) unlink($ruta);
+                }
+            }
+
+            $eliminadas = $this->model->deleteMultiple($idsArray);
+
+            $this->redirigirConMensaje('marca/index', 'success', 'Eliminación múltiple', "Se eliminaron correctamente $eliminadas marcas.");
+        } else {
+            $this->redirigirConMensaje('marca/index', 'danger', 'Acceso denegado', 'Solicitud no válida.');
+        }
+    }
 }

@@ -83,6 +83,10 @@
   justify-content: center;
 }
 
+.fab-actions .formExportar{
+  z-index: 2;
+}
+
 .fab-wrapper.open .fab-actions .fab-btn {
   opacity: 1;
   transform: translateY(0);

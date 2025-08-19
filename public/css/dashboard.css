@@ -698,7 +698,7 @@ main {
 .contenedor {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   padding: 20px 20px;
   border-radius: var(--border-radio-card);
   transition: var(--transition-general);
@@ -810,131 +810,13 @@ main {
   }
 }
 
-/*========== inputs ===========*/
-
-form div .form-control {
-  background-color: var(--color-input-bg);
-  color: var(--color-text);
-}
-
-/*====== CONTENEDOR-HEADER ======*/
-
-.contenedor-header {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  width: 100%;
-  text-align: center;
-  border-radius: var(--border-radio-card);
-}
-
-.contenedor-botones {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  padding-top: 20px;
-}
-
-@media (max-width: 458px) {
-  .contenedor-botones {
-    display: none;
+@keyframes zoomOut {
+  from {
+    transform: scale(1);
+    opacity: 1;
   }
-  .contenedor-header {
-    padding: 20px 15px;
+  to {
+    transform: scale(0.7);
+    opacity: 0;
   }
-}
-
-.button-borders {
-  position: relative;
-  display: inline-block;
-  font-size: var(--font-size-p);
-  font-family: var(--font-family-dashboard);
-}
-
-.button-borders:before {
-  content: "";
-  position: absolute;
-  width: calc(100% + 0.6em);
-  height: 50%;
-  left: -0.3em;
-  top: -0.3em;
-  border: 1px solid var(--color-bw);
-  border-bottom: 0px;
-  border-radius: var(--border-radio-elements);
-  /* opacity: 0.3; */
-}
-
-.button-borders:after {
-  content: "";
-  position: absolute;
-  width: calc(100% + 0.6em);
-  height: 50%;
-  left: -0.3em;
-  bottom: -0.3em;
-  border: 1px solid var(--color-bw);
-  border-top: 0px;
-  border-radius: var(--border-radio-elements);
-  /* opacity: 0.3; */
-  z-index: 0;
-}
-
-.btn-export {
-  position: relative;
-  display: inline-flex;
-  gap: 10px;
-  align-items: center;
-  text-decoration: none;
-  z-index: 1;
-  color: white;
-  font-size: var(--font-size-p);
-  border: none;
-  border-radius: var(--border-radio-elements);
-  overflow: hidden;
-  padding: 5px 15px;
-  cursor: pointer;
-  transition: color 0.3s ease-in-out;
-}
-
-.btn-export:hover {
-  color: var(--color-bw-inverted);
-}
-
-/* Fondo animado diagonal */
-.btn-export::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -210%;
-  width: 200%;
-  height: 100%;
-  background-color: var(--color-bw); /* Efecto sutil */
-  transform: skewX(-20deg);
-  z-index: -1;
-  transition: left 0.6s ease-in-out;
-}
-
-/* Animación al pasar el mouse */
-.btn-export:hover::after {
-  left: -40%;
-}
-
-/* Copiar - Azul petróleo oscuro */
-.btn-copy {
-  background: #181818;
-}
-
-/* Excel - Verde bosque profundo */
-.btn-excel {
-  background: #1d613e;
-}
-
-/* PDF - Rojo vino oscuro */
-.btn-pdf {
-  background: #b51308;
-}
-
-/* Imprimir - Azul noche */
-.btn-print {
-  background: #430199;
 }

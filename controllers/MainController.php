@@ -32,8 +32,8 @@ class MainController extends Controller
                 require_once $rutaModelo;
                 if (class_exists($modelo)) {
                     $instancia = new $modelo();
-                    if (method_exists($instancia, 'contar')) {
-                        $totales["total" . ucfirst($key) . "s"] = $instancia->contar();
+                    if (method_exists($instancia, 'count')) {
+                        $totales["total" . ucfirst($key) . "s"] = $instancia->count();
                     } else {
                         $totales["total" . ucfirst($key) . "s"] = 0; // No tiene método contar
                     }

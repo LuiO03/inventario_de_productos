@@ -93,7 +93,7 @@
   --color-input-border: #444;
   --color-input-text: #e9e9e9;
   --color-placeholder: #aaaaaa;
-  --color-hover: rgba(68, 68, 68, 0.2);
+  --color-hover: #212121;
   --color-active: #444444;
 
   --color-muted: #aaaaaa;
@@ -116,6 +116,10 @@
     transform 0.2s ease-in-out, 
     font-size 0.2s ease, 
     box-shadow 0.3s ease-in-out;
+  --transition-fondo-texto: background-color 0.3s ease-in-out, background 0.3s ease-in-out, color 0.3s ease-in-out;
+  --transition-fondo: background-color 0.3s ease-in-out, background 0.3s ease-in-out;
+  --transition-texto: color 0.3s ease-in-out;
+  --transition-borde: border-color 0.3s ease-in-out;
   --border-radio-card: 16px;
   --border-radio-card-interno: 10px;
   --border-radio-elements: 3px;
@@ -250,6 +254,11 @@
   font-weight: var(--fw-bold);
 }
 
+
+.btn-primario, .bg-primario {
+  background-color: var(--color-primario) !important;
+  transition: var(--transition-general);
+}
 .btn-danger, .bg-danger{
   background-color: var(--color-danger)!important;
 }
@@ -283,6 +292,10 @@
   color: white !important;
 }
 
+.text-base{
+  color: var(--color-text) !important;
+  transition: color 0.3s ease-in-out;
+}
 .text-primario {
   color: var(--color-primario) !important;
   transition: color 0.3s ease-in-out;
