@@ -2,6 +2,18 @@
 
 RewriteEngine On
 
+
+# Desactivar listado de directorios
+Options -Indexes
+
+# Bloquear acceso a carpetas críticas
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Bloquear acceso directo a estas carpetas
+    RewriteRule ^(config|controllers|models|core|libs|entities|helpers) - [F,L]
+</IfModule>
+
 # Estas condiciones evitan que se reescriba la URL si:
 # - El archivo físico existe (!-f)
 # - El directorio físico existe (!-d)

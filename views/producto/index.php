@@ -4,7 +4,7 @@
 ?>
 
 <!-- Contenido de la informacion y botones -->
-<div class="contenedor-header">
+<div class="contenedor-header index">
     <h1 class="text-center">Lista de Productos</h1>
     <p class="text-center">Esta es la página de productos.</p>
     <div class="contenedor-botones">

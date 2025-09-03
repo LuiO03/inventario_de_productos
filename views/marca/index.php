@@ -3,73 +3,90 @@
     partialBreadcrumb();
     $entidad = getEntidadDinamica();
 ?>
-<div class="contenedor-header">
+<div class="contenedor-header index">
     <h1>Lista de Marcas</h1>
     <p>Esta es la página de marcas.</p>
 </div>
-
+<div class="contenedor-botones">
+    <div class="botones-export">
+        <form class="formExportarPdf" id="formExportarPdf" action="<?= BASE_URL ?>marca/exportarPdf" method="POST" target="_blank">
+            <input type="hidden" name="ids" id="idsSeleccionadosPdf">
+            <button type="submit" class="btn-export btn-pdf">
+                <i class="ri-file-pdf-2-line"></i>
+                <span class="export-text">PDF</span>
+            </button>
+        </form>
+        <form class="formExportarExcel" id="formExportarExcel" action="<?= BASE_URL ?>marca/exportarExcel" method="POST">
+            <input type="hidden" name="ids" id="idsSeleccionadosExcel">
+            <button type="submit" class="btn-export btn-excel">
+                <i class="ri-file-excel-2-line"></i>
+                <span class="export-text">Excel</span>
+            </button>
+        </form>
+        <button class="btn-export btn-danger eliminar-seleccion" id="btnEliminarSeleccionados">
+            <i class="ri-delete-bin-7-line"></i>
+            <span class="export-text">Eliminar</span>
+        </button>
+        <button class="btn-export btn-secondary cancelar-seleccion" id="btnCancelarSeleccion">
+            <i class="ri-close-circle-line"></i>
+            <span class="export-text">Cancelar</span>
+        </button>
+    </div>
+</div>
 <div class="control-panel">
     <div class="buscador-container">
         <i class="ri-search-eye-line buscador-icon"></i>
         <input type="text" id="buscadorPersonalizado" placeholder="Buscar marca por nombre o descripción..." class="control-buscador" name="buscador">
     </div>
-    <div class="selector-container">
-        <i class="ri-arrow-down-s-line selector-icon"></i>
+    <div class="selector">
         <span>Filas por página</span>
-        
-        <select id="selectorCantidad" class="control-selector">
-            <option value="10" selected>10</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-        </select>
+        <div class="selector-input">
+            <i class="ri-arrow-down-s-line selector-icon"></i>
+            <select id="selectorCantidad" class="control-selector">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
     </div>
-    <div class="selector-container">
-        <i class="ri-filter-line selector-icon"></i>
-        <span>Filtrar Estado</span>
-        <select id="filtroEstado" class="control-selector">
-            <option value="">Todos</option>
-            <option value="Visible">Habilitado</option>
-            <option value="Oculto">Deshabilitado</option>
-        </select>
+    <div class="selector">
+        <span>Filtrar estado</span>
+        <div class="selector-input">
+            <i class="ri-filter-line selector-icon"></i>
+            <select id="filtroEstado" class="control-selector">
+                <option value="">Todos</option>
+                <option value="Visible">Habilitado</option>
+                <option value="Oculto">Deshabilitado</option>
+            </select>
+        </div>
+    </div>
+    <div class="selector">
+        <span>Ordenar por</span>
+        <div class="selector-input">
+            <i class="ri-sort-desc selector-icon"></i>
+            <select id="filtroOrden" class="control-selector">
+                <option value="">Ninguno</option>
+                <option value="nombre_asc">A–Z</option>
+                <option value="nombre_desc">Z–A</option>
+                <option value="fecha_desc">Más recientes</option>
+                <option value="fecha_asc">Más antiguos</option>
+            </select>
+        </div>
     </div>
 </div>
 <div class="contenedor">
-    <div class="contenedor-botones">
-        <div class="botones-export">
-            <form id="formExportarPdf" action="<?= BASE_URL ?>marca/exportarPdf" method="POST" target="_blank" style="display:inline;">
-                <input type="hidden" name="ids" id="idsSeleccionadosPdf">
-                <button type="submit" class="btn-export btn-pdf">
-                    <i class="ri-file-pdf-2-line"></i>
-                    <span class="export-text">PDF</span>
-                </button>
-            </form>
-            <form id="formExportarExcel" action="<?= BASE_URL ?>marca/exportarExcel" method="POST" style="display:inline;">
-                <input type="hidden" name="ids" id="idsSeleccionadosExcel">
-                <button type="submit" class="btn-export btn-excel">
-                    <i class="ri-file-excel-2-line"></i>
-                    <span class="export-text">Excel</span>
-                </button>
-            </form>
-            <button class="btn-export btn-primary eliminar-seleccion" id="btnEliminarSeleccionados">
-                <i class="ri-delete-bin-7-line"></i>
-                <span class="export-text">Eliminar</span>
-            </button>
-            <button class="btn-export btn-secondary cancelar-seleccion" id="btnCancelarSeleccion">
-                <i class="ri-close-circle-line"></i>
-                <span class="export-text">Cancelar</span>
-            </button>
-        </div>
-    </div>
     <table id="tabla" class="table-sm w-100 tabla-responsive">
         <thead>
             <tr>
                 <th class="column-check-th"><input type="checkbox" id="checkAll"></th>
                 <th class="column-id-th">ID</th>
                 <th class="column-img-th">Img</th>
-                <th class="text-center">Nombre</th>
-                <th class="text-center">Descripción</th>
+                <th class="column-name-th">Nombre</th>
+                <th class="column-descripcion-th">Descripción</th>
                 <th class="column-estado-th">Estado</th>
+                <th class="column-fecha-th">Fecha</th>
                 <th class="column-opciones-th">Opciones</th>
             </tr>
         </thead>
@@ -78,18 +95,21 @@
                 <?php foreach ($marcas as $marca): ?>
                     <tr>
                         <td class="column-check-td"><input type="checkbox" class="check-row" value="<?= $marca->getId() ?>"></td>
-                        <td class="column-id-td text-center" data-label="ID:"><?= htmlspecialchars($marca->getId()) ?></td>
-                        <td data-label="Imagen:" class="column-img-td">
+                        <td class="column-id-td" data-label="ID:"><?= htmlspecialchars($marca->getId()) ?></td>
+                        <td class="column-img-td" data-label="Imagen:">
                             <?php if (!empty($marca->imagen_url)): ?>
-                                <img src="<?= BASE_URL ?>public/images/marcas/<?= htmlspecialchars($marca->getImagen()) ?>" alt="Marca" style="width: 45px; height: 45px; object-fit: cover; border-radius: 50%; pointer-events: none;">
+                                <img src="<?= BASE_URL ?>public/images/marcas/<?= htmlspecialchars($marca->getImagen()) ?>" alt="Marca" class="avatar-img">
                             <?php else: ?>
                                 <span class="text-primario fw-bolder">Sin imagen</span>
                             <?php endif; ?>
                         </td>
-                        <td class="text-center" data-label="Nombre:"><?= htmlspecialchars($marca->getNombre()) ?></td>
-                        <td class="text-start" data-label="Descripción:"><?= htmlspecialchars($marca->getDescripcion() ?: '[Sin descripción]') ?></td>
-
-                        <td class="column-estado-td text-center" data-label="Estado:">
+                        <td class="column-name-td" data-label="Nombre:">
+                            <div>
+                                <?= htmlspecialchars($marca->getNombre()) ?><strong class="column-mbdata-td"> - #<?= htmlspecialchars($marca->getId()) ?></strong>
+                            </div>
+                        </td>
+                        <td class="column-descripcion-td" data-label="Descripción:"><?= htmlspecialchars($marca->getDescripcion() ?: '[Sin descripción]') ?></td>
+                        <td class="column-estado-td" data-label="Estado:">
                             <span class="estado-texto d-print-inline"><?= $marca->getEstado() ? 'Visible' : 'Oculto' ?></span>
                             <label class="switch-tabla">
                                 <input type="checkbox" id="switch-marca-<?= $marca->getId() ?>" class="toggle-estado" data-id="<?= $marca->getId() ?>"
@@ -97,6 +117,7 @@
                                 <span class="slider"></span>
                             </label>
                         </td>
+                        <td class="column-fecha-td"><?= htmlspecialchars($marca->getCreatedAt()) ?></td>
                         <td class="column-opciones-td">
                             <div class="table-botones">
                                 <button class="btn-ver-marca btn btn-sm btn-info" data-id="<?= $marca->getId() ?>">
@@ -120,23 +141,11 @@
     </table>
 </div>
 
-<script>
-    function prepararEnvio(formId, inputId) {
-        document.getElementById(formId).addEventListener('submit', function (e) {
-            const seleccionados = Array.from(document.querySelectorAll('.check-row:checked'))
-                                    .map(chk => chk.value);
-            document.getElementById(inputId).value = seleccionados.join(',');
-        });
-    }
-    // Asigna la función a ambos formularios
-    prepararEnvio('formExportarPdf', 'idsSeleccionadosPdf');
-    prepararEnvio('formExportarExcel', 'idsSeleccionadosExcel');
-</script>
 
 <?php
-getModal("modal-marca");
-menuFlotante();
-modalFlash($mensaje);
-modalConfirmacion();
-footerAdmin();
+    getModal("modal-marca");
+    menuFlotante();
+    modalFlash($mensaje);
+    modalConfirmacion();
+    footerAdmin();
 ?>

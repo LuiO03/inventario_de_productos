@@ -87,6 +87,56 @@ class Validador
         return null;
     }
 
+        /**
+     * Valida que el valor sea un número ENTERO (opcionalmente dentro de un rango).
+     * Si el valor viene vacío, se considera inválido (útil para selects como rol_id).
+     */
+    public static function entero($valor, $nombreCampo, ?int $min = null, ?int $max = null)
+    {
+        // filtra '', null, strings no enteras, etc.
+        if (filter_var($valor, FILTER_VALIDATE_INT) === false) {
+            return "El campo <strong>$nombreCampo</strong> debe ser un número entero válido.";
+        }
+
+        $valor = (int)$valor;
+        if ($min !== null && $valor < $min) {
+            return "El campo <strong>$nombreCampo</strong> debe ser mayor o igual a $min.";
+        }
+        if ($max !== null && $valor > $max) {
+            return "El campo <strong>$nombreCampo</strong> debe ser menor o igual a $max.";
+        }
+        return null;
+    }
+
+    /**
+     * Valida teléfonos. Permite +, espacios, guiones, paréntesis y puntos.
+     * Si $requerido = false y viene vacío, no marca error.
+     * Valida longitud en dígitos entre $min y $max (por defecto 7–15).
+     */
+    public static function telefono($valor, $nombreCampo, bool $requerido = false, int $min = 7, int $max = 15)
+    {
+        $valor = trim((string)$valor);
+
+        if ($valor === '') {
+            return $requerido ? "El campo <strong>$nombreCampo</strong> es obligatorio." : null;
+        }
+
+        // Solo caracteres típicos de teléfono
+        if (!preg_match('/^\+?[0-9\s\-\(\)\.]+$/', $valor)) {
+            return "El campo <strong>$nombreCampo</strong> contiene caracteres inválidos.";
+        }
+
+        // Contar únicamente dígitos
+        $digitos = preg_replace('/\D+/', '', $valor);
+        $len = strlen($digitos);
+
+        if ($len < $min || $len > $max) {
+            return "El campo <strong>$nombreCampo</strong> debe tener entre $min y $max dígitos.";
+        }
+
+        return null;
+    }
+
     public static function fechaPosterior($fecha, $compararCon, $nombreCampo)
     {
         if (strtotime($fecha) <= strtotime($compararCon)) {
@@ -125,14 +175,5 @@ class Validador
             return "El campo <strong>{$campo}</strong> no puede contener solo números.";
         }
         return null;
-    }
-
-    // =========================
-    // UTILITARIOS
-    // =========================
-
-    public static function emailValido($email)
-    {
-        return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
     }
 }

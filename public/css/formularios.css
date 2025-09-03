@@ -25,8 +25,8 @@
   background-color: var(--color-sidebar);
   padding: 10px 15px;
   transition: var(--transition-general);
-  border-radius: 0 var(--border-radio-card) var(--border-radio-card) 0;
   border-left: 3px solid var(--color-primario);
+  border-right: 3px solid var(--color-primario);
   box-shadow: var(--sombra-material);
 }
 
@@ -39,7 +39,6 @@
 
 .formulario-columna {
   flex: 1 1 350px;
-  width: 100%;
   flex-shrink: 0;
   display: flex;
   flex-wrap: wrap;
@@ -63,6 +62,7 @@
   box-shadow: var(--sombra-material);
   transition: var(--transition-general);
   background-color: var(--color-sidebar);
+  padding: 15px;
 }
 
 .input-group-nowrap {
@@ -133,6 +133,12 @@
   transition: var(--transition-general);
   background-color: var(--color-input-bg);
   color: var(--color-text);
+}
+
+.input-contenedor input:hover,
+.input-contenedor textarea:hover,
+.input-contenedor select:hover {
+  background-color: var(--color-hover);
 }
 
 .input-contenedor textarea {
@@ -303,54 +309,6 @@
 }
 
 /* =============================
-   SWITCH EN TABLA
-============================= */
-.switch-tabla {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 26px;
-}
-
-.switch-tabla input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 34px;
-}
-
-.slider::before {
-  position: absolute;
-  content: "";
-  height: 20px;
-  width: 20px;
-  left: 3px;
-  bottom: 3px;
-  background-color: var(--color-card-bg);
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-.switch-tabla input:checked + .slider {
-  background-color: var(--color-primario);
-}
-
-.switch-tabla input:checked + .slider::before {
-  transform: translateX(24px);
-}
-
-/* =============================
    ESTILO SUBIDA DE IMAGEN CUSTOM
 ============================= */
 
@@ -420,11 +378,12 @@
   object-fit: cover; /* Usa 'cover' si quieres que llene sin dejar espacios */
   border-radius: var(--border-radio-elements);
   transition: filter 0.3s ease, transform 0.3s ease;
+  border-radius: var(--border-radio-card);
 }
 
 .upload-header img:hover {
   filter: brightness(0.7);
-  transform: scale(1.2);
+  transform: scale(0.95);
 }
 
 .upload-header i {
@@ -489,15 +448,23 @@
   display: none;
 }
 
+@media (max-width: 768px){
+  .formulario-acciones {
+    gap: 10px;
+    z-index: 4;
+  }
+}
+
 @media (max-width: 450px) {
   .boton-form {
     max-width: 100%;
   }
-
-  .formulario-acciones {
-    gap: 10px;
+  .formulario-acciones.edit {
+    position: absolute;
+    bottom: 10px;
+    left: 0px;
+    padding: 0px 10px;
   }
-
   .upload-header {
     height: 250px;
   }

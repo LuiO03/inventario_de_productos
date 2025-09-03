@@ -1,17 +1,17 @@
 <?php
   $entidad = getEntidadDinamica();
 ?>
-<div class="fab-wrapper d-block d-sm-none" id="fabWrapper">
+<div class="fab-wrapper" id="fabWrapper">
   <!-- Fondo externo independiente -->
   <div class="fab-overlay" id="fabOverlay"></div>
 
   <!-- Acciones ocultas -->
   <div class="fab-actions">
-    <form id="formExportarPdf" class="formExportar" action="<?= BASE_URL ?>marca/exportarPdf" method="POST" target="_blank">
+    <form id="formExportarPdf" class="formExportar" action="<?= BASE_URL ?><?= $entidad['titulo'] ?>/exportarPdf" method="POST" target="_blank">
       <input type="hidden" name="ids" id="idsSeleccionadosPdf">
       <button class="fab-btn pdf" title="Exportar PDF"><i class="ri-file-pdf-2-fill"></i></button>
     </form>
-    <form id="formExportarExcel" class="formExportar" action="<?= BASE_URL ?>marca/exportarExcel" method="POST">
+    <form id="formExportarExcel" class="formExportar" action="<?= BASE_URL ?><?= $entidad['titulo'] ?>/exportarExcel" method="POST">
       <input type="hidden" name="ids" id="idsSeleccionadosExcel">
       <button class="fab-btn excel" title="Exportar Excel"><i class="ri-file-excel-fill"></i></button>
     </form>

@@ -27,7 +27,7 @@ body.no-scroll {
   font-family: var(--font-family-dashboard);
   font-size: var(--font-size-p);
   background-color: var(--color-sidebar);
-  z-index: 2;
+  z-index: 4;
   transition: var(--transition-general);
   box-shadow: var(--sombra-material);
 }
@@ -171,7 +171,7 @@ main::-webkit-scrollbar {
 
 .sidebar-menu::-webkit-scrollbar-thumb,
 main::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbar-track);
+  background-color: var(--color-text-submenu);
   border-radius: 4px;
   transition: var(--transition-general);
 }
@@ -243,6 +243,8 @@ main::-webkit-scrollbar-thumb:hover {
   background-color: var(--color-bg);
   transition: background-color 0.3s ease-in-out,
     grid-template-rows 0.3s ease-in-out;
+    border-right: 2px solid rgba(0, 0, 0, 0.05); /* marca jerarquía */
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 @media (max-width: 576px) {
   #sidebar .sub-menu {
@@ -256,6 +258,7 @@ main::-webkit-scrollbar-thumb:hover {
 #sidebar .sub-menu div li,
 #sidebar .sub-menu div li a {
   background-color: transparent;
+  color: var(--color-text-submenu);
 }
 
 #sidebar .sub-menu.show {
@@ -410,7 +413,7 @@ main::-webkit-scrollbar-thumb:hover {
   opacity: 0;
   transition: opacity 0.3s ease;
   display: none;
-  z-index: 3;
+  z-index: 4;
 }
 
 .overlay.active {
@@ -438,6 +441,8 @@ main::-webkit-scrollbar-thumb:hover {
   background-color: var(--color-sidebar);
   transition: var(--transition-general);
   box-sizing: border-box;
+  z-index: 3;
+  box-shadow: var(--sombra-material);
 }
 
 .topbar-left,
@@ -614,14 +619,12 @@ main::-webkit-scrollbar-thumb:hover {
   }
 
   .topbar {
-    border-bottom: 1px solid var(--color-bw);
-
     padding: 0px 5px;
+    border-bottom: 1px solid var(--color-boton-datatable);
   }
 
   main {
     width: 100%;
-    padding: 15px;
     min-height: calc(100dvh - 60px);
     border-radius: 0px;
   }
@@ -643,7 +646,7 @@ main {
   font-family: var(--font-family-base);
   padding: 20px;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 60px);
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -651,7 +654,6 @@ main {
   gap: 10px;
   transition: var(--transition-general);
   overflow-y: auto;
-
   /*
   border-radius: 20px 0 0 0px;
   background-color: var(--color-bg);
@@ -707,13 +709,13 @@ main {
 
 @media (max-width: 450px) {
   main {
-    padding: 20px 15px;
+    padding: 20px 15px 80px 15px;
     /*background-color: var(--color-sidebar);*/
   }
 
   .contenedor {
     background-color: transparent;
-    padding: 10px 0px;
+    padding: 0px;
     border-radius: 0px;
   }
 
@@ -748,16 +750,45 @@ main {
   background-color: var(--color-primario);
 }
 
+.modal-body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.modal-buttons-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: var(--font-size-xs);
+}
+
 .modal-imagen-sm, .modal-imagen{
   object-fit: cover;
-  margin-top: 20px;
   border-radius: var(--border-radio-elements);
+}
+
+.modal-foto {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+@media (max-width: 450px) {
+  .modal-foto {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
 }
 
 .modal-imagen-sm {
   width: 120px;
   height: 120px;
-  
 }
 
 .modal-imagen{
@@ -785,7 +816,6 @@ main {
   text-align: center;
   font-weight: 800;
   font-family: var(--font-family-base);
-  padding: 10px 0px 20px 0px;
 }
 
 @keyframes slideDown {

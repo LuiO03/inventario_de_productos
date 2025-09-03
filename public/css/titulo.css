@@ -10,44 +10,58 @@
   border-radius: var(--border-radio-card);
 }
 
+.contenedor-header.index{
+  padding: 5px 20px;
+}
+
 .control-panel{
   display: flex;
-  justify-content: space-between;
   font-size: var(--font-size-xs);
   width: 100%;
-  gap: 20px;
+  gap: 10px;
   font-family: var(--font-family-dashboard);
-  flex-wrap: wrap;
   max-width: var(--max-width);
   background-color: var(--color-sidebar);
   border-radius: var(--border-radio-card);
   padding: 10px 20px;
   transition: var(--transition-fondo);
   box-shadow: var(--sombra-material);
-} 
-
-.buscador-container{
-  position: relative;
-  display: flex;
-  position: relative;
-  flex: 1 1 300px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
-.selector-container{
-  display: flex;
-  position: relative;
-  flex: 1 1 300px;
-  max-width: 300px;
-  gap: 10px;
+@media (max-width: 450px) {
+
+  .control-panel{
+    background-color: transparent;
+    padding: 10px 0px;
+  }
 }
 
-@media (max-width: 750px){
-  .selector-container{
+.selector{
+  flex: 0 1 auto;
+  display: flex;
+  min-width: 200px;
+  gap: 5px;
+}
+
+.selector-input{
+  display: flex;
+  position: relative;
+  width: 100%;
+}
+
+@media (max-width: 768px){
+  .selector{
+    flex: 1 1 auto;
+    min-width: 150px;
+    flex-direction: column;
+    gap: 3px;
     max-width: 100%;
   }
 }
 
-.selector-container span{
+.selector span{
   width: fit-content;
   text-wrap: nowrap;
   align-content: center;
@@ -55,14 +69,14 @@
 
 .control-buscador{
   padding-left: 45px;
-  padding-right: 2.5rem;;
+  padding-right: 2.5rem;
 }
 
 .buscador-clear {
   position: absolute;
   right: 0px;
   font-size: 20px;
-  color: var(--color-danger);
+  color: var(--color-primario);
   cursor: pointer;
   transition: color 0.3s ease;
   width: 2.5rem;
@@ -88,13 +102,13 @@
   border-radius: var(--border-radio-elements);
   background-color: var(--color-input-bg);
   color: var(--color-text);
-  transition: var(--transition-fondo-texto);
+  transition: var(--transition-fondo-texto), var(--transition-borde);
 }
 
 .control-selector{
   width: 100%;
-  padding-left: 5px;
   cursor: pointer;
+  padding-left: 5px;
 }
 
 .control-buscador:focus, .control-selector:focus {
@@ -113,13 +127,14 @@
   width: 2.5rem;
   font-size: 20px;
   background-color: var(--color-boton-datatable);
-  color: #fff;
+  color: whitesmoke;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 0;
   border-radius: var(--border-radio-elements);
-  transition: var(--transition-fondo), var(--transition-borde);
+  transition: var(--transition-fondo);
+  pointer-events: none;
 }
 .buscador-icon{
   left: 0;
@@ -131,23 +146,47 @@
   top: 0;
   height: 100%;
 }
-.buscador-container:focus-within .buscador-icon, .selector-container:focus-within .selector-icon {
+.buscador-container:focus-within .buscador-icon, .selector:focus-within .selector-icon {
+  background-color: var(--color-primario);
+}
+
+/* Cuando un filtro está activo */
+.control-selector.active {
+  border-color: var(--color-primario);
+  box-shadow: 0 0 5px var(--color-primario);
+}
+.selector-icon.active{
   background-color: var(--color-primario);
 }
 
 .contenedor-botones {
   position: sticky;
   top: 0px; /* o la altura del header si tienes uno fijo */
-  z-index: 10;
-  width: fit-content;
+  z-index: 3;
+  display: flex;
+  width: 100%;
   justify-content: start;
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-sm);
   font-family: var(--font-family-dashboard);
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+.buscador-container{
+  flex: 1 1 300px;
+  width: 100%;
+  position: relative;
 }
 
 .botones-export{
   display: flex;
   gap: 5px;
+  padding: 5px;
+  border-radius: var(--border-radio-elements);
+  width: fit-content;
+  background-color: var(--color-bg-transparent);
+  backdrop-filter: blur(3px);
 }
 
 .eliminar-seleccion, .cancelar-seleccion{
@@ -159,16 +198,15 @@
   animation: zoomIn 0.2s ease-out;
 }
 
-
 @media (max-width: 458px) {
   .contenedor-header {
-    padding: 20px 15px;
+    padding: 5px 15px;
   }
 }
 
 .btn-export {
   position: relative;
-  display: inline-flex;
+  display: flex;
   gap: 5px;
   align-items: center;
   text-decoration: none;
@@ -180,12 +218,9 @@
   overflow: hidden;
   padding: 8px 15px;
   cursor: pointer;
-  font-size: var(--font-size-xs);
-  box-shadow: var(--sombra-material);
-}
-
-.btn-export:hover {
-  color: var(--color-bw-inverted);
+  font-size: var(--font-size-sm);
+  width: max-content;
+  height: 38px;
 }
 
 /* Fondo animado diagonal */
@@ -196,7 +231,7 @@
   left: -210%;
   width: 200%;
   height: 100%;
-  background-color: var(--color-bw); /* Efecto sutil */
+  background-color: black; /* Efecto sutil */
   transform: skewX(-20deg);
   z-index: -1;
   transition: left 0.6s ease-in-out;
@@ -205,11 +240,6 @@
 /* Animación al pasar el mouse */
 .btn-export:hover::after {
   left: -40%;
-}
-
-/* Copiar - Azul petróleo oscuro */
-.btn-copy {
-  background: #181818;
 }
 
 /* Excel - Verde bosque profundo */
@@ -223,14 +253,13 @@
 }
 
 @media (max-width: 458px) {
-  .btn-excel, .btn-pdf  {
+  .btn-excel, .btn-pdf {
     display: none;
   }
-}
 
-/* Imprimir - Azul noche */
-.btn-recargar {
-  background: #430199;
+  .formExportarPdf, .formExportarExcel{
+    display: none;
+  }
 }
 
 .estado-texto{

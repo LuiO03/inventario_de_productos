@@ -4,12 +4,8 @@ partialBreadcrumb();
 ?>
 
 <div class="contenedor-header">
-  <h1>
-    Editar Marca - #<?= htmlspecialchars($marca->getId()) ?>
-  </h1>
-  <p class="fw-bolder">
-    <?= htmlspecialchars($marca->getNombre()) ?> 
-  </p>
+  <h1>#<?= htmlspecialchars($marca->getId()) ?> - <?= htmlspecialchars($marca->getNombre()) ?></h1>
+  <p>Editar <strong>Categoría</strong></p>
 </div>
 
 <form action="<?= BASE_URL ?>marca/update/<?= urlencode($marca->getSlug()) ?>" method="post" enctype="multipart/form-data" class="formulario" autocomplete="off">
@@ -46,7 +42,7 @@ partialBreadcrumb();
             <option value="1" <?= $marca->getEstado() ? 'selected' : '' ?>>Habilitado</option>
             <option value="0" <?= !$marca->getEstado() ? 'selected' : '' ?>>Deshabilitado</option>
           </select>
-          <i id="input-estado-estado" class="input-estado"></i>
+          <i id="input-estado-estado" class="input-estado select"></i>
         </div>
         <small id="error-estado" class="error-text"></small>
       </div>
@@ -77,7 +73,7 @@ partialBreadcrumb();
               <p id="preview-texto" style="display: none;">Arrastre una imagen aquí o selecciónelo desde su dispositivo.</p>
             <?php else : ?>
               <img id="preview-imagen" src="" alt="Vista previa vacía" draggable="false" style="display: none;">
-              <i class="ri-image-add-line upload-icon" id="upload-icon" style="display: block;"></i>
+              <i class="ri-file-close-line upload-icon text-muted" id="upload-icon" style="display: block;"></i>
               <p id="preview-texto" style="display: block;">Imagen no disponible o eliminada</p>
             <?php endif; ?>
           </div>
@@ -100,7 +96,7 @@ partialBreadcrumb();
     </div>
   </div>
 
-  <div class="formulario-acciones">
+  <div class="formulario-acciones edit">
     <a href="<?= BASE_URL ?>marca/" class="boton-form boton-volver">
       <i class="ri-arrow-left-circle-fill"></i> Volver
     </a>

@@ -4,12 +4,8 @@ partialBreadcrumb();
 ?>
 
 <div class="contenedor-header">
-  <h1>
-    Editar Categoría #<?= htmlspecialchars($categoria->getId()) ?>
-  </h1>
-  <p class="fw-bolder">
-    <?= htmlspecialchars($categoria->getNombre()) ?>
-  </p>
+  <h1>#<?= htmlspecialchars($categoria->getId()) ?> - <?= htmlspecialchars($categoria->getNombre()) ?></h1>
+  <p>Editar <strong>Categoría</strong></p>
 </div>
 
 <form action="<?= BASE_URL ?>categoria/update/<?= $categoria->getId() ?>" method="post" enctype="multipart/form-data"
@@ -47,7 +43,7 @@ partialBreadcrumb();
             <option value="1" <?= $categoria->getEstado() ? 'selected' : '' ?>>Habilitado</option>
             <option value="0" <?= !$categoria->getEstado() ? 'selected' : '' ?>>Deshabilitado</option>
           </select>
-          <i id="input-estado-estado" class="input-estado"></i>
+          <i id="input-estado-estado" class="input-estado select"></i>
         </div>
         <small id="error-estado" class="error-text"></small>
       </div>
@@ -85,7 +81,7 @@ partialBreadcrumb();
               </p>
             <?php else: ?>
               <img id="preview-imagen" src="" alt="Vista previa vacía" draggable="false" style="display: none;">
-              <i class="ri-file-close-line upload-icon" id="upload-icon" style="display: block;"></i>
+              <i class="ri-file-close-line upload-icon text-muted" id="upload-icon" style="display: block;"></i>
               <p id="preview-texto" style="display: block;">Imagen no disponible o eliminada</p>
             <?php endif; ?>
           </div>
@@ -146,10 +142,11 @@ partialBreadcrumb();
         <table id="tablaSubcategorias" class="table-sm w-100 tabla-responsive">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Nombre</th>
-              <th>Estado</th>
-              <th class="text-center">Opciones</th>
+              <th class="column-id-th">ID</th>
+              <th class="column-name-th">Nombre</th>
+              <th class="column-descripcion-th">Descripción</th>
+              <th class="column-estado-th text-center">Estado</th>
+              <th class="column-sub-opciones-th">Opciones</th>
             </tr>
           </thead>
 
@@ -157,17 +154,17 @@ partialBreadcrumb();
             <?php if (!empty($subcategorias)): ?>
               <?php foreach ($subcategorias as $subcategoria): ?>
                 <tr>
-                  <td data-label="ID:"><?= htmlspecialchars($subcategoria->getId()) ?></td>
-                  <td class="text-start" data-label="Nombre:"><?= htmlspecialchars($subcategoria->getNombre()) ?></td>
-                  <td data-label="Estado:">
-                    <label class="switch-tabla">
-                      <input type="checkbox" id="switch-categoria-<?= $subcategoria->getId() ?>" class="toggle-estado"
-                        data-id="<?= $subcategoria->getId() ?>" <?= $subcategoria->getEstado() ? 'checked' : '' ?>>
-                      <span class="slider"></span>
-                    </label>
+                  <td class="column-id-td" data-label="ID:"><?= htmlspecialchars($subcategoria->getId()) ?></td>
+                  <td class="column-name-td" data-label="Nombre:"><?= htmlspecialchars($subcategoria->getNombre()) ?></td>
+                  <td class="column-descripcion-td" data-label="Descripción:"><?= htmlspecialchars($subcategoria->getDescripcion() ?: '[Sin descripción]') ?></td>
+                  <td class="column-estado-td" data-label="Estado:">
+                      <label class="switch-tabla">
+                          <input type="checkbox" id="switch-categoria-<?= $subcategoria->getId() ?>" class="toggle-estado" data-id="<?= $subcategoria->getId() ?>"
+                              <?= $subcategoria->getEstado() ? 'checked' : '' ?> name="estado">
+                          <span class="slider"></span>
+                      </label>
                   </td>
-
-                  <td>
+                  <td class="column-sub-opciones-td">
                     <div class="table-botones">
                       <button class="btn-ver-categoria btn btn-sm btn-info" data-id="<?= $subcategoria->getId() ?>"
                         title="Ver Categoría" type="button">
@@ -204,7 +201,7 @@ partialBreadcrumb();
     </div>
   </div>
   <!-- Botones -->
-  <div class="formulario-acciones">
+  <div class="formulario-acciones edit">
     <a href="<?= BASE_URL ?>categoria/" class="boton-form boton-volver">
       <i class="ri-arrow-left-circle-fill"></i> Volver
     </a>

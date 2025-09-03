@@ -47,7 +47,8 @@
             'cliente'  => 'ri-user-fill',
             'categoria'  => 'ri-price-tag-3-fill',
             'marca' => 'ri-award-fill',
-            'usuario'  => 'ri-shield-user-fill',
+            'usuario'  => 'ri-admin-fill',
+            'rol' => 'ri-shield-user-fill',
             'servicio' => 'ri-store-fill',
             default    => 'ri-folder-fill'
         };

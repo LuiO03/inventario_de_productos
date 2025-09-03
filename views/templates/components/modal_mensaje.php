@@ -38,11 +38,11 @@
                 </div>
                 
                 <div class="modal-footer border-0 justify-content-center">
-                    <button type="button" class="btn btn-sm btn-light d-flex align-items-center gap-1" data-bs-dismiss="modal">
-                        <i class="ri-close-line"></i> Cerrar
+                    <button type="button" class="boton bg-modal-close" data-bs-dismiss="modal">
+                        <span class="boton-icon text-base-inverted"><i class="ri-close-line"></i></span>
+                        <span class="boton-text">Cerrar</span>
                     </button>
                 </div>
-
             </div>
         </div>
     </div>

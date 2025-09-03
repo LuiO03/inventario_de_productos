@@ -83,8 +83,8 @@
         <ul class="sub-menu">
           <div>
             <li>
-              <a href="<?=base_url()?>producto" data-label="Producto">
-                <i class="ri-box-3-line icon"></i><span>Producto</span>
+              <a href="<?=base_url()?>producto" data-label="Productos">
+                <i class="ri-box-3-line icon"></i><span>Productos</span>
               </a>
             </li>
             <li>
@@ -111,28 +111,31 @@
         </ul>
       </li>
       <li>
-        <a href="#" data-label="Usuarios">
-          <i class="ri-id-card-line icon"></i><span>Usuarios</span>
-        </a>
+        <button
+          class="dropdown-btn"
+          onclick="toggleSubMenu(this)"
+          data-label="Gestión de Acceso" data-id="create">
+          <i class="ri-settings-3-line icon"></i><span>Gestión de Acceso</span>
+          <i class="ri-arrow-down-s-line arrow-icon"></i>
+        </button>
+        <ul class="sub-menu">
+          <div>
+            <li>
+              <a href="<?=base_url()?>rol" data-label="Roles">
+                <i class="ri-shield-user-line icon"></i><span>Roles</span>
+              </a>
+            </li>
+            <li>
+              <a href="<?=base_url()?>usuario" data-label="Usuarios">
+                <i class="ri-id-card-line icon"></i><span>Usuarios</span>
+              </a>
+            </li>
+          </div>
+        </ul>
       </li>
       <li>
         <a href="#" data-label="Clientes">
           <i class="ri-account-box-line icon"></i><span>Clientes</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" data-label="Ventas">
-          <i class="ri-shopping-cart-line icon"></i><span>Ventas</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" data-label="Ventas">
-          <i class="ri-shopping-cart-line icon"></i><span>Ventas</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" data-label="Ventas">
-          <i class="ri-shopping-cart-line icon"></i><span>Ventas</span>
         </a>
       </li>
       <li>
@@ -215,7 +218,6 @@
     </aside>
     <main>
       <div class="background">
-
         <span class="ball"></span>
         <span class="ball"></span>
         <span class="ball"></span>

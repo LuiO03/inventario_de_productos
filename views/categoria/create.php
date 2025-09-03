@@ -70,7 +70,7 @@ partialBreadcrumb();
                         <option value="1" <?= (isset($old['estado']) && $old['estado'] == '1') ? 'selected' : '' ?>>Habilitado</option>
                         <option value="0" <?= (isset($old['estado']) && $old['estado'] == '0') ? 'selected' : '' ?>>Deshabilitado</option>
                     </select>
-                    <i id="input-estado-estado" class="input-estado"></i>
+                    <i id="input-estado-estado" class="input-estado select"></i>
                 </div>
                 <small id="error-estado" class="error-text"></small>
             </div>

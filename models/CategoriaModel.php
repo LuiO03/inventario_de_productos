@@ -236,10 +236,10 @@ class CategoriaModel extends Model
         $query->execute($ids);
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-        $marcas = [];
+        $categorias = [];
         foreach ($result as $row) {
-            $marcas[] = Marca::fromArray($row); // Igual que en getAll()
+            $categorias[] = categoria::fromArray($row); // Igual que en getAll()
         }
-        return $marcas;
+        return $categorias;
     }
 }

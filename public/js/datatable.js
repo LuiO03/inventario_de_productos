@@ -46,19 +46,30 @@ function actualizarIconosOrden() {
 }
 // Inicialización del DataTable y personalización
 $(document).ready(function () {
-    
+    // Obtener índice de la columna con clase column-id-th
+    const indiceColumnaId = $('#tabla thead th.column-id-th').index();
+    const indiceColumnaFecha = $('#tabla thead th.column-fecha-th').index();
+    const indiceColumnaEstado = $('#tabla thead th.column-estado-th').index();
+    let columnDefs = [
+    { orderable: false, targets: ['.column-check-th', '.column-opciones-th', '.column-estado-th', '.column-opciones-sm-th', '.column-user-th'] }
+    ];
+
+    if (indiceColumnaFecha !== -1) {
+        columnDefs.push({ targets: indiceColumnaFecha, visible: false });
+    }
     window.tabla = $('#tabla').DataTable({
         dom: 'tip',
-        order: [[1, 'asc']],            // Orden inicial por la primera columna descendente
+        responsive: true, // 👈 ajusta columnas automáticamente
+        autoWidth: false, // 👈 evita que fije anchos innecesarios
+        scrollX: false,   // 👈 asegura que no meta scroll horizontal
+        order: [[indiceColumnaId, 'asc']],// Orden inicial por la primera columna descendente antes [[1, 'asc']], 
         pageLength: 10,                  // Cantidad de registros por página
         deferRender: true,              // Mejora rendimiento en tablas grandes
         lengthMenu: [[10, 20, 50, 100], [10, 20, 50, 100]],
         ordering: true,
         searching: true,
         language: language_es,
-        columnDefs: [
-            { orderable: false, targets: [0, -1] }, // 0 = checkboxes, -1 = acciones
-        ],
+        columnDefs: columnDefs,
         initComplete: function () {
             // Mostrar tabla una vez inicializada
             $('#tabla').addClass('ready');
@@ -76,21 +87,50 @@ $(document).ready(function () {
     tabla.page.len(this.value).draw();
     });
 
+    // Filtro por Estado
     $('#filtroEstado').on('change', function () {
         const valor = this.value;
-        const totalColumnas = tabla.columns().count();
-        const columnaEstado = totalColumnas - 2; // penúltima columna
 
         if (valor === '') {
-            tabla.column(columnaEstado).search('').draw();
+            tabla.column(indiceColumnaEstado).search('').draw();
         } else {
-            tabla.column(columnaEstado).search(valor).draw();
+            tabla.column(indiceColumnaEstado).search(valor).draw();
         }
     });
 
-    $('#btn-recargar').on('click', function () {
-    tabla.ajax.reload(null, false); // Recarga los datos sin recargar la página
-  });
+    // Filtro por Rol
+    const indiceColumnaRol = $('#tabla thead th.column-rol-th').index();
+    $('#filtroRol').on('change', function () {
+        const valor = this.value;
+
+        if (valor === '') {
+            tabla.column(indiceColumnaRol).search('').draw();
+        } else {
+            tabla.column(indiceColumnaRol).search('^' + valor + '$', true, false).draw();
+        }
+    });
+
+    // Filtro de ordenamiento personalizado
+    $('#filtroOrden').on('change', function () {
+        const valor = this.value;
+
+        switch (valor) {
+            case 'nombre_asc':
+                tabla.order([$('.column-name-th').index(), 'asc']).draw();
+                break;
+            case 'nombre_desc':
+                tabla.order([$('.column-name-th').index(), 'desc']).draw();
+                break;
+            case 'fecha_desc':
+                tabla.order([indiceColumnaFecha, 'desc']).draw(); // 👈 usamos el índice guardado
+                break;
+            case 'fecha_asc':
+                tabla.order([indiceColumnaFecha, 'asc']).draw();
+                break;
+            default:
+                tabla.order([]).draw();
+        }
+    });
 
     // Actualizar íconos cuando cambia el orden o se redibuja
     $('#tabla').on('draw.dt order.dt', actualizarIconosOrden);
@@ -113,7 +153,7 @@ $(document).ready(function () {
     const $buscador = $('#buscadorPersonalizado');
     const $clearBuscador = $(`
         <button class="buscador-clear" type="button" style="display:none;">
-            <i class="ri-close-circle-line"></i>
+            <i class="ri-close-circle-fill"></i>
         </button>
     `);
 

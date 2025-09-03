@@ -7,13 +7,20 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <h2 class="modal-nombre" id="modal-nombre"></h2>
+                <h2 id="modal-tabla-titulo" class="modal-nombre"></h2>
+                <div class="modal-buttons-container">
+                    <a id="modal-edit-link" class="boton btn-warning btn-sm">
+                        <span class="boton-text">Editar</span>
+                        <span class="boton-icon"><i class="ri-edit-circle-fill"></i></span>
+                    </a>
+                </div>
                 <table class="table-sm w-100">
-                    <tr><td class="text-start fw-bolder">ID:</td><td class="text-start px-2" id="modal-id"></td></tr>
-                    <tr><td class="text-start fw-bolder">Descripción:</td><td class="text-start px-2" id="modal-descripcion"></td></tr>
-                    <tr><td class="text-start fw-bolder">Estado:</td><td class="text-start px-2" id="modal-estado"></td></tr>
+                    <tr><td class="text-start fw-bolder px-2">ID:</td><td class="text-start px-2" id="modal-id"></td></tr>
+                    <tr><td class="text-start fw-bolder px-2">Nombre:</td><td class="text-start px-2" id="modal-nombre"></td></tr>
+                    <tr><td class="text-start fw-bolder px-2">Descripción:</td><td class="text-start px-2" id="modal-descripcion"></td></tr>
+                    <tr><td class="text-start fw-bolder px-2">Estado:</td><td class="text-start px-2" id="modal-estado"></td></tr>
                     <tr>
-                        <td class="text-start fw-bolder">Creado por:</td>
+                        <td class="text-start fw-bolder px-2">Creado por:</td>
                         <td class="text-start px-2">
                             <span id="modal-creado-por"></span>
                             <div>
@@ -23,7 +30,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td class="text-start fw-bolder">Modificado por:</td>
+                        <td class="text-start fw-bolder px-2">Modificado por:</td>
                         <td class="text-start px-2">
                             <span id="modal-modificado-por"></span>
                             <div>
@@ -41,9 +48,10 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer border-0 justify-content-center mt-0 pt-0">
-                <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
-                    <i class="ri-close-line"></i> Cerrar
+            <div class="modal-footer border-0 justify-content-center">
+                <button type="button" class="boton bg-modal-close" data-bs-dismiss="modal">
+                    <span class="boton-icon text-base-inverted"><i class="ri-close-line"></i></span>
+                    <span class="boton-text">Cerrar</span>
                 </button>
             </div>
         </div>
@@ -60,6 +68,8 @@
                 })
                 .then(res => res.json())
                 .then(data => {
+                    const titulo = `${data.nombre}`;
+                    document.getElementById('modal-tabla-titulo').textContent = titulo || '-';
                     document.getElementById('modal-id').textContent = data.id ?? '-';
                     document.getElementById('modal-nombre').textContent = data.nombre ?? '-';
                     document.getElementById('modal-descripcion').textContent = data.descripcion ?? '(Sin descripción)';
@@ -70,6 +80,7 @@
                     document.getElementById('modal-created-at').textContent = data.created_at ?? '-';
                     document.getElementById('modal-modificado-por').textContent = data.modificado_por ?? '-';
                     document.getElementById('modal-updated-at').textContent = data.updated_at ?? '-';
+                    
                     const img = document.getElementById('modal-imagen');
                     const sinImagen = document.getElementById('modal-sin-imagen');
 
@@ -81,6 +92,8 @@
                         img.classList.add('d-none');
                         sinImagen.classList.remove('d-none');
                     }
+                    // 👉 Enlace Editar dinámico
+                    document.getElementById('modal-edit-link').href = `${'<?= BASE_URL ?>'}marca/edit/${data.slug}`;
                     const viewModal = new bootstrap.Modal(document.getElementById('viewModal'));
                     viewModal.show();
                 });

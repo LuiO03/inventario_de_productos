@@ -37,7 +37,7 @@ class MarcaController extends Controller
         // Crear PDF con mPDF
         $mpdf = new Mpdf([
             'default_font' => 'dejavusans',
-            'tempDir' => __DIR__ . '/../../tmp'
+            'tempDir' => __DIR__ . '/../tmp'
         ]);
 
         // Nombre del archivo (según si es todo o seleccionados)
@@ -102,7 +102,8 @@ class MarcaController extends Controller
         foreach (range('A', 'F') as $col) {
             $sheet->getColumnDimension($col)->setAutoSize(true);
         }
-
+        // Establecer celda activa
+        $sheet->setSelectedCell('A1');
         // Descargar archivo
         $fechaHora = date('Y-m-d_H-i-s');
         $nombreArchivo = "{$nombreArchivoBase}_$fechaHora.xlsx";
@@ -319,6 +320,7 @@ class MarcaController extends Controller
             if ($marca) {
                 echo json_encode([
                     'id' => '#'. $marca->getId(),
+                    'slug' => $marca->getSlug(),
                     'nombre' => $marca->getNombre(),
                     'descripcion' => $marca->getDescripcion(),
                     'estado' => $marca->getEstado(),

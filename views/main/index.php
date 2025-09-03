@@ -106,6 +106,23 @@
                             </a>
                         </div>
                     </div>
+
+                    <!-- Roles -->
+                    <div class="col-4 col-md-4 col-lg-3">
+                        <div class="card targeta h-100 border-0">
+                            <a href="<?= BASE_URL ?>rol" class="h-100">
+                                <div class="targeta-conteiner">
+                                    <div class="card-icon-bg secondary">
+                                        <i class="ri-shield-user-line display-4 text-secondary"></i>
+                                    </div>
+                                    <div class="card-info">
+                                        <h1><?= $totalRols ?? 0 ?></h1>
+                                        <p>Roles</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
     
                     <!-- Pedidos -->
                     <div class="col-4 col-md-4 col-lg-3">
@@ -174,90 +191,36 @@
                             </a>
                         </div>
                     </div>
-    
                 </div>
             </div>
         </div>
         <div id="tab-colaboradores" class="tab-content">
             <div class="contenedor-menu">
                 <div class="row gx-2 gy-2 gy-md-4 gx-md-4">
-    
-                    <!-- Colaborador 5 -->
-                    <div class="col-6 col-md-3 col-lg-2">
-                        <div class="card targeta h-100 border-0">
-                            <div class="targeta-conteiner-user">
-                                <img src="<?= media() ?>/images/usuarios/pikachu.jpg" class="avatar-user" alt="Usuario 5">
-                                <div class="card-info-user">
-                                    <p class="fw-bolder">Luis Alberto</p>
-                                    <small>Administrador</small>
+                    <?php if (!empty($colaboradores)): ?>
+                        <?php foreach ($colaboradores as $colaborador): ?>
+                            <div class="col-6 col-md-3 col-lg-2">
+                                <div class="card targeta h-100 border-0">
+                                    <div class="targeta-conteiner-user">
+                                        <img src="<?= !empty($colaborador->getImagen()) 
+                                                        ? media() . "/images/usuarios/" . $colaborador->getImagen() 
+                                                        : media() . "/images/usuarios/default.jpg" ?>" 
+                                            class="avatar-user" 
+                                            alt="<?= htmlspecialchars($colaborador->getNombre()) ?>">
+                                        <div class="card-info-user">
+                                            <p class="fw-bolder"><?= htmlspecialchars($colaborador->getNombre()) ?></p>
+                                            <p>
+                                                <?= htmlspecialchars($colaborador->getApellido()) ?>
+                                            </p>
+                                            <small><?= htmlspecialchars($colaborador->nombreRol ?? "Sin rol") ?></small>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <!-- Colaborador 6 -->
-                    <div class="col-6 col-md-3 col-lg-2">
-                        <div class="card targeta h-100 border-0">
-                            <div class="targeta-conteiner-user">
-                                <img src="<?= media() ?>/images/usuarios/roku.jpg" class="avatar-user" alt="Usuario 6">
-                                <div class="card-info-user">
-                                    <p class="fw-bolder">Eucladiana</p>
-                                    <small>Administrador</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Colaborador 1 -->
-                    <div class="col-6 col-md-3 col-lg-2">
-                        <div class="card targeta h-100 border-0">
-                            <div class="targeta-conteiner-user">
-                                <img src="https://i.pravatar.cc/100?img=1" class="avatar-user" alt="Usuario 1">
-                                <div class="card-info-user">
-                                    <p class="fw-bolder">Lucía Ramírez</p>
-                                    <small>Administradora</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <!-- Colaborador 2 -->
-                    <div class="col-6 col-md-3 col-lg-2">
-                        <div class="card targeta h-100 border-0">
-                            <div class="targeta-conteiner-user">
-                                <img src="https://i.pravatar.cc/100?img=2" class="avatar-user" alt="Usuario 2">
-                                <div class="card-info-user">
-                                    <p class="fw-bolder">Carlos Gómez</p>
-                                    <small>Editor</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <!-- Colaborador 3 -->
-                    <div class="col-6 col-md-3 col-lg-2">
-                        <div class="card targeta h-100 border-0">
-                            <div class="targeta-conteiner-user">
-                                <img src="https://i.pravatar.cc/100?img=3" class="avatar-user" alt="Usuario 3">
-                                <div class="card-info-user">
-                                    <p class="fw-bolder">Andrea Soto</p>
-                                    <small>Diseñadora</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <!-- Colaborador 4 -->
-                    <div class="col-6 col-md-3 col-lg-2">
-                        <div class="card targeta h-100 border-0">
-                            <div class="targeta-conteiner-user">
-                                <img src="https://i.pravatar.cc/100?img=4" class="avatar-user" alt="Usuario 4">
-                                <div class="card-info-user">
-                                    <p class="fw-bolder">Pedro Luján</p>
-                                    <small>Soporte Técnico</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p class="text-center">No hay colaboradores registrados.</p>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

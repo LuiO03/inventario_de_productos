@@ -15,7 +15,7 @@
 
       <!-- Cuerpo -->
       <di class="modal-body py-3 px-4">
-        <div class="row">
+        <div class="row w-100">
           <!-- Texto (Columna izquierda) -->
           <div class="col-9 d-flex flex-column justify-content-between">
             <!-- Texto -->
@@ -30,15 +30,16 @@
           </div>
         </div>
         <!-- Botones -->
-        <form id="confirmModalForm" method="POST" action="" class="d-flex gap-2 justify-content-end align-items-center mt-auto">
+        <form id="confirmModalForm" method="POST" action="" class="d-flex gap-2 justify-content-end align-items-center mt-auto w-100">
           <input type="hidden" name="csrf_token" value="<?= generarTokenCSRF(); ?>">
           <div id="confirmModalCamposExtra"></div>
-
-          <button type="button" class="btn btn-sm btn-light d-flex align-items-center gap-1" data-bs-dismiss="modal">
-            <i class="ri-close-line"></i> No, Cancelar
+          <button type="button" class="boton bg-modal-close" data-bs-dismiss="modal">
+              <span class="boton-icon text-base-inverted"><i class="ri-close-line"></i></span>
+              <span class="boton-text">No, Cancelar</span>
           </button>
-          <button type="submit" class="btn btn-sm btn-danger d-flex align-items-center gap-1">
-            <i class="ri-check-line"></i> Sí, confirmar
+          <button type="submit" class="boton bg-danger" data-bs-dismiss="modal">
+              <span class="boton-icon"><i class="ri-delete-bin-2-line"></i></span>
+              <span class="boton-text">Sí, confirmar</span>
           </button>
         </form>
     </div>

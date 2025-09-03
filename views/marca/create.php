@@ -41,7 +41,7 @@ partialBreadcrumb();
                         <option value="1" <?= (isset($old['estado']) && $old['estado'] == '1') ? 'selected' : '' ?>>Habilitado</option>
                         <option value="0" <?= (isset($old['estado']) && $old['estado'] == '0') ? 'selected' : '' ?>>Deshabilitado</option>
                     </select>
-                    <i id="input-estado-estado" class="input-estado"></i>
+                    <i id="input-estado-estado" class="input-estado select"></i>
                 </div>
                 <small id="error-estado" class="error-text"></small>
             </div>
@@ -59,7 +59,6 @@ partialBreadcrumb();
                 <small id="error-descripcion" class="error-text"></small>
             </div>
         </div>
-
         <div class="formulario-columna-nowrap">
             <!-- Imagen -->
             <div class="input-group-nowrap">
@@ -83,7 +82,6 @@ partialBreadcrumb();
             </div>
         </div>
     </div>
-
     <div class="formulario-acciones">
         <a href="<?= BASE_URL ?>marca/" class="boton-form boton-volver">
             <i class="ri-arrow-left-circle-fill"></i> Volver

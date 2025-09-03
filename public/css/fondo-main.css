@@ -17,7 +17,7 @@
   box-shadow: inset var(--sombra-material); /* sombra interna */
 }
 
-@media (max-width: 800px){
+@media (max-width: 576px){
   .background {
     width: 100vw;
     height: 100vh;

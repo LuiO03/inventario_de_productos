@@ -7,12 +7,22 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                <h2 class="modal-nombre" id="modal-nombre"></h2>
+                <h2 id="modal-tabla-titulo" class="modal-nombre"></h2>
+                <div class="modal-buttons-container">
+                    <a id="modal-edit-link" class="boton btn-warning btn-sm">
+                        <span class="boton-text">Editar</span>
+                        <span class="boton-icon"><i class="ri-edit-circle-fill"></i></span>
+                    </a>
+                </div>
                 <table class="table-sm w-100">
                     <tbody>
                         <tr>
                             <td class="text-start fw-bolder px-2">ID:</td>
                             <td class="text-start px-2"><span id="modal-id"></span></td>
+                        </tr>
+                        <tr>
+                            <td class="text-start fw-bolder px-2">Nombre:</td>
+                            <td class="text-start px-2"><span id="modal-nombre"></span></td>
                         </tr>
                         <tr>
                             <td class="text-start fw-bolder px-2">Descripción:</td>
@@ -55,6 +65,7 @@
                         </tr>
                     </tbody>
                 </table>
+                
                 <div class="text-center">
                     <img id="modal-imagen" class="img-thumbnail d-none modal-imagen" alt="Imagen Marca">
                     <div id="modal-sin-imagen" class="modal-sin-imagen d-none">
@@ -63,9 +74,10 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer border-0 justify-content-center mt-0 pt-0">
-                <button type="button" class="btn btn-light btn-sm" data-bs-dismiss="modal">
-                    <i class="ri-close-line"></i> Cerrar
+            <div class="modal-footer border-0 justify-content-center">
+                <button type="button" class="boton bg-modal-close" data-bs-dismiss="modal">
+                    <span class="boton-icon text-base-inverted"><i class="ri-close-line"></i></span>
+                    <span class="boton-text">Cerrar</span>
                 </button>
             </div>
         </div>
@@ -87,6 +99,8 @@
                         return response.json();
                     })
                     .then(data => {
+                        const titulo = `${data.nombre}`;
+                        document.getElementById('modal-tabla-titulo').textContent = titulo || '-';
                         document.getElementById('modal-id').textContent = data.id || '-';
                         document.getElementById('modal-nombre').textContent = data.nombre || '-';
                         document.getElementById('modal-descripcion').textContent = data.descripcion || '(Sin descripción)';
@@ -104,16 +118,16 @@
                         if (data.subcategorias && data.subcategorias.length > 0) {
                             data.subcategorias.forEach(sub => {
                                 const a = document.createElement('a');
-                                a.classList.add(sub.estado ? 'text-base' : 'text-muted'); // Aplica clase global
-                                a.classList.add('text-md');
-                                a.href = `${'<?= BASE_URL ?>'}/categoria/edit/${sub.id}`;
-
+                                const claseEstado = sub.estado ? 'text-link' : 'text-muted';
                                 const icono = sub.estado ? 'ri-eye-fill' : 'ri-eye-close-fill';
+
+                                a.classList.add('text-md', claseEstado);
+                                a.href = `${'<?= BASE_URL ?>'}categoria/edit/${sub.id}`;
 
                                 a.innerHTML = `
                                     <li>
-                                        <i class="${icono} me-1"></i> <span>#${sub.id} -</span>
-                                        ${sub.nombre}
+                                        <i class="${icono} me-1 ${claseEstado}"></i>
+                                        <span>#${sub.id} -</span> ${sub.nombre}
                                     </li>
                                 `;
                                 contenedorSubcategorias.appendChild(a);
@@ -125,26 +139,26 @@
                                 </li>
                             `;
                         }
-
+                        document.getElementById('modal-edit-link').href = `${'<?= BASE_URL ?>'}categoria/edit/${data.slug}`;
                         const padre = document.getElementById('modal-categoria-padre');
                         padre.innerHTML = ''; // Limpiar antes
 
                         if (data.categoria_padre) {
-                            const claseEstado = data.categoria_padre.estado ? 'text-primario' : 'text-muted';
-                            const icono = data.categoria_padre.estado ? 'ri-eye-fill' : 'ri-eye-close-fill';
+                                const claseEstado = data.categoria_padre.estado ? 'text-link' : 'text-muted';
+                                const icono = data.categoria_padre.estado ? 'ri-eye-fill' : 'ri-eye-close-fill';
 
-                            const a = document.createElement('a');
-                            a.href = `${'<?= BASE_URL ?>'}/categoria/edit/${data.categoria_padre.id}`;
-                            a.classList.add(claseEstado, 'text-md');
+                                const a = document.createElement('a');
+                                a.href = `${'<?= BASE_URL ?>'}categoria/edit/${data.categoria_padre.id}`;
+                                a.classList.add(claseEstado);
 
-                            a.innerHTML = `
-                                <i class="${icono} me-1 ${claseEstado}"></i> 
-                                <span>#${data.categoria_padre.id} -</span> 
-                                ${data.categoria_padre.nombre}
-                            `;
+                                a.innerHTML = `
+                                    <i class="${icono} me-1 ${claseEstado}"></i>
+                                    <span>#${data.categoria_padre.id} -</span> 
+                                    ${data.categoria_padre.nombre}
+                                `;
 
-                            padre.appendChild(a);
-                        } else {
+                                padre.appendChild(a);
+                            } else {
                             padre.innerHTML = `
                                 <li class="medalla bg-secondary text-white">
                                     <i class="ri-price-tag-2-line"></i>Sin categoría padre

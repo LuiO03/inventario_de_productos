@@ -26,6 +26,25 @@ class TextoHelper
         return mb_strtoupper(mb_substr($texto, 0, 1)) . mb_substr($texto, 1);
     }
 
+    public static function getIniciales(string $nombreCompleto): string
+    {
+        // Divide en palabras
+        $partes = explode(' ', trim($nombreCompleto));
+        $iniciales = '';
+
+        // Tomar la primera letra del nombre
+        if (isset($partes[0])) {
+            $iniciales .= strtoupper(substr($partes[0], 0, 1));
+        }
+
+        // Tomar la primera letra del apellido (si existe)
+        if (isset($partes[1])) {
+            $iniciales .= strtoupper(substr($partes[1], 0, 1));
+        }
+
+        return $iniciales ?: '?'; // fallback en caso extremo
+    }
+
     // =========================
     // ESCAPE DE SALIDA
     // =========================

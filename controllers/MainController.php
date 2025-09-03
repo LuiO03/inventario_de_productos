@@ -1,4 +1,5 @@
 <?php
+require_once "models/UsuarioModel.php";
 class MainController extends Controller
 {
 
@@ -16,6 +17,7 @@ class MainController extends Controller
             'marca'      => 'MarcaModel',
             'cliente'    => 'ClienteModel',
             'usuario'    => 'UsuarioModel',
+            'rol'        => 'RolModel',
             'pedido'     => 'PedidoModel',
             'servicio'   => 'ServicioModel',
             'blog'       => 'BlogModel',
@@ -27,7 +29,6 @@ class MainController extends Controller
         foreach ($entidades as $key => $modelo) {
             $rutaModelo = "models/$modelo.php";
 
-            // Verifica si el archivo del modelo existe
             if (file_exists($rutaModelo)) {
                 require_once $rutaModelo;
                 if (class_exists($modelo)) {
@@ -35,18 +36,21 @@ class MainController extends Controller
                     if (method_exists($instancia, 'count')) {
                         $totales["total" . ucfirst($key) . "s"] = $instancia->count();
                     } else {
-                        $totales["total" . ucfirst($key) . "s"] = 0; // No tiene método contar
+                        $totales["total" . ucfirst($key) . "s"] = 0;
                     }
                 }
             } else {
-                $totales["total" . ucfirst($key) . "s"] = 0; // Modelo no existe aún
+                $totales["total" . ucfirst($key) . "s"] = 0;
             }
         }
 
-        // Agrega el mensaje a los datos
+        // 🔹 Aquí obtenemos los usuarios activos como colaboradores
+        $usuarioModel = new UsuarioModel();
+        $totales['colaboradores'] = $usuarioModel->getAll(); 
+
         $totales['mensaje'] = $this->view->mensaje ?? null;
 
-        // Renderizar con los datos dinámicos
         $this->view->render('main/index', $totales);
     }
+
 }

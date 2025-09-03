@@ -37,6 +37,32 @@ function mostrarCategorias($parentId, $agrupadas, $nivel = 1)
                             <span class='boton-icon'><i class='ri-add-circle-fill'></i></span>
                         </a>
                     </div>
+                    <!-- Menú compacto (solo móvil) -->
+                    <div class='menu-opciones-movil'>
+                        <button class='btn-menu'><i class='ri-more-2-fill'></i></button>
+                        <ul class='menu-lista'>
+                            <li>
+                                <button class='btn-ver-categoria btn btn-info' data-id='{$cat->getId()}' title='Ver Categoría'>
+                                    <span class='boton-icon text-white'><i class='ri-eye-2-fill'></i></span>
+                                </button>
+                            </li>
+                            <li>
+                                <a href='" . BASE_URL . "categoria/edit/" . urlencode($cat->getSlug()) . "' class='btn btn-warning' title='Editar Categoría'>
+                                    <span class='boton-icon'><i class='ri-edit-circle-fill'></i></span>
+                                </a>
+                            </li>
+                            <li>
+                                <button class='btn btn-danger btn-eliminar' data-bs-toggle='modal' data-bs-target='#deleteModal' data-id='{$cat->getId()}' title='Eliminar Categoría'>
+                                    <span class='boton-icon'><i class='ri-delete-bin-2-fill'></i></span>
+                                </button>
+                            </li>
+                            <li>
+                                <a href='" . BASE_URL . "categoria/create/" . urlencode($cat->getSlug() ?: $cat->getId()) . "' class='btn btn-success' title='Agregar Subcategoría'>
+                                    <span class='boton-icon'><i class='ri-add-circle-fill'></i></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>";
             echo "<div class='hijos' data-parent-id='{$cat->getId()}'>";
             mostrarCategorias($cat->getId(), $agrupadas, $nivel + 1);
@@ -66,6 +92,33 @@ function mostrarCategorias($parentId, $agrupadas, $nivel = 1)
                             <span class='boton-icon'><i class='ri-add-circle-fill'></i></span>
                         </a>
                     </div>
+                    <!-- Menú compacto (solo móvil) -->
+                    <div class='menu-opciones-movil'>
+                        <button class='btn-menu'><i class='ri-more-2-fill'></i></button>
+                        <ul class='menu-lista'>
+                            <li>
+                                <button class='btn-ver-categoria btn btn-info' data-id='{$cat->getId()}' title='Ver Categoría'>
+                                    <span class='boton-icon text-white'><i class='ri-eye-2-fill'></i></span>
+                                </button>
+                            </li>
+                            <li>
+                                <a href='" . BASE_URL . "categoria/edit/" . urlencode($cat->getSlug()) . "' class='btn btn-warning' title='Editar Categoría'>
+                                    <span class='boton-icon'><i class='ri-edit-circle-fill'></i></span>
+                                </a>
+                            </li>
+                            <li>
+                                <button class='btn btn-danger btn-eliminar' data-bs-toggle='modal' data-bs-target='#deleteModal' data-id='{$cat->getId()}' title='Eliminar Categoría'>
+                                    <span class='boton-icon'><i class='ri-delete-bin-2-fill'></i></span>
+                                </button>
+                            </li>
+                            <li>
+                                <a href='" . BASE_URL . "categoria/create/" . urlencode($cat->getSlug() ?: $cat->getId()) . "' class='btn btn-success' title='Agregar Subcategoría'>
+                                    <span class='boton-icon'><i class='ri-add-circle-fill'></i></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>";
         }
 

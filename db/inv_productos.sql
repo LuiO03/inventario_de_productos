@@ -1,38 +1,78 @@
--- Base de datos
+-- ======================
+-- BASE DE DATOS
+-- ======================
 DROP DATABASE IF EXISTS inv_productos;
 CREATE DATABASE inv_productos;
 USE inv_productos;
 
--- Tabla de roles
+-- ======================
+-- TABLA: roles
+-- ======================
 CREATE TABLE roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL UNIQUE,
     descripcion TEXT,
+    estado TINYINT(1) DEFAULT 1,
+	creado_por INT,
+    modificado_por INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-INSERT INTO roles (nombre, descripcion) VALUES
-('Superadmin', 'Acceso total al sistema'),
-('Admin', 'Acceso administrativo limitado');
+-- Insert inicial de roles
+INSERT INTO roles (nombre, descripcion, estado) VALUES
+('Superadmin', 'Acceso total al sistema', 0),
+('Admin', 'Acceso administrativo limitado', 0),
+('Supervisor', 'Acceso restringido a algunas entidades', 0),
+('Almacenero', 'Gestión de inventario y control de stock', 0),
+('Vendedor', 'Gestión de ventas y clientes', 0),
+('Cliente', 'Acceso limitado como cliente', 0);
 
--- Tabla de permisos
-CREATE TABLE permisos (
+-- ======================
+-- TABLA: entidades
+-- ======================
+CREATE TABLE entidades (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    entidad VARCHAR(50) NOT NULL,
-    accion ENUM('ver', 'crear', 'editar', 'eliminar') NOT NULL,
-    UNIQUE(entidad, accion)
+    nombre VARCHAR(100) NOT NULL UNIQUE,   -- ej: 'usuarios', 'productos', 'categorias'
+    descripcion TEXT
 );
 
-INSERT INTO permisos (entidad, accion) VALUES
-('usuarios', 'ver'), ('usuarios', 'crear'), ('usuarios', 'editar'), ('usuarios', 'eliminar'),
-('productos', 'ver'), ('productos', 'crear'), ('productos', 'editar'), ('productos', 'eliminar'),
-('categorias', 'ver'), ('categorias', 'crear'), ('categorias', 'editar'), ('categorias', 'eliminar'),
-('marcas', 'ver'), ('marcas', 'crear'), ('marcas', 'editar'), ('marcas', 'eliminar'),
-('roles', 'ver'), ('roles', 'crear'), ('roles', 'editar'), ('roles', 'eliminar'),
-('permisos', 'ver'), ('permisos', 'crear'), ('permisos', 'editar'), ('permisos', 'eliminar');
+-- Insert inicial de entidades
+INSERT INTO entidades (nombre, descripcion) VALUES
+('usuarios', 'Gestión de usuarios del sistema'),
+('productos', 'Gestión de productos'),
+('categorias', 'Gestión de categorías'),
+('marcas', 'Gestión de marcas'),
+('roles', 'Gestión de roles de usuario'),
+('permisos', 'Gestión de permisos del sistema');
 
--- Asignación de permisos al rol Superadmin
+-- ======================
+-- TABLA: permisos
+-- ======================
+CREATE TABLE permisos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    entidad_id INT NOT NULL,
+    accion ENUM('ver','crear','editar','eliminar','cambiar_estado','exportar') NOT NULL,
+    UNIQUE(entidad_id, accion),
+    FOREIGN KEY (entidad_id) REFERENCES entidades(id) ON DELETE CASCADE
+);
+
+-- Insert inicial de permisos (Cross Join entre entidades y acciones)
+INSERT INTO permisos (entidad_id, accion)
+SELECT e.id, a.accion
+FROM entidades e
+CROSS JOIN (
+    SELECT 'ver' AS accion
+    UNION SELECT 'crear'
+    UNION SELECT 'editar'
+    UNION SELECT 'eliminar'
+    UNION SELECT 'cambiar_estado'
+    UNION SELECT 'exportar'
+) a;
+
+-- ======================
+-- TABLA: rol_permiso
+-- ======================
 CREATE TABLE rol_permiso (
     id INT AUTO_INCREMENT PRIMARY KEY,
     rol_id INT NOT NULL,
@@ -42,10 +82,19 @@ CREATE TABLE rol_permiso (
     UNIQUE(rol_id, permiso_id)
 );
 
+-- Dar permisos solo a Supervisor (ejemplo: ver y editar categorías)
+INSERT INTO rol_permiso (rol_id, permiso_id)
+VALUES 
+(3, 13),  -- Supervisor: ver categorias
+(3, 15);  -- Supervisor: editar categorias
+
+-- Dar todos los permisos al Superadmin
 INSERT INTO rol_permiso (rol_id, permiso_id)
 SELECT 1, id FROM permisos;
 
--- Tabla de usuarios
+-- ======================
+-- TABLA: usuarios
+-- ======================
 CREATE TABLE usuarios (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -55,7 +104,9 @@ CREATE TABLE usuarios (
     rol_id INT NOT NULL,
     direccion VARCHAR(255),
     dni VARCHAR(20) UNIQUE,
-    estado TINYINT(1) DEFAULT 1,
+    telefono VARCHAR(15) NULL,
+    imagen VARCHAR(255) DEFAULT NULL,
+    estado TINYINT(1) NOT NULL DEFAULT 1,
     ultimo_login DATETIME DEFAULT NULL,
     creado_por INT,
     modificado_por INT,
@@ -66,27 +117,49 @@ CREATE TABLE usuarios (
     FOREIGN KEY (modificado_por) REFERENCES usuarios(id)
 );
 
--- Usuario Superadmin (sin creado_por/modificado_por aún)
-INSERT INTO usuarios (
-    nombre, apellido, correo, contrasena, rol_id, estado
-)
-VALUES (
-    'Luis', 'Osorio', 'luis@correo.com', 'HASH_SUPERADMIN', 1, 1
-);
+-- Insert inicial de usuarios
+INSERT INTO usuarios (nombre, apellido, correo, dni, contrasena, imagen, rol_id, estado)
+VALUES ('Luis', 'Osorio', 'luis@correo.com', '70098517', 'HASH_SUPERADMIN', 'pikachu.jpg', 1, 1);
 
--- Usuario Admin (con referencias a Luis como creador)
-INSERT INTO usuarios (
-    nombre, apellido, correo, contrasena, rol_id, estado, creado_por, modificado_por
-)
-VALUES (
-    'Eucladiana', 'Paucar Rosas', 'eucladiana@correo.com', 'HASH_ADMIN', 2, 1, 1, 1
-);
+INSERT INTO usuarios (nombre, apellido, correo, contrasena, imagen, rol_id, estado, creado_por, modificado_por)
+VALUES ('Eucladiana', 'Paucar Rosas', 'eucladiana@correo.com', 'HASH_ADMIN', 'roku.jpg', 2, 1, 1, 1);
 
--- (Opcional) Actualiza a Luis con su propio ID como creador/modificador
+-- Actualizar creador/modificador de Luis (Superadmin)
 UPDATE usuarios
 SET creado_por = 1, modificado_por = 1
 WHERE id = 1;
 
+-- ======================
+-- TABLA: auditoria
+-- ======================
+CREATE TABLE auditoria (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NULL,
+    entidad_id INT NOT NULL,            -- FK a entidades
+    registro_id INT NULL,               -- ID del registro afectado
+    accion ENUM('crear','editar','eliminar','cambiar_estado','exportar') NOT NULL,
+    descripcion TEXT,                   -- detalle del cambio
+    ip VARCHAR(45),
+    user_agent TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE SET NULL,
+    FOREIGN KEY (entidad_id) REFERENCES entidades(id) ON DELETE RESTRICT
+);
+
+-- ======================
+-- TABLA: accesos
+-- ======================
+CREATE TABLE accesos (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NULL,
+    correo VARCHAR(150),           -- útil para intentos fallidos
+    accion ENUM('login','logout') NOT NULL,
+    exito TINYINT(1) DEFAULT 1,    -- 1 = exitoso, 0 = fallido
+    ip VARCHAR(45),
+    user_agent TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE SET NULL
+);
 
 CREATE TABLE categorias (
     id INT AUTO_INCREMENT PRIMARY KEY,

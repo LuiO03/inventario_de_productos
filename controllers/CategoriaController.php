@@ -37,7 +37,7 @@ class CategoriaController extends Controller
         // Crear PDF con mPDF
         $mpdf = new Mpdf([
             'default_font' => 'dejavusans',
-            'tempDir' => __DIR__ . '/../../tmp'
+            'tempDir' => __DIR__ . '/../tmp'
         ]);
 
         // Nombre del archivo (según si es todo o seleccionados)
@@ -49,7 +49,6 @@ class CategoriaController extends Controller
         $mpdf->WriteHTML($html);
         $mpdf->Output($nombreArchivo, 'I'); // 'I' mostrar en navegador, 'D' descargar
     }
-
     public function exportarExcel()
     {
         // Verificar si hay IDs seleccionados
@@ -102,7 +101,8 @@ class CategoriaController extends Controller
         foreach (range('A', 'F') as $col) {
             $sheet->getColumnDimension($col)->setAutoSize(true);
         }
-
+        // Establecer celda activa
+        $sheet->setSelectedCell('A1');
         // Descargar archivo
         $fechaHora = date('Y-m-d_H-i-s');
         $nombreArchivo = "{$nombreArchivoBase}_$fechaHora.xlsx";
@@ -400,6 +400,7 @@ class CategoriaController extends Controller
 
                 echo json_encode([
                     'id' => '#'. $categoria->getId(),
+                    'slug' => $categoria->getSlug(),
                     'nombre' => $categoria->getNombre(),
                     'descripcion' => $categoria->getDescripcion(),
                     'estado' => $categoria->getEstado(),
